@@ -1,0 +1,24 @@
+/////// fonts initilize
+
+
+
+
+@font-face {
+	font-family: 'BebasNeueBold';
+	src: url('../fonts/BebasNeueBold.eot?#iefix') format('embedded-opentype'),  url('../fonts/BebasNeueBold.woff') format('woff'), url('../fonts/BebasNeueBold.ttf')  format('truetype'), url('../fonts/BebasNeueBold.svg#BebasNeueBold') format('svg');
+	
+}
+
+
+.bebasBold{
+	font-family: BebasNeueBold, Arial, sans-sarif;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 8px;
+}
+
+.calibri{
+	font-family: Calibri, sans-sarif;
+	font-weight: normal;
+	font-style: normal;
+}

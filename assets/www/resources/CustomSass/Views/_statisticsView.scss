@@ -1,0 +1,164 @@
+.StatisticsView{
+	background: #3e335e;
+}
+
+
+
+.resumeStatsBtn, .requestStatsBtn, .graphStatsBtn{
+	width:46px;
+	height:46px;
+	background: center center no-repeat transparent !important;
+	border: none;
+}
+.resumeStatsBtn{	
+	background-image: url(../images/statisticsView/resume.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/statisticsView/resumeActive.png) !important;
+	}	
+}
+
+.requestStatsBtn{	
+	background-image: url(../images/statisticsView/request.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/statisticsView/requestActive.png) !important;
+	}	
+}
+
+
+.graphStatsBtn{	
+	background-image: url(../images/statisticsView/graph.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/statisticsView/graphActive.png) !important;
+	}	
+}
+
+.PrevStatsBtn{
+	border:none;
+	width: 17px;
+	height: 21px;
+	background: url(../images/statisticsView/prev.png) no-repeat center !important;	
+	
+}
+.NextStatsBtn{
+	border:none;
+	width: 17px;
+	height: 21px;
+	background: url(../images/statisticsView/next.png) no-repeat center !important;	
+	
+}
+
+.statsHeadCnt{
+	background: #261f3b;
+	padding: 5px 0;
+}
+.statisticsList{
+	position: absolute;
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	.x-list-item.x-list-item-tpl{
+		border-bottom: 1px solid #000 !important;
+	}
+	.statsDate{
+		float: left;
+	}
+	.statsResume{
+		float: right;
+		font-size: 18px;
+	}
+
+	.x-innerhtml{
+		@extend .clearfix;
+		color: #fff;
+	}
+}
+
+.StatsBottom{
+	color: white;
+	text-align: center;
+	font-size: 20px;
+}
+.statsBlue{
+	background-color: #3ba2f6;
+}
+
+.statsYellow{
+	background-color: #f6aa3a;
+}
+
+
+.x-chart-watermark{
+	display: none;
+}
+.statsImgCnt{
+	position: relative;
+	border-bottom: 2px solid #261f3b;
+	
+}
+.StatsGraphInnerCnt{
+	position: relative;
+	// &:after {
+	// 	content: '';
+	// 	background: url("../images/statisticsView/down.png") no-repeat center center;
+	// 	width: 27px;
+	// 	height: 28px;
+	// 	position: absolute;
+	// 	bottom: -14px;
+	// 	left: 50%;
+	// 	margin-left: -14px;
+	// 	@include border-radius (50%);
+	// 	border: 2px solid #261f3b;
+	// 	z-index: 5;
+	// }
+	// &.activeImg{
+	// 	&:after{
+	// 		background: url("../images/statisticsView/up.png") no-repeat center center;
+	// 	}
+	// }
+}
+.StatsRequestImg{
+	background:url('../images/statisticsView/request1.png') no-repeat center center #8f82f5 ;
+}
+.StatsResumeImg{
+	background:url('../images/statisticsView/resume1.png') no-repeat center center #8f82f5 ;
+}
+.StatsDate{
+	width: 26px;
+	height: 26px;
+	border:none;
+	background:url('../images/statisticsView/calander.png') no-repeat center center #8f82f5 !important;
+}
+
+.StatsDateCnt{
+	line-height: 1;
+	.x-inner{
+		@extend .clearfix;
+	}
+}
+.StatsDatelbl{
+	font-size: 12px;
+	color: #fff;
+}
+.StatsRequestLbl{
+	color: #f6aa3a;
+	width: 48%;
+	float: right;
+	text-align: left;
+}
+.StatsResumeLbl{
+	color: #3ba2f6;
+	width: 48%;
+	float: left;
+	text-align: right;
+}
+
+.chartLegend{
+	.x-legend-inner .x-legend-container{
+		background: none;
+		.x-legend-item{
+			color: #fff;
+			font-weight: normal;
+		}
+	}
+}

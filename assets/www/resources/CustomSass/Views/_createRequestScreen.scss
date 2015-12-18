@@ -1,0 +1,207 @@
+.RequestHeadingCnt{
+	@extend .bebasBold;
+	position: relative;
+	color: white;
+	line-height: 1;
+	letter-spacing: 1px;
+	font-size: 18px;
+}
+
+.cReqNo{
+	text-align: center;
+	width: 40px;
+	padding: 11px 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color: $yellow;
+	
+}
+.cReqName{
+	padding: 10px 0 10px 60px;
+}
+.requestCloseIcon{
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+
+.DateCls{
+	position: relative;
+	.x-field-input{
+		&:before{
+			content: "";
+			background-color: $yellow;
+			width: 30px;
+			bottom: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			@include  border-radius(0 5px 5px 0);
+
+		}
+		&:after{
+			content: "";
+			width: 11px;
+			height: 14px;
+			position: absolute;
+			right: 10px;
+			top: 8px;
+
+			background-image: url(../images/resumeDetail/downArrow1.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center center;
+
+		}
+	}
+	&.x-field-select .x-component-outer .x-input-el{
+		border:none;
+	}
+	&.x-field .x-field-input{
+		overflow: hidden;
+		border-radius: 5px; 
+	}
+}
+
+.DateHeading{
+	height: 30px;
+	position: relative;
+	background: url('../images/createRequest/calander.png') no-repeat center center $yellow;
+	.x-inner{
+		position: absolute;
+		right: 10px;
+		top: 3px;
+		text-align: center;
+		padding: 6px 7px;
+		width: 24px;
+		height: 24px;
+		background: white;
+		@include border-radius(50%);
+		&:after{
+			content: '';
+			background-image: url(../images/resumeDetail/upArrow.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center center;
+			display: inline-block;
+			width: 10px;
+			vertical-align: top;
+			height: 10px;
+		}
+	}
+	&.collapseActive{
+		.x-inner{
+			&:after{
+				background-image: url(../images/resumeDetail/downArrow.png);
+			}
+		}
+	}
+}
+.LocationHeading{
+	padding:5px 0;
+	height: 30px;
+	position: relative;
+	background: url('../images/savedSearch/locationL1.png') no-repeat center center $yellow;
+	background-size: contain;
+	.x-inner{
+		position: absolute;
+		right: 10px;
+		top: 3px;
+		text-align: center;
+		padding: 6px 7px;
+		width: 24px;
+		height: 24px;
+		background: white;
+		@include border-radius(50%);
+		&:after{
+			content: '';
+			background-image: url(../images/resumeDetail/upArrow.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center center;
+			display: inline-block;
+			width: 10px;
+			vertical-align: top;
+			height: 10px;
+		}
+	}
+	&.collapseActive{
+		.x-inner{
+			&:after{
+				background-image: url(../images/resumeDetail/downArrow.png);
+			}
+		}
+	}
+}
+
+.requestInnerCnt{
+	border-bottom: 1px solid black;
+}
+
+.textarea{
+	&.x-field-textarea .x-component-outer .x-input-el{
+		border:none;
+		resize: vertical;
+		@include border-radius (5px);
+	}
+}
+
+.requestBack{
+	bottom: 10px;
+	left: 10px;
+}
+
+.saveBtn{
+	left: 50%;
+	margin-left: -30px;
+	bottom: 10px;
+	background-color: $yellow !important;
+	.x-button-label{
+		background-image: url(../images/searchResult/Save.png);		
+	}
+}
+
+
+.saveRequest{
+	left: 50%;
+	margin-left: -30px;
+	bottom: 10px;
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	border:none;
+	position: absolute;
+	background-image: url(../images/requestScreen/saveRequest.png) !important;
+	background-size: contain!important;
+}
+
+.fixRequest{
+	right:10px;
+	bottom: 10px;
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	position: absolute;
+	border:none;
+	background-image: url(../images/requestScreen/tick.png) !important;
+	background-size: contain!important;
+}
+
+.searchTitle{
+
+	.x-input-el{
+		background-color: transparent;
+		text-align: center;
+		color: #fff;
+		-webkit-text-fill-color: #fff;
+
+	}
+}
+
+.clone{
+	position: absolute;
+	top:0;
+	right: 0;
+}

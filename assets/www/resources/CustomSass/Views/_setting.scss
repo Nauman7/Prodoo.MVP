@@ -1,0 +1,89 @@
+.settingCnt{
+	background: #3e335e;
+}
+.notificationCnt{
+	position: relative;
+	background: url('../images/setting/2A.png') 10px center no-repeat ;
+	&.settingActiveCnt{
+		background: url('../images/setting/3A.png') 10px center no-repeat #bf90d4;
+	}
+}
+.aboutProdooCnt{
+	position: relative;
+	background: url('../images/setting/2B.png') 10px center no-repeat ;
+	&.settingActiveCnt{
+		background: url('../images/setting/4A.png') 10px center no-repeat #bf90d4;
+	}
+}
+.settingHelpCnt{
+	position: relative;
+	background: url('../images/setting/2C.png') 10px center no-repeat ;
+	&.settingActiveCnt{
+		background: url('../images/setting/6A.png') 10px center no-repeat #bf90d4;
+	}
+}
+
+.settingDownArrow{
+	background: red;
+	position: absolute;
+	right:10px;
+	top:50%;
+	margin-top: -16px;
+	width: 31px;
+	border:none;
+	height: 32px;
+	background: url('../images/setting/2D.png') no-repeat !important;
+}
+.settingInnerCnt{
+	position: relative;
+	.x-inner{
+		@extend .clearfix;
+	}
+}
+.settingActiveCnt{
+	.settingDownArrow{
+		background: url('../images/setting/3B.png') no-repeat !important;
+	}
+	
+}
+.SettingRightBtn{
+	background: url('../images/setting/6C.png') no-repeat !important;
+	border:none;
+	position: absolute;
+	right: 15px;
+	top:50%;
+	margin-top: -16px;
+	width: 32px;
+	height: 32px;
+}
+
+.SettingMainHeading{
+	padding: 15px 0;
+	text-align: center;
+	background: #bf90d4;
+	color: #ffffff;
+}
+.SettingInnerHeading{
+	padding: 15px;
+	text-align: center;
+	font-weight: bold;
+	color: #ffffff;
+	
+}
+.SettingDetail{
+	padding: 0 15px;
+	text-align: justify;
+	color: #ffffff;
+	font-size: 14px;
+}
+
+.settingList{
+	position: absolute;
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	.x-innerhtml{
+		padding: 0 !important;
+	}
+}

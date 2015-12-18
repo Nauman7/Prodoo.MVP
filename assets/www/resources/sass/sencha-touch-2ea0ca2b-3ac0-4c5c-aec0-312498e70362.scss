@@ -1,0 +1,73 @@
+$badge-bg-gradient: flat;
+$badge-radius: 0;
+$button-font-family: inherit;
+$button-gradient: flat;
+$button-radius: 0;
+$font-family: 'Segoe UI', HelveticaNeue, Helvetica, Arial, sans-serif;
+$list-bg-color: rgba(255,255,255,0);
+$form-field-border-bottom-color: rgba(255,255,255,0);
+$form-field-border-bottom-width: 0;
+$form-field-height: 30px;
+$form-field-label-bg-color: rgba(255,255,255,0);
+$form-fieldset-border-width: 0;
+
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+
+body{
+    font-size: 100%;
+    &.x-desktop{
+        font-size: 100%;
+    }
+}
+
+.x-form-label span{
+    font-weight: normal;
+}
+
+body, body h4, body h5, body p {
+	line-height: 16pt;
+}
+.x-form .x-scroll-container{
+	background-color: transparent !important;
+
+}
+
+.x-form-fieldset .x-form-fieldset-inner{
+	background: transparent;
+}
+.x-field {
+	padding: 15px .5em;
+	background-color: transparent;
+
+}
+
+.x-input-el {
+	padding: .2em;
+	font-size: 15px;
+}
+.x-form-fieldset {
+    margin: .75em 0 .75em;
+}
+
+.x-msgbox-inner{
+	color: white;
+}
+
+.x-field-search .x-field-input{
+	&:before{
+		display: none;
+	}
+	.x-form-field{
+		margin-left: 0;
+	}
+}
+.x-button{
+	min-height: 1.6em;
+}
+
+
+.x-form-label{
+    padding:0.2em;
+}

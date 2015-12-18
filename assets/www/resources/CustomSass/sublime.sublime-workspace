@@ -1,0 +1,1049 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"ani",
+				"animate	animate"
+			],
+			[
+				"remove",
+				"removeAttr	.removeAttr()"
+			],
+			[
+				"an",
+				"animate	animate"
+			],
+			[
+				"st",
+				"style	<style>"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"mar",
+				"mar	margin"
+			],
+			[
+				"di",
+				"d:ib	display:inline-block"
+			],
+			[
+				"fsh",
+				"fshopCont"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"mou",
+				"mouseover"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"he",
+				"header	<header>"
+			],
+			[
+				"win",
+				"WinScrolTopval"
+			],
+			[
+				"com",
+				"compress"
+			],
+			[
+				"comr",
+				"compress"
+			],
+			[
+				"por",
+				"Portfolio"
+			],
+			[
+				"zi",
+				"z-in	z-index"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"s",
+				"summary"
+			],
+			[
+				"fl",
+				"fl:l	float:left"
+			],
+			[
+				"border",
+				"border-top"
+			],
+			[
+				"trans",
+				"transition"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"selec",
+				"selected	Attr"
+			],
+			[
+				"BA",
+				"background"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"re",
+				"relative"
+			],
+			[
+				"ca",
+				"capitalize"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"orange",
+				"orangeButton"
+			],
+			[
+				"wi",
+				"window"
+			],
+			[
+				"W",
+				"width"
+			],
+			[
+				"window",
+				"windowWidth"
+			],
+			[
+				"wind",
+				"windowWidth"
+			],
+			[
+				"cell",
+				"cellspacing	Attr"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"output",
+				"output_style"
+			],
+			[
+				"mix",
+				"mixin"
+			],
+			[
+				"mixMa",
+				"mixMainPadd"
+			],
+			[
+				"calc",
+				"calcPercentage	calc-percent"
+			],
+			[
+				"red",
+				"red_color"
+			],
+			[
+				"b",
+				"body"
+			],
+			[
+				"get",
+				"getElementsByTagName"
+			],
+			[
+				"wid",
+				"width"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/_Common.scss",
+			"settings":
+			{
+				"buffer_size": 481,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 79 files for \"menuIcon\"\n\n0 matches",
+			"settings":
+			{
+				"buffer_size": 44,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 311.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Enable Package"
+			],
+			[
+				"Package Control: dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: is",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"setsynjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"syntjs",
+				"Set Syntax: JSON"
+			],
+			[
+				"css",
+				"Autoprefix CSS"
+			],
+			[
+				"syntax",
+				"Preferences: Alignment File Settings – Syntax Specific – User"
+			],
+			[
+				"synts",
+				"Set Syntax: Sass"
+			],
+			[
+				"syntsass",
+				"Set Syntax: Sass"
+			],
+			[
+				"syntcss",
+				"Set Syntax: CSS"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"gist",
+				"Gist: Add File to Gist"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"snipp",
+				"Snippet: Mailings: Image"
+			],
+			[
+				"snippjq",
+				"Snippet: HTML w/ jQuery"
+			],
+			[
+				"snipJq",
+				"Snippet: jQuery ready function"
+			],
+			[
+				"sni",
+				"Snippet: border-image"
+			],
+			[
+				"copyas",
+				"File: Copy as Tag style"
+			],
+			[
+				"",
+				"Autoprefix CSS"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"copy",
+				"File: Copy Path From Project"
+			],
+			[
+				"fetch",
+				"Fetch: Package"
+			],
+			[
+				"fetc",
+				"Fetch: Package"
+			],
+			[
+				"project",
+				"Project: Refresh Folders"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"lint",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"lin",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"linter",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"manage",
+				"Fetch: Manage"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"packag",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 528.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/Modules"
+	],
+	"file_history":
+	[
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/CustomSass/style.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/CustomSass/Views/_userApp.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/CustomSass/_Common.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/CustomSass/_mixins.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/css/style.css",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/_mixins.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/Modules/_Login.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/Style.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/_variables.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/_Common.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/CustomSass/Views/_login.scss",
+		"/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooMobileApp/resources/startup/320x460.jpg",
+		"/D/Projects/Teaminjection/EER/EER/Scripts/SA/bootstrap.json",
+		"/D/Softwares/Sublime/changelog.txt",
+		"/C/Users/tahir/Desktop/game/index.html",
+		"/C/Users/tahir/Desktop/game/game.html",
+		"/C/Users/tahir/Desktop/game/js/main.js",
+		"/C/Users/tahir/Desktop/game/scss/style.scss",
+		"/D/Projects/SMNEW/swnewHtml/index.html",
+		"/D/Projects/SMNEW/swnewHtml/sass/style.scss",
+		"/D/Projects/SMNEW/swnewHtml/sass/modules/_nav.scss",
+		"/D/Projects/SMNEW/swnewHtml/js/main.js",
+		"/D/Projects/SMNEW/swnewHtml/sass/_variables.scss",
+		"/D/Projects/SMNEW/swnewHtml/sass/modules/_footer.scss",
+		"/D/Projects/SMNEW/swnewHtml/sass/_reset.scss",
+		"/D/Projects/SMN/smnHtml/sass/style.scss",
+		"/D/Projects/SMN/smnHtml/index.html",
+		"/D/Projects/SMN/smnHtml/sass/modules/_aside.scss",
+		"/D/Projects/SMN/smnHtml/sass/modules/_footer.scss",
+		"/D/Projects/SMN/smnHtml/sass/modules/_header.scss",
+		"/D/Projects/SMN/smnHtml/sass/pages/_index.scss",
+		"/D/Projects/SMN/smnHtml/sass/modules/_nav.scss",
+		"/D/Projects/SMN/smnHtml/sass/modules/_slider.scss",
+		"/D/Projects/SMN/smnHtml/sass/_mixins.scss",
+		"/D/Projects/SMN/smnHtml/sass/_variables.scss",
+		"/D/Projects/SMN/smnHtml/js/main.js",
+		"/D/Projects/SMN/smnHtml/js/plugins.js",
+		"/D/Projects/SMN/smnHtml/sass/_reset.scss",
+		"/D/Projects/SMN/smnHtml/css/style.css",
+		"/D/Softwares/Sublime/Data/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/product.html",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/style.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/productList.html",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/modules/_pageProductList.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/modules/_pageProduct.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/usedbike-desc.html",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/productCatagories.html",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/aboutus.html",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/css/style.css",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/_reset.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/js/main.js",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/_mixins.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/modules/_productCatagories.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/modules/_product.scss",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/js/plugins.js",
+		"/E/TAHIR DATA/Tahir/Projects/ROM project/ROM/romhtml/sass/modules/_index.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/portfolio.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/portfolio.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/_mixins.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/js/main.js",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/portfolio123.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/portfolio123.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/portfolio123.css",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/blog.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/index.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/home.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/master.css",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/master.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/technology.css",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/technologies.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/blog.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/article-detail.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/about.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/casestudy.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/.sass-cache/d9e497d31bc1803a6cbd4d06de4b48db7a8547fa/_compass.scssc",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/services.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/about.html.orig",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/technologies-detail.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/services.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/service-detail.html",
+		"/E/TAHIR DATA/Tahir/Others/Sublime Text 3 -Portable/Portable - Copy/Data/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/portfolio.html.orig",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/service-detail.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/service.css",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/service.scss",
+		"/E/TAHIR DATA/Tahir/Others/Sublime Text 3 -Portable/Portable - Copy/Data/Packages/JSHint Gutter/Default (Windows).sublime-keymap",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/service.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/Boxes.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/about.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/sass/_variables.scss",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/portfolio.css",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/temp",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/temp.html",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/js/test.js",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/js/jquery.flexnav.js",
+		"/E/TAHIR DATA/Tahir/Projects/GDW/GDW/gdwhtml/css/portflio.css",
+		"/D/Projects/ROM/ROM/romhtml/sass/style.scss",
+		"/D/Projects/ROM/ROM/romhtml/service.html",
+		"/D/Projects/ROM/ROM/romhtml/css/style.css",
+		"/D/Projects/ROM/ROM/romhtml/aboutus.html",
+		"/D/Projects/ROM/ROM/romhtml/index.html",
+		"/D/Projects/ROM/ROM/romhtml/sass/_reset.scss",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_header.scss",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_footer.scss",
+		"/D/Projects/ROM/ROM/romhtml/js/main.js",
+		"/D/Projects/ROM/ROM/romhtml/sass/_mixins.scss",
+		"/D/Projects/ROM/ROM/romhtml/js/plugins.js",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_aside.scss",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_slider.scss",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_nav.scss",
+		"/D/Projects/ROM/ROM/romhtml/sass/modules/_index.scss",
+		"/D/temp/jquery.customSelect-master/index.html",
+		"/D/Projects/ROM/ROM/romhtml/css/index.css",
+		"/D/Projects/ROM/ROM/romhtml/sass/index.scss",
+		"/D/Projects/ROM/ROM/romhtml/about.html",
+		"/D/Projects/ROM/ROM/romhtml/sass/_variables.scss",
+		"/D/Projects/ROM/ROM/romhtml/js/index.js",
+		"/D/Projects/ROM/ROM/romhtml/rom.sublime-project",
+		"/D/Projects/ROM/ROM/romhtml/romhtml.sublime-project",
+		"/D/Projects/ROM/ROM/romhtml/romhtml.sublime-workspace",
+		"/D/Projects/ROM/romhtml/sass/style.scss",
+		"/D/Projects/ROM/romhtml/index.html",
+		"/D/Projects/ROM/romhtml/sass/modules/_header.scss",
+		"/D/Projects/ROM/romhtml/css/index.css",
+		"/D/Projects/ROM/romhtml/sass/index.scss",
+		"/D/Projects/ROM/romhtml/js/main.js",
+		"/D/Projects/ROM/romhtml/sass/_variables.scss",
+		"/D/Projects/ROM/romhtml/css/style.css"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"menuIcon",
+			"btnDetailBottom",
+			"Resume",
+			"x-button-icon",
+			"Resume",
+			".settings",
+			"Login.aspx",
+			"MainViewViewModel",
+			"</",
+			"><",
+			"livedemo00",
+			"$table",
+			"tableImg",
+			"hNav",
+			"contentContainer",
+			"f4cec1",
+			"arrow",
+			"nav",
+			"footerContent",
+			"p",
+			"facebook",
+			"book",
+			"footerContent",
+			"social",
+			"ROM",
+			"extend",
+			"lightBlue",
+			"offblack",
+			"bebasneue_book-webfont",
+			"bebasneue_bold-webfont",
+			"Helvetica",
+			"helvetica",
+			"Helvetica",
+			"langdon",
+			"helveticabold",
+			"helvetica-bold",
+			"5px",
+			"fshopCont",
+			"qCont",
+			"template",
+			"priceContainer",
+			"result",
+			"clrbar",
+			"none",
+			"priceContainer",
+			"followusicons",
+			"HelveticaRegular",
+			"product",
+			"produc",
+			"helve",
+			"font-fa",
+			"i",
+			"1024",
+			"port",
+			"BoxesOverlay",
+			"ContentBoxesOverlay",
+			"transi",
+			"BoxesOverlay",
+			"portfolio",
+			"boxsize",
+			"header",
+			"transition",
+			"back",
+			"bac",
+			"SingleTechnologyExpanded ",
+			"ContentBoxesSmallContainer",
+			"ContentBoxesOverlay",
+			"social",
+			"header",
+			"ddslick",
+			"slide",
+			"slider",
+			"images/",
+			"images/Team/",
+			"images/",
+			"AboutContent",
+			"images/",
+			"AndyDavidson",
+			"AndyDavidsonTeafasfasfasfas",
+			"h2",
+			"facebook.png",
+			"arc",
+			"this",
+			"1000",
+			"Pinterest.com",
+			"www.",
+			"Pinterest.com",
+			"twitter.com",
+			"twitter",
+			"Facebook",
+			"facebook",
+			"http://facebook.com",
+			");\n",
+			"                \n",
+			"dds",
+			"FirstContainer",
+			"boxsize ",
+			"});\n",
+			"FirstContainer",
+			".rslides1_nav.next",
+			"profile",
+			"ProfileContainer",
+			"PortHeight",
+			"slide",
+			"port",
+			"com",
+			" .SecondContainer , .summary , .rslides_nav{\n        display: none;\n    }",
+			"ProfileContainer",
+			"nav{",
+			"rslides",
+			"rslides1",
+			"section",
+			"float",
+			">\n",
+			"tel:",
+			"span",
+			"Services",
+			"Services & Repairs",
+			"::",
+			"logoDv",
+			"720",
+			"console.log",
+			"this",
+			"closest",
+			"parent()",
+			"parent",
+			"$(this)",
+			"//\nh1.head{\n  @extend .HelveticaRegular;\n  \n  border-bottom:$white 2px solid;\n  font-size:30px;\n  padding:10px 10px 11px;\n  margin:0 0 16px;\n  position: relative;\n\n}//h1.whiteHead\n\nh1.whiteHead{\n  @extend h1.head;\n  @include text-shadow($black 1px 1px 1px);\n  color:$white;\n\n  .whiteHead-topBar{\n      @include box-shadow(#343434 1px 2px 2px);\n  }//.whiteHead-topBar\n\n}//h1.whiteHead\n\nh1.greyHead{\n  @extend h1.head;\n  @include text-shadow(none);\n  \n  color:$grey;\n  \n  .whiteHead-topBar{\n      @include box-shadow(none);\n      background:$grey;\n    }//whiteHea-topBar\n\n}//h1.greHead\n\n.whiteHead-topBar{\n  @include box-shadow(#c8c8c8 1px 2px 2px);\n  height:4px;\n  width:100%;\n  background:$white;\n  position: absolute;\n  left: 0;\n  top: 0;\n}//whiteHead-topBar"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\n</",
+			"</\n",
+			">\n<",
+			";\n",
+			"%'\n",
+			"CaseStudyLogoSource",
+			"\">\n",
+			"background",
+			"\n.",
+			");\n",
+			">\n",
+			"><!--",
+			"label",
+			"HelveticaRegular",
+			"HelveticaBold",
+			"<span>",
+			"$grey",
+			"$gey",
+			"$orange",
+			"nav.menu"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/D/Projects/ProDoo Projects/Teaminjection/EER/ProDooWebApp/resources/scss/_Common.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								243,
+								243
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SCSS/SCSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 273.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 44,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 262.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "sublime.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"mix",
+				"sass\\_mixins.scss"
+			],
+			[
+				"reset",
+				"sass\\_reset.scss"
+			],
+			[
+				"main",
+				"js\\main.js"
+			],
+			[
+				"plu",
+				"js\\plugins.js"
+			],
+			[
+				"home",
+				"sass\\home.scss"
+			],
+			[
+				"sty",
+				"sass\\style.scss"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"about",
+				"aboutus.html"
+			],
+			[
+				"serv",
+				"service.html"
+			],
+			[
+				"stye",
+				"css\\style.css"
+			],
+			[
+				"plugin",
+				"js\\plugins.js"
+			],
+			[
+				"st",
+				"css\\style.css"
+			],
+			[
+				"styl",
+				"css\\style.css"
+			],
+			[
+				"ssty",
+				"css\\style.css"
+			],
+			[
+				"foot",
+				"sass\\modules\\_footer.scss"
+			],
+			[
+				"style",
+				"css\\style.css"
+			],
+			[
+				"head",
+				"sass\\modules\\_header.scss"
+			],
+			[
+				"nav",
+				"sass\\modules\\_nav.scss"
+			],
+			[
+				"foo",
+				"sass\\modules\\_footer.scss"
+			],
+			[
+				"header",
+				"sass\\modules\\_header.scss"
+			],
+			[
+				"sytle",
+				"css\\style.css"
+			],
+			[
+				"f",
+				"sass\\modules\\_footer.scss"
+			],
+			[
+				"var",
+				"sass\\_variables.scss"
+			],
+			[
+				"footer",
+				"sass\\modules\\_footer.scss"
+			],
+			[
+				".css",
+				"css\\index.css"
+			],
+			[
+				"inde",
+				"sass\\index.scss"
+			],
+			[
+				".js",
+				"js\\plugins.js"
+			],
+			[
+				"ind",
+				"sass\\index.scss"
+			],
+			[
+				"plug",
+				"js\\plugins.js"
+			],
+			[
+				"boi",
+				"sass\\_normaliseBoilerplate.scss"
+			],
+			[
+				"ramst",
+				"sass\\ramstyle.scss"
+			],
+			[
+				"jq",
+				"js\\vendor\\jquery-1.10.2.min.js"
+			],
+			[
+				"html",
+				"index.html"
+			],
+			[
+				"wp-config",
+				"wp-config-sample.php"
+			],
+			[
+				"js",
+				"js\\myjs.js"
+			],
+			[
+				"my",
+				"js\\myjs.js"
+			],
+			[
+				"te",
+				"test.html"
+			],
+			[
+				"em",
+				"email.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 256.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

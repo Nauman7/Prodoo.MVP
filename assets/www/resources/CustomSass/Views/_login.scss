@@ -1,0 +1,195 @@
+// .loginForm {
+// 	border: 1px solid #ccc;
+// 	@include box-shadow(2px 2px 5px 0px #777);
+// 	.x-form-fieldset-title .x-innerhtml{
+// 		line-height: 1.4;
+// 	}
+// }
+
+.loginProdoo{
+	text-align: center;
+}
+.loginHeading{
+	@extend .bebasBold;
+	font-size: 66px;
+	color: white;
+
+}
+
+.LoginFormCnt{
+	background-color: $darkPurple;
+}
+
+.field {
+	&.x-field-text .x-component-outer .x-input-el{
+		background: none;
+		padding: 0;
+		color: white;
+		line-height: 1;
+		border: none;
+		min-height: 0;
+		border-bottom: 1px solid #332a4c;
+		text-align: center;
+		-webkit-text-fill-color: white;
+		&::-webkit-input-placeholder{
+			color: white;
+			@include opacity(0.5);
+		}
+		&:-moz-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+		&::-moz-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+		&:-ms-input-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+	}
+	
+}
+.loginBtnCnt{
+	background-color: $green!important;
+	position: relative;
+	// &:before{
+	// 	position: absolute;
+	// 	top:3px;
+	// 	left: 50%;
+	// 	margin-left: -11px;
+	// 	content: '';
+	// 	display: inline-block;
+	// 	width: 0;
+	// 	height: 0;
+	// 	border-style: solid;
+	// 	border-width: 0 11px 22px 11px;
+	// 	border-color: transparent transparent $green transparent;
+	// 	z-index: 4;
+	// }
+	// &:after{
+	// 	position: absolute;
+	// 	top: -1px;
+	// 	content: '';
+	// 	display: inline-block;
+	// 	width: 100%;
+	// 	height: 26px;
+	// 	border: none;
+	// 	background-color: $darkPurple;
+	// 	border-radius: 0px 0px 200px 200px / 30px;
+	// }
+}
+
+.loginBtn{
+	@extend .bebasBold; 
+	font-size: 36px;
+	border:none;
+	padding: 0;
+	background: #04caa7 !important;
+	.x-button-label{
+		color: #3e335e;
+		font-weight: normal;
+	}
+	
+}
+.visitorBtn{
+	font-size: 15px;
+	border:none;
+	padding: 0;
+	background: #04caa7 !important;	
+	.x-button-label{
+		color: #3e335e;
+		font-weight: normal;
+	}
+}
+.facebookBtn {
+	background: url("../images/social/facebook.png") 5px 5px no-repeat #3b5997 !important;
+	padding: 15px 0 15px 40px;
+	border:none;
+	.x-button-label {
+		font-weight: normal;
+		line-height: 1.4;
+		color: white;
+		font-size: 12px;
+	}
+}
+
+.linkedinBtn {
+	background: url("../images/social/linkedin.png") right 5px no-repeat #007bb6 !important;
+	padding: 15px 40px 15px 0;
+	border:none;
+	.x-button-label {
+		font-weight: normal;
+		line-height: 1.4;
+		color: white;
+		font-size: 12px;
+	}
+}
+// .createBtn,
+// .facebook,
+// .linkdin,
+// .forgotBtn {
+// 	border: none;
+// 	padding: 10px;
+// 	@include transition(0.5s all); 
+// 	.x-button-label{
+// 		color: white;
+// 		font-size: 14px;
+// 	}
+// 	&.x-button-pressing{
+// 		@include opacity(0.7);
+// 	}
+// }
+// .x-button{
+// 	&.createBtn {
+// 		background-color: $pink;
+// 	}
+
+// 	&.facebook {
+// 		background-color: $blue;
+// 	}
+
+// 	&.linkdin {
+// 		background-color: $lightBlue;
+// 	}
+
+// 	&.forgotBtn{
+// 		background-color: $darkPurple;
+// 	}
+// }
+
+.center{
+	text-align: center;
+}
+
+.SignUpCnt{
+	text-align: center;
+	.x-innerhtml{
+		color: white;
+		font-size: 14px;
+	}
+}
+.SignUp, 
+.facebook,
+.linkdIn,
+.visitor{
+	text-decoration: underline;
+}
+.SignUp{
+	color: $green;
+	font-weight: bold;
+	text-decoration: none;
+}
+.facebook{
+	color: lighten($blue,20);
+}
+.linkdIn{
+	color:$lightBlue;
+}
+.visitor{
+	color: $lightPink;
+}
+.forgot{
+	color: $orange2;
+	font-weight: bold;
+}

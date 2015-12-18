@@ -1,0 +1,130 @@
+.navCls {
+	background: url('../images/nav.jpg') repeat-x 0 bottom white;
+	height:70px;
+	.x-center {
+		background: url('../images/ProDoo.png') no-repeat center center;
+	}
+}
+
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+.inlineBlock{
+	display: inline-block;
+}
+.auto{
+	margin: 0 auto;
+}
+.noBorder{
+	border:none!important;
+}
+.hidden{
+	display: none;
+}
+.tabBarCnt{
+	&.x-tabbar {
+		background-color: lighten($blue, 2);
+	}
+
+	&.x-tabbar .x-tab {
+		background: $blue;
+		margin: 0;
+		padding: 20px;
+		.x-button-icon{
+			border:none;
+			@include border-radius(0);
+		}
+	}
+
+	&.x-tabbar .x-tab.x-tab-active {
+		background: darken($green, 5);
+		@include transition(all 0.5s);
+	}
+}
+
+.x-msgbox .x-toolbar.x-docked-top, .x-msgbox .x-toolbar{
+	overflow: visible;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+	clear: both;
+}
+.relative{
+	position: relative;
+}
+
+.requestCnt{
+	color: white;
+	line-height: 1;
+	font-size: 17px;
+	@extend .clearfix;
+	.closeIcon{
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		margin-top: -15px;
+		@include transition(opacity .3s);
+		&:hover{
+			@include opacity(0.7);
+
+		}
+	}
+
+}
+.reqNo{
+	text-align: center;
+	width: 60px;
+	padding: 16px 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color:darken($blue5, 3);
+	
+}
+.reqName{
+	padding: 3px 60px 0;
+	float: left;
+}
+
+.requestList{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	padding-bottom: 80px;
+	.x-list-item {
+		border-top: 1px solid black !important;
+		@include transition(background 0.3s);
+		&:hover{
+			background: lighten($blue5,10);
+		}
+	}
+	.x-list-item-last{
+		border-bottom: 1px solid black !important;
+	}
+	&.x-list {
+		.x-list-item.x-item-selected.x-list-item-tpl,
+		.x-list-item.x-item-pressed.x-list-item-tpl{
+			background: lighten($blue5,15);
+			.x-innerhtml{
+				background: lighten($blue5,15);
+			}
+		}
+	}
+
+}
+.MainNavigationView {
+	background: #3e335e;
+}
+.bottom78{
+	bottom: 78px !important;
+}

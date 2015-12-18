@@ -1,0 +1,314 @@
+.ResumeView{
+	.tabIconSpan {
+		background-color: $blue4;	
+		.profileTabIcon{
+			background-image: url("../images/searchResult/userL.png");
+		}
+		.editTabIcon{
+			background-image: url("../images/searchResult/pencilboxL.png");
+		}
+
+		.skillTabIcon{
+			background-image: url("../images/searchResult/keyL.png");
+		}
+
+		.savedTabIcon{
+			background-image: url("../images/searchResult/caseL.png");
+		}
+
+		.certificationTabIcon{
+			background-image: url("../images/searchResult/capL.png");
+		}
+		
+		&.activeBtn{
+			background-color: white;
+		}
+	}
+}
+.confirmIcon{
+	bottom: 10px;
+	right: 10px;
+	background-color: $blue4 !important;
+	.x-button-label{
+		background-image: url(../images/resumeView/tickL.png);		
+	}
+}
+
+.CreateNewIcon{
+	position: absolute;	
+	border:none;
+	@include transition(0.3s all);
+	z-index: 25;
+	width: 60px;
+	height: 60px;
+	bottom: 10px;
+	right: 10px;
+	background:url(../images/resumeView/add.png) center center no-repeat !important;
+	background-size: contain !important;
+	&.x-button-pressing{
+		@include opacity(0.7); 
+	}
+}
+
+.tabIconSpan{
+	.settingTabIcon{
+		background-image: url("../images/resumeView/settingL.png");
+	}
+	.languageTabIcon{
+		background-image: url("../images/resumeDetail/speakL.png");
+	}
+}
+
+.LanguageCnt{
+	@extend .clearfix;
+	.x-container{
+		float: left;
+		background-color: $pink;
+		@include border-radius (18px);
+		padding: 0 10px;
+		margin: 10px 10px 10px 0;
+	}
+	.x-item-disabled{
+		&.x-container{
+			background-color: darken($pink,30);
+		}
+	}
+}
+
+.AvailableBtn{
+	background: url('../images/resumeView/checkBtn.png') no-repeat 0 0 !important;
+	width: 65px;
+	height: 38px;
+	border:none;
+	&.busyBtn{
+		background-position: -70px 0px !important;
+	}
+}
+.AvailableCnt{
+	background:#04caa7;
+	@extend .clearfix;
+	&.BusyCnt{
+		background: #ed6363;
+	}
+}
+.cWhite{
+	color:white;
+}
+
+
+.resumeLanguage{
+	height: 35px;
+	position: relative;	
+	background:#3ba2f6;
+	padding: 5px 0;
+	.x-inner{
+		background: url('../images/resumeDetail/speakL.png') no-repeat center center ;
+		background-size: contain;
+	}
+	
+}
+.PlusMiniBtn{
+	background: url(../images/resumeView/plus.png) 0 0 no-repeat !important;
+	width: 24px;
+	height: 24px;
+	border:none;
+}
+
+.TriggerBlue .x-field-input:before {
+	background-color: #3ba2f6 !important;
+}
+
+.IndustryList{
+	position: absolute;
+	top:0;
+	left:0;
+	bottom: 0;
+	line-height: 1;
+	&.x-list .x-list-item .x-list-item-body, &.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+		padding: 0;
+	}
+	&.x-list-normal .x-list-item.x-item-selected.x-list-item-tpl{
+		background: transparent;
+	}
+	.x-list-item-last{
+		padding-bottom: 20px;
+	}
+
+}
+.CertTitleWrap{
+	background-color: #4c98d3;
+	color: white;
+	text-align: center;
+	line-height: 1;
+	padding: 10px 0;
+	@extend .clearfix;
+	border-bottom: 1px solid #5680ad;
+}
+.certTtile {
+	padding: 5px 0 0;
+	display: inline-block;
+}
+.tabHeading{
+	background-color: #4c98d3;
+	text-align: center;
+	padding: 5px;
+	@extend .clearfix; 
+}
+.wProfileIcon{
+	background-image: url(../images/resumeView/user.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 23px;
+	display: inline-block;
+	width: 20px;
+	vertical-align: top;
+}
+.wSkillIcon{
+	background-image: url(../images/resumeView/skill.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 23px;
+	display: inline-block;
+	width: 20px;
+	vertical-align: top;
+}
+.wKeywordIcon{
+	background-image: url(../images/resumeView/key.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 14px;
+	display: inline-block;
+	width: 24px;
+	vertical-align: top;
+	margin: 6px 0 0;
+}
+.wGraphIcon{
+	background-image: url(../images/resumeView/graph.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 23px;
+	display: inline-block;
+	width: 20px;
+	vertical-align: top;
+}
+.sliderCnt{
+	padding: 10px;
+	border-bottom: #000 1px solid;
+}
+.KeywordDiv{
+	.x-container {
+		float: left;
+		background-color: #f6a825;
+		@include border-radius(18px);
+		padding: 0 10px;
+		margin: 10px 10px 10px 0;
+	}
+}
+.resumeEdit{
+	background: #4c98d3 !important;
+	.x-button-label{
+		background-image: url(../images/resumeView/Edit.png);		
+	}
+
+}
+
+
+
+
+
+
+
+.indDate {
+	color: white;
+	padding: 18px 50px;
+	font-size: 16px;
+	background: #1a8deb;
+	text-align: center;
+	position: relative;
+}
+
+.indEdit {
+	background: url('../images/resumeView/EditIcon.png') no-repeat center #fff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 5px;
+	margin-top: -20px;
+	top: 50%;
+}
+
+.indDelete {
+	background: url('../images/resumeView/remove.png') no-repeat center #fff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	right: 5px;
+	margin-top: -20px;
+	top: 50%;
+}
+
+.indHeading {
+	background: #3ba2f6;
+	color: #fff;
+	font-size: 18px;
+	padding: 15px 10px;
+	@extend .clearfix;
+}
+
+.indDescriptionCnt {
+	background: #fff;
+	padding: 15px 15px;
+	display: none;
+}
+.indVisible{
+	.indDescriptionCnt{
+		display: block;
+	}
+}
+.compWorkedDate{
+
+	float: right;
+	text-align: right;
+	width: 50%;
+	color: #fff;
+	font-size: 16px;
+}
+.indProfile {
+	// background: #3ba2f6;
+	// padding: 10px 30px;
+	// display: table;
+	// margin: 0 auto;
+	// border-radius: 20px;
+	
+	float: left;
+	width: 50%;
+}
+
+.indDescription {
+	margin-top: 10px;
+	line-height: 1.2;
+}
+
+.indMain {
+	position: relative;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: -15px;
+		left: 50%;
+		z-index: 1;
+		margin-left: -15px;
+		border-radius: 50%;
+		background: url("../images/resumeView/down.png") center no-repeat #1a8deb;
+		height: 30px;
+		width: 30px;
+		border: 2px solid #3e335e;
+	}
+	&.indVisible{
+		&:after{
+			background-image: url("../images/resumeView/up.png");
+		}
+	}
+}

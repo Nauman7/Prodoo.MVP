@@ -1,0 +1,118 @@
+.presentEdit{
+	background: #3e335e;
+}
+.presImgCnt{
+	background: #f17849;
+	text-align: center;
+}
+
+.presSocialHead{
+	background:#f54949;
+	position: relative;
+	.x-inner{
+		@extend .clearfix;
+	}
+}
+.presEditDesc{
+	background: #f54949;
+	text-align: center;
+	color: white;
+}
+.presEditArea {
+	padding: 0;
+	.x-input-el{
+		padding: 20px;
+	}
+}
+.presEditAdd{
+	width: 32px;
+	height: 32px;
+	background: url('../images/present/add.png') !important;
+	top:50%;
+	margin-top: -16px;
+	right: 20px;
+	position: absolute;
+	border:none;
+}
+.presFacebookCnt,
+.presTwitterCnt,
+.presLinkedinCnt,
+.presPinterestCnt,
+.presGPlusCnt,
+.presDriblleCnt,
+.presBahanceCnt,
+.presInstagramCnt{
+	padding: 15px 75px 15px 60px;
+	position: relative;
+	.x-inner{
+		@extend .clearfix; 
+	}
+}
+.presFacebookCnt{
+    background: url("../images/social/facebook.png") 5px center no-repeat #3b5997 !important;
+}
+.presTwitterCnt{
+    background: url("../images/social/twitter.png") 5px center no-repeat #00abf0 !important;
+}
+.presLinkedinCnt{
+    background: url("../images/social/linkedin.png") 5px center no-repeat #007bb6 !important;
+}
+.presGPlusCnt{
+    background: url("../images/social/google.png") 5px center no-repeat #dd4c39 !important;
+}
+
+.presPinterestCnt{
+    background: url("../images/social/pinterest.png") 5px center no-repeat #e3161d !important;
+}
+.presDriblleCnt{
+    background: url("../images/social/driblle.png") 5px center no-repeat #e86181 !important;
+}
+.presBahanceCnt{
+    background: url("../images/social/behance.png") 5px center no-repeat #3b8dff !important;
+}
+.presInstagramCnt{
+    background: url("../images/social/instagram.png") 5px center no-repeat #78554c !important;
+}
+
+.socialCheck{
+	background: url('../images/present/onOff.png') no-repeat -70px 0 !important;
+	width: 65px;
+	height: 36px;
+	border:none;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -18px;
+	&.socialBtnActive{
+		background-position: 0px 0px !important;
+	}
+}
+
+.PresentUserImg{
+	    border: 3px solid #251D3A;
+    @include border-radius (50%);
+    background-color: #3E335D;
+}
+
+
+
+// .uploaderCls {
+// 	position: absolute;
+// 	    top: 130px;
+//     left: 50%;
+//     margin-left: 25px;
+// }
+.uploaderCls {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    overflow: hidden;
+    width: 29px;
+    padding: 0;
+    margin-left: 25px;
+    background: url(../images/company/upload.png);
+    height: 30px;
+    input[type=file]{
+    	@include opacity(0);
+    }
+}

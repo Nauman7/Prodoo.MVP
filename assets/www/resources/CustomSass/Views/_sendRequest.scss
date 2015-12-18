@@ -1,0 +1,17 @@
+.shortlistRequest{
+	.reqName{
+		padding-left: 15px;
+	}
+}
+
+.sendRequest{
+	right:10px;
+	bottom: 10px;
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	position: absolute;
+	border:none;
+	background-image: url(../images/requestScreen/sendBtn.png) !important;
+	background-size: contain !important;
+}

@@ -1,0 +1,107 @@
+.RequestDetail{
+	background-color: #3e335e;
+}
+.reqAmountLbl{
+	background-color: #65bc50;
+	color:#3e335e;
+}
+.reqHeader{
+	.x-inner{
+		@extend .clearfix;
+	}
+}
+.reqCompName{
+	position: relative;
+	padding-right: 50px;
+	background-color:  #f6aa3a;
+	.x-inner{
+		color: #3e335e;
+		font-size: 20px;
+	}
+	&:after{
+		content: '';
+		top: 50%;
+		margin-top: -16px;
+		position: absolute;
+		right: 5px;
+		width: 32px;
+		height: 32px;
+		background: url(../images/requestDetail/right.png) no-repeat center center ;
+	}
+}
+
+.reqDate{
+	color: #fff;
+	position: relative;
+	border-right: 1px solid #261f3b;
+	padding: 0 10px 0 35px;
+	&:before{
+		content: '';
+		background:url(../images/requestDetail/calendar.png) no-repeat;
+		width: 24px;
+		height: 23px;
+		top: 50%;
+		position: absolute;
+		left: 5px;
+		margin-top: -12px;
+	}
+}
+.reqLangDateCnt{
+	.x-inner{
+		@extend .clearfix;
+	}
+}
+
+.reqLang{
+	color: #fff;
+	position: relative;
+	border-right: 1px solid #261f3b;
+	padding: 0 35px 0 10px;
+	text-align: right;
+	&:before{
+		content: '';
+		background:url(../images/requestDetail/language.png) no-repeat;
+		width: 15px;
+		height: 21px;
+		top: 50%;
+		position: absolute;
+		right: 5px;
+		margin-top: -11px;
+	}
+}
+.reqYesBtn{
+	background: url(../images/requestDetail/yes.png) no-repeat !important;
+	border:none;
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	width: 37px;
+	height: 36px;
+	margin-top: -18px;
+}
+.reqNoBtn{
+	background: url(../images/requestDetail/no.png) no-repeat !important;
+	border:none;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	width: 36px;
+	height: 36px;
+	margin-top: -18px;
+}
+.reqIntrestCnt{
+	position: relative;
+	background: #261f3b;
+}
+.reqDetailCnt{
+	color: #3e335e;
+	@include border-radius(10px);
+	background: #fff;
+}
+.reqReplyBtn{
+	width: 69px;
+	height: 69px;
+	position: absolute;
+	border:none;
+	background: url(../images/requestDetail/reply.png) !important;
+}

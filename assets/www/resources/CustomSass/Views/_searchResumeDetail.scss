@@ -1,0 +1,220 @@
+.darkBlue{
+	background-color: $darkBlue;
+}
+.resumeDetail{
+	.x-scroll-scroller{
+		padding: 0 0 80px 0;
+	}
+	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+		padding: 0;
+		font-size: 16px;
+		color: white;
+	}
+	&.x-list .x-list-item.x-item-selected.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-selected.x-list-item-tpl{
+		background: none;
+		.resultTitle {
+			color:white;
+		}
+	}
+}
+.backIcon{
+	.x-button-label{
+		background-image: url(../images/resumeDetail/back.png);
+	}
+}
+.ViewCnt {
+	border-bottom: 1px solid $darkBlue;
+}
+.detailTitle{
+	background-color: $green;
+	color:white;
+	text-align: center;
+	@extend .clearfix;
+	padding-top: 10px; 
+	width: 100%;
+	&.busyDetail{
+		background-color: #f54949;
+	}
+}
+.tickIcon{
+	padding: 0px 8px 0px;
+	margin: 5px;
+	margin-top: -5px;
+	height: 30px;
+	float: left;
+	vertical-align: middle;
+	background-color: white;
+	@include border-radius(50%);
+	&:before{
+		background-image: url("../images/resumeDetail/tickL.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center center;
+		content: '';
+		display: inline-block;
+		width: 16px;
+		vertical-align: top;
+		margin: 6px 0 0;
+		height: 16px;
+
+	}
+}
+
+.LocationDiv {
+	color: white;
+	line-height: 1.4;
+	padding: 2px 0 2px 10px;
+	@extend .clearfix;
+}
+.location{
+	display: inline-block;
+	margin-top: 5px;
+	vertical-align: top;
+}
+.onSite {
+	float: right;
+	padding: 5px 20px;
+	background-color: lighten($darkBlue,10);
+}
+
+.tabHead {
+	height: 30px;
+	background-color: $blue4;
+	text-align: center;
+	@extend .clearfix;
+}
+
+.speakIcon, .userIcon, .langIcon, .KeywordIcon, .certIcon, .caseIcon {
+	background-image: url(../images/resumeDetail/speakL.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 20px;
+	display: inline-block;
+	width: 20px;
+	vertical-align: top;
+	margin-top: 5px;
+}
+.userIcon {
+	background-image: url(../images/resumeDetail/userL.png);
+}
+.langIcon{
+	background-image: url(../images/resumeDetail/pencil.png);
+}
+.KeywordIcon{
+	background-image: url(../images/searchResult/keyL.png);
+	width: 30px;
+	margin-top: 8px;
+}
+.certIcon{
+	background-image: url(../images/resumeDetail/cap.png);
+	width: 27px;
+}
+.caseIcon{
+	background-image: url(../images/resumeDetail/case.png);
+	width: 23px;
+}
+.ArrowUp {
+	float: right;
+	padding: 0px 8px 0px;
+	margin: 3px 5px 0 0;
+	height: 25px;
+	background-color: white;
+	@include border-radius(50%);
+	&:before{
+		background-image: url(../images/resumeDetail/upArrow.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center center;
+		content: '';
+		display: inline-block;
+		width: 10px;
+		vertical-align: top;
+		margin: 7px 0 0;
+		height: 10px;
+
+	}
+}
+.ArrowDown{
+	&:before{
+		background-image: url(../images/resumeDetail/downArrow.png);
+	}
+}
+
+.listCnt {
+	@extend .clearfix;
+	padding: 3px 20px 3px 20px;
+	border-bottom: 2px solid black;
+}
+.Innerlist,.innerListLevel2{
+	// max-height: 0;            
+	overflow-y: hidden;
+
+	// @include transition (max-height .5s ease-in-out);
+}
+
+.level {
+	float: right;
+}
+.language {
+	padding: 4px 0 3px;
+	float: left;
+}
+.levelNo {
+	padding: 4px 0px 6px;
+	text-align: center;
+	width: 30px;
+	margin-left: 10px;
+	@include border-radius(50%);
+	display: inline-block;
+}
+.YearNo{
+	margin-right: 10px;
+}
+.orange2{
+	background-color:$orange2;
+}
+.center{
+	text-align: center;
+}
+.yearExp{
+	color: $blue2;
+	float: right;
+}
+
+.BoardGame{
+	color: white;
+	vertical-align: top;
+	line-height: 1.7;
+}
+.Innerlist{
+	border-top: 1px solid $darkBlue;
+}
+
+.para{
+	font-size: 14px;
+	padding: 10px 20px;
+	line-height: 1.7;
+	color:white;
+}
+.resultSkills{
+	font-size: 15px;
+	line-height: 1;
+	position: relative;
+	display: block;
+	padding: 15px 30px 15px;
+	color: white;
+	&:before {
+		content: '';
+		width: 25px;
+		height: 28px;
+		position: absolute;
+		top: 10px;
+		left: 0;
+		background: url(../images/savedSearch/pencilL.png) no-repeat 0 center;
+		background-size: contain;
+	}
+}
+
+.InnerHead{
+	background-color: lighten($blue4,10);
+}

@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<!-- Auto Generated with Sencha Architect -->
+<!-- Modifications to this file will be overwritten. -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Prodoo</title>
+    
+    <script>
+      
+        var Ext = Ext || {};
+        Ext.theme = {
+            name: "Windows"
+        };
+    </script>
+	<style>
+		body{
+			background:#3e335e;	
+		}
+		.preLoader{
+			margin: 100px auto 0;
+			text-align:center;
+		}
+		.preLoader div{
+			margin-bottom:20px;
+		}
+	    .helpIcon {
+	    bottom: 270px !important;
+        }
+	    .confirmed .msgDesc {
+            color: #65bc50
+	    }
+        .confirmed:before {
+            content: '';
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            background-color: #65bc50;
+            left: 84px;
+            top: 48%;
+            border-radius: 50%;
+        }
+	</style>
+    <script src="touch/sencha-touch-all.js"></script>
+	<link rel="stylesheet" href="resources/css/sencha-touch-2ea0ca2b-3ac0-4c5c-aec0-312498e70362.css">
+    <link rel="stylesheet" href="resources/css/style.css">
+    <script src="libs/jquery-1.11.3.min.js"></script>
+
+    <script src="libs/cordova.js"></script>
+    <script src="libs/cdv-plugin-fb-connect.js"></script>
+    <script src="libs/facebook-js-sdk.js"></script>
+    
+   
+    <script type="text/javascript" src="app.js"></script>
+	     <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+                api_key: 77ebtpvngdtfgt
+				authorize: true
+         </Script>
+
+        <script>
+            function onLinedInAuth() {
+                IN.API.Profile('me').fields(["id", "firstName", "lastName", "emailAddress"]).result(LinkedInSyncProfile);
+            }
+            function onLinkedInAuthLogin() {
+                IN.User.authorize(function () {
+                    IN.API.Profile('me').fields([
+                    'firstName',
+                    'lastName',
+                    'emailAddress'
+                    ]).result(function (profiles) {
+                        LinkedInSyncProfile(profiles);
+                    });
+                });
+            }
+            function LinkedInSyncProfile(profiles) {
+                if (profiles) {
+                    member = profiles.values[0];
+                    var authStore = Ext.getStore('AuthStore');
+                    var authModel = Ext.create('ProDooMobileApp.model.AuthModel');
+                    authModel.data.Email = member.emailAddress;
+                    authModel.data.FirstName = member.firstName;
+                    authModel.data.LastName = member.lastName;
+                    authModel.data.AuthType = 1; // lookup value, 1 stands for linkedIn
+                    authStore.add(authModel);
+                    authStore.sync({
+                        success: function () {
+                        var model = new Object();
+                        model.Name = member.firstName;
+                        model.Email = member.emailAddress;
+                        model.OAuthProviderId = 1;
+                        model.IsLoginByMobile = true;
+						G.registerThirdPartyUser(model);
+                        },
+                        failure: function (batch) {
+
+                        }
+                    });
+                }
+            }
+</script>
+
+</head>
+<body>
+
+<div id="preLoader" class="preLoader">
+	<div><img class="loaderImage" src="resources/images/logo.png" alt="logo"></div>
+	<div><img class="loaderImage" src="resources/images/loader1.gif" alt="loader"></div>
+</div>
+<script>
+   
+    if (window.location.href.toLowerCase().indexOf('prodoo') > -1) { // web app login
+        window.fbAsyncInit = function () {
+            if (window.location.hostname.indexOf('staging') > -1) {
+                FB.init({
+                    appId: '405242339680715',
+                    cookie: true,  // enable cookies to allow the server to access the session
+                    xfbml: true,  // parse social plugins on this page
+                    version: 'v2.2' // use version 2.2
+                });
+            }
+            else if (window.location.hostname.indexOf('dev') > -1) {
+                FB.init({
+                    appId: '113850725626284',
+                    cookie: true, 
+                    xfbml: true,
+                    version: 'v2.2'
+                });
+            }
+            else if (window.location.hostname.indexOf('localhost') > -1) {
+                FB.init({
+                    appId: '944681392241461',
+                    cookie: true, 
+                    xfbml: true,  
+                    version: 'v2.2'
+                });
+            }
+            else {
+                FB.init({
+                    appId: '1613499288923128',
+                    cookie: true, 
+                    xfbml: true, 
+                    version: 'v2.2'
+                });
+            }
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+    else { //Mobile app login
+        FB.Event.subscribe('auth.login', function (response) {
+            console.log('login event:' + JSON.stringify(response));
+        });
+        document.addEventListener('deviceready', function () {
+            try {
+
+                FB.init({
+                    appId: "930023363758501",
+                    nativeInterface: CDV.FB,
+                    useCachedDialogs: false
+                });
+
+            } catch (e) {
+                alert(e);
+            }
+        }, false);
+    }
+
+window.onload = function(){
+  Account.authCheck();
+  }
+
+</script></body>
+</html>

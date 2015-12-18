@@ -1,0 +1,203 @@
+.presentDetail{
+	background: #f54949;
+	.x-scroll-scroller{
+		padding: 0 0 80px 0;
+	}
+	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+		padding: 0;
+		font-size: 16px;
+		color: white;
+	}
+	&.x-list .x-list-item.x-item-selected.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-selected.x-list-item-tpl{
+		background: none;
+		.resultTitle {
+			color:white;
+		}
+	}
+}
+.input[type=file] {
+	display:none;
+}
+// .plusBtn{
+// 	margin-left: -30px;
+// 	background: center center #f17849 !important;
+// 	width: 60px;
+// 	height: 60px;
+// 	border: none;
+// 	padding: 13px 13px;
+// 	position: absolute;
+// 	@include border-radius(50%);
+// 	@include box-shadow (0px 0px 3px 1px #555555);
+// 	.x-button-label {
+
+// 		background: center center transparent !important;
+// 		background-image: url(../images/company/add.png) !important;
+// 		width: 35px;
+// 		height: 35px;
+// 		border: none;
+// 		position: absolute;
+// 		background-size: contain!important;
+// 	} 
+// }
+
+
+.presList {
+	position: relative;
+	text-align: center;
+	line-height: 1.4;
+	margin-top: 20px;
+}
+
+.presEdit {
+	background: url(../images/present/EditIcon.png) center center no-repeat #fff;
+	width: 40px;
+	height: 40px;
+	left: 5px;
+	top:-15px;
+	position: absolute;
+	@include border-radius(50%);
+}
+.presDelete{
+	@include border-radius(50%);
+	background: url(../images/present/Delete.png) center center no-repeat #fff;
+	width: 40px;
+	height: 40px;
+	right: 5px;
+	top:-15px;
+	position: absolute;
+}
+.presName {
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
+}
+
+.presSkill{
+	color: #3e335e;
+}
+.presPhone {
+	font-size: 14px;
+	float: left;
+}
+
+.presEmail {
+	font-size: 14px;
+	float: right;
+}
+
+
+.presContact {
+	background: #3e335e;
+	padding: 12px 10px;
+	margin-top: 5px;
+	@extend .clearfix;
+}
+
+.presDetail {
+	background: white;
+	text-align: left;
+	max-height: 0;
+	overflow: hidden;
+	margin-bottom: 12px;
+	@include transition( max-height 0.5s);
+}
+.InnerPresDetail{
+	color: #3e335e;
+	// padding: 22px;
+}
+
+.presArrowDown {
+	background: url(../images/present/downArrow.png) no-repeat;
+	display: inline-block;
+	width: 31px;
+	height: 31px;
+	position: absolute;
+	bottom: -16px;
+	left: 50%;
+	margin-left: -15px;
+	
+	&.presArrowUp{
+		background: url(../images/present/upArrow.png) no-repeat;
+	}
+}
+
+.presImg {
+	display: block;
+	// width: 100%;
+	border:3px solid #251D3A;
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+	@include border-radius(50%);
+	background-color: #3E335D;
+	margin: 0 auto;
+	img{
+		max-width:100%;
+		max-height: 100%;
+	}
+}
+.presFacebook {
+	background: url("../images/social/facebook.png") no-repeat #3b5997 !important;
+	float: left;
+	width: 50%;
+}
+
+.presLinkedin {
+	background: url("../images/social/linkedin.png") no-repeat #007bb6 !important;
+	float: left;
+	width: 50%;
+}
+
+.presTwitter {
+	background: url("../images/social/twitter.png") no-repeat #00abf0 !important;
+	float: left;
+	width: 50%;
+}
+
+.presGooglePlus {
+	background: url("../images/social/google.png") no-repeat #dd4c39 !important;
+	width: 50%;
+	float: left;
+}
+
+.presPinterestPlus {
+	background: url("../images/social/pinterest.png") no-repeat #e3161d !important;
+	width: 50%;
+	float: left;
+}
+.presDribllePlus {
+	background: url("../images/social/driblle.png") no-repeat #e86181 !important;
+	width: 50%;
+	float: left;
+}
+.presBehancePlus {
+	background: url("../images/social/behance.png") no-repeat #3b8dff !important;
+	width: 50%;
+	float: left;
+}
+.presInstagramPlus {
+	background: url("../images/social/instagram.png") no-repeat #78554c !important;
+	width: 50%;
+	float: left;
+}
+
+.presSocialLinks {
+	text-align: center;
+	line-height: 1.2;
+	color: white;
+	font-size: 14px;
+	@extend .clearfix;
+	span:nth-child(even){
+		background-position: 99% 5px !important;
+		padding: 15px 40px 15px 0;
+	}
+	span:nth-child(odd){
+		background-position: 5px 5px !important;
+		padding: 15px 0px 15px 40px;
+	}
+}
+
+.PresDesc {
+	padding: 20px 22px;
+
+}

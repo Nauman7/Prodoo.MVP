@@ -1,0 +1,203 @@
+
+.RequestScreen{
+	background: $blue5;
+}
+.bottom10{
+	bottom:10px;
+}
+.addBtn{
+	left: 50%;
+	margin-left: -30px;
+	bottom: 10px;
+	background: center center $green !important;
+	width: 65px;
+	height: 65px;
+	border:none;
+	padding: 15px 16px;
+	position: absolute;
+	@include border-radius(50%);
+	.x-button-label {
+
+		background: center center transparent !important;
+		background-image: url(../images/searchResult/plus1.png) !important;
+		width: 35px;
+		height: 35px;
+		border: none;
+		position: absolute;
+		background-size: contain!important;
+	} 
+	
+}
+
+.requestListView{
+	// position: absolute;
+	// width: 100%;
+	// height: 100%;
+	// padding-bottom: 80px;
+	color:#fff;
+	.x-list-item-first{
+		border-top: 1px solid #000 !important;
+	}
+	.x-list-item {
+		border-bottom: 1px solid black !important;
+		@include transition(background 0.3s);
+		&:hover{
+			background: lighten($blue5,10);
+		}
+	}
+	.x-list-emptytext {
+		padding: 10px;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+	}
+	.x-list-item-last{
+		// border-bottom: 1px solid black !important;
+	}
+	&.x-list {
+		.x-list-item.x-list-item-tpl .x-innerhtml{
+			// padding: 0;
+		}
+		.x-list-item.x-item-selected.x-list-item-tpl,
+		.x-list-item.x-item-pressed.x-list-item-tpl{
+			background: lighten($blue5,15);
+			.x-innerhtml{
+				background: lighten($blue5,15);
+			}
+		}
+
+	}
+
+}
+.requestListCnt{
+	color: white;
+	line-height: 1;
+	font-size: 17px;
+	@extend .clearfix;
+	// padding: 12px 15px;
+	// position: relative;
+	// border-bottom: 1px solid #000;
+	// &:hover{
+	// 	background: lighten($blue5,10);
+	// }
+	.closeIcon{
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		margin-top: -15px;
+		@include transition(opacity .3s);
+		&:hover{
+			@include opacity(0.7);
+
+		}
+	}
+
+}
+.reqListNo{
+	text-align: center;
+	width: 60px;
+	padding: 14px 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color:darken($blue5, 3);
+	
+}
+.reqListName{
+	padding: 3px 60px 0;
+	float: left;
+}
+.reqHead{
+	color: #F6B73F;
+	padding: 15px 0 15px 75px;
+	background: #2d1f55;
+	position: absolute;
+	// border-bottom: 1px solid #000;
+	&:after{
+		content: '';
+		background-image: url(../images/present/down.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		display: inline-block;
+		width: 32px;
+		vertical-align: top;
+		height: 32px;
+		position: absolute;
+		top:50%;
+		margin-top: -16px;
+		right: 10px;
+	}
+	&.collapseActive{
+		&:after{
+			background-image: url(../images/present/up.png);
+		}
+	}
+}
+.reqInboxIcon, .reqDraftIcon, .reqSendIcon{
+	position: relative;
+	&:before{
+		position: absolute;
+		content: '';
+		width: 30px;
+		height: 30px;
+		top: 11px;
+		left: 15px;
+		background: center center no-repeat transparent !important;
+		border: none;
+		background-size: contain!important;
+	}
+}
+.reqInboxIcon{
+	&:before{
+		background-image: url(../images/requestScreen/recieve.png) !important;
+	}
+}
+.reqDraftIcon{
+	&:before{
+		background-image: url(../images/requestScreen/draft.png) !important;
+	}
+}
+.reqSendIcon{
+	&:before{
+		background-image: url(../images/requestScreen/send.png) !important;
+	}
+}
+
+.draftBtn, .recieveBtn, .sendRequestBtn{
+	width:46px;
+	height:46px;
+	background: center center no-repeat transparent !important;
+	border: none;
+}
+.draftBtn{	
+	background-image: url(../images/requestScreen/draft.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/requestScreen/draftActive.png) !important;
+	}	
+}
+
+.recieveBtn{	
+	background-image: url(../images/requestScreen/recieve.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/requestScreen/recieveActive.png) !important;
+	}	
+}
+
+.sendRequestBtn{	
+	background-image: url(../images/requestScreen/send.png) !important;	
+	&.activeBtn{
+		background-image: url(../images/requestScreen/sendActive.png) !important;
+	}	
+}
+
+.requestBtn{
+	right:10px;
+	bottom: 10px;
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	position: absolute;
+	border:none;
+	background-image: url(../images/requestScreen/request.png) !important;
+	background-size: contain!important;
+}

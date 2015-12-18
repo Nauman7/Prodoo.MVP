@@ -1,0 +1,79 @@
+.CompanyEditScreen{
+	background: #3e335e;
+}
+.compImgCnt{
+	background: #f17849;
+	text-align: center;
+}
+
+.inputCls{
+	position: relative;
+	
+	
+	&.x-field .x-field-input{
+		overflow: hidden;
+		@include border-radius(5px); 
+	}
+}
+.bbBlack{
+	border-bottom:1px solid #000;
+}
+.compEditDesc{
+	background: #f54949;
+	text-align: center;
+	color: white;
+}
+.compEditArea {
+	padding: 0;
+	.x-input-el{
+		padding: 20px;
+	}
+}
+
+.redConfirm{	
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	position: absolute;
+	border:none;
+	background-image: url(../images/company/check.png) !important;
+	background-size: contain!important;
+}
+.removeConfirm{	
+	background: center center transparent !important;
+	width: 65px;
+	height: 65px;
+	position: absolute;
+	margin-left: -32px;
+	left: 50%;
+	bottom: 10px;
+	border:none;
+	background-image: url(../images/present/remove.png) !important;
+	background-size: contain!important;
+}
+// .CompUploaderCls {
+// 	position: absolute;
+// 	top: 120px;
+// 	left: 50%;
+// 	margin-left: 20px;
+// }
+
+.CompUploaderCls {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    overflow: hidden;
+    width: 29px;
+    padding: 0;
+    margin-left: 20px;
+    background: url(../images/company/upload.png);
+    height: 30px;
+    input[type=file]{
+    	@include opacity(0);
+    }
+}
+.CompUserImg{
+	 border: 3px solid #CE592C;
+    @include border-radius (50%);
+    background-color: #251E3A;
+}

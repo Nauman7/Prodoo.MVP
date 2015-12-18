@@ -1,0 +1,16 @@
+.savName {
+    padding: 3px 60px 0 0;
+    float: left;
+}
+.greenBtn{
+	background: $green !important;
+}
+
+.messageBoxCls{
+	.x-msgbox-title{
+		display: none;
+	}
+	.x-field{
+		padding: 5px;
+	}
+}

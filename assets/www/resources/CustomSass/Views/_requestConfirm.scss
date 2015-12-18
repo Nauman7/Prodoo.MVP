@@ -1,0 +1,78 @@
+
+.PresCompanyName{
+	background: #3e335e;
+	padding: 15px 55px 15px 10px;
+	color: #fff;
+	position: relative;
+	&:after{
+		background:  url(../images/present/check.png) no-repeat;
+		content:'';
+		position: absolute;
+		right: 10px;
+		top:50%;
+		margin-top: -18px;
+		width: 36px;
+		height: 36px;
+	}
+}
+.presYourName{
+	background: #f54949;
+	padding: 15px 55px 15px 55px;
+	color: #3e335e;
+	border-bottom: 1px solid #3e335e;
+	position: relative;
+	&:before{
+		background:  url(../images/present/user.png) no-repeat;
+		content:'';
+		position: absolute;
+		left: 10px;
+		top:50%;
+		margin-top: -16px;
+		width: 33px;
+		height: 33px;
+	}
+	&:after{
+		background:  url(../images/present/plus.png) no-repeat;
+		content:'';
+		position: absolute;
+		right: 10px;
+		top:50%;
+		margin-top: -16px;
+		width: 32px;
+		height: 32px;
+	}
+}
+.RequestConfirmed{
+	background: #3e335e;
+}
+.reqConfirmList{
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+}
+.reqConfirmContact {
+	background: #261f3b;
+	padding: 12px 10px;
+	margin-top: 5px;
+	@extend .clearfix;
+}
+.reqConfirmDetail{
+	background: #f54949;
+	position: relative;
+}
+
+.reqArrowDown {
+	background: url(../images/present/downArrow.png) no-repeat !important;
+    width: 31px;
+    height: 31px;
+	margin: 0 auto;
+	border:none;
+	z-index: 10;
+	margin-top:-15px;
+	&.presArrowUp{
+		background: url(../images/present/upArrow.png) no-repeat !important;
+	}
+}

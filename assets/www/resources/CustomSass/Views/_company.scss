@@ -1,0 +1,129 @@
+.companyDetail{
+	background: #3e335e;
+	.x-scroll-scroller{
+		padding: 0 0 80px 0;
+	}
+	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+		padding: 0;
+		font-size: 16px;
+		color: white;
+	}
+	&.x-list .x-list-item.x-item-selected.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-selected.x-list-item-tpl{
+		background: none;
+		.resultTitle {
+			color:white;
+		}
+	}
+}
+
+.plusBtn{
+	margin-left: -30px;
+	background: center center #f17849 !important;
+	width: 60px;
+	height: 60px;
+	border: none;
+	padding: 13px 13px;
+	position: absolute;
+	@include border-radius(50%);
+	@include box-shadow (0px 0px 3px 1px #555555);
+	.x-button-label {
+
+		background: center center transparent !important;
+		background-image: url(../images/company/add.png) !important;
+		width: 35px;
+		height: 35px;
+		border: none;
+		position: absolute;
+		background-size: contain!important;
+	} 
+}
+
+
+.compList {
+	position: relative;
+	text-align: center;
+	line-height: 1.4;
+	margin-top: 20px;
+}
+
+.companyEdit {
+	@include border-radius(50%);
+	background: url(../images/company/EditIcon.png) center center no-repeat #fff;
+	width: 40px;
+	height: 40px;
+	left: 5px;
+	top: -15px;
+	position: absolute;
+}
+.companyDelete{
+	@include border-radius(50%);
+	background: url(../images/company/Delete.png) center center no-repeat #fff;
+	width: 40px;
+	height: 40px;
+	right: 5px;
+	top:-15px;
+	position: absolute;
+}
+.compName {
+	font-size: 20px;
+	color: #f17849;
+	font-weight: bold;
+}
+
+.compPhone {
+	font-size: 14px;
+}
+
+.compRegNo {
+	background: #f17849;
+	padding: 12px 0;
+	margin-top: 5px;
+}
+
+.compDetail {
+	background: white;
+	text-align: left;
+	max-height: 0;
+	overflow: hidden;
+	margin-bottom: 12px;
+	@include transition(max-height 0.5s);
+}
+.InnerCompDetail{
+	color: #3e335e;
+	padding: 22px;
+}
+
+.compArrowDown {
+	background: url(../images/company/downArrow.png) -2px -2px;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	position: absolute;
+	bottom: -16px;
+	left: 50%;
+	margin-left: -12px;
+	box-shadow: 0px 0px 3px 0px #3e335e;
+	border: 3px solid #3e335e;
+	@include border-radius(50%);
+	&.compArrowUp{
+		background: url(../images/company/upArrow.png) -2px -2px;
+	}
+}
+
+.compImg {
+	display: block;
+	border:3px solid #f17849;
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+	@include border-radius(50%);
+	background-color: #261f3b;
+	margin: 0 auto;
+	
+	img{
+		max-width:100%;
+		max-height: 100%;
+	}
+}
+
+	

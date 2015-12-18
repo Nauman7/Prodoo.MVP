@@ -1,0 +1,66 @@
+//Functions------------------------------------------------------
+@function calc-percent($target, $container) {
+	@return ($target / $container) * 100%;
+}
+
+//Mixins-----------------------------------------------------------
+@mixin breakpoint($point) {
+	@if $point == mobile {
+		@media (max-width: 480px) { @content; }
+	}//screen480
+	@else if $point == screen720 {
+		@media (max-width: 720px)  { @content; }
+	}//screen720
+	@else if $point == screen1024 {
+		@media (max-width: 1024px)  { @content; }
+	}//screen1024
+	@else if $point == screen1280 {
+		@media (min-width: 1281px)  { @content; }
+	}//screen1281
+
+}//breakpoint
+
+// sample Usage
+// .page-wrap {
+//   width: 100%; 
+//   @include breakpoint(screen1024) { width: 90%; }
+//   @include breakpoint(screen720) { width: 50%; }
+//   @include breakpoint(screen480) { width: 30%; }
+//   @include breakpoint(screen320) { width: 10%; }
+// }
+
+//RESPONSIVE MEDIA QURIES MIXIN ENDS
+
+
+//TRANSPARENT BACKGROUND ONLY STARTS
+@mixin transparentbg($color, $alpha) {
+	$rgba: rgba($color, $alpha);
+	$ie-hex-str: ie-hex-str($rgba);
+	background-color: transparent;
+	background-color: $rgba;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+	zoom: 1;
+}
+
+//calc mixin
+@mixin calc($property, $expression) { 
+	#{$property}: -webkit-calc(#{$expression}); 
+	#{$property}: calc(#{$expression}); 
+} 
+//TRANSPARENT BACKGROUND ONLY ENDS
+
+
+@mixin HelveticaRegular{
+	font-family:HelveticaRegular, sans-serif; 
+	font-weight: normal;
+	font-style: normal;
+}
+@mixin HelveticaBold{ 
+	font-family:helveticabold, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+

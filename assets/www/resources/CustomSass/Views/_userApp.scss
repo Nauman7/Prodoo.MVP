@@ -1,0 +1,126 @@
+.x-button-label{
+	text-transform:none;
+	white-space: normal;
+}
+.AppView {
+  background-image: url(../images/BG.jpg) ;
+}
+.appBtn {
+	border:none;
+	padding: 20px;
+	@include breakpoint(mobile){
+		padding: 10px;
+	}
+	.x-button-label{
+		text-align:left;
+		// padding-left: 10px;
+		line-height:1.4;
+		color:white;
+	}
+	.x-button-icon{
+		color:white;
+	}
+	&.blueBtn{
+		background: $blue;
+	}
+	&.redBtn{
+		background: $red;
+	}
+	&.greenBtn{
+		background: $green;
+	}
+	&.purpleBtn{
+		background: $purple;
+	}
+	&.lightBlackBtn{
+		background: $lightBlack;
+	}
+	&.yellowBtn{
+		background: $yellow;
+	}
+	&.x-button-pressing{
+		@include opacity(0.7);
+	}
+}
+.btnHeading {
+	display: block;
+	font-size: 20px;
+	@include breakpoint(mobile){
+		font-size: 16px;
+		font-weight: bold;
+	}
+}
+.btnDetail{
+	font-size: 14px;
+	@include breakpoint(mobile){
+		font-size: 12px;
+	}
+}
+.btnHeadingRight {
+	//padding-left: 70px;
+}
+
+// .resumeIcon, .settingsIcon:before, .searchIcon, .profileIcon, .statisticsIcon, .messageIcon:before, .companyIcon:before, .logoutIcon:before{
+	
+// 	width: 50px!important;
+// 	height: 50px!important;
+// 	background-size: contain;
+// 	background-repeat: no-repeat;
+// 	display: inline-block;
+// 	content: '';
+// 	vertical-align: middle;
+// 	margin-right: 10px;	
+// 	@include breakpoint(mobile){
+// 		width: 30px!important;
+// 		height: 30px!important;
+// 	}
+// }
+// .resumeIcon{	
+// 	background-image: url("../images/resume.png")!important;
+// }
+
+// .settingsIcon{
+// 	&:before{
+// 		background-image: url("../images/setting.png")!important;
+// 	}
+// }
+// .searchIcon{
+// 	background-image: url("../images/search.png")!important;
+// }
+// .profileIcon{
+// 	background-image: url("../images/profile.png")!important;
+// }
+// .statisticsIcon{
+// 	background-image: url("../images/statistics.png")!important;
+// }
+// .messageIcon{
+// 	&:before{
+// 		background-image: url("../images/message.png")!important;
+// 	}
+// }
+// .companyIcon{
+// 	&:before{
+// 		background-image: url("../images/company.png")!important;
+// 	}
+// }
+// .logoutIcon{
+// 	&:before{
+// 		background-image: url("../images/logout.png")!important;
+// 	}
+// }
+
+.menuIcon{
+	width: 33px;
+	height: 26px;
+	background: url("../images/menu.png") no-repeat center center !important;
+	border: none!important;
+	padding: 0!important;
+	min-height: 0!important;
+
+
+}
+.LoginFormCnt{
+	.menuIcon{
+		display: none!important;
+	}
+}

@@ -1,0 +1,17 @@
+
+.x-mask-inner{
+	background: none !important;
+	.x-loading-spinner{
+		display: none !important;
+	}
+}
+.x-loading-spinner-outer{
+	background: url(../images/loader1.gif) center center no-repeat !important;
+}
+.x-mask .x-mask-message{
+	color: #04caa7;
+}
+.x-mask{
+	z-index: 1000 !important;
+	background-color: rgba(0,0,0,0.5) !important;
+}
