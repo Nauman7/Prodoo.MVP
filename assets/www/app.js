@@ -85,7 +85,6 @@ Ext.application({
         'settingPrivacy',
         'settingNotice',
         'UserDetail',
-        'PresentPosition',
         'SocialMediaStore',
         'StatisticsGraph',
         'UserType',
@@ -168,17 +167,17 @@ Ext.application({
 
         Ext.Ajax.on('beforerequest', function (conn, response, options) {
 
-         //   if(navigator.onLine){
+            if(navigator.onLine){
 
             if(Ext.Viewport.getMasked() == null || Ext.Viewport.getMasked().isHidden() == true)
             {
                 Ext.Viewport.setMasked(true);
             }
-         //   }
-         //   else {
-         //        Ext.Msg.alert('Status', 'Internet connection not available');
-         //       return false;
-         //   }
+            }
+            else {
+                 Ext.Msg.alert('Status', 'Internet connection not available');
+                return false;
+            }
         });
         Ext.Ajax.on('requestcomplete', function (conn, response, options) {
             Ext.Viewport.setMasked(false);

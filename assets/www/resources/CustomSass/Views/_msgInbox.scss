@@ -110,7 +110,31 @@
 
 .SubjectField {
 	padding: 0;
+	background:#fff;
 	border-bottom: 1px solid #3e335e;
+	@extend .clearfix;
+}
+.SubjectFieldTo{
+	border-bottom: 1px solid #3e335e;
+	@extend .clearfix;
+	background-color: #fff;
+}
+.MessageToCls {
+        margin: 2px 10px 0 0;
+        line-height: 1;
+    padding: 10px 40px 10px 10px;
+    float: left;
+    background: #f6aa3a;
+    color: #fff;
+    @include border-radius(20px);
+    position: relative;
+	.closeIcon {
+		position: absolute;
+
+		top: 50%;
+		right: 5px;
+		margin-top: -15px;
+	}
 }
 
 .SubjectField .x-input-el {
@@ -253,10 +277,10 @@
 }
 .MsgReplyCnt{
 	.TextMsg {
-		    top: auto;
-    height: 100%;
-    margin-top: 1px;
-    bottom: auto;
+		top: auto;
+		height: 100%;
+		margin-top: 1px;
+		bottom: auto;
 	}
 }
 .MsgReplyView{

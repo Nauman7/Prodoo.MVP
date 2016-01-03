@@ -301,7 +301,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                         ],
                         itemId: 'MsgUserField',
                         clearIcon: false,
-                        placeHolder: 'UserName'
+                        placeHolder: 'Select reciever'
                     },
                     {
                         xtype: 'hiddenfield',
@@ -309,26 +309,17 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                         itemId: 'MsgUserSearchRecordID'
                     },
                     {
-                        xtype: 'button',
-                        cls: 'addIcon',
-                        hidden: true,
-                        html: ' ',
-                        itemId: 'MsgAddSearchBtn'
-                    },
-                    {
-                        xtype: 'button',
-                        cls: 'clearIcon',
-                        hidden: true,
-                        html: ' ',
-                        itemId: 'MsgClearSearchIcon'
-                    },
-                    {
-                        xtype: 'textfield',
-                        cls: 'SubjectField',
+                        xtype: 'container',
+                        cls: 'SubjectFieldTo',
                         itemId: 'MsgToField',
-                        clearIcon: false,
-                        placeHolder: 'To:',
-                        readOnly: true
+                        items: [
+                            {
+                                xtype: 'label',
+                                cls: 'left',
+                                html: 'To:',
+                                padding: 10
+                            }
+                        ]
                     },
                     {
                         xtype: 'textfield',

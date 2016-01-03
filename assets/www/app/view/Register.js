@@ -82,10 +82,11 @@ Ext.define('ProDooMobileApp.view.Register', {
                     },
                     {
                         xtype: 'selectfield',
-                        cls: 'field',
+                        cls: 'SignUpDropDown',
                         labelAlign: 'top',
                         name: 'IsFreelancer',
                         placeHolder: 'Choose Preferred Usage',
+                        autoSelect: false,
                         displayField: 'Type',
                         store: 'UserType',
                         valueField: 'Val'

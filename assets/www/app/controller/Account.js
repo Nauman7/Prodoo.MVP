@@ -155,7 +155,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
 
             var email = G.get('forgetPasswordEmail').getValue();
 
-            if(Ext.isEmpty(email))
+            if(Ext.isEmpty(email) || !G.ValidateEmail(email))
             {
                 Ext.Msg.alert('', 'Please enter email.');
                 return;
@@ -198,6 +198,11 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 return;
             }
 
+            if(!G.ValidateEmail(values.Email))
+             {
+                Ext.Msg.alert('', 'Please enter valid email address');
+                return;
+            }
 
             Ext.Ajax.request({
                 url: ApiBaseUrl+'Account/Register',
@@ -268,7 +273,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
         var loginModel = values;
         loginModel.RememberMe = false;
 
-        if(loginModel.Email && loginModel.Password){
+        if(loginModel.Email && G.ValidateEmail(loginModel.Email) && loginModel.Password){
             Ext.Ajax.request({
                 url: ApiBaseUrl+'Account/MobileLogin',
                 method: 'POST',
@@ -316,7 +321,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
             });
         }
         else{
-            Ext.Msg.alert('', 'Please add email and password to proceed.');
+            Ext.Msg.alert('', 'Please add valid email and password to proceed.');
         }
 
 

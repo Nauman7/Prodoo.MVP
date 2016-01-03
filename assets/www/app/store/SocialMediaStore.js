@@ -36,6 +36,20 @@ Ext.define('ProDooMobileApp.store.SocialMediaStore', {
                 type: 'json',
                 rootProperty: 'items'
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onJsonstoreBeforeLoad',
+                event: 'beforeload'
+            }
+        ]
+    },
+
+    onJsonstoreBeforeLoad: function(store, operation, eOpts) {
+        var url = ApiBaseUrl + 'SocialMedia/Get';
+        var storeApi = store.getProxy().getApi();
+        if(storeApi.read === undefined)
+            storeApi.read = url;
     }
+
 });

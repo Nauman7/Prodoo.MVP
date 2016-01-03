@@ -28,10 +28,6 @@ Ext.define('ProDooMobileApp.store.SearchRequestList', {
         storeId: 'SearchRequestList',
         proxy: {
             type: 'rest',
-            api: {
-                read: '../webapi/api/requests/GetRequests',
-                create: '../webapi/api/requests/post'
-            },
             timeout: 60000,
             url: '../webapi/api/requests',
             reader: {
@@ -41,6 +37,21 @@ Ext.define('ProDooMobileApp.store.SearchRequestList', {
             writer: {
                 type: 'json'
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onJsonstoreBeforeSync',
+                event: 'beforesync'
+            }
+        ]
+    },
+
+    onJsonstoreBeforeSync: function(options, eOpts) {
+                var storeApi = this.getProxy().getApi();
+                        if(storeApi.read === undefined)
+                            storeApi.read = ApiBaseUrl + 'requests/GetRequests';
+                        if(storeApi.create === undefined)
+                            storeApi.create = ApiBaseUrl + 'requests/post';
     }
+
 });

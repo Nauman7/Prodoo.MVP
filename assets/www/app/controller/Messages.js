@@ -37,64 +37,34 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             ]);
         },
 
-        onMsgAddSearchBtnTap: function() {
-
-            G.hide('MsgAddSearchBtn');
-            G.hide('MsgClearSearchIcon');
-
-            var searchField =  G.get('MsgUserField');
-            var toField =  G.get('MsgToField');
-            var value = searchField.getValue();
-            var recordID = G.get('MsgUserSearchRecordID');
-            var newCnt;
-            var alreadyExist = false;
-            var existingRecords = null;
-
-
-            UsersList.forEach(function(item,index){
-                if(recordID.getValue() == item.UserId)
-                {
-                    alreadyExist=true;
-                }
-            });
-
-
-            if (!alreadyExist)
-            {
-                UsersList.push({UserId:parseInt(recordID.getValue())});
-
-                var val=toField.getValue();
-                if (val === "" || val === null)
-                { toField.setValue(searchField.getValue().toUpperCase()); }
-                else { toField.setValue(val + ", " + searchField.getValue()); }
-            }
-
-            searchField.setValue('');
-            searchField.setReadOnly();
-        },
-
         onSearchListItemTap: function(dataview,record,e) {
             var selectedElement =  Ext.get(e.target);
             if(selectedElement.hasCls('listResult') || selectedElement.parent().hasCls('listResult')){
-                G.show('MsgAddSearchBtn');
-                G.show('MsgClearSearchIcon');
-                var searchField = G.get('MsgUserField');
-                var recordID = G.get('MsgUserSearchRecordID');
+                var searchField =  G.get('MsgUserField');
+                var toField =  G.get('MsgToField');
+                var alreadyExist = false;
+                var existingRecords = null;
+
+
+                UsersList.forEach(function(item,index){
+                    if(record.data.UserId == item.UserId)
+                    {
+                        alreadyExist=true;
+                    }
+                });
+
+
+                if (!alreadyExist)
+                {
+                    UsersList.push({UserId:record.data.UserId});
+                    this.ClearInput(toField,record.data.UserFirstname, record.data.UserId);
+
+                }
+
+                searchField.setValue('');
                 dataview.hide();
 
-                searchField.setValue(record.data.UserFirstname);
-                recordID.setValue(record.data.UserId);
-                searchField.setReadOnly(true);
-
             }
-        },
-
-        clearSearch: function() {
-            G.hide('MsgAddSearchBtn');
-            G.hide('MsgClearSearchIcon');
-            var searchField = G.get('MsgUserField');
-            searchField.setValue('');
-            searchField.setReadOnly();
         },
 
         setActiveBtn: function(button) {
@@ -137,6 +107,53 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                 scope: this
             }
             ]);
+        },
+
+        ClearInput: function(View, labelVal, userId) {
+            var Cnt=Ext.create('Ext.Container', {
+                cls:'MessageToCls',
+                items: [
+                {
+                    xtype: 'label',
+                    cls: '',
+                    html: labelVal,
+                },
+                {
+                    xtype:'hiddenfield',
+                    value:userId
+                },
+                {
+                    xtype: 'button',
+                    cls: [
+                    'closeIcon',
+                    'noBorder'
+                    ],
+                    text: ' ',
+                    listeners: [
+                    {
+                        fn: function(button, e, eOpts) {
+
+                            var userId= (button.up('container')).down('hiddenfield').getValue();
+                            button.up('container').destroy();
+
+                            UsersList.forEach(function(item,index){
+
+                                if(userId == item.UserId)
+                                {
+                                    UsersList.splice(index,1);
+                                }
+                            });
+                        },
+                        event: 'tap'
+                    }
+                    ]
+                }
+                ]
+            });
+
+            // Container=G.get(View);
+
+            View.add(Cnt);
         }
     },
 
@@ -157,12 +174,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             "textfield#MsgUserField": {
                 focus: 'onMytextfield1Focus',
                 keyup: 'onMytextfield1Keyup'
-            },
-            "button#MsgAddSearchBtn": {
-                tap: 'onMsgAddSearchBtnTap'
-            },
-            "button#MsgClearSearchIcon": {
-                tap: 'onMsgClearSearchIconTap1'
             },
             "list#MsgUserSearchList": {
                 itemtap: 'onSearchListItemTap1'
@@ -385,14 +396,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         Messages.MessagesPropertySearch(textfield);
     },
 
-    onMsgAddSearchBtnTap: function(button, e, eOpts) {
-        Messages.onMsgAddSearchBtnTap();
-    },
-
-    onMsgClearSearchIconTap1: function(button, e, eOpts) {
-        Messages.clearSearch();
-    },
-
     onSearchListItemTap1: function(dataview, index, target, record, e, eOpts) {
         Messages.onSearchListItemTap(dataview,record,e);
     },
@@ -415,28 +418,26 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         Messages.hideAll();
 
         G.show('MsgCreateNew');
-        // G.hide('MsgDetailList');
         G.show('backBtn');
         G.show('SendBtn');
-        // G.hide('EditBtn');
-        // G.hide('MsgList');
-        // G.hide('HomeBtn');
-        // G.hide('searchCnt');
-        // G.hide('topButtons');
 
         var str=Ext.getStore("UserStore");
         str.load();
 
-        UsersList=new Array();
 
-        G.hide("MsgAddSearchBtn");
-        G.hide("MsgClearSearchIcon");
+        UsersList = new Array();
 
         G.get("MsgUserField").reset();
         G.get("MsgUserField").setReadOnly();
-        G.get("MsgToField").reset();
         G.get("MsgSubjectField").reset();
         G.get("MsgContentField").reset();
+        var toField =  G.get('MsgToField');
+        toField.items.each(function(item,index){
+        if(index!=0)
+            item.destroy();
+        })
+
+
     },
 
     onReplyBtnTap: function(button, e, eOpts) {
@@ -491,7 +492,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         else { messageBody = G.get('replyMsgArea').getValue(); }
 
 
-        if (  messageBody !== null && messageBody.trim() !== "")
+        if (UsersList.length!=0 && messageBody !== null && messageBody.trim() !== "")
         {
             var selectedRecord = G.get('selectedMsg').data;
             var record= Ext.create("ProDooMobileApp.model.MsgModel");
@@ -557,8 +558,10 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             /*if (subject == null || subject.trim() == "")
             { Ext.Msg.alert('Error', 'Please add subject!'); }
             else*/
+            if (UsersList.length==0)
+            { Ext.Msg.alert('', 'Please add at least one reciever to proceed'); }
             if (messageBody === null || messageBody.trim() === "")
-            { Ext.Msg.alert('Error', 'Please add message!'); }
+            { Ext.Msg.alert('', 'Please add message to proceed'); }
         }
     },
 

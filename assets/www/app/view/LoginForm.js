@@ -21,6 +21,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
         'Ext.Img',
         'Ext.Label',
         'Ext.form.FieldSet',
+        'Ext.field.Email',
         'Ext.field.Password',
         'Ext.Button'
     ],
@@ -52,7 +53,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                 padding: '20 20 0 20',
                 items: [
                     {
-                        xtype: 'textfield',
+                        xtype: 'emailfield',
                         cls: 'field',
                         itemId: 'LoginEmail',
                         clearIcon: false,

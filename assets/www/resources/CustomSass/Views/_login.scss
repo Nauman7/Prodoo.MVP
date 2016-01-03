@@ -50,6 +50,59 @@
 	}
 	
 }
+.SignUpDropDown{
+	.x-input-el{
+		&::-webkit-input-placeholder{
+			color: white;
+			@include opacity(0.5);
+		}
+		&:-moz-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+		&::-moz-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+		&:-ms-input-placeholder {
+			color: white;
+			@include opacity(0.5);
+		}
+	}
+	.x-input-el{
+		border: none;
+		background: transparent;
+		-webkit-text-fill-color: #fff;
+		text-align: center;
+	} 
+	.x-field-input:before {
+		content: "";
+		background-color: transparent !important;
+		width: 30px;
+		bottom: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		-moz-border-radius: 0 5px 5px 0;
+		-webkit-border-radius: 0;
+		border-radius: 0 5px 5px 0;
+	}
+	.x-field-input:after {
+		content: "";
+		width: 11px;
+		height: 14px;
+		position: absolute;
+		right: 10px;
+		top: 8px;
+		background-image: url(../images/resumeDetail/downArrow1.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: center center;
+	}
+	.x-component-outer{
+		border-bottom: 1px solid #332A4C;
+	}
+}
 .loginBtnCnt{
 	background-color: $green!important;
 	position: relative;
@@ -115,14 +168,26 @@
 }
 
 .linkedinBtn {
-	background: url("../images/social/linkedin.png") right 5px no-repeat #007bb6 !important;
 	padding: 15px 40px 15px 0;
 	border:none;
+	position: relative;
+	background: #007bb6 !important;
 	.x-button-label {
 		font-weight: normal;
 		line-height: 1.4;
 		color: white;
 		font-size: 12px;
+	}
+	&:after{
+		position: absolute;
+		right: 5px;
+		width: 37px;
+		height: 37px;
+		top:50%;
+		margin-top: -16px;
+		content:'';
+		background: url("../images/social/linkedin.png") 0 0 no-repeat;
+
 	}
 }
 // .createBtn,

@@ -15,7 +15,7 @@
         <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
     </feature>
     
-    
+    <content src="index.html" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
@@ -31,6 +31,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+    <preference name="loadUrlTimeoutValue" value="99999999" />
     <icon src="icon.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:density="mdpi" gap:platform="android" src="res/icon/android/icon-48-mdpi.png" />
