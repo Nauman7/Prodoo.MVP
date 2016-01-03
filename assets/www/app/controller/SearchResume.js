@@ -400,7 +400,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 {
                     fn   : function(record) {
                         //if(record.get(activeLookup) !== null )
-                        return record.get(activeLookup).toLowerCase().startsWith(query);
+                        return record.get(activeLookup).toLowerCase().indexOf(query)>-1;
                     },
                     scope: this
                 }

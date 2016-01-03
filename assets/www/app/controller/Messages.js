@@ -30,7 +30,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             store.filter([
             {
                 fn   : function(record) {
-                    return record.get(activeLookup).toLowerCase().startsWith(textfield.getValue().toLowerCase());
+                    return record.get(activeLookup).toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
                 },
                 scope: this
             }
@@ -273,15 +273,15 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                             G.get("MsgList").refresh();
 
                             Messages.hideAll();
-                            //                     G.hide('MsgCreateNew');
+
                             G.show('MsgDetailList');
-                            //                     G.hide('SendBtn');
-                            //                     G.hide('EditBtn');
+
                             G.show('backBtn');
-                            //                     G.hide('HomeBtn');
-                            //                     G.hide('searchCnt');
-                            //                     G.hide('topButtons');
+
                             G.show('ReplyBtn');
+
+
+
 
                             isInbox=true;
                             isSent=false;
@@ -310,11 +310,10 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                 //         G.hide('SendBtn');
                 //         G.hide('EditBtn');
                 G.show('backBtn');
-                G.show('ReplyBtn');
-
-
-                isInbox=true;
-                isSent=false;
+                if(isInbox)
+                    G.show('ReplyBtn');
+                else
+                    G.hide('ReplyBtn');
 
                 G.get('selectedMsg').data = record;
                 Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
@@ -437,7 +436,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             item.destroy();
         })
 
-
+        isCreateNew=true;
     },
 
     onReplyBtnTap: function(button, e, eOpts) {
@@ -451,6 +450,8 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         Ext.query(".msgDetailTime")[1].innerText=G.GetSpecificTime(rec.data.DateCreated);
         G.show('backBtn');
         G.show('SendBtn');
+        G.get('replyMsgArea').reset('');
+        isCreateNew=false;
     },
 
     onHomeBtnTap: function(button, e, eOpts) {
@@ -481,7 +482,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
     onsendBtnTap: function(button, e, eOpts) {
 
         var subject = null;
-        var isCreateNew = G.get("MsgDetailList").isHidden();
         var messageBody = null;
 
         if (isCreateNew)
@@ -492,7 +492,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         else { messageBody = G.get('replyMsgArea').getValue(); }
 
 
-        if (UsersList.length!=0 && messageBody !== null && messageBody.trim() !== "")
+        if (messageBody !== null && messageBody.trim() !== "")
         {
             var selectedRecord = G.get('selectedMsg').data;
             var record= Ext.create("ProDooMobileApp.model.MsgModel");
@@ -501,11 +501,15 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
             if (isCreateNew)
             {
+                if(UsersList.length!=0){
                 UsersList.forEach(function(item,index){
                     record.data.UserIds[index]=item.UserId;
                 });
 
-                record.data.Subject=subject;
+                    record.data.Subject=subject;
+                }
+                else
+                    Ext.Msg.alert('', 'Please add at least one reciever to proceed');
             }
             else
             {
@@ -558,8 +562,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             /*if (subject == null || subject.trim() == "")
             { Ext.Msg.alert('Error', 'Please add subject!'); }
             else*/
-            if (UsersList.length==0)
-            { Ext.Msg.alert('', 'Please add at least one reciever to proceed'); }
             if (messageBody === null || messageBody.trim() === "")
             { Ext.Msg.alert('', 'Please add message to proceed'); }
         }

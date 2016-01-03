@@ -33,6 +33,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
             {
                 xtype: 'container',
                 cls: 'loginProdoo',
+                margin: '10 0 0 0',
                 items: [
                     {
                         xtype: 'image',
@@ -81,6 +82,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                 cls: 'SignUpCnt',
                 html: '<span class="forgot">Forgot password</span><br>Don\'t have an account?<br><span class=\'SignUp\'>Sign up</span> for free',
                 itemId: 'SignUp',
+                margin: '0 0 10 0',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
@@ -142,6 +144,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                                 xtype: 'button',
                                 flex: 1,
                                 cls: 'linkedinBtn',
+                                hidden: true,
                                 itemId: 'linkedinloginBtn',
                                 text: 'Login with linkedin'
                             }

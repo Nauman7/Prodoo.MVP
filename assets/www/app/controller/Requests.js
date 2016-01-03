@@ -169,7 +169,6 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             fields.Duration.enable();
             fields.StartDate.enable();
             fields.Description.enable();
-            fields.OtherDetails.enable();
             fields.Location.enable();
             fields.Language.enable();
             fields.HourlyFee.enable();
@@ -436,19 +435,15 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                         if(isFreelancer)
                         {
-                            if(result.items.Inbox.length>0){
+                            var inboxStore = Ext.create('Ext.data.Store', {
+                                model:'ProDooMobileApp.model.SearchRequestList',
+                                data: result.items.Inbox
+                            });
+                            G.get('requestInboxList').setStore(inboxStore);
+                            G.show('requestInboxList');
+                            G.show('invitationLabel');
+                            var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
 
-                                var inboxStore = Ext.create('Ext.data.Store', {
-                                    model:'ProDooMobileApp.model.SearchRequestList',
-                                    data: result.items.Inbox
-                                });
-                                G.get('requestInboxList').setStore(inboxStore);
-                                G.show('requestInboxList');
-                                G.show('invitationLabel');
-                                var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
-
-                                G.get('requestInboxList').setHeight(72*numberOfItems);
-                            }
                         }
                         else
                         {

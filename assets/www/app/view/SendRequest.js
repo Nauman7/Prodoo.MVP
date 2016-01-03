@@ -130,7 +130,7 @@ Ext.define('ProDooMobileApp.view.SendRequest', {
         store.filter([
             {
                 fn   : function(record) {
-                    return record.get('ShortlistName').toLowerCase().startsWith(textfield.getValue().toLowerCase());
+                    return record.get('ShortlistName').toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
                 },
                 scope: this
             }

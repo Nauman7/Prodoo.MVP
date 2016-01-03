@@ -522,6 +522,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
 
     AdjustListHeight: function(component) {
         component.on('refresh',function(){
+
             this.setHeight(null);
             var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
             if(ViewHeight > 10)

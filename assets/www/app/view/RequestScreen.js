@@ -304,7 +304,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         store.filter([
             {
                 fn   : function(record) {
-                    return record.get('RequestName').toLowerCase().startsWith(textfield.getValue().toLowerCase());
+                    return record.get('RequestName').toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
                 },
                 scope: this
             }

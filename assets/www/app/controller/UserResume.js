@@ -114,7 +114,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 store.filter([
                 {
                     fn   : function(record) {
-                        return record.get(activeLookup).toLowerCase().startsWith(query);
+                        return record.get(activeLookup).toLowerCase().indexOf(query)>-1;
                     },
                     scope: this
                 }
@@ -509,16 +509,16 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             }
         },
 
-        ShowCreateResumeExperience: function(record) {
+        ShowCreateResumeExperience: function(record, index) {
             G.show('createCompanyCnt');
             G.hide('IndustryList');
             G.get('CompanyExperienceComfirm').hide();
             G.show('CompanyExperienceComfirm');
-            G.get('HFresumeExperienceId').setValue(0);
+            G.get('HFresumeExperienceId').setValue("0-0"); // id and index of record
 
 
             if(record){
-                G.get('HFresumeExperienceId').setValue(record.data.ResumeExperienceId);;
+                G.get('HFresumeExperienceId').setValue(record.data.ResumeExperienceId+'-'+index);
                 G.get("CreateExpCompanyName").setValue(record.data.CompanyWorked);
                 G.get("CreateExpProfile").setValue(record.data.ProfileId);
                 G.get("CreateExpStartDate").setValue(new Date(record.data.StartDate));
@@ -527,7 +527,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             }
         },
 
-        SaveCompanyExperience: function() {
+        SaveCompanyExperience: function(rec) {
             var resumeId = Ext.getStore('AuthStore').getAt(0).get('ResumeId');
 
             var companyNameField=G.get("CreateExpCompanyName");
@@ -535,6 +535,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             var StartDateField=G.get("CreateExpStartDate");
             var EndDateField=G.get("CreateExpEndDate");
             var DescriptionField=G.get("CreateExpDescription");
+            var HFValue=G.get('HFresumeExperienceId').getValue();
+            var resumeExpId=HFValue.split('-')[0];
+            var index=HFValue.split('-')[1];
 
             var companyName=companyNameField.getValue();
             var profile=profileField.getValue();
@@ -593,7 +596,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             }
 
             var model=Ext.create("ProDooMobileApp.model.ResumeExperiencesModel");
-            model.data.ResumeExperienceId=G.get('HFresumeExperienceId').getValue();
+            model.data.ResumeExperienceId=resumeExpId;
             model.data.ResumeId=resumeId;
             model.data.CompanyWorked=companyName;
             model.data.ProfileId=profile;
@@ -614,11 +617,11 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         model.data.StartDateYear=StartDate.getFullYear();
                         model.data.EndDateYear=EndDate.getFullYear() ;
                         model.data.ProfileValue=profileField.getRecord().data.ProfileValue;
-                        if(model.data.ResumeExperienceId==0)
+                        if(resumeExpId==0)
                         str.insert(0,model);
                         else
                         {
-                            str.remove(model);
+                            str.removeAt(index);
                             str.insert(0,model);
                         }
 
@@ -641,6 +644,98 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     G.showGeneralFailure();
                 }
             });
+        },
+
+        CloneLangaugeControl: function(expLevel, languageId) {
+            var Cnt=Ext.create('Ext.Container', {
+                //     xtype: 'container',
+                cs: 'requestInnerCnt',
+                hidden: false,
+                margin: '0 0 5 0',
+                padding: '0 5',
+                layout: {
+                    type: 'hbox',
+                    align: 'center'
+                },
+                items: [
+                {
+                    xtype: 'sliderfield',
+                    flex: 1,
+                    cls: ['sliderCls','languageExp'],
+                    label: 'Level',
+                    labelWidth: 80,
+                    name: 'ExperienceLevel',
+                    value: [
+                    expLevel
+                    ],
+                    maxValue: 10,
+                    listeners: [
+                    {
+                        fn: function(component, eOpts) {
+                            component.setLabelAlign('left');
+                            var thumb = component.element.dom.querySelector('.x-thumb');
+                            thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
+                            SearchResume.onSliderfieldDrag(component);
+                        },
+                        event: 'initialize'
+                    },
+                    {
+                        fn: function(sliderfield, sl, thumb, e, eOpts){
+                            SearchResume.onSliderfieldDrag(sliderfield);
+                        },
+                        event: 'drag'
+                    },
+                    {
+                        fn: function(me, sl, thumb, newValue, oldValue, eOpts){
+                            SearchResume.onSliderfieldDrag(me);
+                        },
+                        event: 'change'
+                    }
+                    ]
+                },
+                {
+                    xtype: 'selectfield',
+                    cls: [
+                    'DateCls',
+                    'TriggerBlue',
+                    'languageDD'
+                    ],
+                    //             itemId: 'languageDropdown',
+                    width: 120,
+                    label: '',
+                    labelCls: 'labelCls',
+                    name: 'LanguageId',
+                    placeHolder: 'Language',
+                    autoSelect: false,
+                    displayField: 'LanguageValue',
+                    store: 'SearchLanguage',
+                    valueField: 'LanguageId',
+                    value:languageId
+                },
+                {
+                    xtype: 'button',
+                    cls: [
+                    'closeIcon',
+                    'noBorder'
+                    ],
+                    text: ' ',
+                    listeners: [
+                    {
+                        fn: function(button, eOpts) {
+                            button.up('container').destroy();
+                        },
+                        event: 'tap'
+                    }
+                    ]
+                }
+                ]
+            });
+            var Container;
+
+            Container=G.get('SettingDateCnt');
+
+            Container.add(Cnt);
+
         }
     },
 

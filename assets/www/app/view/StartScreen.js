@@ -186,10 +186,10 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                     {
                                         fn: function(element, eOpts) {
                                             element.on('tap',function(){
-                                                //      SearchResume.resetStores();
-                                                //     ActiveScreen=1;
-                                                // UserResume.onResumeClick();
-                                                Ext.ComponentQuery.query("#ResumeContainerImg")[0].fireEvent('tap');
+                                                SearchResume.resetStores();
+                                                ActiveScreen=0;
+                                                UserResume.onResumeClick();
+                                                //Ext.ComponentQuery.query("#ResumeContainerImg")[0].fireEvent('tap');
                                             });
                                         },
                                         event: 'painted'
@@ -418,7 +418,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 xtype: 'container',
                                 centered: true,
                                 cls: 'imgTitle',
-                                html: 'Let us see how its is going',
+                                html: 'Let us see how its going',
                                 itemId: 'mycontainer10',
                                 padding: '0 20',
                                 items: [
@@ -606,9 +606,9 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     },
 
     onMyimgTap2: function(image, e, eOpts) {
-        SearchResume.resetStores();
-        ActiveScreen=0;
-        UserResume.onResumeClick();
+        //SearchResume.resetStores();
+        //ActiveScreen=0;
+        //UserResume.onResumeClick();
     },
 
     onMyimgTap21: function(image, e, eOpts) {

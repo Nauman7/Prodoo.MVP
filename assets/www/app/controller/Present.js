@@ -175,28 +175,28 @@ Ext.define('ProDooMobileApp.controller.Present', {
         if(obj.UserName.trim()==null || obj.UserName.trim()=="")
         {
             fields.UserName.addCls('isRequired');
-            Ext.Msg.alert("Unable to save, Name is required.");
+            Ext.Msg.alert('',"Unable to save, Name is required.");
             return null;
         }
 
         if(obj.UserName != null && obj.UserName != "" &&  !G.ValidateAlphabet(obj.UserName))
         {
             fields.UserName.addCls('isRequired');
-            Ext.Msg.alert("Unable to save,  Name is invalid.");
+            Ext.Msg.alert('',"Unable to save,  Name is invalid.");
             return null;
         }
 
         if(obj.Phone != null && obj.Phone != "" && !G.ValidateInteger(obj.Phone))
         {
             fields.Phone.addCls('isRequired');
-            Ext.Msg.alert("Unable to save,  Phone No is invalid.");
+            Ext.Msg.alert('',"Unable to save,  Phone No is invalid.");
             return null;
         }
 
         if(obj.Email != null && obj.Email != "" && !G.ValidateEmail(obj.Email))
         {
             fields.Email.addCls('isRequired');
-            Ext.Msg.alert("Unable to save,  Email is invalid.");
+            Ext.Msg.alert('',"Unable to save,  Email is invalid.");
             return null;
         }
 

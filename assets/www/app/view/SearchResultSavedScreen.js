@@ -54,61 +54,45 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '    <tpl for=\'Profiles\'>',
             '        <tpl if="Score &gt; 0">',
             '        <div class="searchDetail">',
-            '',
-            '            <!--  <tpl if="Correlations.Score &gt;= 80">',
-            '                <span class="itemNo iGreen">',
-            '            <tpl elseif="Correlations.Score &gt;= 50">',
-            '                <span class="itemNo iOrange">',
-            '            <tpl else>',
-            '                <span class="itemNo iYellow">',
-            '            </tpl>',
-            '    -->',
-            '          ',
-            '              <span class="itemNo iGreen"> {[this.prepareHeading(values.Score,"score")]} </span>',
+            '              <span class="itemNo iGreen">{Score}</span>',
             '            <div class="itemSkill">{ProfileValue}</div>',
             '        </div>',
-            '            </tpl>',
-            '    </tpl>',
+            '    </tpl> </tpl>',
             '    ',
             '    <tpl for=\'Skills\'>',
             '        <tpl if="Score &gt; 0">',
             '        <div class="searchDetail">',
-            '              <span class="itemNo iOrange"> {[this.prepareHeading(values.Score,"score")]} </span>',
+            '              <span class="itemNo iOrange"> {Score} </span>',
             '            <div class="itemSkill">{SkillValue}</div>',
             '        </div>',
-            '        </tpl>',
+            '       </tpl>',
             '    </tpl>',
             '    ',
-            '    <tpl for=\'Industries\'>',
+            '    ',
+            '    <tpl for=\'Certifications\'>',
             '        <tpl if="Score &gt; 0">',
             '        <div class="searchDetail">',
-            '',
-            '          ',
-            '          ',
-            '              <span class="itemNo iYellow"> {[this.prepareHeading(values.Score,"score")]} </span>',
-            '            <div class="itemSkill">{IndustryValue}</div>',
-            '        </div>',
-            '            </tpl>',
-            '    </tpl>',
-            '    ',
-            '    <tpl for=\'Certifications\' if="Score!=0">',
-            '        <div class="searchDetail">',
-            '',
-            '          ',
-            '          ',
-            '              <span class="itemNo"> {[this.prepareHeading(values.Score,"score")]} </span>',
+            '              <span class="itemNo iYellow">{Score}</span>',
             '            <div class="itemSkill">{CertificationValue}</div>',
             '        </div>',
-            '    </tpl>',
+            '    </tpl> </tpl>',
             '    ',
-            '    <tpl for=\'Keywords\' if="Score &gt; 0">',
+            '    <tpl for=\'Keywords\'>',
+            '        <tpl if="Score &gt; 0">',
             '        <div class="searchDetail">',
-            '',
-            '          ',
-            '          ',
-            '              <span class="itemNo iGreen"> {[this.prepareHeading(values.Score,"score")]} </span>',
+            '              <span class="itemNo iGreen"> {Score}</span>',
             '            <div class="itemSkill">{KeywordValue}</div>',
             '        </div>',
+            '             </tpl>',
+            '    </tpl>',
+            '    ',
+            '     <tpl for=\'Industries\'>',
+            '         <tpl if="Score &gt; 0">',
+            '        <div class="searchDetail">',
+            '              <span class="itemNo iYellow"> {Score} </span>',
+            '            <div class="itemSkill">{IndustryValue}</div>',
+            '        </div>',
+            '           </tpl>',
             '    </tpl>',
             '</div>',
             {
@@ -330,7 +314,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                             {
                                 xtype: 'label',
                                 cls: 'labelCls',
-                                html: 'Resume Title',
+                                html: 'Resume Summary',
                                 itemId: 'HelpHeading'
                             },
                             {
@@ -343,7 +327,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                     },
                     {
                         xtype: 'container',
-                        html: 'Resumes sorted by high score ',
+                        html: 'Brief summary about resume given here',
                         itemId: 'HelpDetail',
                         padding: 10
                     },
@@ -434,13 +418,17 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             HelpCnt.removeCls('HelpSRDownArrow');
             HelpCnt.removeCls('HelpSRSkill');
             Ext.get(Ext.query('.SrNo')[0]).removeCls('rightSide');
-            this.down('#HelpHeading').setHtml('Resume Title');
-            this.down('#HelpDetail').setHtml('Resumes sorted by high score ');
+            this.down('#HelpHeading').setHtml('Resume Summary');
+            this.down('#HelpDetail').setHtml('Brief summary about resume given here');
 
             this.startCount();
             HelpCnt.show();
             button.addCls('activeBtn');
         }
+
+        if(IsVistor)
+            Ext.select('.helpIcon').addCls('bottom78');
+
     },
 
     onRequestBtnTap: function(button, e, eOpts) {
@@ -541,14 +529,14 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             HelpCnt.removeCls('HelpSRTitle');
             HelpCnt.addCls('HelpSrNo');
             Ext.get(Ext.query('.SrNo')[0]).addCls('rightSide');
-            this.down('#HelpHeading').setHtml('Skill Number');
-            this.down('#HelpDetail').setHtml('user can shortlist by swap the result to right');
+            this.down('#HelpHeading').setHtml('Score');
+            this.down('#HelpDetail').setHtml('Resumes are sorted by score');
         }
         else if(HelpCnt.element.hasCls('HelpSrNo')){
             HelpCnt.removeCls('HelpSrNo');
             HelpCnt.addCls('HelpSRShortlistIcon');
             this.down('#HelpHeading').setHtml('Shortlist button');
-            this.down('#HelpDetail').setHtml('Tab to add resume in your shortlist');
+            this.down('#HelpDetail').setHtml('Tap to add resume in your shortlist');
         }
         else if(HelpCnt.element.hasCls('HelpSRShortlistIcon')){
             HelpCnt.removeCls('HelpSRShortlistIcon');

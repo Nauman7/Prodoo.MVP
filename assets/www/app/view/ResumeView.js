@@ -645,7 +645,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                     {
                                         xtype: 'selectfield',
                                         cls: [
-                                            'field',
+                                            'DateCls',
                                             'TriggerBlue'
                                         ],
                                         itemId: 'CreateExpProfile',
@@ -657,7 +657,15 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         placeHolder: 'ProfileId',
                                         displayField: 'ProfileValue',
                                         store: 'SearchProfile',
-                                        valueField: 'ProfileId'
+                                        valueField: 'ProfileId',
+                                        listeners: [
+                                            {
+                                                fn: function(component, eOpts) {
+                                                    component.setLabelAlign('left');
+                                                },
+                                                event: 'initialize'
+                                            }
+                                        ]
                                     },
                                     {
                                         xtype: 'container',
@@ -706,7 +714,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                     'TriggerBlue'
                                                 ],
                                                 itemId: 'CreateExpEndDate',
-                                                label: 'Until',
+                                                label: 'To',
                                                 labelCls: 'labelCls',
                                                 labelWidth: 50,
                                                 name: 'EndDate',
@@ -953,7 +961,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                     'TriggerBlue'
                                                 ],
                                                 itemId: 'mydatepicker',
-                                                label: 'Available until',
+                                                label: 'Available From',
                                                 labelCls: 'labelCls',
                                                 labelWidth: 150,
                                                 name: 'AvailabilityDate',
@@ -1016,6 +1024,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                             },
                             {
                                 xtype: 'container',
+                                itemId: 'SettingDateCnt',
                                 items: [
                                     {
                                         xtype: 'container',
@@ -1027,60 +1036,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 cls: [
                                                     'PlusMiniBtn',
                                                     'right'
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        xtype: 'container',
-                                        cls: 'requestInnerCnt',
-                                        hidden: false,
-                                        margin: '0 0 5 0',
-                                        padding: '0 5',
-                                        layout: {
-                                            type: 'hbox',
-                                            align: 'center'
-                                        },
-                                        items: [
-                                            {
-                                                xtype: 'sliderfield',
-                                                flex: 1,
-                                                cls: 'sliderCls',
-                                                itemId: 'levelItemID',
-                                                label: 'Level',
-                                                labelWidth: 80,
-                                                name: 'ExperienceLevel',
-                                                value: [
-                                                    0
                                                 ],
-                                                maxValue: 10,
-                                                listeners: [
-                                                    {
-                                                        fn: function(component, eOpts) {
-                                                            component.setLabelAlign('left');
-                                                            var thumb = component.element.dom.querySelector('.x-thumb');
-                                                            thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                        },
-                                                        event: 'initialize'
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                xtype: 'selectfield',
-                                                cls: [
-                                                    'DateCls',
-                                                    'TriggerBlue'
-                                                ],
-                                                itemId: 'languageDropdown',
-                                                width: 120,
-                                                label: '',
-                                                labelCls: 'labelCls',
-                                                name: 'LanguageId',
-                                                placeHolder: 'Language',
-                                                autoSelect: false,
-                                                displayField: 'LanguageValue',
-                                                store: 'SearchLanguage',
-                                                valueField: 'LanguageId'
+                                                itemId: 'ResumeSettingAdd'
                                             }
                                         ]
                                     }
@@ -1250,19 +1207,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#availabilityBtn'
             },
             {
-                fn: 'ondurationItemIDDrag11',
-                event: 'drag',
-                delegate: '#levelItemID'
-            },
-            {
-                fn: 'onDurationItemIDChange11',
-                event: 'change',
-                delegate: '#levelItemID'
-            },
-            {
-                fn: 'onMyselectfield6Change1',
-                event: 'change',
-                delegate: '#languageDropdown'
+                fn: 'onResumeSettingAddTap',
+                event: 'tap',
+                delegate: '#ResumeSettingAdd'
             },
             {
                 fn: 'onConfirmBtnTap',
@@ -1380,7 +1327,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
             targetElement.parent('.indMain').toggleCls('indVisible');
         }
         else if (targetElement.hasCls('indEdit')){
-            UserResume.ShowCreateResumeExperience(record);
+            UserResume.ShowCreateResumeExperience(record,index);
 
         }
         else if (targetElement.hasCls('indDelete'))
@@ -1397,7 +1344,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     if (result.success) {
 
                         var str=Ext.getStore("ResumeExperiencesStore");
-                        var index=str.findExact("ResumeExperienceId", record.data.ResumeExperienceId);
                         var rec=str.data.items[index];
                         str.remove(rec);
                     }
@@ -1437,42 +1383,34 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     },
 
-    ondurationItemIDDrag11: function(sliderfield, sl, thumb, e, eOpts) {
-        SearchResume.onSliderfieldDrag(sliderfield);
-    },
-
-    onDurationItemIDChange11: function(me, sl, thumb, newValue, oldValue, eOpts) {
-        SearchResume.onSliderfieldDrag(me);
-
-        /*var AuthObj = Ext.getStore('AuthStore').getAt(0);
-
-        var requestSettingObj = new Object();
-        requestSettingObj.UserId = AuthObj.get('UserId');
-        requestSettingObj.ResumeId = AuthObj.get('ResumeId');
-        requestSettingObj.ExperienceLevel = newValue;
-
-        UserResume.UpdateSettings(requestSettingObj);*/
-    },
-
-    onMyselectfield6Change1: function(selectfield, newValue, oldValue, eOpts) {
-        /*var AuthObj = Ext.getStore('AuthStore').getAt(0);
-        var requestSettingObj = new Object();
-        requestSettingObj.UserId = AuthObj.get('UserId');
-        requestSettingObj.ResumeId = AuthObj.get('ResumeId');
-        requestSettingObj.LanguageId = newValue;
-
-        UserResume.UpdateSettings(requestSettingObj);*/
+    onResumeSettingAddTap: function(button, e, eOpts) {
+        this.addNewLevel();
     },
 
     onConfirmBtnTap: function(button, e, eOpts) {
+        var resumeLanguageModels = new Array();
+        var slider = G.get('SettingCnt').element.query('.sliderCls');
+        var dd=G.get('SettingCnt').element.query('.languageDD');
+        for( var i=0; i< slider.length; i++){
+        var resumeLanguage=new Object();
+             var sliderId = Ext.get(slider[i]).getId();
+             var ddId = Ext.get(dd[i]).getId();
+             resumeLanguage.ExperienceLevel = G.get(sliderId).getValue()[0];
+             resumeLanguage.LanguageId=G.get(ddId).getValue();
+            resumeLanguageModels.push(resumeLanguage);
+        }
+
+
+
         var button=G.get('availabilityBtn');
         var AuthObj = Ext.getStore('AuthStore').getAt(0);
         var requestSettingObj = new Object();
         requestSettingObj.UserId = AuthObj.get('UserId');
         requestSettingObj.ResumeId = AuthObj.get('ResumeId');
         requestSettingObj.AvailabilityDate = new Date(G.get('mydatepicker').getValue());
-        requestSettingObj.LanguageId =G.get('languageDropdown').getValue();
-        requestSettingObj.ExperienceLevel = G.get('levelItemID').getValue()[0];
+        //requestSettingObj.LanguageId =G.get('languageDropdown').getValue();
+        //requestSettingObj.ExperienceLevel = G.get('levelItemID').getValue()[0];
+        requestSettingObj.ResumeLanguage=resumeLanguageModels;
         requestSettingObj.Region = G.get('locationSelectField').getValue();
         requestSettingObj.IsAvailable= !button.element.hasCls('busyBtn');
         UserResume.UpdateSettings(requestSettingObj,true);
@@ -1500,6 +1438,10 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 G.hide('SearchList');
             }
         });
+    },
+
+    addNewLevel: function() {
+        UserResume.CloneLangaugeControl(0,2);
     }
 
 });

@@ -167,8 +167,8 @@ Ext.application({
 
         Ext.Ajax.on('beforerequest', function (conn, response, options) {
 
-            if(navigator.onLine){
-
+          //  if(navigator.onLine){
+        if(true){
             if(Ext.Viewport.getMasked() == null || Ext.Viewport.getMasked().isHidden() == true)
             {
                 Ext.Viewport.setMasked(true);

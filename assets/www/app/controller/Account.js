@@ -157,7 +157,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
 
             if(Ext.isEmpty(email) || !G.ValidateEmail(email))
             {
-                Ext.Msg.alert('', 'Please enter email.');
+                Ext.Msg.alert('', 'Please enter valid email.');
                 return;
             }
 
@@ -310,7 +310,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                         });
 
                     } else {
-                        Ext.Msg.alert('', 'Invalid email and password.');
+                        Ext.Msg.alert('', 'Invalid email or password.');
                     }
                 },
                 failure: function(response, options) {

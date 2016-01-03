@@ -33,6 +33,7 @@ Ext.define('ProDooMobileApp.view.Register', {
             {
                 xtype: 'container',
                 cls: 'loginProdoo',
+                margin: '10 0 0 0 ',
                 items: [
                     {
                         xtype: 'image',
@@ -83,6 +84,7 @@ Ext.define('ProDooMobileApp.view.Register', {
                     {
                         xtype: 'selectfield',
                         cls: 'SignUpDropDown',
+                        padding: '5 10',
                         labelAlign: 'top',
                         name: 'IsFreelancer',
                         placeHolder: 'Choose Preferred Usage',

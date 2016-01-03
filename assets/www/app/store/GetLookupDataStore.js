@@ -41,7 +41,7 @@ Ext.define('ProDooMobileApp.store.GetLookupDataStore', {
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {
-        var url = ApiBaseUrl + 'LookupData/GetLookupData';
+        var url = ApiBaseUrl + 'Account/GetLookupData';
         var storeApi = store.getProxy().getApi();
         storeApi.read = url;
     }

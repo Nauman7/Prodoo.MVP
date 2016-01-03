@@ -918,7 +918,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             G.show('HelpCnt');
             button.removeCls('helpFirstClick');
         }
-        else if(!button.element.hasCls('helpFirstClick')){ // check if clicking on first time
+        else if(!IsVistor && !button.element.hasCls('helpFirstClick')){ // check if clicking on first time
             var HelpActive = SearchResume.UpdateHelpDetail('helpIconBtn');
             button.addCls('helpFirstClick');
         }

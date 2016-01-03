@@ -307,11 +307,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
             var Languages = resume.Languages;
             Languages.forEach(function(item,index){
-                //G.createView('Language',item.LanguageValue, item.LanguageId,item.ExperienceLevel);
-                var Language = settingContainer.down('selectfield[name=LanguageId]');
-                var experienceLevel = settingContainer.down('[name=ExperienceLevel]');
-                Language.setValue(item.LanguageId);
-                experienceLevel.setValue(item.ExperienceLevel);
+                 UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
 
             });
         }

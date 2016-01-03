@@ -322,12 +322,17 @@ Ext.define('ProDooMobileApp.controller.G', {
                 success: function(conn, response, options, eOpts) {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success) {
+                        localStorage.globalKeywords=Ext.encode(result.items.LookupData.keywords);
+                        localStorage.globalCertifications=Ext.encode(result.items.LookupData.certificates);
+
+
                         var authStore = Ext.getStore('AuthStore');
                         var rec = authStore.getAt(0);
                         rec.set('ResumeId', result.items.ResumeId);
                         rec.set('UserId', result.items.UserId);
                         rec.set('IsFreelancer', result.items.IsFreelancer);
                         rec.set('IsNotificationRead', result.items.IsNotificationRead);
+                        rec.set('FirstName',result.items.DisplayName);
                         rec.dirty = true;
                         authStore.sync();
                         G.loadCommonLookups(result.items.LookupData);

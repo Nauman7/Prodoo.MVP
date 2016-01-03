@@ -131,12 +131,12 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
     },
 
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
-        var store = Ext.getStore('ShortlistResumeStore');
+        var store = Ext.getStore('SavedSearchStore');
         store.clearFilter();
         store.filter([
             {
                 fn   : function(record) {
-                    return record.get('SearchName').toLowerCase().startsWith(textfield.getValue().toLowerCase());
+                    return record.get('SearchName').toLowerCase().indexOf(textfield.getValue().toLowerCase()) > -1;
                 },
                 scope: this
             }
