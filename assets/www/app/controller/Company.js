@@ -106,7 +106,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
                             params : { userId : loggedUserId }
                         });
                     }
-                    else {  Ext.Msg.alert('Error', result.message); }
+                    else {  Ext.Msg.alert('', result.message); }
                 },
                 failure: function(conn, response, options, eOpts) {
                     //failure catch

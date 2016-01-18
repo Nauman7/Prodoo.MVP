@@ -19,7 +19,8 @@ Ext.define('ProDooMobileApp.store.SearchResultSaved', {
     requires: [
         'ProDooMobileApp.model.SearchResultSaved',
         'Ext.data.proxy.Ajax',
-        'Ext.data.reader.Json'
+        'Ext.data.reader.Json',
+        'Ext.data.writer.Json'
     ],
 
     config: {
@@ -32,6 +33,9 @@ Ext.define('ProDooMobileApp.store.SearchResultSaved', {
             reader: {
                 type: 'json',
                 rootProperty: 'items'
+            },
+            writer: {
+                type: 'json'
             }
         },
         listeners: [

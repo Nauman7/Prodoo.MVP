@@ -147,11 +147,11 @@
 .TextMsg {
 	padding: 0;
 	background-color: white;
-	position: absolute;
-	top: 148px;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	// position: absolute;
+	// top: 148px;
+	// left: 0;
+	// right: 0;
+	// bottom: 0;
 	.x-input-el {
 		padding: 10px;
 		height: 100%;
@@ -277,10 +277,8 @@
 }
 .MsgReplyCnt{
 	.TextMsg {
-		top: auto;
 		height: 100%;
 		margin-top: 1px;
-		bottom: auto;
 	}
 }
 .MsgReplyView{

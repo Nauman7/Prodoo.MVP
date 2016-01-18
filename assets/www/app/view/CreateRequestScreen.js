@@ -263,7 +263,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                             component.setLabelAlign('left');
                                             var thumb = component.element.dom.querySelector('.x-thumb');
                                             thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-
                                             SearchResume.onSliderfieldDrag(component);
                                         },
                                         event: 'initialize'
@@ -480,10 +479,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 label: 'fee range',
                                 labelWidth: 90,
                                 name: 'HourlyFee',
-                                value: [
-                                    1
-                                ],
-                                maxValue: 2000,
+                                maxValue: 999,
                                 minValue: 1,
                                 listeners: [
                                     {
@@ -491,6 +487,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                             component.setLabelAlign('left');
                                             var thumb = component.element.dom.querySelector('.x-thumb');
                                             thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
+                                            SearchResume.onSliderfieldDrag(component);
                                         },
                                         event: 'initialize'
                                     }

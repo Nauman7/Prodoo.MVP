@@ -28,7 +28,6 @@ Ext.define('ProDooMobileApp.store.UserStore', {
         proxy: {
             type: 'ajax',
             timeout: 60000,
-            url: 'http://localhost/PRODOO/WebAPI/api/User/GetAllUsersForMsgs',
             reader: {
                 type: 'json',
                 rootProperty: 'items'

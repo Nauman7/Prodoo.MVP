@@ -141,10 +141,14 @@
 }
 
 .textarea{
+	.x-field-input{
+		@include border-radius (5px);
+		overflow: hidden;
+	}
 	&.x-field-textarea .x-component-outer .x-input-el{
 		border:none;
 		resize: vertical;
-		@include border-radius (5px);
+		// @include border-radius (5px);
 	}
 }
 

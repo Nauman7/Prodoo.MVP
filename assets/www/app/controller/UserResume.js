@@ -184,6 +184,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
         },
 
         onTopBtnTap: function(button,lookupName) {
+            debugger;
             G.hide('Confirm');
             var Searchfield = G.get('mysearchfield');
             UserResume.hideActive(button);
@@ -505,7 +506,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 button.addCls('busyBtn');
                 var Cnt = button.up('#availabilityCnt');
                 Cnt.addCls('BusyCnt');
-                Cnt.down('#availabilityLbl').setHtml('Busy');
+                Cnt.down('#availabilityLbl').setHtml('Not Available');
             }
         },
 
@@ -548,35 +549,35 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             if(companyName.trim()==null || companyName.trim()=="")
             {
                 companyNameField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Company Name is required.");
+                Ext.Msg.alert('',"Company Name is required to proceed.");
                 return null;
             }
 
             if(companyName != null && companyName != "" &&  !G.ValidateAlphabet(companyName))
             {
                 companyNameField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Company Name is invalid.");
+                Ext.Msg.alert('',"Company Name is invalid to proceed.");
                 return null;
             }
 
             if(profile == null)
             {
                 profileField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Profile is required.");
+                Ext.Msg.alert('',"Profile is required to proceed.");
                 return null;
             }
 
             if(StartDate  == null)
             {
                 StartDateField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Start Date is required.");
+                Ext.Msg.alert('',"Start Date is required to proceed.");
                 return null;
             }
 
             if(EndDate  == null)
             {
                 EndDateField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, End Date is required.");
+                Ext.Msg.alert('',"End Date is required to proceed.");
                 return null;
             }
 
@@ -584,14 +585,14 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             {
                 StartDateField.addCls('isRequired');
                 EndDateField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Start Date cannot be greater than end date.");
+                Ext.Msg.alert('',"Start Date cannot be greater than end date to proceed.");
                 return null;
             }
 
             if(Description.trim()==null || Description.trim()=="")
             {
                 DescriptionField.addCls('isRequired');
-                Ext.Msg.alert('',"Unable to save, Description is required.");
+                Ext.Msg.alert('',"Description is required to proceed.");
                 return null;
             }
 
@@ -617,12 +618,32 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         model.data.StartDateYear=StartDate.getFullYear();
                         model.data.EndDateYear=EndDate.getFullYear() ;
                         model.data.ProfileValue=profileField.getRecord().data.ProfileValue;
+                        debugger;
+                        var resumeExperince = Ext.getStore("SearchResultDetail").data.items[0].data.ResumeExperience;
+
                         if(resumeExpId==0)
-                        str.insert(0,model);
+                        {
+                            model.data.ResumeExperienceId= result.items.ResumeExperienceId;
+                            str.insert(0,model);
+                            resumeExperince.push(model.data);
+                        }
                         else
                         {
                             str.removeAt(index);
                             str.insert(0,model);
+                            resumeExperince.forEach(function(item,index){
+                                if(item.ResumeExperienceId == resumeExpId){
+                                    item.CompanyWorked = model.data.CompanyWorked;
+                                    item.Description = model.data.Description;
+                                    item.EndDate= model.data.EndDate;
+                                    item.EndDateYear= model.data.EndDateYear;
+                                    item.ProfileId= model.data.ProfileId;
+                                    item.ProfileValue= model.data.ProfileValue;
+                                    item.ResumeId= model.data.ResumeId;
+                                    item.StartDate= model.data.StartDate;
+                                    item.StartDateYear= model.data.StartDateYear;
+                                }
+                            });
                         }
 
                         G.hide('createCompanyCnt');

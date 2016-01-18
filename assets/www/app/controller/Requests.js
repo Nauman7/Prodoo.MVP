@@ -177,6 +177,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             fields.DurationType.enable();
             fields.SavedSearchedId.enable();
             Ext.Msg.alert('Status', 'Request cloned successfully');
+            G.get('FixRequest').show();
         },
 
         DeleteRequestResume: function(requestId, requestName, innerView) {
@@ -306,17 +307,14 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     }
                 }
                 else{ // Other active
-                    var setDisable = true;
-                    var isClonable = false;
 
-                    if( item==1 ) // Draft active
-                    setDisable = false;
+                    var isSentRequest = false
 
-                    // for enabling clone btn
+
                     if(item==2) // Sent active
-                    {
-                        isClonable = true;
-                    }
+                    isSentRequest = true;
+
+
                     G.Push('CreateRequestScreen');
                     var topHeadingLabel =G.get('requestTopHeading');
                     topHeadingLabel.setHtml('Request Details');
@@ -324,10 +322,14 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     var form = G.get('CreateRequestScreen');
                     form.setValues(record.data);
                     var fields = form.getFields();
+
+                    SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
+                    SearchResume.onSliderfieldDrag(G.get('durationItemID'));
+
                     // setting start date
                     fields.StartDate.setValue(new Date(record.data.StartDate));
 
-                    if(setDisable){
+                    if(isSentRequest){
                         G.get('DraftRequestBtn').hide();
                         fields.Duration.disable();
                         fields.StartDate.disable();
@@ -341,12 +343,12 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         fields.FeeCurrencyType.disable();
                         fields.DurationType.disable();
                         fields.SavedSearchedId.disable();
+                        G.get('cloneBtn').show();
+                        G.get('FixRequest').hide();
                     }
+                    else
+                    G.get('DraftRequestBtn').hide();
 
-                    if(isClonable){
-                        var cloneBtn = G.get('cloneBtn');
-                        cloneBtn.show();
-                    }
                 }
             }
         },
@@ -378,7 +380,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 },
                 failure: function(conn, response, options, eOpts) {
                     if (response.timedout)
-                    Ext.Msg.alert('Error', 'Maximum request time exceeded');
+                    Ext.Msg.alert('', 'Maximum request time exceeded');
                 }
             });
         },

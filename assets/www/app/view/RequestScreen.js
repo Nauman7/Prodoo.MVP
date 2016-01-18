@@ -21,6 +21,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         'Ext.Button',
         'Ext.Label',
         'Ext.field.Search',
+        'Ext.field.Hidden',
         'Ext.dataview.List',
         'Ext.XTemplate'
     ],
@@ -84,6 +85,11 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                         itemId: 'mysearchfield',
                         clearIcon: false,
                         placeHolder: 'Search request'
+                    },
+                    {
+                        xtype: 'hiddenfield',
+                        itemId: 'requestType',
+                        value: 'sent'
                     }
                 ]
             },
@@ -288,6 +294,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         this.hideAll();
         G.show('requestSendList');
         G.get('buttonsLabel').setHtml('Sent');
+        G.get('requestType').setValue('sent');
     },
 
     onDraftBtnTap: function(button, e, eOpts) {
@@ -295,10 +302,18 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         this.hideAll();
         G.show('requestDraftList');
         G.get('buttonsLabel').setHtml('Draft');
+        G.get('requestType').setValue('draft');
     },
 
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
-        var store = Ext.getStore('SearchRequestList');
+        var store;
+
+        if(G.get('requestType').getValue()=='sent')
+            store= G.get('requestSendList').getStore();
+        else
+            store= G.get('requestDraftList').getStore();
+
+
         store.clearFilter();
 
         store.filter([

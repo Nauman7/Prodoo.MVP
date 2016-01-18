@@ -108,7 +108,8 @@
 	height: 20px;
 }
 .logoutBtn{
-	background: transparent!important;
+	// background: transparent!important;
+	background: #251f36 !important;
 	@extend .bebasBold;
 	font-size: 30px;
 	border: none;
@@ -123,6 +124,7 @@
 
 .logLabel{
 	color: #bbbbbb;
+	background: #251f36;
 	@extend .bebasBold;
 	letter-spacing: 2px;
 	font-size: 18px;
@@ -133,11 +135,11 @@
 }
 
 .MenuIcon{
-	background: url('../images/menu.png') no-repeat center center #3e335e;
+	background: url('../images/menu.png') no-repeat center center transparent;
 }
 .UserInfo{
 	position: absolute;
-	background: #251f36;
+	
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -145,7 +147,7 @@
 
 .UserModeBtn{
 	border:none;
-	background: transparent!important;
+	background: #3E335E !important;
 	@extend .bebasBold;
 	color: white;
 	border-bottom: 2px solid #000; 

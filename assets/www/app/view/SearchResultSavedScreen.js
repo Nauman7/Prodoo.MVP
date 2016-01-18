@@ -337,6 +337,11 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                         itemId: 'HelpDisable'
                     }
                 ]
+            },
+            {
+                xtype: 'hiddenfield',
+                itemId: 'comeFrom',
+                name: 'comeFrom'
             }
         ]
     },
@@ -392,7 +397,9 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             store.add(record);
             store.sync();
             G.Push('SearchResumeDetail');
-
+            if(G.get('comeFrom').getValue()==='shortlist'){
+            G.get('shortlistResume').hide();
+            }
             if(IsVistor)
                 G.hide('shortlistResume');
 

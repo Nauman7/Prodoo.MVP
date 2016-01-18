@@ -253,6 +253,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
 
                         if(success && records.length>0){
                             G.Push('SearchResultSavedScreen');
+
                             //var view = Ext.create('ProDooMobileApp.view.SearchResultSavedScreen');
                             //Ext.Viewport.setActiveItem(view);
                         }//end if
@@ -298,7 +299,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
     },
     failure: function(conn, response, options, eOpts) {
         if (response.timedout)
-        Ext.Msg.alert('Error', 'Maximum request time exceeded');
+        Ext.Msg.alert('', 'Maximum request time exceeded');
     }
 });*/
 }

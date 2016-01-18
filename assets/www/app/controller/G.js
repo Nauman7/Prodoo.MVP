@@ -71,12 +71,12 @@ Ext.define('ProDooMobileApp.controller.G', {
                 {
                     if(!DontShow)
                     {
-                        Ext.Msg.alert('Info', obj.message);
+                        Ext.Msg.alert('', obj.message);
                     }
                 }
                 else
                 {
-                    Ext.Msg.alert('Error', obj.message);
+                    Ext.Msg.alert('', obj.message);
                     return false;
                 }
             }
@@ -132,11 +132,11 @@ Ext.define('ProDooMobileApp.controller.G', {
                             {
                                 if(exception.error.status === 0)
                                 {
-                                    Ext.Msg.alert('Error', 'You request has timedout. Please try again later.');
+                                    Ext.Msg.alert('', 'You request has timedout. Please try again later.');
                                 }
                                 else
                                 {
-                                    Ext.Msg.alert('Error', exception.error.statusText);
+                                    Ext.Msg.alert('', exception.error.statusText);
                                 }
                             }
                         }
@@ -150,7 +150,7 @@ Ext.define('ProDooMobileApp.controller.G', {
             if(form.getForm().isValid())
             return false;
             else
-            Ext.Msg.alert('Error', 'Please fix validation errors.');
+            Ext.Msg.alert('', 'Please fix validation errors.');
             return true;
         },
 
@@ -219,17 +219,6 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         ShowView: function(UserClassName) {
-            // var view = G.get(itemId);
-            // if(view)
-            // {
-            //     Ext.Viewport.setActiveItem(view);
-            // }
-            // else
-            // {
-            //     Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-            //     var view = Ext.create('ProDooMobileApp.view.' + itemId);
-            //     Ext.Viewport.setActiveItem(view);
-            // }
             var mainView = Ext.ComponentQuery.query('navigationview')[0];
             var view = Ext.create('ProDooMobileApp.view.' + UserClassName);
             mainView.removeAll(true);
@@ -340,12 +329,12 @@ Ext.define('ProDooMobileApp.controller.G', {
                         G.setLoggedUsername(model.Name);
 
                     } else {
-                        Ext.Msg.alert('Error', result.message);
+                        Ext.Msg.alert('', result.message);
                     }
                 },
                 failure: function(conn, response, options, eOpts) {
                     var response = G.getResponseData(response);
-                    Ext.Msg.alert('Error', response.message);
+                    Ext.Msg.alert('', response.message);
                 }
             });
         },
@@ -650,7 +639,7 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         showGeneralFailure: function() {
-            Ext.Msg.alert('Error', 'Please contact tech support, sorry for inconvenience');
+            Ext.Msg.alert('', 'Please contact tech support, sorry for inconvenience');
 
         },
 

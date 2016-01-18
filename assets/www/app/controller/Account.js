@@ -86,7 +86,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 },
                 failure: function(response, options) {
                     var response = G.getResponseData(response);
-                    Ext.Msg.alert('Error', response.message);
+                    Ext.Msg.alert('', response.message);
                 }
             });
         }

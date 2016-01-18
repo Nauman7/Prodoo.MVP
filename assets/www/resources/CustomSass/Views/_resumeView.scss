@@ -293,8 +293,9 @@
 
 .indMain {
 	position: relative;
-	&:after {
-		content: '';
+
+	.indArrow {
+		// content: '';
 		position: absolute;
 		bottom: -15px;
 		left: 50%;
@@ -307,7 +308,7 @@
 		border: 2px solid #3e335e;
 	}
 	&.indVisible{
-		&:after{
+		.indArrow{
 			background-image: url("../images/resumeView/up.png");
 		}
 	}

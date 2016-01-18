@@ -25,16 +25,27 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         MessagesPropertySearch: function(textfield) {
             var activeLookup = 'UserFirstname';
             var store = Ext.getStore('UserStore');
-
-            store.clearFilter();
+            if(textfield.getValue().trim() ==='')
+            {
+                store.load();
+            }
+            else
+            {
+                store.load({
+                    params : {
+                        name : textfield.getValue().toLowerCase()
+                    }
+                });
+            }
+            /*store.clearFilter();
             store.filter([
             {
-                fn   : function(record) {
-                    return record.get(activeLookup).toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
-                },
-                scope: this
+            fn   : function(record) {
+            return record.get(activeLookup).toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
+            },
+            scope: this
             }
-            ]);
+            ]);*/
         },
 
         onSearchListItemTap: function(dataview,record,e) {
@@ -244,7 +255,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                     {
                         var store = Ext.getStore("MessageStore");
                         store.remove(record);
-                        Ext.Msg.alert('Info', 'Message deleted successfully!');
+                        Ext.Msg.alert('', 'Message deleted successfully!');
                     }
                     else { G.showGeneralFailure(); }
 
@@ -280,12 +291,10 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
                             G.show('ReplyBtn');
 
-
-
-
                             isInbox=true;
                             isSent=false;
 
+                             G.get('selectedMsg').data = record;
                             Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
                             Ext.query(".msgDetailMsg")[0].innerText=record.data.MessageBody;
                             Ext.query(".msgDetailUsername")[0].innerText=record.data.UserName;
@@ -434,7 +443,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         toField.items.each(function(item,index){
         if(index!=0)
             item.destroy();
-        })
+        });
 
         isCreateNew=true;
     },
@@ -560,7 +569,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         else
         {
             /*if (subject == null || subject.trim() == "")
-            { Ext.Msg.alert('Error', 'Please add subject!'); }
+            { Ext.Msg.alert('', 'Please add subject!'); }
             else*/
             if (messageBody === null || messageBody.trim() === "")
             { Ext.Msg.alert('', 'Please add message to proceed'); }

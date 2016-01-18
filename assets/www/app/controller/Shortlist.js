@@ -47,10 +47,30 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                             if (result.success) {
                                 if(result.items!==null){
                                     var ResultSavedStore  = Ext.getStore('SearchResultSaved');
-                                    var records = ResultSavedStore.getRange();
-                                    ResultSavedStore.remove(records);
-                                    ResultSavedStore.sync();
+                                    ResultSavedStore.removeAll();
+                                    //ResultSavedStore.sync();
+
+                                    result.items.forEach(function(item,index){
+                                        var model = new ProDooMobileApp.model.SearchResultSaved();
+                                        model.set(item);
+                                        ResultSavedStore.add(model);
+                                    });
+
                                     G.Push('SearchResultSavedScreen');
+                                    G.get('comeFrom').setValue('shortlist');
+
+                                    // for shortlist we dont need to show other icons
+                                    Ext.select('.SrNo').elements.forEach(function(item,index){
+                                        Ext.get(item).hide();
+                                    });
+                                    Ext.select('.saveIconDiv').elements.forEach(function(item,index){
+                                        Ext.get(item).hide();
+                                    });
+
+                                    Ext.select('.resultRight').elements.forEach(function(item,index){
+                                        item.className = 'shortlistResultRight';
+                                    });
+
                                 }
                                 else{
                                     Ext.Msg.alert('Status', 'No matched resume found!',null);

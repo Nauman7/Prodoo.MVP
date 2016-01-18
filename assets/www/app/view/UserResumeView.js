@@ -32,7 +32,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             '<tpl if="IsAvailable == false">',
             '<div class="detailTitle busyDetail">',
             '    <span class="tickIcon"></span>',
-            '    Not Available',
+            '    <span class=\'marginForIcon\'>Available Now</span>',
             '</div>',
             '<tpl else>',
             ' <div class="detailTitle">',
@@ -238,10 +238,12 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
     },
 
     onMybutton4Tap: function(button, e, eOpts) {
+        // showing loader not visible while rendering the view
+        //Ext.Viewport.setMasked(true);
+        G.Push('ResumeView');
+
         var store = Ext.getStore('SearchResultDetail');
         var resume = store.getAt(0).data;
-        G.ShowView('ResumeView');
-
         if(resume.Profiles.length > 0 ){
             var profiles = resume.Profiles;
             profiles.forEach(function(item,index){
@@ -254,7 +256,6 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             var skills = resume.Skills;
             skills.forEach(function(item,index){
                 G.createKeywordView('Skill',item.SkillValue,item.SkillId,item.ExperienceLevel);
-                // G.show('SkillCnt');
             });
         }
 
@@ -262,15 +263,6 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             var keywords = resume.Keywords;
             keywords.forEach(function(item,index){
                 G.createKeywordView('Keyword',item.KeywordValue, item.KeywordId);
-                // G.show('KeywordCnt');
-            });
-        }
-
-        if(resume.Industries && resume.Industries.length > 0 ){
-            var Industries = resume.Industries;
-            Industries.forEach(function(item,index){
-                //G.createView('Industry',item.IndustryValue,item.IndustryId,item.ExperienceLevel);
-                //  G.show('IndustryCnt');
             });
         }
 
@@ -278,7 +270,6 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             var certifications = resume.Certifications;
             certifications.forEach(function(item,index){
                 G.createKeywordView('Certification',item.CertificationValue, item.CertificationId);
-                //  G.show('CertificationCnt');
             });
         }
 
@@ -299,7 +290,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             button.addCls('busyBtn');
             var Cnt = button.up('#availabilityCnt');
             Cnt.addCls('BusyCnt');
-            Cnt.down('#availabilityLbl').setHtml('Busy');
+            Cnt.down('#availabilityLbl').setHtml('Not Available');
         }
 
 
@@ -329,6 +320,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                 languageField.setValue(2); // 2 is for Denish
             }
         }
+        //Ext.Viewport.setMasked(false);
     }
 
 });

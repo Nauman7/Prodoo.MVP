@@ -332,6 +332,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     {
                         xtype: 'textareafield',
                         cls: 'TextMsg',
+                        height: '100%',
                         itemId: 'MsgContentField',
                         clearIcon: false,
                         placeHolder: 'Compose Message'
@@ -346,9 +347,10 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                         margin: '0 40',
                         itemTpl: [
                             '<div class="listResult">',
-                            '        <span class="listTitle">{UserFirstname}{UserLastname}</span>',
+                            '        <span class="listTitle">{UserFirstname}&nbsp{UserLastname}</span>',
                             '</div>'
                         ],
+                        loadingText: false,
                         store: 'UserStore'
                     }
                 ]

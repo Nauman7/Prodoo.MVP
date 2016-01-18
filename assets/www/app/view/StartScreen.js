@@ -496,6 +496,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             {
                 xtype: 'image',
                 height: 26,
+                hidden: true,
                 itemId: 'leftArrow',
                 left: 10,
                 top: '50%',
@@ -712,16 +713,20 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
 
     onCarouselActiveItemChange: function(container, value, oldValue, eOpts) {
         var carousel=Ext.ComponentQuery.query('carousel')[0];
-
+        var iterator=5;
+        if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
+            iterator=4;
         if((carousel.activeIndex===0)){
-            //this.down('#leftArrow').hide();
+            this.down('#leftArrow').hide();
+            this.down('#rightArrow').show();
         }
-        else if(carousel.activeIndex === carousel.items.items.length-4){
-            //this.down('#rightArrow').hide();
+        else if(carousel.activeIndex === iterator){
+            this.down('#rightArrow').hide();
+            this.down('#leftArrow').show();
         }
         else{
-            //     this.down('#leftArrow').show();
-            //     this.down('#rightArrow').show();
+            this.down('#leftArrow').show();
+            this.down('#rightArrow').show();
         }
     },
 

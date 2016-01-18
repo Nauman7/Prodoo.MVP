@@ -31,7 +31,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
         itemTpl: [
             '<div class="detailTitle">',
             '    <span class="tickIcon"></span>',
-            '    Available Now',
+            '    <span class=\'marginForIcon\'>Available Now</span>',
             '</div>',
             '',
             '<div class="LocationDiv"><span class="location">{Region}</span>',

@@ -610,6 +610,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                     '        ',
                                     '        <div class="indDescription">{Description}</div>',
                                     '    </div>',
+                                    '    <span class="indArrow"></span>',
                                     '</div>'
                                 ],
                                 pressedCls: '',
@@ -631,7 +632,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         clearIcon: false,
                                         label: 'Company',
                                         labelCls: 'labelCls',
-                                        labelWidth: 90,
+                                        labelWidth: 110,
                                         name: 'CompanyWorked',
                                         listeners: [
                                             {
@@ -646,13 +647,13 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         xtype: 'selectfield',
                                         cls: [
                                             'DateCls',
-                                            'TriggerBlue'
+                                            'TriggerBlue',
+                                            'bbBlack'
                                         ],
                                         itemId: 'CreateExpProfile',
                                         label: 'Profile',
-                                        labelAlign: 'top',
                                         labelCls: 'labelCls',
-                                        labelWidth: 90,
+                                        labelWidth: 110,
                                         name: 'ProfileId',
                                         placeHolder: 'ProfileId',
                                         displayField: 'ProfileValue',
@@ -670,19 +671,18 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                     {
                                         xtype: 'container',
                                         cls: 'bbBlack',
-                                        layout: 'hbox',
                                         items: [
                                             {
                                                 xtype: 'datepickerfield',
-                                                flex: 1,
                                                 cls: [
                                                     'DateCls',
-                                                    'TriggerBlue'
+                                                    'TriggerBlue',
+                                                    'bbBlack'
                                                 ],
                                                 itemId: 'CreateExpStartDate',
                                                 label: 'From',
                                                 labelCls: 'labelCls',
-                                                labelWidth: 50,
+                                                labelWidth: 110,
                                                 name: 'StartDate',
                                                 value: {
                                                     day: new Date().getDate(),
@@ -708,7 +708,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             },
                                             {
                                                 xtype: 'datepickerfield',
-                                                flex: 1,
                                                 cls: [
                                                     'DateCls',
                                                     'TriggerBlue'
@@ -716,7 +715,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 itemId: 'CreateExpEndDate',
                                                 label: 'To',
                                                 labelCls: 'labelCls',
-                                                labelWidth: 50,
+                                                labelWidth: 110,
                                                 name: 'EndDate',
                                                 value: {
                                                     day: new Date().getDate(),
@@ -1323,7 +1322,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     onIndustryListItemTap1: function(dataview, index, target, record, e, eOpts) {
         var targetElement = Ext.get(e.target);
-        if(targetElement.hasCls('indHeading') || targetElement.parent('.indHeading')){
+        if(targetElement.hasCls('indArrow') ){
             targetElement.parent('.indMain').toggleCls('indVisible');
         }
         else if (targetElement.hasCls('indEdit')){
