@@ -394,6 +394,81 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 });
 
             }
+            else if(activeLookup === 'IndustryValue'){
+                var url = ApiBaseUrl+'AllIndustries/IndustriesLookup';
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            store = Ext.getStore('SearchIndustry');
+                            store.setData(result.items);
+                            store.sync();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
+
+            }
+            else if(activeLookup === 'ProfileValue'){
+                var url = ApiBaseUrl+'AllProfiles/ProfileLookup';
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            store = Ext.getStore('SearchProfile');
+                            store.setData(result.items);
+                            store.sync();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
+
+            }
+            else if(activeLookup === 'SkillValue'){
+                var url = ApiBaseUrl+'AllSkills/SkillsLookup';
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            store = Ext.getStore('SearchSkill');
+                            store.setData(result.items);
+                            store.sync();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
+
+            }
             else{
 
                 store.clearFilter();
@@ -407,99 +482,6 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 }
                 ]);
             }
-        },
-
-        createView: function(view,labelVal,labelId, experienceLevel) {
-            if(experienceLevel === null)
-            experienceLevel =0;
-            var Cnt=Ext.create('Ext.Container', {
-                padding: '5 0',
-                layout: {
-                    type: 'hbox',
-                    align: 'center'
-                },
-                items: [
-                {
-                    xtype: 'label',
-                    cls: 'labelCls',
-                    html: labelVal,
-                    width: 120
-                },
-                {
-                    xtype: 'sliderfield',
-                    flex: 1,
-                    cls: 'sliderCls',
-                    //             itemId: 'sliderfieldItemID',
-                    value: [
-                    experienceLevel
-                    ],
-                    maxValue: 10,
-                    listeners: [
-                    {
-                        fn: function(component, eOpts) {
-                            var thumb = component.element.dom.querySelector('.x-thumb');
-                            var val = component.getValue()[0];
-                            thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">'+val+'</span>' );
-                        },
-                        event: 'initialize'
-                    },
-                    {
-                        fn: function(sliderfield, sl, thumb, e, eOpts) {
-                            var slider=sliderfield.element.dom.querySelector('.xValue');
-                            slider.innerText = sliderfield.getValue()[0];
-                        },
-                        event: 'drag'
-                    },
-                    {
-                        fn: function(sliderfield, sl, thumb, e, eOpts) {
-                            var slider=sliderfield.element.dom.querySelector('.xValue');
-                            slider.innerText = sliderfield.getValue()[0];
-                        },
-                        event: 'change'
-                    }
-                    ]
-                },
-                {
-                    xtype: 'button',
-                    cls: [
-                    'closeIcon',
-                    'noBorder'
-                    ],
-                    text: ' ',
-                    listeners: [
-                    {
-                        fn: function(button, e, eOpts) {
-                            var cnt = button.up('container');
-                            if(cnt.up('container').innerItems.length <= 3){
-                                cnt.up('container').hide();
-                            }
-                            button.up('container').destroy();
-                        },
-                        event: 'tap'
-                    }
-                    ]
-                },
-
-                {
-                    xtype: 'hiddenfield',
-
-                    value: labelId
-                }
-                ]
-            });
-            var Container;
-            if(view=='Profile'){
-                Container=G.get('ProfileCnt');
-            }
-            else if(view=='Skill'){
-                Container=G.get('SkillCnt');
-            }
-            else if(view=='Industry'){
-                Container=G.get('IndustryCnt');
-            }
-            Container.add(Cnt);
-
-            return Cnt;
         },
 
         onAddSearchBtnTap: function() {
@@ -693,6 +675,99 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             }
 
             button.toggleCls('activeBtn');
+        },
+
+        createView: function(view,labelVal,labelId, experienceLevel) {
+            if(experienceLevel === null)
+            experienceLevel =0;
+            var Cnt=Ext.create('Ext.Container', {
+                padding: '5 0',
+                layout: {
+                    type: 'hbox',
+                    align: 'center'
+                },
+                items: [
+                {
+                    xtype: 'label',
+                    cls: 'labelCls',
+                    html: labelVal,
+                    width: 120
+                },
+                {
+                    xtype: 'sliderfield',
+                    flex: 1,
+                    cls: 'sliderCls',
+                    //             itemId: 'sliderfieldItemID',
+                    value: [
+                    experienceLevel
+                    ],
+                    maxValue: 10,
+                    listeners: [
+                    {
+                        fn: function(component, eOpts) {
+                            var thumb = component.element.dom.querySelector('.x-thumb');
+                            var val = component.getValue()[0];
+                            thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">'+val+'</span>' );
+                        },
+                        event: 'initialize'
+                    },
+                    {
+                        fn: function(sliderfield, sl, thumb, e, eOpts) {
+                            var slider=sliderfield.element.dom.querySelector('.xValue');
+                            slider.innerText = sliderfield.getValue()[0];
+                        },
+                        event: 'drag'
+                    },
+                    {
+                        fn: function(sliderfield, sl, thumb, e, eOpts) {
+                            var slider=sliderfield.element.dom.querySelector('.xValue');
+                            slider.innerText = sliderfield.getValue()[0];
+                        },
+                        event: 'change'
+                    }
+                    ]
+                },
+                {
+                    xtype: 'button',
+                    cls: [
+                    'closeIcon',
+                    'noBorder'
+                    ],
+                    text: ' ',
+                    listeners: [
+                    {
+                        fn: function(button, e, eOpts) {
+                            var cnt = button.up('container');
+                            if(cnt.up('container').innerItems.length <= 3){
+                                cnt.up('container').hide();
+                            }
+                            button.up('container').destroy();
+                        },
+                        event: 'tap'
+                    }
+                    ]
+                },
+
+                {
+                    xtype: 'hiddenfield',
+
+                    value: labelId
+                }
+                ]
+            });
+            var Container;
+            if(view=='Profile'){
+                Container=G.get('ProfileCnt');
+            }
+            else if(view=='Skill'){
+                Container=G.get('SkillCnt');
+            }
+            else if(view=='Industry'){
+                Container=G.get('IndustryCnt');
+            }
+            Container.add(Cnt);
+
+            return Cnt;
         },
 
         onConfirmBtnTap: function(context,button) {

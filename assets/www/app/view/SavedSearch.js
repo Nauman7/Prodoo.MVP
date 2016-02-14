@@ -136,7 +136,7 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
         store.filter([
             {
                 fn   : function(record) {
-                    return record.get('SearchName').toLowerCase().indexOf(textfield.getValue().toLowerCase()) > -1;
+                    return record.get('SearchName').toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
                 },
                 scope: this
             }
@@ -144,7 +144,7 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
     },
 
     onMybutton6Tap1: function(button, e, eOpts) {
-        G.ShowView('SearchResult');
+        G.Pop();
     },
 
     onMybutton6Tap11: function(button, e, eOpts) {

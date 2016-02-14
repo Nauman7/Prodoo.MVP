@@ -50,6 +50,9 @@ Ext.define('ProDooMobileApp.store.ShortlistResumeStore', {
             },
             {
                 name: 'ShortlistName'
+            },
+            {
+                name: 'Count'
             }
         ]
     },

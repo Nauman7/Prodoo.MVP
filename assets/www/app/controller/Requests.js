@@ -420,7 +420,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             });
         },
 
-        ShowRequestView: function(pushView, loadLookup) {
+        ShowRequestView: function(pushView, loadLookup, showHomeButton) {
             var isFreelancer=Ext.getStore('AuthStore').getAt(0).data.IsFreelancer;
             Ext.Ajax.request({
                 url: ApiBaseUrl+'requests/GetRequests?isFreelancer='+isFreelancer+'&userId='+Ext.getStore('AuthStore').getAt(0).data.UserId,
@@ -432,8 +432,15 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success)
                     {
-                        if(pushView)
+                        if(pushView & showHomeButton) // navigation from home screen
                         G.ShowView('RequestScreen');
+                        else if(pushView & !showHomeButton)// navigation from search menu
+                        G.Push('RequestScreen');
+                        if(showHomeButton)
+                        {
+                            G.hide('requrestBackButton');
+                            G.show('requestHomeButton');
+                        }
 
                         if(isFreelancer)
                         {
@@ -441,8 +448,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
                                 data: result.items.Inbox
                             });
-                            G.get('requestInboxList').setStore(inboxStore);
                             G.show('requestInboxList');
+
+                            G.get('requestInboxList').setStore(inboxStore);
                             G.show('invitationLabel');
                             var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
 

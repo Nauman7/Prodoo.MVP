@@ -96,43 +96,39 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             '    </div>',
             '</div>',
             '',
+            '   ',
             '<div class="ViewCnt">',
+            '     ',
             '    <div class="tabHead">',
             '        <span class="caseIcon"> </span>',
             '        <span class="ArrowUp"> </span>',
             '    </div>',
             '    <div class="Innerlist">',
-            '    <tpl for="Industries">',
+            '    <tpl for="ResumeExperience">',
             '        <div class="tabHead InnerHead">',
-            '            <span class="BoardGame">{IndustryValue}</span>',
+            '           <span class="BoardGame">{CompanyWorked}</span>',
             '            <span class="ArrowUp"> </span>',
             '        </div>',
-            '    </tpl>',
-            '        <!-- <div class="innerListLevel2">',
+            '',
+            '',
+            '    <div class="innerListLevel2">',
+            '<!--             <div class="listCnt">',
+            '                <span class="language"></span>',
+            '                ',
+            '            </div> -->',
             '            <div class="listCnt">',
-            '                <span class="language">Project Manager</span>',
-            '                <span class="level"><span class="levelNo YearNo orange">3</span> Years</span>',
+            '                <span class="language">{ProfileValue} ({IndustryValue})</span>',
+            '                <span class="yearExp">{StartDateYear} - {EndDateYear}</span>',
+            '              ',
             '            </div>',
-            '            <div class="listCnt">',
-            '                <span class="resultSkills">Java, PHP, HTML, CSS, XML</span>',
-            '                <span class="yearExp">2008</span>',
-            '            </div>',
+            '            ',
             '',
             '            <div class="listCnt para">',
-            '                Lorem Ipsum is simply dummy text of the',
-            '                printing and typesetting industry. Lorem Ipsum ',
-            '                has been the industry\'s standard dummy text ever',
-            '                since the 1500s, when an unknown printer took a galley ',
-            '                of type and scrambled it to make a type specimen book. ',
-            '                It has survived not only five centuries, but also the leap ',
-            '                into electronic typesetting, remaining essentially unchanged. ',
-            '                It was popularised in the 1960s with the release of Letraset sheets ',
-            '                containing Lorem Ipsum passages, and more recently with desktop publishing',
-            '                software like Aldus PageMaker including versions of Lorem Ipsum.',
+            '                {Description}',
             '            </div>',
-            '',
-            '            ',
-            '        </div> -->',
+            '        </div>',
+            '        </tpl>',
+            '        ',
             '    </div>',
             '</div>',
             ''
@@ -174,6 +170,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
                     'searchIcon3'
                 ],
                 docked: 'bottom',
+                hidden: true,
                 itemId: 'shortlistResume',
                 right: 10,
                 text: ' '
@@ -187,31 +184,15 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             Ext.get(selectedItem).toggleCls('ArrowDown');
             var detail = selectedItem.parentElement.nextElementSibling;
 
-            if(!Ext.isEmpty(detail) && !Ext.isEmpty(detail.children))
-            {
-                var innerEl = detail.children,
-                    elementHeight=0;
-                for(var i=0; i< detail.childElementCount; i++){
-                    elementHeight += innerEl[i].clientHeight;
-                }
-            }
-            console.log(Ext.get(detail));
-            var d = Ext.get(detail);
-            if(!Ext.isEmpty(d) && d.hasCls('innerListLevel2')){
-                detail.parentElement.style.maxHeight =parseInt( detail.style.maxHeight.split('px')[0]) + elementHeight+'px';
-            }
 
-            var sel = Ext.get(selectedItem);
-            if (!Ext.isEmpty(sel) && !sel.hasCls('ArrowDown')) {
-                detail.style.maxHeight = elementHeight+'px';
+            if ( !Ext.get(selectedItem).hasCls('ArrowDown')) {
+                detail.removeAttribute('style');
             }
             else{
-                if(!Ext.isEmpty(detail) && detail.style.maxHeight===""){
-                    detail.style.maxHeight = elementHeight+'px';
+                if(detail.style.maxHeight==""){
+                    detail.removeAttribute('style');
                 }
-
-                if(!Ext.isEmpty(detail))
-                    detail.style.maxHeight = '0px';
+                detail.style.maxHeight = '0px';
             }
         }
 
@@ -225,9 +206,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
     },
 
     onMybutton4Tap: function(button, e, eOpts) {
-        Shortlist.showShortListView();
-        var hf= G.get('hfResumeId');
-        hf.setValue(this.getStore().getAt(0).get('ResumeId'));
+
     }
 
 });

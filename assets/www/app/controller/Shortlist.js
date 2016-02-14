@@ -23,20 +23,23 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
     statics: {
         onShortlistResumeItemClick: function(className, data) {
 
-            if(className === 'x-button-label'){
+            if(className === 'x-button-label'){ // Delete Shortlist and associated resumes
                 Shortlist.DeleteRecord(data);
-
             }
 
             else
             {
-                var resumeId=G.get('hfResumeId').getValue();
-                if(resumeId!="-1"){
+                // Save associated resume which are shortlisted in searched resume screen
+                if(G.get('AddBtn').getHidden() && ResumeIdList && ResumeIdList.length>0){
                     var shortlistId=data.ShortlistId;
-                    Shortlist.onCreateShortListedResume(resumeId, shortlistId);
+                    ResumeIdList.forEach(function(resumeId) {
+                        Shortlist.onCreateShortListedResume(resumeId,shortlistId);
+                    });
+
                     G.Pop();
                 }
-                else{
+                else{//Load resume which are associated with shortlist
+                    var shortlistName=data.ShortlistName;
                     Ext.Ajax.request({
                         url: ApiBaseUrl+'Shortlistresumes/get?shortlistid='+data.ShortlistId,
                         method: 'Get',
@@ -60,16 +63,18 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                                     G.get('comeFrom').setValue('shortlist');
 
                                     // for shortlist we dont need to show other icons
-                                    Ext.select('.SrNo').elements.forEach(function(item,index){
-                                        Ext.get(item).hide();
-                                    });
-                                    Ext.select('.saveIconDiv').elements.forEach(function(item,index){
-                                        Ext.get(item).hide();
-                                    });
+                                    Ext.select('.SrNo').hide();
+
+                                    Ext.select('.saveIconDiv').hide();
+
+                                    Ext.select('.rightBottomSearchResultButtons').hide();
+
+
 
                                     Ext.select('.resultRight').elements.forEach(function(item,index){
                                         item.className = 'shortlistResultRight';
                                     });
+                                    G.get('titleHeader').setData( { Total:shortlistName}).show();
 
                                 }
                                 else{
@@ -112,7 +117,7 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
             });
         },
 
-        onCreateShortlist: function(shortlistTitle, ResumeIdList, shortlistId) {
+        onCreateShortlist: function(shortlistTitle, ResumeIdList, shortlistId, hideCreateIcon) {
             var authStore = Ext.getStore('AuthStore');
             var authRec = authStore.getAt(0);
 
@@ -138,7 +143,7 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
 
                         }
                         else
-                        Shortlist.showShortListView();
+                        Shortlist.showShortListView(hideCreateIcon);
                     }
                     else
                     G.showGeneralFailure();
@@ -151,17 +156,29 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
             });
         },
 
-        showShortListView: function() {
+        showShortListView: function(hideCreateIcon) {
             var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
             var shortlistStore = Ext.getStore('ShortlistResumeStore');
             shortlistStore.load({
                 params : { userId : loggedUserId
-                }
+                },
+                scope: this,
+                callback: function(records,operation,success){
+                    if(success){
+                        var total = 0;
+                        records.forEach(function(item,index){total +=item.data.Count;});
+                        G.get('shortlistTotal').setData( { Total:total});
+                    }//end if
+                }//end callback
             });
-            var hf= G.get('hfResumeId'); //restore resumeID into hidden field
-            var tempId=hf? hf.getValue():-1;
+
+
+            //var hf= G.get('hfResumeId'); //restore resumeID into hidden field
+            //var tempId=hf? hf.getValue():-1;
             G.Push('Shortlist');
-            G.get('hfResumeId').setValue(tempId);;
+            //G.get('hfResumeId').setValue(-1);
+            if(hideCreateIcon)
+            G.hide('AddBtn');
         },
 
         DeleteRecord: function(data) {
@@ -184,6 +201,24 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                     G.showGeneralFailure();
                 }
             });
+        },
+
+        DirectShortListIconClick: function() {
+            if(ResumeIdList && ResumeIdList.length>0){
+                Ext.Msg.confirm('', 'You have picked '+ResumeIdList.length+' resumes to add to a shortlist. Would you like to create a new shortlist, or add them to an existing shortlist?', function(btn){
+                    if(btn === 'yes'){
+                        Ext.Msg.prompt('Add shortlist title', '',function(button,text){
+                            if(button==='ok')
+                            Shortlist.onCreateShortlist(text,ResumeIdList, -1);
+                        });
+
+                    }
+                    else
+                    Shortlist.showShortListView(true);
+                });
+            }
+            else
+            Shortlist.showShortListView();
         }
     },
 

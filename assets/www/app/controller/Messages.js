@@ -25,27 +25,23 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         MessagesPropertySearch: function(textfield) {
             var activeLookup = 'UserFirstname';
             var store = Ext.getStore('UserStore');
+            var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
             if(textfield.getValue().trim() ==='')
             {
-                store.load();
+
+                store.load({
+                    params : { userId : loggedUserId }
+                });
             }
             else
             {
                 store.load({
-                    params : {
+                    params : {userId : loggedUserId,
                         name : textfield.getValue().toLowerCase()
                     }
                 });
             }
-            /*store.clearFilter();
-            store.filter([
-            {
-            fn   : function(record) {
-            return record.get(activeLookup).toLowerCase().indexOf(textfield.getValue().toLowerCase())>-1;
-            },
-            scope: this
-            }
-            ]);*/
+
         },
 
         onSearchListItemTap: function(dataview,record,e) {
@@ -428,9 +424,11 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.show('MsgCreateNew');
         G.show('backBtn');
         G.show('SendBtn');
-
+        var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
         var str=Ext.getStore("UserStore");
-        str.load();
+        str.load({
+            params : { userId : loggedUserId }
+            });
 
 
         UsersList = new Array();

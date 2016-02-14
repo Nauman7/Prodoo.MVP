@@ -476,7 +476,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 flex: 1,
                                 cls: 'sliderCls',
                                 itemId: 'feeRangeItemID',
-                                label: 'fee range',
+                                label: 'Fee Range',
                                 labelWidth: 90,
                                 name: 'HourlyFee',
                                 maxValue: 999,

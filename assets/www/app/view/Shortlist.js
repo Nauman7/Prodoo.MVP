@@ -20,9 +20,9 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
     requires: [
         'Ext.Button',
         'Ext.field.Search',
-        'Ext.field.Hidden',
-        'Ext.dataview.List',
-        'Ext.XTemplate'
+        'Ext.Label',
+        'Ext.XTemplate',
+        'Ext.dataview.List'
     ],
 
     config: {
@@ -50,8 +50,13 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 ]
             },
             {
-                xtype: 'hiddenfield',
-                id: 'hfResumeId'
+                xtype: 'label',
+                hidden: true,
+                itemId: 'shortlistTotal',
+                style: 'color: white;',
+                tpl: [
+                    'Total : {Total}'
+                ]
             },
             {
                 xtype: 'list',
@@ -61,7 +66,7 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 itemTpl: [
                     '<div class="requestCnt">',
                     '    <span class="reqNo">{ShortlistId}</span>',
-                    '    <span class="reqName">{ShortlistName}</span>',
+                    '    <span class="reqName">{ShortlistName}&nbsp ({Count})</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',
                     '    </span>',
@@ -143,10 +148,6 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
     },
 
     onShortListBtnTap: function(button, e, eOpts) {
-        // G.ShowView('SearchResultSavedScreen');
-        // var view =  G.get('SearchResultSavedScreenId');
-        // Ext.Viewport.setActiveItem(view);
-
         G.Pop('Shortlist');
     },
 

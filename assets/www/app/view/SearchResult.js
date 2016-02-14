@@ -841,7 +841,6 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
     },
 
     onMysearchfieldFocus: function(textfield, e, eOpts) {
-        console.log("focus called");
         //if(!textfield.getReadOnly()){
             G.show('SearchList');
             SearchResume.helpHide();

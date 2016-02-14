@@ -74,6 +74,12 @@
 	color: white;
 	position: relative;
 	border-bottom: 2px solid black;
+	.closeIcon{
+		position: absolute;
+		top: 50%;
+		right: 8px;
+		margin-top: -15px;
+	}
 }
 .resultRight{
 	padding: 10px 0px 10px 70px;

@@ -615,7 +615,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     onMyimgTap21: function(image, e, eOpts) {
         ActiveScreen=2;
         // G.ShowView('RequestScreen');
-        Requests.ShowRequestView(true,true);
+        Requests.ShowRequestView(true,true,true);
     },
 
     onMyimgTap: function(image, e, eOpts) {
@@ -714,7 +714,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     onCarouselActiveItemChange: function(container, value, oldValue, eOpts) {
         var carousel=Ext.ComponentQuery.query('carousel')[0];
         var iterator=5;
-        if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
+        if(Ext.getStore('AuthStore').getAt(0) && Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
             iterator=4;
         if((carousel.activeIndex===0)){
             this.down('#leftArrow').hide();

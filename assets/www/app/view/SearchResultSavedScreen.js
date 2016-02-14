@@ -18,11 +18,11 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
     alias: 'widget.SearchResultSavedScreen',
 
     requires: [
+        'Ext.Label',
         'Ext.XTemplate',
         'Ext.plugin.ListPaging',
         'Ext.Container',
         'Ext.Button',
-        'Ext.Label',
         'Ext.field.Hidden'
     ],
 
@@ -48,6 +48,10 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '        <div class="resultLocation">{Region}</div>',
             '        <div class="resultSkill">{[this.prepareHeading(values.Skills,"skills")]}</div>',
             '    </div>',
+            '     ',
+            '     <span class="closeIcon">',
+            '        <span class="x-button-label"> </span>',
+            '    </span>',
             '',
             '</div>',
             '<div class="listItems slide-up">',
@@ -153,55 +157,17 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 }
             }
         ),
-        plugins: [
-            {
-                pluginId: 'pagging',
-                autoPaging: true,
-                type: 'listpaging'
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onListItemTap',
-                event: 'itemtap'
-            },
-            {
-                fn: 'onHelpBtnTap',
-                event: 'tap',
-                delegate: '#helpBtn'
-            },
-            {
-                fn: 'onRequestBtnTap',
-                event: 'tap',
-                delegate: '#requestBtn'
-            },
-            {
-                fn: 'onShortlistBtnTap',
-                event: 'tap',
-                delegate: '#shortlistBtn'
-            },
-            {
-                fn: 'onSavedSearchBtnTap',
-                event: 'tap',
-                delegate: '#savedSearchBtn'
-            },
-            {
-                fn: 'onglobeBtnTap',
-                event: 'tap',
-                delegate: '#globeBtn'
-            },
-            {
-                fn: 'onsearchResumeBackBtnTap',
-                event: 'tap',
-                delegate: '#searchResumeBackBtn'
-            },
-            {
-                fn: 'onHelpCloseTap',
-                event: 'tap',
-                delegate: '#HelpClose'
-            }
-        ],
         items: [
+            {
+                xtype: 'label',
+                docked: 'top',
+                hidden: true,
+                itemId: 'titleHeader',
+                style: 'color:white;',
+                tpl: [
+                    '<div>Title : {Total}</div>'
+                ]
+            },
             {
                 xtype: 'container',
                 bottom: 10,
@@ -216,7 +182,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 xtype: 'button',
                 cls: [
                     'btnCircle',
-                    'helpIcon'
+                    'helpIcon',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -227,7 +194,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 xtype: 'button',
                 cls: [
                     'btnCircle',
-                    'searchIcon4'
+                    'searchIcon4',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -238,7 +206,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 xtype: 'button',
                 cls: [
                     'btnCircle',
-                    'searchIcon3'
+                    'searchIcon3',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -249,7 +218,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 xtype: 'button',
                 cls: [
                     'btnCircle',
-                    'searchIcon2'
+                    'searchIcon2',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -261,7 +231,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 bottom: 10,
                 cls: [
                     'btnCircle',
-                    'searchIcon1'
+                    'searchIcon1',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 itemId: 'globeBtn',
@@ -272,7 +243,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 xtype: 'button',
                 cls: [
                     'bigBtnCircle',
-                    'searchIconBig'
+                    'searchIconBig',
+                    'rightBottomSearchResultButtons'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -343,12 +315,76 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 itemId: 'comeFrom',
                 name: 'comeFrom'
             }
+        ],
+        plugins: [
+            {
+                pluginId: 'pagging',
+                autoPaging: true,
+                type: 'listpaging'
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onListItemTap',
+                event: 'itemtap'
+            },
+            {
+                fn: 'onHelpBtnTap',
+                event: 'tap',
+                delegate: '#helpBtn'
+            },
+            {
+                fn: 'onRequestBtnTap',
+                event: 'tap',
+                delegate: '#requestBtn'
+            },
+            {
+                fn: 'onShortlistBtnTap',
+                event: 'tap',
+                delegate: '#shortlistBtn'
+            },
+            {
+                fn: 'onSavedSearchBtnTap',
+                event: 'tap',
+                delegate: '#savedSearchBtn'
+            },
+            {
+                fn: 'onglobeBtnTap',
+                event: 'tap',
+                delegate: '#globeBtn'
+            },
+            {
+                fn: 'onsearchResumeBackBtnTap',
+                event: 'tap',
+                delegate: '#searchResumeBackBtn'
+            },
+            {
+                fn: 'onHelpCloseTap',
+                event: 'tap',
+                delegate: '#HelpClose'
+            }
         ]
     },
 
     onListItemTap: function(dataview, index, target, record, e, eOpts) {
         var selectedItem = e.target;
-        if(selectedItem.className.indexOf('downArrow')>=0){
+        if(selectedItem.className.indexOf('x-button-label')>=0){
+            var store = dataview.getStore();
+            store.remove(record);
+
+            Ext.select('.SrNo').elements.forEach(function(item,index){
+                Ext.get(item).hide();
+            });
+            Ext.select('.saveIconDiv').elements.forEach(function(item,index){
+                Ext.get(item).hide();
+            });
+
+            Ext.select('.resultRight').elements.forEach(function(item,index){
+                item.className = 'shortlistResultRight';
+            });
+
+        }
+        else if(selectedItem.className.indexOf('downArrow')>=0){
             Ext.get(selectedItem).toggleCls('upArrow');
             var detail = Ext.get(Ext.get(selectedItem).parent('.SavedListCnt').dom.nextElementSibling);
             if(detail === null) return; // checking if not null
@@ -398,16 +434,14 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             store.sync();
             G.Push('SearchResumeDetail');
             if(G.get('comeFrom').getValue()==='shortlist'){
-            G.get('shortlistResume').hide();
+              G.get('shortlistResume').hide();
             }
             if(IsVistor)
                 G.hide('shortlistResume');
 
         }
         else if(!IsVistor && selectedItem.className.indexOf('SaveIcon')> -1){
-            Shortlist.showShortListView();
-            var hf= G.get('hfResumeId');
-            hf.setValue(record.get('ResumeId'));
+           Shortlist.DirectShortListIconClick();
         }
     },
 
@@ -441,6 +475,9 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
     onRequestBtnTap: function(button, e, eOpts) {
         if(ResumeIdList && ResumeIdList.length>0){
 
+            Ext.Msg.confirm('', 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.', function(btn){
+                if(btn === 'yes'){
+
             G.Push('CreateRequestScreen');
 
             G.get('DraftRequestBtn').hide(); // dont need draft icon
@@ -461,19 +498,19 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                          }
             });
 
-            /*  var searchStore = Ext.getStore('SavedSearchStore');
-            searchStore.clearData();
-            searchStore.load({
-                params : { userId :loggedUserId}
+                }
+                else{
+                    Requests.ShowRequestView(true,true);
+                }
             });
-        */
         }
         else
             Requests.ShowRequestView(true,true);
     },
 
     onShortlistBtnTap: function(button, e, eOpts) {
-        Shortlist.showShortListView();
+
+        Shortlist.DirectShortListIconClick();
     },
 
     onSavedSearchBtnTap: function(button, e, eOpts) {

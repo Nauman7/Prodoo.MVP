@@ -206,7 +206,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 hidden: false,
                 itemId: 'MsgList',
                 margin: '0 0 70 0',
-                emptyText: 'No record found',
+                emptyText: 'No messages found',
                 itemTpl: Ext.create('Ext.XTemplate', 
                     '<div class="requestCnt">',
                     '    <div class="msgDate">',

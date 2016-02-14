@@ -358,236 +358,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                             },
                             {
                                 xtype: 'list',
-                                scrollable: true,
-                                cls: 'IndustryList',
-                                hidden: true,
-                                itemId: 'IndustryListhidden',
-                                margin: 0,
-                                width: '100%',
-                                hideOnMaskTap: false,
-                                itemTpl: [
-                                    '<div class="CertTitleWrap">',
-                                    '    <span class="certTtile">Paluapps dan SHMILY Company</span>',
-                                    '    <span class="ArrowUp"> </span>',
-                                    '</div>',
-                                    '',
-                                    '<div class="ViewCnt">',
-                                    '    <div class="tabHeading">',
-                                    '        <span class="wProfileIcon"> </span>',
-                                    '        <span class="PlusMiniBtn right"> </span>',
-                                    '    </div>',
-                                    '    <div class="Innerlist">',
-                                    '        <tpl for="Profile">',
-                                    '            <div class="sliderCnt"> </div>',
-                                    '             ',
-                                    '        </tpl>',
-                                    '    </div>',
-                                    '</div>',
-                                    '<div class="ViewCnt">',
-                                    '    <div class="tabHeading">',
-                                    '        <span class="wSkillIcon"> </span>',
-                                    '        <span class="PlusMiniBtn right"> </span>',
-                                    '    </div>',
-                                    '    <div class="Innerlist">',
-                                    '        <tpl for="Skill">',
-                                    '            <div class="sliderCnt"> </div>',
-                                    '        </tpl>',
-                                    '    </div>',
-                                    '</div>',
-                                    '',
-                                    '<div class="ViewCnt">',
-                                    '    <div class="tabHeading">',
-                                    '        <span class="wKeywordIcon"> </span>',
-                                    '        <span class="PlusMiniBtn right"> </span>',
-                                    '    </div>',
-                                    '    <div class="Innerlist">',
-                                    '        <tpl for="Skill">',
-                                    '            <div class="KeywordDiv"> </div>',
-                                    '        </tpl>',
-                                    '',
-                                    '    </div>',
-                                    '</div>',
-                                    '',
-                                    '<div class="ViewCnt">',
-                                    '    <div class="tabHeading">',
-                                    '        <span class="wGraphIcon"> </span>',
-                                    '        <span class="PlusMiniBtn right"> </span>',
-                                    '    </div>',
-                                    '    <div class="Innerlist">',
-                                    '            <div class="userDesc">',
-                                    '           </div>',
-                                    '    </div>',
-                                    '</div>',
-                                    ''
-                                ],
-                                pressedCls: '',
-                                selectedCls: '',
-                                store: 'resumeCertification',
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-
-                                            Ext.select('.sliderCnt', this.el).each(function(el){
-                                                var Cnt=Ext.create('Ext.Container', {
-                                                    padding: '5 0',
-                                                    layout: {
-                                                        type: 'hbox',
-                                                        align: 'center'
-                                                    },
-                                                    items: [
-                                                    {
-                                                        xtype: 'sliderfield',
-                                                        flex: 1,
-                                                        cls: 'sliderCls',
-                                                        label: 'Programmer',
-                                                        labelWidth: 110,
-                                                        value: [
-                                                        0
-                                                        ],
-                                                        maxValue: 10,
-                                                        listeners: [
-                                                        {
-                                                            fn: function(component, eOpts) {
-                                                                component.setLabelAlign('left');
-                                                                var thumb = component.element.dom.querySelector('.x-thumb');
-                                                                thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                            },
-                                                            event: 'initialize'
-                                                        },
-                                                        {
-                                                            fn: function(sliderfield, sl, thumb, e, eOpts) {
-
-                                                                var slider=sliderfield.element.dom.querySelector('.xValue');
-                                                                slider.innerText = sliderfield.getValue()[0];
-                                                            },
-                                                            event: 'drag'
-                                                        },
-                                                        {
-                                                            fn: function(sliderfield, sl, thumb, e, eOpts) {
-                                                                var slider=sliderfield.element.dom.querySelector('.xValue');
-                                                                slider.innerText = sliderfield.getValue()[0];
-
-                                                            },
-                                                            event: 'change'
-                                                        }
-                                                        ]
-                                                    },
-                                                    {
-                                                        xtype: 'button',
-                                                        cls: [
-                                                        'closeIcon',
-                                                        'noBorder'
-                                                        ],
-                                                        text: ' ',
-                                                        listeners: [
-                                                        {
-                                                            fn: function(button, e, eOpts) {
-
-                                                            },
-                                                            event: 'tap'
-                                                        }
-                                                        ]
-                                                    }
-                                                    ],
-                                                    renderTo: el
-                                                });
-                                            });
-
-
-                                            Ext.select('.KeywordDiv', this.el).each(function(el){
-
-                                                var Cnt=Ext.create('Ext.Container', {
-                                                    padding: '5 0',
-                                                    layout: {
-                                                        type: 'hbox',
-                                                        align: 'center'
-                                                    },
-                                                    items: [
-                                                    {
-                                                        xtype: 'label',
-                                                        flex: 1,
-                                                        cls: 'labelCls',
-                                                        html: 'HTML',
-                                                    },
-                                                    {
-                                                        xtype: 'button',
-                                                        cls: [
-                                                        'closeIcon',
-                                                        'noBorder'
-                                                        ],
-                                                        text: ' ',
-                                                        listeners: [
-                                                        {
-                                                            fn: function(button, e, eOpts) {
-
-
-                                                            },
-                                                            event: 'tap'
-                                                        }
-                                                        ]
-                                                    }
-                                                    ],
-                                                    renderTo: el
-                                                });
-                                            });
-
-
-                                            Ext.select('.userDesc', this.el).each(function(el){
-
-                                                var Cnt=Ext.create('Ext.Container', {
-                                                    items: [{
-                                                        xtype: 'container',
-                                                        layout: {
-                                                            type: 'hbox',
-                                                            align: 'center'
-                                                        },
-                                                        items: [
-
-                                                        {
-                                                            xtype: 'selectfield',
-                                                            cls: [
-                                                            'DateCls',
-                                                            'TriggerBlue'
-                                                            ],
-                                                            flex: 1,
-                                                            value: '2003',
-                                                            autoSelect: false,
-                                                            displayField: 'date',
-                                                            store: 'CreateRequestDay'
-                                                        },
-                                                        {
-                                                            xtype: 'label',
-                                                            flex: 1,
-                                                            cls: 'labelCls center',
-                                                            html: 'to',
-                                                        },
-                                                        {
-                                                            xtype: 'selectfield',
-                                                            cls: [
-                                                            'DateCls',
-                                                            'TriggerBlue'
-                                                            ],
-                                                            flex: 1,
-                                                            value: '2006',
-                                                            autoSelect: false,
-                                                            displayField: 'date',
-                                                            store: 'CreateRequestDay'
-                                                        }]
-                                                    },
-                                                    {
-                                                        xtype: 'textareafield',
-                                                        cls: 'textarea'
-                                                    }],
-                                                    renderTo: el
-                                                });
-                                            });
-                                        },
-                                        event: 'painted'
-                                    }
-                                ]
-                            },
-                            {
-                                xtype: 'list',
                                 cls: 'IndustryList',
                                 itemId: 'IndustryList',
                                 margin: '20 0 0 0',
@@ -650,12 +420,40 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'TriggerBlue',
                                             'bbBlack'
                                         ],
+                                        itemId: 'CreateExpIndustry',
+                                        label: 'Industry',
+                                        labelCls: 'labelCls',
+                                        labelWidth: 110,
+                                        name: 'IndustryId',
+                                        defaultTabletPickerConfig: 'zIndex:999',
+                                        displayField: 'IndustryValue',
+                                        store: 'SearchIndustry',
+                                        valueField: 'IndustryId',
+                                        listeners: [
+                                            {
+                                                fn: function(component, eOpts) {
+                                                    component.setLabelAlign('left');
+                                                },
+                                                event: 'initialize'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'selectfield',
+                                        cls: [
+                                            'DateCls',
+                                            'TriggerBlue',
+                                            'bbBlack'
+                                        ],
                                         itemId: 'CreateExpProfile',
                                         label: 'Profile',
                                         labelCls: 'labelCls',
                                         labelWidth: 110,
                                         name: 'ProfileId',
                                         placeHolder: 'ProfileId',
+                                        defaultTabletPickerConfig: {
+                                            zIndex: 999
+                                        },
                                         displayField: 'ProfileValue',
                                         store: 'SearchProfile',
                                         valueField: 'ProfileId',
@@ -1005,6 +803,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 name: 'RegionId',
                                                 placeHolder: 'Choose location',
                                                 autoSelect: false,
+                                                defaultTabletPickerConfig: {
+                                                    zIndex: 999
+                                                },
                                                 displayField: 'CountryName',
                                                 store: 'CreateRequestLocation',
                                                 valueField: 'CountryName',
@@ -1176,11 +977,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#mybutton16'
             },
             {
-                fn: 'onIndustryListItemTap',
-                event: 'itemtap',
-                delegate: '#IndustryListhidden'
-            },
-            {
                 fn: 'onIndustryListItemTap1',
                 event: 'itemtap',
                 delegate: '#IndustryList'
@@ -1314,10 +1110,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     onCloseButtonTap121: function(button, e, eOpts) {
         button.up('container').hide();
-    },
-
-    onIndustryListItemTap: function(dataview, index, target, record, e, eOpts) {
-
     },
 
     onIndustryListItemTap1: function(dataview, index, target, record, e, eOpts) {

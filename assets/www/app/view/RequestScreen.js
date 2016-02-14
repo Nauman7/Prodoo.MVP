@@ -230,11 +230,24 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
             {
                 xtype: 'button',
                 cls: [
+                    'btnCircle',
+                    'backIcon',
+                    'l10',
+                    'b10'
+                ],
+                docked: 'bottom',
+                itemId: 'requrestBackButton',
+                text: ' '
+            },
+            {
+                xtype: 'button',
+                cls: [
                     'homeIcon',
                     'btnCircle'
                 ],
                 docked: 'bottom',
-                itemId: 'mybutton6',
+                hidden: true,
+                itemId: 'requestHomeButton',
                 text: ' '
             },
             {
@@ -277,9 +290,14 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 delegate: '#requestDraftList'
             },
             {
+                fn: 'onRequrestBackButtonTap',
+                event: 'tap',
+                delegate: '#requrestBackButton'
+            },
+            {
                 fn: 'onHomeBtnTap',
                 event: 'tap',
-                delegate: '#mybutton6'
+                delegate: '#requestHomeButton'
             },
             {
                 fn: 'onAddBtnTap',
@@ -342,6 +360,10 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
 
     onRequestDraftListShow: function(component, eOpts) {
         G.get('RequestScreen').AdjustListHeight(component);
+    },
+
+    onRequrestBackButtonTap: function(button, e, eOpts) {
+        G.Pop('RequestScreen');
     },
 
     onHomeBtnTap: function(button, e, eOpts) {

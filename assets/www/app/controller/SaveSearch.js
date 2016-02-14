@@ -29,6 +29,8 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             var industeries =  G.get('IndustryCnt').items;
             var keywords = G.get('KeywordCnt').items;
             var certifications = G.get('CertificationCnt').items;
+            var locationNames = G.get('LocationCnt').items;
+
             var hasDirty = false;
             var authStore = Ext.getStore('AuthStore');
             var authRec = authStore.getAt(0);
@@ -38,6 +40,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             var industeryIds = new Array();
             var keywordIds =  new Array();
             var certificationIds = new Array();
+            var locations = new Array();
 
             // processing profiles
             if(profiles.items.length > 2){
@@ -89,8 +92,16 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 });
             }
 
+            // processing locations
+            if(locationNames.items.length > 2){
+                locationNames.items.forEach(function(item, index){
+                    if(index > 1){
+                        locations.push(item.innerElement.dom.innerText.trim());
+                    }
+                });
+            }
 
-            ;
+
 
             var searchObject = new Object();
             searchObject.ProfileIds = profilesObjs;
@@ -99,13 +110,16 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             searchObject.CertificationIds = certificationIds;
             searchObject.IndusteryIds = industeryIds;
             searchObject.UserId = authRec.get('UserId');
+            searchObject.Countries = locations;
 
             // if no search cretria set
             if(profilesObjs.length < 1
             &&  skillsObjs.length < 1
             &&    keywordIds.length < 1
             && certificationIds.length < 1
-            && industeryIds.length < 1 )
+            && industeryIds.length < 1
+            && locations.length <1
+            )
             {
 
                 var searchStore = Ext.getStore('SavedSearchStore');
@@ -115,12 +129,12 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                     params : { userId : loggedUserId
                     }
                 });
-                G.ShowView('SavedSearch');
+                G.Push('SavedSearch');
                 return;
             }
             else if(!directSave)
             {
-                Ext.Msg.confirm('Confirm', 'Do you want to save current search ?', function(btn){
+                Ext.Msg.confirm('Confirm', 'Do you want to save the current search parameters to be able to retrieve it later? If you press "No" you will be presented with the list of already saved searches.', function(btn){
                     if(btn === 'yes'){
                         Ext.Msg.prompt('Add search title', '',function(button,text){
                             if(button==='ok')
@@ -141,7 +155,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                             params : { userId : loggedUserId
                             }
                         });
-                        G.ShowView('SavedSearch');
+                        G.Push('SavedSearch');
                         return;
 
 
@@ -228,6 +242,13 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                                 });
                                 G.show('CertificationCnt');
                             }
+                            if(result.items.Countries.length > 0){
+                                result.items.Countries.forEach(function(item,index){
+                                    //var certificationLabel = Ext.getStore('CreateRequestLocation').findRecord('CountryName',item).data.CountryName;
+                                    newCnt = SearchResume.createKeywordView('Location', item, item);
+                                });
+                                G.show('LocationCnt');
+                            }
                             // enabling profile by default
                             SearchResume.enableDisableItems('Profile');
                         } else {
@@ -251,6 +272,9 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 params : { userId : loggedUserId
                 }
             });
+            if(G.get('SearchResultSavedScreenId')!==undefined)
+            G.Push('SavedSearch');
+            else
             G.ShowView('SavedSearch');
         },
 
@@ -264,7 +288,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success)
                     {
-                        ;
+
                         if(!directSave){
                             if(result.items!==null){
                                 var searchStore = Ext.getStore('SavedSearchStore');
@@ -273,7 +297,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                                     params : { userId : dataObject.UserId
                                     }
                                 });
-                                G.ShowView('SavedSearch');
+                                G.Push('SavedSearch');
                             }
                             else
                             G.showGeneralFailure();

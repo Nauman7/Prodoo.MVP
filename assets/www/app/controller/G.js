@@ -23,6 +23,9 @@ Ext.define('ProDooMobileApp.controller.G', {
 
     statics: {
         get: function(itemId) {
+            if(itemId.indexOf('.')==0) // Ext.ComponentQuery.query('#' + starting with dot ); // crash the application
+            return null;
+
             var item = Ext.ComponentQuery.query('#' + itemId);
             if(!Ext.isEmpty(item) && !Ext.isEmpty(item[0]))
             return item[0];

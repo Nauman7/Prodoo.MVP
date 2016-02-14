@@ -57,6 +57,9 @@ Ext.define('ProDooMobileApp.model.ResumeExperiencesModel', {
             },
             {
                 name: 'StartDateYear'
+            },
+            {
+                name: 'IndustryId'
             }
         ]
     }

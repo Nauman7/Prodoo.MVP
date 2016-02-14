@@ -108,6 +108,56 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 });
 
             }
+            else if(activeLookup === 'ProfileValue'){
+                var url = ApiBaseUrl+'AllProfiles/ProfileLookup';
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            store = Ext.getStore('SearchProfile');
+                            store.setData(result.items);
+                            store.sync();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
+
+            }
+            else if(activeLookup === 'SkillValue'){
+                var url = ApiBaseUrl+'AllSkills/SkillsLookup';
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            store = Ext.getStore('SearchSkill');
+                            store.setData(result.items);
+                            store.sync();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
+            }
+
             else{
 
                 store.clearFilter();
@@ -184,7 +234,6 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
         },
 
         onTopBtnTap: function(button,lookupName) {
-            debugger;
             G.hide('Confirm');
             var Searchfield = G.get('mysearchfield');
             UserResume.hideActive(button);
@@ -522,6 +571,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 G.get('HFresumeExperienceId').setValue(record.data.ResumeExperienceId+'-'+index);
                 G.get("CreateExpCompanyName").setValue(record.data.CompanyWorked);
                 G.get("CreateExpProfile").setValue(record.data.ProfileId);
+                G.get("CreateExpIndustry").setValue(record.data.IndustryId);
                 G.get("CreateExpStartDate").setValue(new Date(record.data.StartDate));
                 G.get("CreateExpEndDate").setValue(new Date(record.data.EndDate));
                 G.get("CreateExpDescription").setValue(record.data.Description);
@@ -533,6 +583,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
             var companyNameField=G.get("CreateExpCompanyName");
             var profileField=G.get("CreateExpProfile");
+            var industryField=G.get("CreateExpIndustry");
             var StartDateField=G.get("CreateExpStartDate");
             var EndDateField=G.get("CreateExpEndDate");
             var DescriptionField=G.get("CreateExpDescription");
@@ -542,6 +593,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
             var companyName=companyNameField.getValue();
             var profile=profileField.getValue();
+            var industry=industryField.getValue();
             var StartDate=StartDateField.getValue();
             var EndDate=EndDateField.getValue();
             var Description=DescriptionField.getValue();
@@ -601,6 +653,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             model.data.ResumeId=resumeId;
             model.data.CompanyWorked=companyName;
             model.data.ProfileId=profile;
+            model.data.IndustryId=industry;
             model.data.StartDate=StartDate;
             model.data.EndDate=EndDate;
             model.data.Description=Description;
@@ -618,7 +671,8 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         model.data.StartDateYear=StartDate.getFullYear();
                         model.data.EndDateYear=EndDate.getFullYear() ;
                         model.data.ProfileValue=profileField.getRecord().data.ProfileValue;
-                        debugger;
+                        model.data.IndsutryValue=industryField.getRecord().data.ProfileValue;
+
                         var resumeExperince = Ext.getStore("SearchResultDetail").data.items[0].data.ResumeExperience;
 
                         if(resumeExpId==0)
@@ -670,7 +724,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
         CloneLangaugeControl: function(expLevel, languageId) {
             var Cnt=Ext.create('Ext.Container', {
                 //     xtype: 'container',
-                cs: 'requestInnerCnt',
+                cls: 'requestInnerCnt',
                 hidden: false,
                 margin: '0 0 5 0',
                 padding: '0 5',
@@ -731,7 +785,10 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     displayField: 'LanguageValue',
                     store: 'SearchLanguage',
                     valueField: 'LanguageId',
-                    value:languageId
+                    value:languageId,
+                    defaultTabletPickerConfig: {
+                        zIndex: 999
+                    },
                 },
                 {
                     xtype: 'button',
