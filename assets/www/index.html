@@ -53,6 +53,24 @@
         .shortlistResultRight {
             padding: 10px 0px 10px 10px;
         }
+	    .requestListCnt .roundSpan {
+          padding: 7px;
+    margin-right: 7px;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 50%;
+    font-size: 12px;
+	    }
+
+	    .SettingDetail span {
+            color: white !important;
+	    }
+	    .shortlistResultRight .greenColor {
+            color:#2aba9e !important;
+	    }
+	    .shortlistResultRight .redColor {
+            color:#F34848 !important;
+	    }
 	</style>
     <script src="touch/sencha-touch-all.js"></script>
 	<link rel="stylesheet" href="resources/css/sencha-touch-2ea0ca2b-3ac0-4c5c-aec0-312498e70362.css">
@@ -65,53 +83,6 @@
     
    
     <script type="text/javascript" src="app.js"></script>
-	     <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-                api_key: 77ebtpvngdtfgt
-				authorize: true
-         </Script>
-
-        <script>
-            function onLinedInAuth() {
-                IN.API.Profile('me').fields(["id", "firstName", "lastName", "emailAddress"]).result(LinkedInSyncProfile);
-            }
-            function onLinkedInAuthLogin() {
-                IN.User.authorize(function () {
-                    IN.API.Profile('me').fields([
-                    'firstName',
-                    'lastName',
-                    'emailAddress'
-                    ]).result(function (profiles) {
-                        LinkedInSyncProfile(profiles);
-                    });
-                });
-            }
-            function LinkedInSyncProfile(profiles) {
-                if (profiles) {
-                    member = profiles.values[0];
-                    var authStore = Ext.getStore('AuthStore');
-                    var authModel = Ext.create('ProDooMobileApp.model.AuthModel');
-                    authModel.data.Email = member.emailAddress;
-                    authModel.data.FirstName = member.firstName;
-                    authModel.data.LastName = member.lastName;
-                    authModel.data.AuthType = 1; // lookup value, 1 stands for linkedIn
-                    authStore.add(authModel);
-                    authStore.sync({
-                        success: function () {
-                        var model = new Object();
-                        model.Name = member.firstName;
-                        model.Email = member.emailAddress;
-                        model.OAuthProviderId = 1;
-                        model.IsLoginByMobile = true;
-						G.registerThirdPartyUser(model);
-                        },
-                        failure: function (batch) {
-
-                        }
-                    });
-                }
-            }
-</script>
-
 </head>
 <body>
 
@@ -133,7 +104,7 @@
             }
             else if (window.location.hostname.indexOf('dev') > -1) {
                 FB.init({
-                    appId: '113850725626284',
+                    appId: '930023363758501',
                     cookie: true, 
                     xfbml: true,
                     version: 'v2.2'
@@ -185,7 +156,9 @@
 
 window.onload = function(){
   Account.authCheck();
-  }
+}
+
 document.addEventListener("offline", function () { alert("No connection found, please check your internet") }, false);
+
 </script></body>
 </html>

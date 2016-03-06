@@ -35,8 +35,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
         ],
         itemTpl: Ext.create('Ext.XTemplate', 
             '',
-            ' <div class=\'SavedListCnt rYellow\'>',
-            '    ',
+            '<div class=\'SavedListCnt rYellow\'>',
+            '',
             '    <div class="saveIconDiv">',
             '        <span class="SaveIcon"> </span>',
             '    </div>',
@@ -44,61 +44,71 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '        <span class="downArrow"></span>',
             '    </div>',
             '    <div class="resultRight">',
-            '        <div class="resultTitle">{[this.prepareHeading(values.Profiles,"profiles")]}</div>',
-            '        <div class="resultLocation">{Region}</div>',
-            '        <div class="resultSkill">{[this.prepareHeading(values.Skills,"skills")]}</div>',
-            '    </div>',
-            '     ',
-            '     <span class="closeIcon">',
-            '        <span class="x-button-label"> </span>',
-            '    </span>',
+            '        <div class="resultTitle <tpl if=\'IsConfirmed\'>greenColor </tpl> <tpl if=\'IsDeleted\'>redColor </tpl>">{[this.prepareHeading(values.Profiles,"profiles")]}</div>',
             '',
-            '</div>',
-            '<div class="listItems slide-up">',
-            '    <tpl for=\'Profiles\'>',
-            '        <tpl if="Score &gt; 0">',
-            '        <div class="searchDetail">',
-            '              <span class="itemNo iGreen">{Score}</span>',
-            '            <div class="itemSkill">{ProfileValue}</div>',
+            '',
+            '',
+            '        <tpl if=\'IsConfirmed\'>',
+            '            <div class="resultUserIcon">{Contact.UserName} ({Contact.Email})</div>',
+            '        </tpl>',
+            '        ',
+            '        ',
+            '        <div class="resultLocation <tpl if=\'IsConfirmed\'>greenLocation </tpl> <tpl if=\'IsDeleted\'>redLocation </tpl>">{Region}</div>',
+            '        <div class="resultSkill <tpl if=\'IsConfirmed\'>greenSkill </tpl> <tpl if=\'IsDeleted\'>redSkill </tpl>">{[this.prepareHeading(values.Skills,"skills")]}</div>',
+            '        ',
+            '        ',
+            '                </div>',
+            '',
+            '            <span class="closeIcon" style="display:none;">',
+            '                <span class="x-button-label"> </span>',
+            '            </span>',
+            '',
+            '            </div>',
+            '        <div class="listItems slide-up">',
+            '            <tpl for=\'Profiles\'>',
+            '                <tpl if="Score &gt; 0">',
+            '                    <div class="searchDetail">',
+            '                        <span class="itemNo iGreen">{Score}</span>',
+            '                        <div class="itemSkill">{ProfileValue}</div>',
+            '                    </div>',
+            '                </tpl> </tpl>',
+            '',
+            '            <tpl for=\'Skills\'>',
+            '                <tpl if="Score &gt; 0">',
+            '                    <div class="searchDetail">',
+            '                        <span class="itemNo iOrange"> {Score} </span>',
+            '                        <div class="itemSkill">{SkillValue}</div>',
+            '                    </div>',
+            '                </tpl>',
+            '            </tpl>',
+            '',
+            '',
+            '            <tpl for=\'Certifications\'>',
+            '                <tpl if="Score &gt; 0">',
+            '                    <div class="searchDetail">',
+            '                        <span class="itemNo iYellow">{Score}</span>',
+            '                        <div class="itemSkill">{CertificationValue}</div>',
+            '                    </div>',
+            '                </tpl> </tpl>',
+            '',
+            '            <tpl for=\'Keywords\'>',
+            '                <tpl if="Score &gt; 0">',
+            '                    <div class="searchDetail">',
+            '                        <span class="itemNo iGreen"> {Score}</span>',
+            '                        <div class="itemSkill">{KeywordValue}</div>',
+            '                    </div>',
+            '                </tpl>',
+            '            </tpl>',
+            '',
+            '            <tpl for=\'Industries\'>',
+            '                <tpl if="Score &gt; 0">',
+            '                    <div class="searchDetail">',
+            '                        <span class="itemNo iYellow"> {Score} </span>',
+            '                        <div class="itemSkill">{IndustryValue}</div>',
+            '                    </div>',
+            '                </tpl>',
+            '            </tpl>',
             '        </div>',
-            '    </tpl> </tpl>',
-            '    ',
-            '    <tpl for=\'Skills\'>',
-            '        <tpl if="Score &gt; 0">',
-            '        <div class="searchDetail">',
-            '              <span class="itemNo iOrange"> {Score} </span>',
-            '            <div class="itemSkill">{SkillValue}</div>',
-            '        </div>',
-            '       </tpl>',
-            '    </tpl>',
-            '    ',
-            '    ',
-            '    <tpl for=\'Certifications\'>',
-            '        <tpl if="Score &gt; 0">',
-            '        <div class="searchDetail">',
-            '              <span class="itemNo iYellow">{Score}</span>',
-            '            <div class="itemSkill">{CertificationValue}</div>',
-            '        </div>',
-            '    </tpl> </tpl>',
-            '    ',
-            '    <tpl for=\'Keywords\'>',
-            '        <tpl if="Score &gt; 0">',
-            '        <div class="searchDetail">',
-            '              <span class="itemNo iGreen"> {Score}</span>',
-            '            <div class="itemSkill">{KeywordValue}</div>',
-            '        </div>',
-            '             </tpl>',
-            '    </tpl>',
-            '    ',
-            '     <tpl for=\'Industries\'>',
-            '         <tpl if="Score &gt; 0">',
-            '        <div class="searchDetail">',
-            '              <span class="itemNo iYellow"> {Score} </span>',
-            '            <div class="itemSkill">{IndustryValue}</div>',
-            '        </div>',
-            '           </tpl>',
-            '    </tpl>',
-            '</div>',
             {
                 prepareHeading: function(obj, type) {
                     var tempString = '';
@@ -160,9 +170,11 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
         items: [
             {
                 xtype: 'label',
+                cls: 'detailTitle',
                 docked: 'top',
                 hidden: true,
                 itemId: 'titleHeader',
+                padding: 10,
                 style: 'color:white;',
                 tpl: [
                     '<div>Title : {Total}</div>'
@@ -366,6 +378,10 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
         ]
     },
 
+    onListPagingUpdatedata: function(component, newData, eOpts) {
+
+    },
+
     onListItemTap: function(dataview, index, target, record, e, eOpts) {
         var selectedItem = e.target;
         if(selectedItem.className.indexOf('x-button-label')>=0){
@@ -475,8 +491,22 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
     onRequestBtnTap: function(button, e, eOpts) {
         if(ResumeIdList && ResumeIdList.length>0){
 
-            Ext.Msg.confirm('', 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.', function(btn){
-                if(btn === 'yes'){
+
+              Ext.Msg.show({
+            title: '',
+            message: 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.',
+            buttons: [{
+                 text: 'Cancel',
+                ui: 'decline'
+            }, {
+                text: 'No',
+            },{
+                text: 'Continue',
+            }
+                 ],
+            fn: function (buttonId) {
+              if(buttonId == 'Continue'){
+
 
             G.Push('CreateRequestScreen');
 
@@ -499,10 +529,12 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             });
 
                 }
-                else{
-                    Requests.ShowRequestView(true,true);
-                }
-            });
+                else if(buttonId== 'No')
+                 Requests.ShowRequestView(true,true);
+          }
+        });
+
+
         }
         else
             Requests.ShowRequestView(true,true);

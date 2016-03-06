@@ -125,6 +125,14 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
             },
             {
                 xtype: 'button',
+                cls: 'fixRequest',
+                docked: 'bottom',
+                hidden: true,
+                itemId: 'SavedREsumes',
+                text: ' '
+            },
+            {
+                xtype: 'button',
                 cls: [
                     'backIcon',
                     'btnCircle',
@@ -278,6 +286,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 name: 'DurationType',
                                 value: 'Months',
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'DayType',
                                 store: 'CreateRequestDay',
                                 valueField: 'DayType'
@@ -347,6 +361,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 value: 'Denmark',
                                 placeHolder: 'Choose Location',
                                 autoSelect: false,
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'CountryName',
                                 store: 'CreateRequestLocation',
                                 valueField: 'CountryName',
@@ -376,6 +396,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 value: 'Danish',
                                 placeHolder: 'Choose Language',
                                 autoSelect: false,
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'LanguageValue',
                                 store: 'SearchLanguage',
                                 valueField: 'LanguageValue',
@@ -403,6 +429,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelWidth: 110,
                                 name: 'UserCompanyId',
                                 placeHolder: 'Choose Company',
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'CompanyName',
                                 store: 'CompanyDetail',
                                 valueField: 'UserCompanyId',
@@ -431,6 +463,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 name: 'SavedSearchedId',
                                 value: 1,
                                 placeHolder: 'Choose Saved Search',
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'SearchName',
                                 store: 'SavedSearchStore',
                                 valueField: 'SavedSearchId',
@@ -503,6 +541,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 value: 'EUR',
                                 placeHolder: 'hour',
                                 autoSelect: false,
+                                defaultPhonePickerConfig: {
+                                    zIndex: 999
+                                },
+                                defaultTabletPickerConfig: {
+                                    zIndex: 999
+                                },
                                 displayField: 'Currency',
                                 store: 'CreateRequestFeeRange',
                                 valueField: 'Currency'
@@ -536,6 +580,11 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                 fn: 'onFixRequestTap',
                 event: 'tap',
                 delegate: '#FixRequest'
+            },
+            {
+                fn: 'ShowSavedResume',
+                event: 'tap',
+                delegate: '#SavedREsumes'
             },
             {
                 fn: 'onBackBtnTap',
@@ -582,6 +631,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
 
     onFixRequestTap: function(button, e, eOpts) {
          Requests.passModelToSavedSearchList();
+    },
+
+    ShowSavedResume: function(button, e, eOpts) {
+        var form = button.up()
+        var values = form.getValues();
+        Requests.ShowSavedResumeRequest(values.RequestId, G.get('hfShortlistId').getValue());
     },
 
     onBackBtnTap: function(button, e, eOpts) {

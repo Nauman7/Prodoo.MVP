@@ -51,6 +51,7 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
             },
             {
                 xtype: 'label',
+                docked: 'top',
                 hidden: true,
                 itemId: 'shortlistTotal',
                 style: 'color: white;',

@@ -19,6 +19,7 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
 
     requires: [
         'Ext.XTemplate',
+        'Ext.Label',
         'Ext.Container',
         'Ext.Button',
         'Ext.field.Search'
@@ -62,6 +63,14 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
             }
         ],
         items: [
+            {
+                xtype: 'label',
+                cls: 'SearchLabel',
+                docked: 'top',
+                html: 'Saved search list',
+                itemId: 'buttonsLabel',
+                margin: 0
+            },
             {
                 xtype: 'container',
                 cls: 'searchViewCnt',
@@ -148,7 +157,7 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
     },
 
     onMybutton6Tap11: function(button, e, eOpts) {
-        G.ShowView('SearchResult');
+        G.Pop();
     },
 
     onAddBtnTap1: function(button, e, eOpts) {

@@ -341,6 +341,7 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                         xtype: 'textareafield',
                         cls: 'presEditArea',
                         height: 200,
+                        itemId: 'mytextarea2',
                         clearIcon: false,
                         name: 'Detail'
                     },
@@ -377,7 +378,27 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                 itemId: 'PresentEditConfirm',
                 text: ' '
             }
+        ],
+        listeners: [
+            {
+                fn: 'onMytextarea2Focus',
+                event: 'focus',
+                delegate: '#mytextarea2'
+            },
+            {
+                fn: 'onMytextarea2Blur',
+                event: 'blur',
+                delegate: '#mytextarea2'
+            }
         ]
+    },
+
+    onMytextarea2Focus: function(textfield, e, eOpts) {
+        textfield.addCls('MarginBottom');
+    },
+
+    onMytextarea2Blur: function(textfield, e, eOpts) {
+        textfield.removeCls('MarginBottom');
     },
 
     CheckButtonFunctionality: function(button) {

@@ -89,6 +89,15 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
             },
             {
                 name: 'CreateDate'
+            },
+            {
+                name: 'CountNoAction'
+            },
+            {
+                name: 'CountDeleted'
+            },
+            {
+                name: 'CountConfirmed'
             }
         ]
     }

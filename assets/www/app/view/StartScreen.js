@@ -138,16 +138,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         width: 220,
                                         src: 'resources/images/searchIcon.png'
                                     }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                Ext.ComponentQuery.query("#SearchContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
-                                    }
                                 ]
                             }
                         ]
@@ -180,19 +170,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         margin: 'auto',
                                         width: 220,
                                         src: 'resources/images/resumeIcon.png'
-                                    }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                SearchResume.resetStores();
-                                                ActiveScreen=0;
-                                                UserResume.onResumeClick();
-                                                //Ext.ComponentQuery.query("#ResumeContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
                                     }
                                 ]
                             }
@@ -227,19 +204,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         width: 160,
                                         src: 'resources/images/requestIcon.png'
                                     }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //      SearchResume.resetStores();
-                                                //     ActiveScreen=1;
-                                                // UserResume.onResumeClick();
-                                                // G.get("RequestContainerImg").fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
-                                    }
                                 ]
                             }
                         ]
@@ -272,24 +236,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         margin: 'auto',
                                         width: 220,
                                         src: 'resources/images/messageIcon.png'
-                                    }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //     ActiveScreen=2;
-                                                //     G.ShowView('MsgInbox');
-                                                //     var store=Ext.getStore("MessageStore");
-                                                //     store.clearFilter();
-                                                //     store.load({
-                                                //         params:{isInbox: true}
-                                                //     });
-                                                //     G.get("MessageSearchField").reset();
-                                                Ext.ComponentQuery.query("#MessageContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
                                     }
                                 ]
                             }
@@ -324,23 +270,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         width: 220,
                                         src: 'resources/images/profileIcon.png'
                                     }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //     ActiveScreen=3;
-                                                //     var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                                                //     Ext.getStore('UserDetail').load({
-                                                //             params : { userId : loggedUserId
-                                                //             }
-                                                //         });
-                                                //     G.ShowView('PresentDetail');
-                                                Ext.ComponentQuery.query("#PresentContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
-                                    }
                                 ]
                             }
                         ]
@@ -373,29 +302,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         margin: 'auto',
                                         width: 220,
                                         src: 'resources/images/companyIcon.png'
-                                    }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //     if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
-                                                //         ActiveScreen=3;
-                                                //     else
-                                                //         ActiveScreen=4;
-                                                //     var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                                                //     var companyStore = Ext.getStore('CompanyDetail');
-                                                //     companyStore.clearData();
-                                                //     companyStore.load({
-                                                //         params : { userId : loggedUserId
-                                                //                  }
-                                                //     });
-                                                //     G.ShowView('CompanyDetail');
-                                                Ext.ComponentQuery.query("#CompanyContainerImg")[0].fireEvent('tap');
-
-                                            });
-                                        },
-                                        event: 'painted'
                                     }
                                 ]
                             }
@@ -430,18 +336,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         width: 220,
                                         src: 'resources/images/statisticsIcon.png'
                                     }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //     ActiveScreen=5;
-                                                //     Statistics.GetStatistics();
-                                                Ext.ComponentQuery.query("#StatisticsContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
-                                    }
                                 ]
                             }
                         ]
@@ -474,18 +368,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         margin: 'auto',
                                         width: 220,
                                         src: 'resources/images/settingIcon.png'
-                                    }
-                                ],
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            element.on('tap',function(){
-                                                //     ActiveScreen=6;
-                                                //     G.ShowView('Setting');
-                                                Ext.ComponentQuery.query("#SettingsContainerImg")[0].fireEvent('tap');
-                                            });
-                                        },
-                                        event: 'painted'
                                     }
                                 ]
                             }
@@ -602,25 +484,24 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
 
     onSearchContainerImgTap: function(image, e, eOpts) {
         SearchResume.resetStores();
-        G.ShowView('SearchResult');
+        G.Push('SearchResult');
         ActiveScreen=0;
     },
 
     onMyimgTap2: function(image, e, eOpts) {
-        //SearchResume.resetStores();
-        //ActiveScreen=0;
-        //UserResume.onResumeClick();
+        SearchResume.resetStores();
+        ActiveScreen=0;
+        UserResume.onResumeClick();
     },
 
     onMyimgTap21: function(image, e, eOpts) {
         ActiveScreen=2;
-        // G.ShowView('RequestScreen');
         Requests.ShowRequestView(true,true,true);
     },
 
     onMyimgTap: function(image, e, eOpts) {
         ActiveScreen=1;
-        G.ShowView('MsgInbox');
+        G.Push('MsgInbox');
         var store=Ext.getStore("MessageStore");
         store.clearFilter();
         store.load({
@@ -648,7 +529,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             params : { userId : loggedUserId
                      }
         });
-        G.ShowView('PresentDetail');
+        G.Push('PresentDetail');
     },
 
     onCompanyContainerImgTap: function(image, e, eOpts) {
@@ -661,7 +542,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             params : { userId : loggedUserId
                      }
         });
-        G.ShowView('CompanyDetail');
+        G.Push('CompanyDetail');
     },
 
     onMyimgTap1: function(image, e, eOpts) {
@@ -677,7 +558,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             ActiveScreen=4;
         else
             ActiveScreen=5;
-        G.ShowView('Setting');
+        G.Push('Setting');
     },
 
     onLeftArrowTap: function(image, e, eOpts) {

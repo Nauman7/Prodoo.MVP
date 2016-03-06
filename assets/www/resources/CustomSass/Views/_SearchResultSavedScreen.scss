@@ -294,3 +294,37 @@
 
 	}
 }
+
+
+.redLocation{
+	background-image: url(../images/savedSearch/redlocationL.png);
+}
+.greenLocation{
+	background-image: url(../images/savedSearch/greenlocationL.png);
+}
+
+
+.redSkill:before{
+	background-image: url(../images/savedSearch/redpencilL.png);
+}
+.greenSkill:before{
+	background-image: url(../images/savedSearch/greenpencilL.png);
+}
+
+.resultUserIcon {
+	font-size: 15px;
+	padding-left: 22px;
+	margin-top: 10px;
+	position: relative;
+	&:before{
+		background: url(../images/savedSearch/user.png) no-repeat 0 center;
+		background-size: contain;
+		content:'';
+		width: 22px;
+		height: 18px;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		margin-top: -9px;
+	}
+}

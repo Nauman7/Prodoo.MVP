@@ -253,8 +253,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
 
                         if(success && records.length>0){
                             G.Push('SearchResultSavedScreen');
-
-                            //var view = Ext.create('ProDooMobileApp.view.SearchResultSavedScreen');
+                            Ext.select('.SavedListCnt .closeIcon').hide(); // hiding close button in case of search resumes
                             //Ext.Viewport.setActiveItem(view);
                         }//end if
                         else
@@ -262,47 +261,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                     }//end callback
 
                 });
-
-                /*Ext.Ajax.request({
-                url: ApiBaseUrl+'ResumeSearches/SearchResume',
-                method: 'Post',
-                headers: { 'Content-Type': 'application/json' },
-                params : Ext.JSON.encode(searchObject),
-                success: function(conn, response, options, eOpts) {
-                end= new Date();
-                console.log('Response Recieved ' + (end.getTime() - start.getTime())/1000 + ' secs');
-                var result = Ext.JSON.decode(conn.responseText);
-                if (result.success) {
-                if(result.items && result.items.length > 0){
-
-                var stor = Ext.create('Ext.data.Store', {
-                model :'ProDooMobileApp.model.SearchResultSaved',
-                data: result.items
-                });
-
-                //stor.sort('CorrelationScore', 'DESC');
-                var view = Ext.create('ProDooMobileApp.view.SearchResultSavedScreen');
-                Ext.Viewport.setActiveItem(view);
-
-                view.setStore(stor);
             }
-            else{
-                Ext.Msg.alert('Status', 'No matched resume found!',null);
-
-            }
-            end= new Date();
-            console.log('Operation took ' + (end.getTime() - start.getTime())/1000 + ' secs');
-        } else {
-
-        }
-
-    },
-    failure: function(conn, response, options, eOpts) {
-        if (response.timedout)
-        Ext.Msg.alert('', 'Maximum request time exceeded');
-    }
-});*/
-}
 
         },
 

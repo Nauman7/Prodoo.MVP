@@ -132,7 +132,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
             item.data.isAdded=false;
             SocialMediaList.push(item.data);
         });
-        G.ShowView('PresentEdit');
+        G.Push('PresentEdit');
     },
 
     onPresentNameFieldInitialize: function(component, eOpts) {
@@ -154,7 +154,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
     onSocialMediaAddBtnTap: function(button, e, eOpts) {
         var form = G.get('PresentAddForm');
         UserDetail=form.getValues();
-        G.ShowView('PresentSocialMedia');
+        G.Push('PresentSocialMedia');
         SocialMediaList.forEach(function(item,index){
             if (item.isAdded)
             {
@@ -230,7 +230,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
                     Ext.getStore('UserDetail').load({
                         params : { userId : loggedUserId }
                     });
-                    G.ShowView('PresentDetail');
+                    G.Pop();
                 } else {
                     G.showGeneralFailure();
                 }
@@ -243,7 +243,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
     },
 
     onPresentEditBackBtnTap: function(button, e, eOpts) {
-        G.ShowView('PresentDetail');
+        G.Pop();
     },
 
     onfacebookAvailableTap: function(button, e, eOpts) {
@@ -356,7 +356,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
             }
         });
 
-        G.ShowView('PresentEdit');
+        G.Pop();
         var form = G.get('PresentAddForm');
         UserDetail=form.setValues(UserDetail);
 
@@ -379,7 +379,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
     },
 
     onPresentSocialMediaBackBtnTap: function(button, e, eOpts) {
-        G.ShowView('PresentEdit');
+        G.Pop();
         var form = G.get('PresentAddForm');
         UserDetail=form.setValues(UserDetail);
     },
@@ -435,6 +435,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
     },
 
     onPresentDetailTplItemTap: function(dataview, index, target, record, e, eOpts) {
+
         SocialMediaList=new Array();
         Ext.getStore("SocialMediaStore").data.items.forEach(function(item,index){
             item.data.isAdded=false;
@@ -511,7 +512,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
         }
         else if(selectedItem.className.indexOf('presEdit')>=0)
         {
-            G.ShowView('PresentEdit');
+            G.Push('PresentEdit');
 
             var form = G.get('PresentAddForm');
             form.setValues(record.data);

@@ -425,7 +425,12 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         labelCls: 'labelCls',
                                         labelWidth: 110,
                                         name: 'IndustryId',
-                                        defaultTabletPickerConfig: 'zIndex:999',
+                                        defaultPhonePickerConfig: {
+                                            zIndex: 999
+                                        },
+                                        defaultTabletPickerConfig: {
+                                            zIndex: 999
+                                        },
                                         displayField: 'IndustryValue',
                                         store: 'SearchIndustry',
                                         valueField: 'IndustryId',
@@ -451,6 +456,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         labelWidth: 110,
                                         name: 'ProfileId',
                                         placeHolder: 'ProfileId',
+                                        defaultPhonePickerConfig: {
+                                            zIndex: 999
+                                        },
                                         defaultTabletPickerConfig: {
                                             zIndex: 999
                                         },
@@ -803,6 +811,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 name: 'RegionId',
                                                 placeHolder: 'Choose location',
                                                 autoSelect: false,
+                                                defaultPhonePickerConfig: {
+                                                    zIndex: 999
+                                                },
                                                 defaultTabletPickerConfig: {
                                                     zIndex: 999
                                                 },
@@ -887,6 +898,19 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 ],
                 docked: 'bottom',
                 itemId: 'EditResumeBackBtn',
+                text: ' '
+            },
+            {
+                xtype: 'button',
+                cls: [
+                    'backIcon',
+                    'btnCircle',
+                    'b10',
+                    'l10'
+                ],
+                docked: 'bottom',
+                hidden: true,
+                itemId: 'BackToExperience',
                 text: ' '
             }
         ],
@@ -1027,6 +1051,11 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#EditResumeBackBtn'
             },
             {
+                fn: 'onBackToExperienceTap',
+                event: 'tap',
+                delegate: '#BackToExperience'
+            },
+            {
                 fn: 'onContainerPainted',
                 single: true,
                 event: 'painted'
@@ -1136,6 +1165,13 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
                         var str=Ext.getStore("ResumeExperiencesStore");
                         var rec=str.data.items[index];
+                        var expStore=Ext.getStore("SearchResultDetail");
+                        var expRec =expStore.getAt(0);
+                        var expIndex = -1;
+                        expRec.data.ResumeExperience.forEach(function(item,index){
+                            if(item.ResumeExperienceId==rec.data.ResumeExperienceId){
+                               expIndex = index;}});
+                        expRec.data.ResumeExperience.pop(expIndex);
                         str.remove(rec);
                     }
                 },
@@ -1218,8 +1254,17 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     onBackBtnTap: function(button, e, eOpts) {
         // G.showHomeView();
-        UserResume.onResumeClick();
+        UserResume.onResumeClick('goBack');
 
+    },
+
+    onBackToExperienceTap: function(button, e, eOpts) {
+        G.hide('createCompanyCnt');
+        G.show('IndustryList');
+        G.hide('CompanyExperienceComfirm');
+        G.show('EditResumeBackBtn');
+        G.hide('BackToExperience');
+        G.show('CreateCompanyExperience');
     },
 
     onContainerPainted: function(element, eOpts) {

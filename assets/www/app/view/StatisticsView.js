@@ -601,6 +601,7 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
         G.show('TotalStatsCnt');
         G.show('StatsListView');
         G.hide('StatsGraphCnt');
+
     },
 
     onGraphStatsBtnTap: function(button, e, eOpts) {

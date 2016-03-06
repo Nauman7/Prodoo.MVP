@@ -120,6 +120,18 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                 ]
             },
             {
+                xtype: 'passwordfield',
+                cls: 'field',
+                itemId: 'LoginPassword1',
+                margin: '100 0 0 ',
+                clearIcon: false,
+                labelAlign: 'top',
+                name: 'Password',
+                value: 'password',
+                maxLength: 50,
+                placeHolder: 'Password'
+            },
+            {
                 xtype: 'container',
                 docked: 'bottom',
                 items: [

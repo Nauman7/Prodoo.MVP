@@ -64,17 +64,15 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
 
                                     // for shortlist we dont need to show other icons
                                     Ext.select('.SrNo').hide();
-
                                     Ext.select('.saveIconDiv').hide();
-
                                     Ext.select('.rightBottomSearchResultButtons').hide();
-
-
 
                                     Ext.select('.resultRight').elements.forEach(function(item,index){
                                         item.className = 'shortlistResultRight';
                                     });
                                     G.get('titleHeader').setData( { Total:shortlistName}).show();
+                                    // disable pagging
+                                    G.get('SearchResultSavedScreenId').setPlugins(null);
 
                                 }
                                 else{
@@ -205,16 +203,33 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
 
         DirectShortListIconClick: function() {
             if(ResumeIdList && ResumeIdList.length>0){
-                Ext.Msg.confirm('', 'You have picked '+ResumeIdList.length+' resumes to add to a shortlist. Would you like to create a new shortlist, or add them to an existing shortlist?', function(btn){
-                    if(btn === 'yes'){
-                        Ext.Msg.prompt('Add shortlist title', '',function(button,text){
-                            if(button==='ok')
-                            Shortlist.onCreateShortlist(text,ResumeIdList, -1);
-                        });
-
+                Ext.Msg.show({
+                    title: '',
+                    message: 'You have picked '+ResumeIdList.length+' resumes to add to a shortlist. Would you like to create a new shortlist, or add them to an existing shortlist?',
+                    buttons: [
+                    {
+                        text: 'Cancel',
+                        ui: 'decline'
+                    },
+                    {
+                        text: 'Add to Existing',
+                    }, {
+                        text: 'Create New',
                     }
-                    else
-                    Shortlist.showShortListView(true);
+                    ],
+                    fn: function (buttonId) {
+                        if(buttonId == 'Create New'){
+                            Ext.defer( function() {
+                                Ext.Msg.prompt('Add shortlist title', '',function(button,text){
+                                    if(button==='ok')
+                                    Shortlist.onCreateShortlist(text,ResumeIdList, -1);
+                                });
+                            }, 10 );
+
+                        }
+                        else if(buttonId== 'Add to Existing')
+                        Shortlist.showShortListView(true);
+                    }
                 });
             }
             else

@@ -64,6 +64,7 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                         cls: 'reqCompName',
                         html: '',
                         itemId: 'SpanCompanyName',
+                        minHeight: 40,
                         padding: '10 5',
                         listeners: [
                             {
@@ -95,6 +96,7 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                                     'left'
                                 ],
                                 itemId: 'SpanDateDuration',
+                                minHeight: 30,
                                 width: '50%'
                             },
                             {
@@ -105,6 +107,7 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                                 ],
                                 html: '',
                                 itemId: 'SpanLanguageLocation',
+                                minHeight: 30,
                                 width: '50%'
                             }
                         ]

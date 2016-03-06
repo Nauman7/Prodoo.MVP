@@ -508,7 +508,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             });
         },
 
-        onResumeClick: function() {
+        onResumeClick: function(view) {
             // get current logged user
             var loggedUser = Ext.getStore('AuthStore').getAt(0);
             var resumeId = loggedUser.get('ResumeId');
@@ -527,8 +527,13 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                             store.remove(records);
                             store.add(resume);
                             store.sync();
+                            if(view == 'goBack'){
+                                G.Pop();
+                            }
+                            else{
+                                G.Push('UserResumeView');
+                            }
 
-                            G.ShowView('UserResumeView');
                         }
                     }
                     else{
@@ -565,7 +570,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             G.get('CompanyExperienceComfirm').hide();
             G.show('CompanyExperienceComfirm');
             G.get('HFresumeExperienceId').setValue("0-0"); // id and index of record
-
+            G.hide('EditResumeBackBtn');
+            G.show('BackToExperience');
+            G.hide('CreateCompanyExperience');
 
             if(record){
                 G.get('HFresumeExperienceId').setValue(record.data.ResumeExperienceId+'-'+index);
@@ -704,6 +711,10 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         G.show('IndustryList');
                         G.get('CompanyExperienceComfirm').hide();
                         G.show('CreateCompanyExperience');
+                        G.show('EditResumeBackBtn');
+                        G.hide('BackToExperience');
+                        G.show('CreateCompanyExperience');
+
                     } else {
                         G.showGeneralFailure();
                     }
@@ -786,6 +797,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     store: 'SearchLanguage',
                     valueField: 'LanguageId',
                     value:languageId,
+                    defaultPhonePickerConfig: {
+                        zIndex: 999
+                    },
                     defaultTabletPickerConfig: {
                         zIndex: 999
                     },

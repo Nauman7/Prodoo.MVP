@@ -252,8 +252,8 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 if(FB.getAccessToken() !== null ){
                     FB.logout();
                 }
-                if(!Ext.isEmpty(IN.User) && IN.User.isAuthorized())
-                    IN.User.logout();
+                //if(!Ext.isEmpty(IN.User) && IN.User.isAuthorized())
+                //   IN.User.logout();
                 G.ShowView('LoginForm');
             },
             failure: function (batch) {

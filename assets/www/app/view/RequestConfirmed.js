@@ -127,9 +127,9 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
             },
             {
                 xtype: 'textareafield',
+                cls: 'presEditArea',
                 itemId: 'presDesciption',
-                margin: '10 20',
-                padding: '10 20'
+                margin: '10 0'
             },
             {
                 xtype: 'button',

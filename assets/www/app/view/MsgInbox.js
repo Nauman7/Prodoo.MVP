@@ -161,13 +161,6 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                         fn: function(component, eOpts) {
                             G.get('MsgViewCnt').AdjustListHeight(component);
 
-                            // component.on('refresh',function(){
-
-                            //     this.setHeight(null);
-                            //     var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
-                            //     if(ViewHeight > 10)
-                            //         this.setHeight(ViewHeight);
-                            // });
                         },
                         single: true,
                         event: 'initialize'
@@ -474,19 +467,6 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 docked: 'bottom',
                 hidden: true,
                 itemId: 'backBtn',
-                text: ' '
-            },
-            {
-                xtype: 'button',
-                cls: [
-                    'btnCircle',
-                    'backIcon',
-                    'b10',
-                    'l10'
-                ],
-                docked: 'bottom',
-                hidden: true,
-                itemId: 'backPrevScreenBtn',
                 text: ' '
             },
             {

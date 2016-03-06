@@ -45,7 +45,10 @@ Ext.application({
         'SocialMediaModel',
         'UserDetailSocialMediaModel',
         'StatisticsModel',
-        'ResumeExperiencesModel'
+        'ResumeExperiencesModel',
+        'Faq',
+        'ConfigurationModel',
+        'SettingTerm'
     ],
     stores: [
         'ProfilesStore',
@@ -88,7 +91,9 @@ Ext.application({
         'SocialMediaStore',
         'StatisticsGraph',
         'UserType',
-        'ResumeExperiencesStore'
+        'ResumeExperiencesStore',
+        'FaqStore',
+        'ConfigurationStore'
     ],
     views: [
         'LoginForm',
@@ -146,11 +151,11 @@ Ext.application({
         if(window.location.href.indexOf('localhost')>0)
             ApiBaseUrl= "http://localhost/PRODOO/webapi/api/";
         else if(window.location.href.indexOf('dev')>0)
-            ApiBaseUrl= "http://dev.prodoo.dk/webapi/api/";
+            ApiBaseUrl= "http://mobile.dev.prodoo.dk/webapi/api/";
         else if(window.location.href.indexOf('staging')>0)
-            ApiBaseUrl= "http://staging.prodoo.dk/WebAPI/api/";
+            ApiBaseUrl= "http://mobile.staging.prodoo.dk/WebAPI/api/";
         else
-            ApiBaseUrl= "http://dev.prodoo.dk/WebAPI/api/";
+            ApiBaseUrl= "http://mobile.dev.prodoo.dk/WebAPI/api/";
 
         // setting loading mask on viewport
         Ext.Viewport.setMasked({xtype:'loadmask',message:'loading...'});

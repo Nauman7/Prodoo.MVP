@@ -95,7 +95,7 @@ Ext.define('ProDooMobileApp.controller.Statistics', {
                     G.showGeneralFailure();
                 }
             });
-            G.ShowView('StatisticsView');
+            G.Push('StatisticsView');
         }
     },
 

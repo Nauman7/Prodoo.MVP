@@ -25,6 +25,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         createResumeRequest: function(isNew) {
             var form  = G.get('CreateRequestScreen');
             var values = form.getValues();
+
             if(values.RequestName){
                 var model = null;
                 var store = Ext.getStore('SearchRequestList');
@@ -32,7 +33,6 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 model = Ext.create('ProDooMobileApp.model.SearchRequestList');
                 isNew = values.RequestId ==='';
                 model.set(values);
-
 
                 if(isNew){
                     var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
@@ -277,15 +277,10 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     G.get("SpanDescription").hide();
 
                     if(record.data.IsConfirmed){
-                        {
-                            G.get("acceptRequestBtn").hide();
-                            G.get("declineRequestBtn").hide();
-                            G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
 
-                        }
-
-
-
+                        G.get("acceptRequestBtn").hide();
+                        G.get("declineRequestBtn").hide();
+                        G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
                     }
 
                     if(!record.data.IsRead) //Mark message as read
@@ -300,15 +295,13 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                             success : function (response) {
                                 Requests.ShowRequestView();
                             }
-
-
                         });
 
                     }
                 }
                 else{ // Other active
 
-                    var isSentRequest = false
+                    var isSentRequest = false;
 
 
                     if(item==2) // Sent active
@@ -345,6 +338,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         fields.SavedSearchedId.disable();
                         G.get('cloneBtn').show();
                         G.get('FixRequest').hide();
+                        G.get('SavedREsumes').show();
+                        G.get('hfShortlistId').setValue(record.data.ShortlistId)
                     }
                     else
                     G.get('DraftRequestBtn').hide();
@@ -433,7 +428,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     if (result.success)
                     {
                         if(pushView & showHomeButton) // navigation from home screen
-                        G.ShowView('RequestScreen');
+                        G.Push('RequestScreen');
                         else if(pushView & !showHomeButton)// navigation from search menu
                         G.Push('RequestScreen');
                         if(showHomeButton)
@@ -457,8 +452,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         }
                         else
                         {
-                            // G.show('requestDraftList');
-                            //s G.show('requestSendList');
+
                             var draftStore = Ext.create('Ext.data.Store', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
                                 data: result.items.Draft
@@ -520,6 +514,61 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     G.showGeneralFailure();
                 }
             });
+        },
+
+        ShowSavedResumeRequest: function(requestId, shortlistId) {
+            Ext.Ajax.request({
+                url: ApiBaseUrl+'Requests/GetRequestedResumes?requestId='+requestId+'&shortlistid='+shortlistId,
+                method: 'Get',
+                headers: { 'Content-Type': 'application/json' },
+                success: function(conn, response, options, eOpts) {
+
+                    var result = Ext.JSON.decode(conn.responseText);
+                    if (result.success) {
+                        if(result.items!==null){
+                            var ResultSavedStore  = Ext.getStore('SearchResultSaved');
+                            ResultSavedStore.removeAll();
+                            //ResultSavedStore.sync();
+
+                            result.items.forEach(function(item,index){
+                                var model = new ProDooMobileApp.model.SearchResultSaved();
+                                model.set(item);
+                                ResultSavedStore.add(model);
+                            });
+
+                            G.Push('SearchResultSavedScreen');
+                            G.get('comeFrom').setValue('shortlist');
+
+                            // for shortlist we dont need to show other icons
+                            Ext.select('.SrNo').hide();
+
+                            Ext.select('.saveIconDiv').hide();
+
+                            Ext.select('.rightBottomSearchResultButtons').hide();
+
+
+
+                            Ext.select('.resultRight').elements.forEach(function(item,index){
+                                item.className = 'shortlistResultRight';
+                            });
+                            // G.get('titleHeader').setData( { Total:shortlistName}).show();
+
+                        }
+                        else{
+                            Ext.Msg.alert('Status', 'No matched resume found!',null);
+                        }
+                    } else {
+
+                    }
+
+
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+
+                }
+            });requestId
+
         }
     },
 

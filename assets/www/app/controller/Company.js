@@ -66,6 +66,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
     },
 
     onCompanyDetailTplItemTap: function(dataview, index, target, record, e, eOpts) {
+
         var selectedItem = e.target;
         if(selectedItem.className.indexOf('compArrowDown')>=0){
             Ext.get(selectedItem).toggleCls('compArrowUp');
@@ -84,7 +85,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
             }
         }
         else if(selectedItem.className.indexOf('companyEdit')>=0){
-            G.ShowView('CompanyEdit');
+            G.Push('CompanyEdit');
             var form = G.get('CompanyAddForm');
             form.setValues(record.data);
             G.get('companyImg').setSrc(record.data.Logo);
@@ -125,7 +126,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
     },
 
     onCompanyAddNewBtnTap: function(button, e, eOpts) {
-        G.ShowView('CompanyEdit');
+        G.Push('CompanyEdit');
     },
 
     onCompanyAddressInitialize: function(component, eOpts) {
@@ -141,7 +142,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
     },
 
     onCompanyEditBackBtnTap: function(button, e, eOpts) {
-        G.ShowView('CompanyDetail');
+        G.Pop();
     },
 
     onCompanyEditConfirmTap: function(button, e, eOpts) {
@@ -193,7 +194,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
                     Ext.getStore('CompanyDetail').load({
                         params : { userId : loggedUserId }
                     });
-                    G.ShowView('CompanyDetail');
+                    G.Pop();
                 } else {
                     G.showGeneralFailure();
                 }

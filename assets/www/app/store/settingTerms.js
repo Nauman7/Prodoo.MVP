@@ -17,28 +17,15 @@ Ext.define('ProDooMobileApp.store.settingTerms', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'Ext.data.Field'
+        'ProDooMobileApp.model.SettingTerm',
+        'Ext.data.proxy.Memory'
     ],
 
     config: {
-        data: [
-            {
-                MainHeading: 'Terms Of Service',
-                Heading: 'PROODOO Terms of condition of use',
-                Detail: 'Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.'
-            }
-        ],
+        model: 'ProDooMobileApp.model.SettingTerm',
         storeId: 'settingTerms',
-        fields: [
-            {
-                name: 'MainHeading'
-            },
-            {
-                name: 'Heading'
-            },
-            {
-                name: 'Detail'
-            }
-        ]
+        proxy: {
+            type: 'memory'
+        }
     }
 });

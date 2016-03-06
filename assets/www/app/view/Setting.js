@@ -18,9 +18,10 @@ Ext.define('ProDooMobileApp.view.Setting', {
     alias: 'widget.Setting',
 
     requires: [
-        'Ext.Container',
         'Ext.Label',
-        'Ext.Button'
+        'Ext.Button',
+        'Ext.dataview.DataView',
+        'Ext.XTemplate'
     ],
 
     config: {
@@ -169,7 +170,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                                     'labelCls',
                                     'right'
                                 ],
-                                html: '0.1'
+                                html: '',
+                                itemId: 'currentVersion'
                             }
                         ]
                     },
@@ -195,7 +197,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                                     'labelCls',
                                     'right'
                                 ],
-                                html: '0.2'
+                                html: '',
+                                itemId: 'latestVersion'
                             }
                         ]
                     },
@@ -281,7 +284,7 @@ Ext.define('ProDooMobileApp.view.Setting', {
                     {
                         xtype: 'label',
                         cls: 'labelCls',
-                        html: 'HELP'
+                        html: 'FAQ'
                     },
                     {
                         xtype: 'button',
@@ -295,69 +298,19 @@ Ext.define('ProDooMobileApp.view.Setting', {
                 hidden: true,
                 items: [
                     {
-                        xtype: 'container',
-                        cls: [
-                            'settingInnerCnt',
-                            'bbBlack',
-                            'center'
+                        xtype: 'dataview',
+                        cls: 'faqList',
+                        height: 195,
+                        itemId: 'FaqList',
+                        itemTpl: [
+                            '<div class="settingInnerCnt bbBlack">',
+                            '<div class="labelCls">{Title}</div> ',
+                            '    <div class="SettingRightBtn"></div>',
+                            '    <br/>',
+                            '<!-- <div>A: {Answer}</div><br/> -->',
+                            '    </div>'
                         ],
-                        padding: '15 15 15 15',
-                        items: [
-                            {
-                                xtype: 'label',
-                                cls: [
-                                    'labelCls',
-                                    'center'
-                                ],
-                                html: 'FAQ\'s'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'container',
-                        cls: [
-                            'settingInnerCnt',
-                            'bbBlack'
-                        ],
-                        padding: '15 70 15 15',
-                        items: [
-                            {
-                                xtype: 'label',
-                                cls: [
-                                    'labelCls',
-                                    'left'
-                                ],
-                                html: 'How do i restore my messages?'
-                            },
-                            {
-                                xtype: 'button',
-                                cls: 'SettingRightBtn',
-                                itemId: 'SettingRightBtn'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'container',
-                        cls: [
-                            'settingInnerCnt',
-                            'bbBlack'
-                        ],
-                        padding: '15 70 15 15',
-                        items: [
-                            {
-                                xtype: 'label',
-                                cls: [
-                                    'labelCls',
-                                    'left'
-                                ],
-                                html: 'How do i get more jobs?'
-                            },
-                            {
-                                xtype: 'button',
-                                cls: 'SettingRightBtn',
-                                itemId: 'SettingRightBtn'
-                            }
-                        ]
+                        store: 'FaqStore'
                     }
                 ]
             },
@@ -419,6 +372,11 @@ Ext.define('ProDooMobileApp.view.Setting', {
                 delegate: '#ArrowHelp'
             },
             {
+                fn: 'onFaqListItemTap',
+                event: 'itemtap',
+                delegate: '#FaqList'
+            },
+            {
                 fn: 'onHomeBtn1Tap',
                 event: 'tap',
                 delegate: '#SettingsHomeButton'
@@ -476,40 +434,73 @@ Ext.define('ProDooMobileApp.view.Setting', {
         else{
             Cnt.element.next().show();
             Cnt.addCls('settingActiveCnt');
+            var store = Ext.getStore('ConfigurationStore');
+            store.load({
+            scope: this,
+            callback: function(records,operation,success){
+                    if(success){
+                     var store = Ext.getStore('ConfigurationStore');
+                        var latestVersionNumber = store.findRecord('ConfigName','Release Version');
+                        var currentVersion = store.findRecord('ConfigName','CurrentVersion');
+                        if(latestVersionNumber !== null){
+                        G.get('latestVersion').setHtml(latestVersionNumber.get('ConfigValue'));
+                      }
+                        if(currentVersion!==null){
+                            G.get('currentVersion').setHtml(currentVersion.get('ConfigValue'));
+                        }
+                    }//end if
+            }
+            });
         }
+
     },
 
     onMybutton23Tap11212: function(button, e, eOpts) {
-        // G.ShowView('SettingDetail');
         G.Push('SettingDetail');
-        //var view = Ext.create('ProDooMobileApp.view.SettingDetail');
-        //Ext.Viewport.setActiveItem(view);
-
-
         var list = G.get('settingList');
-        list.setStore('settingTerms');
+        var store = Ext.getStore('ConfigurationStore');
+        var termsOfService = store.findRecord('ConfigName','Terms and Condition');
+        if(termsOfService !== null){
+        var model = Ext.create('ProDooMobileApp.model.SettingTerm');
+        model.set('MainHeading', 'Terms Of Service');
+        model.set('Heading','PROODOO Terms of condition of use');
+        model.set('Detail', termsOfService.get('ConfigValue'));
+        var listStore = list.getStore();
+            listStore.removeAll();
+            listStore.add(model);
+         }
     },
 
     onMybutton23Tap112121: function(button, e, eOpts) {
-        // G.ShowView('SettingDetail');
         G.Push('SettingDetail');
-        // var view = Ext.create('ProDooMobileApp.view.SettingDetail');
-        // Ext.Viewport.setActiveItem(view);
-
         var list = G.get('settingList');
-        list.setStore('settingPrivacy');
+        var store = Ext.getStore('ConfigurationStore');
+        var termsOfService = store.findRecord('ConfigName','Privacy policy');
+        if(termsOfService !== null){
+        var model = Ext.create('ProDooMobileApp.model.SettingTerm');
+        model.set('MainHeading', 'Privacy Policy');
+        model.set('Heading','PROODOO Privacy Policy');
+        model.set('Detail', termsOfService.get('ConfigValue'));
+        var listStore = list.getStore();
+            listStore.removeAll();
+            listStore.add(model);
+         }
     },
 
     onMybutton23Tap1121211: function(button, e, eOpts) {
-        //         G.ShowView('SettingDetail');
         G.Push('SettingDetail');
-
-        // var view = Ext.create('ProDooMobileApp.view.SettingDetail');
-        // Ext.Viewport.setActiveItem(view);
-
-        var list =G.get('settingList');
-        list.setStore('settingNotice');
-
+        var list = G.get('settingList');
+        var store = Ext.getStore('ConfigurationStore');
+        var termsOfService = store.findRecord('ConfigName','Legal notice');
+        if(termsOfService !== null){
+        var model = Ext.create('ProDooMobileApp.model.SettingTerm');
+        model.set('MainHeading', 'Legal Notices');
+        model.set('Heading','PROODOO Legal Notices');
+        model.set('Detail', termsOfService.get('ConfigValue'));
+        var listStore = list.getStore();
+            listStore.removeAll();
+            listStore.add(model);
+         }
     },
 
     onArrowHelpTap: function(button, e, eOpts) {
@@ -521,7 +512,27 @@ Ext.define('ProDooMobileApp.view.Setting', {
         else{
             Cnt.element.next().show();
             Cnt.addCls('settingActiveCnt');
+            var store = Ext.getStore('FaqStore');
+        store.load();
         }
+
+
+    },
+
+    onFaqListItemTap: function(dataview, index, target, record, e, eOpts) {
+        var Target = Ext.get(e.target);
+        if(Target.hasCls('SettingRightBtn')){
+            G.Push('SettingDetail');
+            var list = G.get('settingList');
+            var model = Ext.create('ProDooMobileApp.model.SettingTerm');
+            model.set('MainHeading', 'FAQ');
+            model.set('Heading',record.data.Title);
+            model.set('Detail',record.data.Answer);
+            var listStore = list.getStore();
+            listStore.removeAll();
+            listStore.add(model);
+        }
+
     },
 
     onHomeBtn1Tap: function(button, e, eOpts) {

@@ -98,7 +98,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             Cnt.down('#topButtons').hide();
             Cnt.down('#ReplyBtn').hide();
             Cnt.down('#MsgDetailReply').hide();
-            Cnt.down('#backPrevScreenBtn').hide();
         },
 
         searchMessages: function(textfield) {
@@ -202,9 +201,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             },
             "button#SendBtn": {
                 tap: 'onsendBtnTap'
-            },
-            "MsgInbox button#backPrevScreenBtn": {
-                tap: 'onBackPrevScreenBtnTap'
             }
         }
     },
@@ -424,6 +420,8 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.show('MsgCreateNew');
         G.show('backBtn');
         G.show('SendBtn');
+        VisibleScreen = 'CreateMessage';
+
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
         var str=Ext.getStore("UserStore");
         str.load({
@@ -484,6 +482,8 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.show('topButtons');
         // G.hide('ReplyBtn');
         // G.hide('MsgDetailReply');
+        VisibleScreen = null;
+
     },
 
     onsendBtnTap: function(button, e, eOpts) {
@@ -572,10 +572,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             if (messageBody === null || messageBody.trim() === "")
             { Ext.Msg.alert('', 'Please add message to proceed'); }
         }
-    },
-
-    onBackPrevScreenBtnTap: function(button, e, eOpts) {
-        G.Pop();
     }
 
 });

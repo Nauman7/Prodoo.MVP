@@ -739,7 +739,7 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         showHomeView: function() {
-            G.ShowView('StartScreen');
+            G.Pop();
             G.get('StartScreen').setActiveItem(ActiveScreen);
             G.setLoggedUsername(Ext.getStore('AuthStore').getAt(0).get('FirstName'));
         },
@@ -762,6 +762,36 @@ Ext.define('ProDooMobileApp.controller.G', {
         ValidateAlphanumeric: function(alphanumeric) {
             var re = /^[a-zA-Z0-9' '_./#&-]+$/;
             return re.test(alphanumeric);
+        },
+
+        GoBackScreen: function() {
+            mainView = Ext.ComponentQuery.query('navigationview')[0];
+
+            if(mainView.innerItems.length==1){
+                Ext.Msg.show({
+                    title: '',
+                    message: 'Do you want to leave Prodoo?',
+                    buttons: [
+                    {
+                        text: 'No',
+                        ui: 'decline'
+                    },
+                    {
+                        text: 'Yes',
+                    }
+                    ],
+                    fn: function (buttonId) {
+                        if(buttonId == 'Yes'){
+                            return true;
+                        }
+                        else
+                        return false;
+                    }
+                });
+            }
+            else{
+                G.Pop();
+            }
         }
     },
 

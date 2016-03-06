@@ -89,6 +89,12 @@ Ext.define('ProDooMobileApp.view.Register', {
                         name: 'IsFreelancer',
                         placeHolder: 'Choose Preferred Usage',
                         autoSelect: false,
+                        defaultPhonePickerConfig: {
+                            zIndex: 999
+                        },
+                        defaultTabletPickerConfig: {
+                            zIndex: 999
+                        },
                         displayField: 'Type',
                         store: 'UserType',
                         valueField: 'Val'

@@ -87,3 +87,13 @@
 		padding: 0 !important;
 	}
 }
+
+.faqList{
+	.settingInnerCnt{
+		@extend .clearfix;
+		padding: 15px 70px 15px 15px;
+	}
+	.labelCls{
+		float: left;
+	}
+}

@@ -129,7 +129,10 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 itemTpl: [
                     '<div class="requestListCnt">',
                     '    <span class="reqListNo">{RequestId}</span>',
-                    '    <span class="reqListName">{RequestName}</span>',
+                    '    <span class="reqListName">{RequestName} </span> ',
+                    '    <span class="roundSpan">{CountNoAction}</span>',
+                    '    <span class="roundSpan green">{CountConfirmed}</span>',
+                    '    <span class="roundSpan red">{CountDeleted}</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',
                     '    </span>',

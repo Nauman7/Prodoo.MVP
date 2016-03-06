@@ -87,7 +87,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             if(certifications.items.length > 2){
                 certifications.items.forEach(function(item, index){
                     if(index > 1){
-                        certificationIds.push(item.getAt(2).getHtml());
+                        certificationIds.push(item.getAt(2).getValue());
                     }
                 });
             }
@@ -136,14 +136,16 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             {
                 Ext.Msg.confirm('Confirm', 'Do you want to save the current search parameters to be able to retrieve it later? If you press "No" you will be presented with the list of already saved searches.', function(btn){
                     if(btn === 'yes'){
-                        Ext.Msg.prompt('Add search title', '',function(button,text){
-                            if(button==='ok')
-                            {
-                                searchObject.SearchName = text;
-                                SaveSearch.SaveSearchParameters(searchObject, directSave);
-                            }
+                        Ext.defer( function() {
+                            Ext.Msg.prompt('Add search title', '',function(button,text){
+                                if(button==='ok')
+                                {
+                                    searchObject.SearchName = text;
+                                    SaveSearch.SaveSearchParameters(searchObject, directSave);
+                                }
 
-                        });
+                            });
+                        }, 10 );
 
                     }
                     else{
@@ -205,8 +207,9 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                     success: function(conn, response, options, eOpts) {
                         var result = Ext.JSON.decode(conn.responseText);
                         if (result.success) {
-
-                            G.ShowView('SearchResult');
+                            G.Pop();
+                            G.Pop();
+                            G.Push('SearchResult');
                             if(result.items.Profiles.length > 0){
                                 result.items.Profiles.forEach(function(item,index){
                                     var profileLabel = Ext.getStore('SearchProfile').findRecord('ProfileId',item[0]).data.ProfileValue;
@@ -272,10 +275,10 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 params : { userId : loggedUserId
                 }
             });
-            if(G.get('SearchResultSavedScreenId')!==undefined)
+            // if(G.get('SearchResultSavedScreenId')!==undefined)
             G.Push('SavedSearch');
-            else
-            G.ShowView('SavedSearch');
+            // else
+            // G.ShowView('SavedSearch');
         },
 
         SaveSearchParameters: function(dataObject, directSave) {
