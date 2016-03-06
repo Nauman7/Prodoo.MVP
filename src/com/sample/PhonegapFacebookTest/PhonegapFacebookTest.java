@@ -33,5 +33,14 @@ public class PhonegapFacebookTest extends DroidGap
         //super.loadUrl("file:///android_asset/www/index.html");
         super.loadUrl(Config.getStartUrl());
     }
+    
+    @Override
+public void onBackPressed() {
+    //boolean isExit= sendJavascript("javascript:G.GoBackScreen();");
+    //if(isExit)
+    // super.onBackPressed();
+    
+    sendJavascript("javascript:G.GoBackScreen();");
+}
 }
 
