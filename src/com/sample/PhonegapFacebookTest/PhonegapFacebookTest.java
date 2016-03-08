@@ -19,11 +19,27 @@
 
 package com.sample.PhonegapFacebookTest;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
+
 import org.apache.cordova.*;
 
-public class PhonegapFacebookTest extends DroidGap
+import com.facebook.internal.Logger;
+
+import android.content.Intent;
+
+public class PhonegapFacebookTest extends CordovaActivity
 {
+	private String TAG = null;
+	public static Context ctx = null;
+	public static boolean isMainView = false; 
+	private BroadcastReceiver mainViewReceiver = null;
+	private IntentFilter MainViewIntentFilter = null;
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -34,13 +50,70 @@ public class PhonegapFacebookTest extends DroidGap
         super.loadUrl(Config.getStartUrl());
     }
     
+    private void onBack(){
+		moveTaskToBack(true);
+	}
+    /*
+    
     @Override
-public void onBackPressed() {
+	public void onBackPressed() {
     //boolean isExit= sendJavascript("javascript:G.GoBackScreen();");
     //if(isExit)
     // super.onBackPressed();
     
     sendJavascript("javascript:G.GoBackScreen();");
-}
+	}
+    */
+	@Override
+	protected void onStop()
+	{
+		String TAG = " Class > PhonegapFacebookTest :: Method > onStop";
+		
+		try{
+			super.onStop();
+			unregisterReceiver(mainViewReceiver);
+		}catch(Exception ex){
+			Log.v(TAG, ex.toString());
+		}finally{
+			TAG = "";
+		}
+	}
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onBackPressed(){
+		TAG = " Class > PhonegapFacebookTest :: Method > onBackPressed";
+		
+		try{
+			sendJavascript("javascript:G.GoBackScreen();");
+			MainViewIntentFilter = new IntentFilter("com.prodoo.app.CHECK_MAIN_VIEW");
+			mainViewReceiver = new BroadcastReceiver() {
+	            
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					
+					String TAG = " Class > PhonegapFacebookTest :: Method > mReceiver - onReceive";
+					
+					try{
+						
+						if(isMainView){
+							((PhonegapFacebookTest) ctx).onBack();
+						}
+						
+						
+					}catch(Exception ex){
+						Log.v(TAG, ex.toString());
+					}finally{
+						TAG = "";
+					}
+				}
+	        };
+	        
+	        registerReceiver(mainViewReceiver, MainViewIntentFilter);
+	        
+		}catch(Exception ex){
+		//	Logger.v(TAG, ex);
+		}
+	}
 }
 

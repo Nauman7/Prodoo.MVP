@@ -781,11 +781,26 @@ Ext.define('ProDooMobileApp.controller.G', {
                     }
                     ],
                     fn: function (buttonId) {
-                        if(buttonId == 'Yes'){
+                    var args = {
+				        isMainView:buttonId == 'Yes'
+				       };
+				       
+                       /* if(buttonId == 'Yes'){
                             return true;
                         }
                         else
                         return false;
+                        */
+                   cordova.exec(
+			        function(success){
+			         //console.log('Successfully called');
+			        },
+			        function(failed){
+			         //console.log('failed to call native function');
+			        },
+			        "com.prodo.plugins.BackButtonCallbackPlugin",
+			        "executeBBCPlugin",
+			        [args]);
                     }
                 });
             }
