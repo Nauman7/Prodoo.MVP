@@ -43,6 +43,8 @@ public class PhonegapFacebookTest extends CordovaActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+    	ctx=this;
+    	
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         super.setIntegerProperty("loadUrlTimeoutValue", 70000);
