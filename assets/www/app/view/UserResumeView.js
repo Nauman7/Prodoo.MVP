@@ -284,7 +284,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             button.removeCls('busyBtn');
             var Cnt = button.up('#availabilityCnt');
             Cnt.removeCls('BusyCnt');
-            Cnt.down('#availabilityLbl').setHtml('Available now!');
+            Cnt.down('#availabilityLbl').setHtml('Available');
         }
         else{
             button.addCls('busyBtn');

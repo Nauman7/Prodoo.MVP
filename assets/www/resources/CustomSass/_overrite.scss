@@ -82,7 +82,7 @@
 // }
 // .x-form .x-scroll-container{
 // 	background-color: transparent !important;
-	
+
 // }
 
 // .x-form-fieldset .x-form-fieldset-inner{
@@ -92,7 +92,7 @@
 // .x-field {
 // 	padding: 15px .5em;
 // 	background-color: transparent;
-	
+
 // }
 
 // .x-input-el {
@@ -139,4 +139,49 @@
 }
 .x-field-select .x-field-mask{
     z-index: 1;
+}
+
+
+
+.x-msgbox {
+    padding: 0;
+    border: none;
+    background: #FFFFFF;
+    .x-toolbar {
+        padding: 0;
+    }
+    .x-toolbar .x-body {
+        min-height: 40px;
+        background: red;
+        width: 100%;
+        margin: 0;
+        border-radius: 5px 5px 0 0;
+        background: #ed6363 !important; 
+        border-bottom: 2px solid #e0dcdc;
+    }
+    .x-dock-horizontal{
+        padding: 0 10px;
+    }
+    .x-toolbar.x-docked-top {
+        height: auto;
+    }
+    .x-field-text {
+        border: 2px solid #2D1F55 !important;
+    }
+}
+
+.x-msgbox-inner {
+    color: #000;
+}
+.x-toolbar .x-button.x-button-action, .x-toolbar-light .x-button {
+    background: #04caa7;
+    padding: 6px 5px;
+    margin-bottom: 10px;
+    &.x-button-pressing {
+        background: darken(#04caa7, 10);
+    }
+
+}
+.x-msgbox-buttons .x-button-normal span{
+    opacity: 1;
 }

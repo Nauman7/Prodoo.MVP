@@ -251,9 +251,9 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 items: [
                     {
                         xtype: 'list',
-                        scrollable: true,
+                        scrollable: false,
                         cls: 'MsgDetailView',
-                        itemId: '',
+                        itemId: 'MsgDetailView',
                         itemTpl: [
                             '<div class="MsgView">',
                             '    <div class="msgDetailTitle">',
@@ -488,6 +488,11 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 fn: 'onrequestListTap1',
                 event: 'itemtap',
                 delegate: '#requestInboxList'
+            },
+            {
+                fn: 'onMsgDetailListShow',
+                event: 'show',
+                delegate: '#MsgDetailList'
             }
         ]
     },
@@ -502,13 +507,20 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
         Requests.TapRequestTitle(target, 0, record);
     },
 
+    onMsgDetailListShow: function(component, eOpts) {
+        var list = G.get('MsgDetailView').element.query('.MsgView')[0];
+        var viewHeight = Ext.get(list).getHeight();
+        G.get('MsgDetailView').setHeight(Math.max(viewHeight, Ext.getBody().getHeight() - 37));
+    },
+
     AdjustListHeight: function(component) {
         component.on('refresh',function(){
-
-            this.setHeight(null);
-            var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
-            if(ViewHeight > 10)
-                this.setHeight(ViewHeight);
+            if(!G.get('MsgViewCnt').isHidden()){
+                this.setHeight(null);
+                var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
+                if(ViewHeight > 10)
+                    this.setHeight(ViewHeight);
+            }
         });
     }
 

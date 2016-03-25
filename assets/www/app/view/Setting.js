@@ -432,24 +432,24 @@ Ext.define('ProDooMobileApp.view.Setting', {
 
         }
         else{
+            if(currentVersionNumber!==null)
+                G.get('currentVersion').setHtml(currentVersionNumber);
+
             Cnt.element.next().show();
             Cnt.addCls('settingActiveCnt');
             var store = Ext.getStore('ConfigurationStore');
             store.load({
-            scope: this,
-            callback: function(records,operation,success){
+                scope: this,
+                callback: function(records,operation,success){
                     if(success){
-                     var store = Ext.getStore('ConfigurationStore');
+                        var store = Ext.getStore('ConfigurationStore');
                         var latestVersionNumber = store.findRecord('ConfigName','Release Version');
-                        var currentVersion = store.findRecord('ConfigName','CurrentVersion');
                         if(latestVersionNumber !== null){
-                        G.get('latestVersion').setHtml(latestVersionNumber.get('ConfigValue'));
-                      }
-                        if(currentVersion!==null){
-                            G.get('currentVersion').setHtml(currentVersion.get('ConfigValue'));
+                            G.get('latestVersion').setHtml(latestVersionNumber.get('ConfigValue'));
                         }
+
                     }//end if
-            }
+                }
             });
         }
 

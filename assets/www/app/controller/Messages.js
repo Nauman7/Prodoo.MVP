@@ -91,6 +91,9 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             Cnt.down('#MsgDetailList').hide();
             Cnt.down('#backBtn').hide();
             Cnt.down('#SendBtn').hide();
+            Cnt.down('#MsgInboxLbl').hide();
+            Cnt.down('#requestInboxList').hide();
+            Cnt.down('#invitationLabel').hide();
             Cnt.down('#EditBtn').hide();
             Cnt.down('#MsgList').hide();
             Cnt.down('#HomeBtn').hide();
@@ -277,21 +280,23 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
                             Messages.hideAll();
 
-                            G.show('MsgDetailList');
+
 
                             G.show('backBtn');
 
                             G.show('ReplyBtn');
+                    G.get('buttonsLabel').setHtml('Message detail');
 
                             isInbox=true;
                             isSent=false;
 
-                             G.get('selectedMsg').data = record;
+                            G.get('selectedMsg').data = record;
                             Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
                             Ext.query(".msgDetailMsg")[0].innerText=record.data.MessageBody;
                             Ext.query(".msgDetailUsername")[0].innerText=record.data.UserName;
                             Ext.query(".msgDetailDate")[0].innerText=G.GetSpecificTimePeriod(record.data.DateCreated);
                             Ext.query(".msgDetailTime")[0].innerText=G.GetSpecificTime(record.data.DateCreated);
+                            G.show('MsgDetailList');
                         }
                         else { G.showGeneralFailure(); }
 
@@ -306,7 +311,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             {
                 Messages.hideAll();
                 //         G.hide('MsgCreateNew');
-                G.show('MsgDetailList');
+        //         G.show('MsgDetailList');
                 //         G.hide('MsgInboxList');
                 //         G.hide('SendBtn');
                 //         G.hide('EditBtn');
@@ -316,12 +321,14 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                 else
                     G.hide('ReplyBtn');
 
+                G.get('buttonsLabel').setHtml('Message detail');
                 G.get('selectedMsg').data = record;
                 Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
                 Ext.query(".msgDetailMsg")[0].innerText=record.data.MessageBody;
                 Ext.query(".msgDetailUsername")[0].innerText=record.data.UserName;
                 Ext.query(".msgDetailDate")[0].innerText=G.GetSpecificTimePeriod(record.data.DateCreated);
                 Ext.query(".msgDetailTime")[0].innerText=G.GetSpecificTime(record.data.DateCreated);
+                G.show('MsgDetailList');
             }
         }
     },
@@ -336,13 +343,12 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.get("MessageSearchField").reset();
         var Label=G.get('MsgInboxLbl').setHtml('Inbox');
         Label.replaceCls('reqSendIcon','reqInboxIcon');
-
         if(Ext.getStore('AuthStore').getAt(0).data.IsFreelancer)
         {
             G.show('requestInboxList');
             G.show('invitationLabel');
         }
-
+        G.show('MsgInboxLbl');
         G.get('buttonsLabel').setHtml('Inbox');
     },
 
@@ -420,6 +426,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.show('MsgCreateNew');
         G.show('backBtn');
         G.show('SendBtn');
+        G.get('buttonsLabel').setHtml('New message');
         VisibleScreen = 'CreateMessage';
 
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
@@ -455,6 +462,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         Ext.query(".msgDetailTime")[1].innerText=G.GetSpecificTime(rec.data.DateCreated);
         G.show('backBtn');
         G.show('SendBtn');
+        G.get('buttonsLabel').setHtml('Reply');
         G.get('replyMsgArea').reset('');
         isCreateNew=false;
     },
@@ -480,9 +488,29 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.show('HomeBtn');
         G.show('searchCnt');
         G.show('topButtons');
+        G.show('MsgInboxLbl');
         // G.hide('ReplyBtn');
         // G.hide('MsgDetailReply');
+
         VisibleScreen = null;
+
+        var topBtns = G.get('topButtons');
+        var items =  topBtns.items.items;
+        items.forEach(function(item,index){
+            if (item.element.dom.classList.contains('activeBtn'))
+                if(index === 0){
+                    G.get('buttonsLabel').setHtml('Inbox');
+
+                    if(Ext.getStore('AuthStore').getAt(0).data.IsFreelancer )
+                    {
+                        G.show('requestInboxList');
+                        G.show('invitationLabel');
+                    }
+                }
+                else  if(index === 1){
+                    G.get('buttonsLabel').setHtml('Sent');
+                }
+        });
 
     },
 
@@ -516,7 +544,10 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                     record.data.Subject=subject;
                 }
                 else
+                {
                     Ext.Msg.alert('', 'Please add at least one reciever to proceed');
+                    return;
+                }
             }
             else
             {
@@ -544,17 +575,12 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
                         Messages.hideAll();
                         G.get('MsgViewCnt').addCls('MsgInboxCnt');
-                        //                 G.hide('MsgCreateNew');
-                        //                 G.hide('MsgDetailList');
                         G.show('MsgList');
-                        //                 G.hide('SendBtn');
+                        G.show('MsgInboxLbl');
                         G.show('EditBtn');
-                        //                 G.hide('backBtn');
                         G.show('HomeBtn');
                         G.show('searchCnt');
                         G.show('topButtons');
-                        //                 G.hide('ReplyBtn');
-                        //                 G.hide('MsgDetailReply');
                     }
                     else { G.showGeneralFailure(); }
 

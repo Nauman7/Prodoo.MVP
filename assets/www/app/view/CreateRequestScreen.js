@@ -221,13 +221,8 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 labelWidth: 90,
                                 name: 'StartDate',
-                                value: {
-                                    year: 2015,
-                                    month: 7,
-                                    day: 26
-                                },
                                 placeHolder: 'mm/dd/yyyy',
-                                dateFormat: 'd/m/y',
+                                dateFormat: 'm/d/y',
                                 picker: {
                                     zIndex: 30
                                 },
@@ -235,6 +230,10 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     {
                                         fn: function(component, eOpts) {
                                             component.setLabelAlign('left');
+                                            var d= new Date();
+                                            d.getFullYear();
+                                            component.getPicker().setYearFrom(d.getFullYear());
+                                            component.getPicker().setYearTo(d.getFullYear()+5);
                                         },
                                         event: 'initialize'
                                     }
@@ -636,7 +635,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
     ShowSavedResume: function(button, e, eOpts) {
         var form = button.up()
         var values = form.getValues();
-        Requests.ShowSavedResumeRequest(values.RequestId, G.get('hfShortlistId').getValue());
+        Requests.ShowSavedResumeRequest(values.RequestId);
     },
 
     onBackBtnTap: function(button, e, eOpts) {

@@ -60,7 +60,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         clearIcon: false,
                         labelAlign: 'top',
                         name: 'Email',
-                        value: 'nauman@prodoo.dk',
+                        value: '',
                         maxLength: 50,
                         placeHolder: 'Email'
                     },
@@ -71,7 +71,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         clearIcon: false,
                         labelAlign: 'top',
                         name: 'Password',
-                        value: 'password',
+                        value: '',
                         maxLength: 50,
                         placeHolder: 'Password'
                     }
@@ -118,18 +118,6 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         event: 'painted'
                     }
                 ]
-            },
-            {
-                xtype: 'passwordfield',
-                cls: 'field',
-                itemId: 'LoginPassword1',
-                margin: '100 0 0 ',
-                clearIcon: false,
-                labelAlign: 'top',
-                name: 'Password',
-                value: 'password',
-                maxLength: 50,
-                placeHolder: 'Password'
             },
             {
                 xtype: 'container',

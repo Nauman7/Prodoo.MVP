@@ -155,7 +155,7 @@ Ext.application({
         else if(window.location.href.indexOf('staging')>0)
             ApiBaseUrl= "http://mobile.staging.prodoo.dk/WebAPI/api/";
         else
-            ApiBaseUrl= "http://mobile.dev.prodoo.dk/WebAPI/api/";
+            ApiBaseUrl= "http://mobile.staging.prodoo.dk/WebAPI/api/";
 
         // setting loading mask on viewport
         Ext.Viewport.setMasked({xtype:'loadmask',message:'loading...'});

@@ -492,47 +492,51 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
         if(ResumeIdList && ResumeIdList.length>0){
 
 
-              Ext.Msg.show({
-            title: '',
-            message: 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.',
-            buttons: [{
-                 text: 'Cancel',
-                ui: 'decline'
-            }, {
-                text: 'No',
-            },{
-                text: 'Continue',
-            }
-                 ],
-            fn: function (buttonId) {
-              if(buttonId == 'Continue'){
-
-
-            G.Push('CreateRequestScreen');
-
-            G.get('DraftRequestBtn').hide(); // dont need draft icon
-
-            var saveSearchDD= G.get('fieldSavedSearchedId');
-            saveSearchDD.disable();
-            saveSearchDD.setPlaceHolder("Current Search");
-
-            localStorage.SubmitDirectRequest=true;
-
-
-            var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-
-            var companyStore = Ext.getStore('CompanyDetail');
-            companyStore.clearData();
-            companyStore.load({
-                params : { userId : loggedUserId
-                         }
-            });
-
+            Ext.Msg.show({
+                title: '',
+                message: 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.',
+                buttons: [{
+                    text: 'Cancel',
+                    ui: 'decline'
+                }, {
+                    text: 'No',
+                },{
+                    text: 'Continue',
                 }
-                else if(buttonId== 'No')
-                 Requests.ShowRequestView(true,true);
-          }
-        });
+                         ],
+                fn: function (buttonId) {
+                    if(buttonId == 'Continue'){
+
+                        G.Push('CreateRequestScreen');
+
+                        //PD-170- set search available date as default date
+                        var searchedDate=G.get('SearchDatepicker')
+                        if(searchedDate)
+                            G.get('mydatepicker').setValue(searchedDate.getValue());
+                        // End of Pd-170
+
+                        G.get('DraftRequestBtn').hide(); // dont need draft icon
+                        var saveSearchDD= G.get('fieldSavedSearchedId');
+                        saveSearchDD.disable();
+                        saveSearchDD.setPlaceHolder("Current Search");
+
+                        localStorage.SubmitDirectRequest=true;
+
+
+                        var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+
+                        var companyStore = Ext.getStore('CompanyDetail');
+                        companyStore.clearData();
+                        companyStore.load({
+                            params : { userId : loggedUserId
+                                     }
+                        });
+
+                    }
+                    else if(buttonId== 'No')
+                        Requests.ShowRequestView(true,true);
+                }
+            });
 
 
         }

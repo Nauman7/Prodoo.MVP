@@ -767,7 +767,9 @@ Ext.define('ProDooMobileApp.controller.G', {
         GoBackScreen: function() {
             mainView = Ext.ComponentQuery.query('navigationview')[0];
 
+
             if(mainView.innerItems.length==1){
+
                 Ext.Msg.show({
                     title: '',
                     message: 'Do you want to leave Prodoo?',
@@ -781,32 +783,31 @@ Ext.define('ProDooMobileApp.controller.G', {
                     }
                     ],
                     fn: function (buttonId) {
-                    var args = {
-				        isMainView:buttonId == 'Yes'
-				       };
-				       
-                       /* if(buttonId == 'Yes'){
-                            return true;
-                        }
-                        else
-                        return false;
-                        */
-                   cordova.exec(
-			        function(success){
-			         //console.log('Successfully called');
-			        },
-			        function(failed){
-			         //console.log('failed to call native function');
-			        },
-			        "com.prodo.plugins.BackButtonCallbackPlugin",
-			        "executeBBCPlugin",
-			        [args]);
+
+                        var args = {
+                            isMainView:buttonId == 'Yes'
+                        };
+
+
+                        
+                        cordova.exec(
+                        function(success){
+                        console.log('Tap button Cordova success');
+                        },
+                        function(failed){
+                        console.log('Tap button Cordova failed');
+                        },
+                        "com.prodo.plugins.BackButtonCallbackPlugin",
+                        "executeBBCPlugin",
+                        [args]);
+                        
                     }
                 });
             }
             else{
                 G.Pop();
             }
+
         }
     },
 

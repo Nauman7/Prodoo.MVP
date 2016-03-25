@@ -71,7 +71,7 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
                         label: 'Name',
                         labelCls: 'labelCls',
                         name: 'CompanyName',
-                        maxLength: 30
+                        maxLength: 50
                     },
                     {
                         xtype: 'textfield',

@@ -160,13 +160,15 @@ Ext.define('ProDooMobileApp.controller.Company', {
             return null;
         }
 
+        /*
+        Pd-216
         if(obj.CompanyName != null && obj.CompanyName != "" &&  !G.ValidateAlphabet(obj.CompanyName))
         {
             fields.CompanyName.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save,  Name is invalid.");
             return null;
         }
-
+        */
         if(obj.CompanyAddress != null && obj.CompanyAddress != "" && !G.ValidateAlphanumeric(obj.CompanyAddress))
         {
             fields.CompanyAddress.addCls('isRequired');

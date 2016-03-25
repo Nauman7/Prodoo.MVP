@@ -216,20 +216,19 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 label: 'Start Date',
                 labelCls: 'iYellow',
                 labelWidth: 120,
-                value: {
-                    day: new Date().getDate(),
-                    month: (new Date().getMonth()+1),
-                    year: new Date().getFullYear()
-                },
+                dateFormat: 'm/d/y',
                 picker: {
                     height: '100%',
-                    zIndex: 35,
-                    yearFrom: 2015,
-                    yearTo: 2099
+                    zIndex: 35
                 },
                 listeners: [
                     {
                         fn: function(component, eOpts) {
+                            var d= new Date();
+                            d.getFullYear();
+                            component.getPicker().setYearFrom(d.getFullYear());
+                            component.getPicker().setYearTo(d.getFullYear()+5);
+                            component.setValue(d);
                             component.setLabelAlign('left');
                         },
                         event: 'initialize'

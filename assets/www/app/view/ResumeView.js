@@ -737,7 +737,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'cWhite',
                                             'left'
                                         ],
-                                        html: 'Available now!',
+                                        html: 'Available',
                                         itemId: 'availabilityLbl',
                                         padding: '5 0 0 0'
                                     },
@@ -770,13 +770,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 labelCls: 'labelCls',
                                                 labelWidth: 150,
                                                 name: 'AvailabilityDate',
-                                                value: {
-                                                    year: 2015,
-                                                    month: 7,
-                                                    day: 26
-                                                },
                                                 placeHolder: 'mm/dd/yyyy',
-                                                dateFormat: 'd/m/y',
+                                                dateFormat: 'm/d/y',
                                                 picker: {
                                                     zIndex: 100,
                                                     doneButton: {
@@ -787,6 +782,12 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                     {
                                                         fn: function(component, eOpts) {
                                                             component.setLabelAlign('left');
+                                                            var d= new Date();
+                                                            d.getFullYear();
+                                                            component.getPicker().setYearFrom(d.getFullYear());
+                                                            component.getPicker().setYearTo(d.getFullYear()+5);
+                                                            component.setValue(d);
+
                                                         },
                                                         event: 'initialize'
                                                     }
@@ -1026,6 +1027,11 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#availabilityBtn'
             },
             {
+                fn: 'onMydatepickerChange',
+                event: 'change',
+                delegate: '#mydatepicker'
+            },
+            {
                 fn: 'onResumeSettingAddTap',
                 event: 'tap',
                 delegate: '#ResumeSettingAdd'
@@ -1208,6 +1214,13 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         var button=G.get('availabilityBtn');
         UserResume.changeAvailibilityStatus(button.element.hasCls('busyBtn'));
 
+    },
+
+    onMydatepickerChange: function(datepickerfield, newDate, oldDate, eOpts) {
+        if(newDate<new Date())
+            UserResume.changeAvailibilityStatus(false);
+        else
+            UserResume.changeAvailibilityStatus(true);
     },
 
     onResumeSettingAddTap: function(button, e, eOpts) {

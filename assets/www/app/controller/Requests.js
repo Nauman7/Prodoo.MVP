@@ -243,7 +243,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
             }
             else if(target.parent('.x-list-item')){
-
+                debugger;
                 if(item===0){// Inbox active
                     // G.ShowView('RequestDetail');
                     G.Push('RequestDetail');
@@ -339,7 +339,6 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         G.get('cloneBtn').show();
                         G.get('FixRequest').hide();
                         G.get('SavedREsumes').show();
-                        G.get('hfShortlistId').setValue(record.data.ShortlistId)
                     }
                     else
                     G.get('DraftRequestBtn').hide();
@@ -439,6 +438,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                         if(isFreelancer)
                         {
+
                             var inboxStore = Ext.create('Ext.data.Store', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
                                 data: result.items.Inbox
@@ -446,6 +446,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                             G.show('requestInboxList');
 
                             G.get('requestInboxList').setStore(inboxStore);
+
+
                             G.show('invitationLabel');
                             var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
 
@@ -516,9 +518,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             });
         },
 
-        ShowSavedResumeRequest: function(requestId, shortlistId) {
+        ShowSavedResumeRequest: function(requestId) {
             Ext.Ajax.request({
-                url: ApiBaseUrl+'Requests/GetRequestedResumes?requestId='+requestId+'&shortlistid='+shortlistId,
+                url: ApiBaseUrl+'RequestsResumes/GetRequestedResumes?requestId='+requestId,
                 method: 'Get',
                 headers: { 'Content-Type': 'application/json' },
                 success: function(conn, response, options, eOpts) {

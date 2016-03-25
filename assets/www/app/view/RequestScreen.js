@@ -376,7 +376,11 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
     onAddBtnTap: function(button, e, eOpts) {
         localStorage.SubmitDirectRequest=false;
         G.Push('CreateRequestScreen');
-
+        var searchedDate=G.get('SearchDatepicker')
+        if(searchedDate)
+            G.get('mydatepicker').setValue(searchedDate.getValue());
+        else
+            G.get('mydatepicker').setValue(new Date());
     },
 
     setActiveBtn: function(button) {

@@ -624,6 +624,11 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                     context.down('#shortlistBtn').hide();
                     context.down('#requestBtn').hide();
                     context.down('#helpBtn').hide();
+
+                    //Reset Help notification
+                    SearchResume.helpHide();
+                    context.down('#helpBtn').removeCls('activeBtn');
+                    G.get('HelpDisable').setHtml(' all ');
                 }
                 else{
                     context.down('#savedSearchBtn').show();

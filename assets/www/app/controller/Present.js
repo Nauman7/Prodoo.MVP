@@ -179,12 +179,15 @@ Ext.define('ProDooMobileApp.controller.Present', {
             return null;
         }
 
+        /*
+        PD-216
         if(obj.UserName != null && obj.UserName != "" &&  !G.ValidateAlphabet(obj.UserName))
         {
             fields.UserName.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save,  Name is invalid.");
             return null;
         }
+        */
 
         if(obj.Phone != null && obj.Phone != "" && !G.ValidateInteger(obj.Phone))
         {
