@@ -74,13 +74,17 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 {
 
                     var record  = G.get('resumeDirectRequestData').getData();
+                    var shortlistIds= new Array();
+                    shortlistIds.push(G.get('hfShortlistId').getValue());
                     record.set('SavedSearchedId',G.get('hfSavedSearchId').getValue());
-                    record.set('ShortlistId',G.get('hfShortlistId').getValue());
+                    record.set('ShortlistIds', shortlistIds);
                 }
                 else
                 {
                     var record  = G.get('resumeRequestData').getData();
-                    record.set('ShortlistId',G.get('requestList').getSelection()[0].data.ShortlistId);
+                    var shortlistIds= new Array();
+                    shortlistIds.push(G.get('requestList').getSelection()[0].data.ShortlistId);
+                    record.set('ShortlistIds',shortlistIds);
                 }
 
                 record.set('IsSent', true);
@@ -169,8 +173,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             fields.Duration.enable();
             fields.StartDate.enable();
             fields.Description.enable();
-            fields.Location.enable();
-            fields.Language.enable();
+            fields.LocationId.enable();
+            fields.LanguageId.enable();
             fields.HourlyFee.enable();
             fields.Duration.enable();
             fields.FeeCurrencyType.enable();
@@ -220,9 +224,11 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 headers: { 'Content-Type': 'application/json' },
                 success: function(conn, response, options, eOpts) {
                     var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success) {
-                        Requests.ShowRequestView(false,false);
-                    }
+                    if (result.success)
+                    Requests.ShowRequestView(false,false);
+                    else
+                    Ext.Msg.alert('Not Deleted', result.message);
+
                 },
                 failure: function(conn, response, options, eOpts) {
                     //failure catch
@@ -243,7 +249,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
             }
             else if(target.parent('.x-list-item')){
-                debugger;
+
                 if(item===0){// Inbox active
                     // G.ShowView('RequestDetail');
                     G.Push('RequestDetail');
@@ -270,11 +276,15 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     }
                     else
                     G.get("SpanCompanyName").hide();
-                    G.get("SpanLanguageLocation").setHtml(record.data.Language+" "+record.data.Location);
+
+
                     if(record.data.Description)
                     G.get("SpanDescription").setHtml(record.data.Description);
                     else
                     G.get("SpanDescription").hide();
+
+                    G.get("SpanLanguageLocation").setHtml(record.data.Language.LanguageValue+" "+record.data.Location.CountryName);
+
 
                     if(record.data.IsConfirmed){
 
@@ -315,6 +325,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     var form = G.get('CreateRequestScreen');
                     form.setValues(record.data);
                     var fields = form.getFields();
+                    fields.LanguageId.setValue(record.data.Language.LanguageId);
+                    fields.LocationId.setValue(record.data.Location.CountryId);
 
                     SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
                     SearchResume.onSliderfieldDrag(G.get('durationItemID'));
@@ -328,8 +340,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         fields.StartDate.disable();
                         fields.RequestName.disable();
                         fields.Description.disable();
-                        fields.Location.disable();
-                        fields.Language.disable();
+                        fields.LocationId.disable();
+                        fields.LanguageId.disable();
                         fields.HourlyFee.disable();
                         fields.Duration.disable();
                         fields.UserCompanyId.disable();

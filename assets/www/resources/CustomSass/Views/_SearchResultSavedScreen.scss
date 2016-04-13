@@ -11,6 +11,7 @@
 	}
 	&.x-list .x-list-item.x-item-selected.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl, &.x-list .x-list-item.x-item-pressed.x-list-item-tpl .x-innerhtml, &.x-list .x-list-item.x-item-selected.x-list-item-tpl{
 		background: none;
+		border-top-color: rgba(230,230,230,0);
 		
 	}
 }
@@ -198,7 +199,7 @@
 }
 
 .iGreen{
-	color: $lightGreen2;
+	color: $_green;
 }
 .iOrange{
 	color: $orange2;

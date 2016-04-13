@@ -123,7 +123,7 @@
 }
 
 .logLabel{
-	color: #bbbbbb;
+	color: #fff;
 	background: #251f36;
 	@extend .bebasBold;
 	letter-spacing: 2px;
@@ -147,7 +147,7 @@
 
 .UserModeBtn{
 	border:none;
-	background: #3E335E !important;
+	background: #251F36 !important;
 	@extend .bebasBold;
 	color: white;
 	border-bottom: 2px solid #000; 
@@ -156,6 +156,6 @@
 	letter-spacing: 4px;
     font-size: 18px;
 	&.ActiveBtn, &:hover{
-		background: #58516B!important;
+		background: #3E335E !important;
 	}
 }

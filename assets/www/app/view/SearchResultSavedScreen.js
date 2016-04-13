@@ -28,6 +28,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
 
     config: {
         itemId: 'SearchResultSavedScreenId',
+        pressedCls: null,
+        selectedCls: null,
         store: 'SearchResultSaved',
         cls: [
             'darkBlue',
@@ -68,7 +70,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '            <tpl for=\'Profiles\'>',
             '                <tpl if="Score &gt; 0">',
             '                    <div class="searchDetail">',
-            '                        <span class="itemNo iGreen">{Score}</span>',
+            '                        <span class="itemNo iYellow">{Score}</span>',
             '                        <div class="itemSkill">{ProfileValue}</div>',
             '                    </div>',
             '                </tpl> </tpl>',
@@ -76,7 +78,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '            <tpl for=\'Skills\'>',
             '                <tpl if="Score &gt; 0">',
             '                    <div class="searchDetail">',
-            '                        <span class="itemNo iOrange"> {Score} </span>',
+            '                        <span class="itemNo iYellow"> {Score} </span>',
             '                        <div class="itemSkill">{SkillValue}</div>',
             '                    </div>',
             '                </tpl>',
@@ -94,7 +96,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '            <tpl for=\'Keywords\'>',
             '                <tpl if="Score &gt; 0">',
             '                    <div class="searchDetail">',
-            '                        <span class="itemNo iGreen"> {Score}</span>',
+            '                        <span class="itemNo iYellow"> {Score}</span>',
             '                        <div class="itemSkill">{KeywordValue}</div>',
             '                    </div>',
             '                </tpl>',

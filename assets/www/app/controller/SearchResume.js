@@ -23,34 +23,41 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
 
     statics: {
         onTopBtnTap: function(button,lookupName) {
+            var HelpActive = G.get('HelpCnt');
+            if(!HelpActive.isHidden())
+            {
+                SearchResume.UpdateHelpDetail(lookupName);
+            }
+            else{
 
-            SearchResume.hideActive(button);
-            var lookupStore = '';
-            if(lookupName=='Location')
-            lookupStore = 'CreateRequestLocation';
-            else
-            lookupStore = 'Search'+lookupName;
+                SearchResume.hideActive(button);
+                var lookupStore = '';
+                if(lookupName=='Location')
+                lookupStore = 'CreateRequestLocation';
+                else
+                lookupStore = 'Search'+lookupName;
 
-            var str=Ext.getStore(lookupStore);
-            str.clearFilter();
+                var str=Ext.getStore(lookupStore);
+                str.clearFilter();
 
-            if (lookupName == "Keyword")
-            { str.setData(JSON.parse(localStorage.globalKeywords)); }
-            else if (lookupName == "Certification")
-            { str.setData(JSON.parse(localStorage.globalCertifications)); }
+                if (lookupName == "Keyword")
+                { str.setData(JSON.parse(localStorage.globalKeywords)); }
+                else if (lookupName == "Certification")
+                { str.setData(JSON.parse(localStorage.globalCertifications)); }
 
-            var lookupPlaceholder = 'Enter '+lookupName.toLowerCase();
-            var list = G.get('SearchList');
-            list.setStore(lookupStore);
-            list.hide();
-            SearchResume.enableDisableItems(lookupName);
-            var Searchfield = G.get('mysearchfield');
-            Searchfield.setPlaceHolder(lookupPlaceholder);
-            Searchfield.setValue('');
-            //SearchResume.scrollToHeading();
-            SearchResume.UpdateHelpDetail(lookupName);
+                var lookupPlaceholder = 'Enter '+lookupName.toLowerCase();
+                var list = G.get('SearchList');
+                list.setStore(lookupStore);
+                list.hide();
+                SearchResume.enableDisableItems(lookupName);
+                var Searchfield = G.get('mysearchfield');
+                Searchfield.setPlaceHolder(lookupPlaceholder);
+                Searchfield.setValue('');
+                //SearchResume.scrollToHeading();
 
-            G.get('buttonsLabel').setHtml(lookupName);
+
+                G.get('buttonsLabel').setHtml(lookupName);
+            }
         },
 
         scrollToHeading: function(context) {
@@ -546,8 +553,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 {
                     xtype: 'button',
                     cls: [
-                    'closeIcon',
-                    'noBorder'
+                    'closeIcon'
                     ],
                     text: ' ',
                     listeners: [
@@ -750,6 +756,144 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             button.toggleCls('activeBtn');
         },
 
+        onSliderfieldDrag: function(sliderfield) {
+            var a=sliderfield.element.dom.querySelector('.xValue');
+            a.innerText = sliderfield.getValue()[0];
+        },
+
+        UpdateHelpDetail: function(Name) {
+            var disbleValue = G.get('HelpDisable').getHtml();
+            if(disbleValue.indexOf(' '+Name+' ')>=0 || disbleValue.indexOf(' all ')>=0){ //if name is Already exist, then hide HelpCnt
+                G.hide('HelpCnt');
+                return false;
+            }
+            else{
+                G.show('HelpCnt');
+
+                if(Name == 'Profile' || Name == 'Skill' || Name == 'Industry' || Name == 'Keyword' || Name == 'Certification' || Name == 'Location' ){
+                    G.get('HelpDetail').setHtml('Type your '+Name+' search here and add it to search item');
+                    G.get('HelpHeading').setHtml('Search for '+ Name);
+                    var item = SearchResume.getActiveBtn();
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpRequestBtn'){
+                    G.get('HelpHeading').setHtml('Request button');
+                    G.get('HelpDetail').setHtml('Tap to show request screen');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpShorlistBtn'){
+                    G.get('HelpHeading').setHtml('Shortlist button');
+                    G.get('HelpDetail').setHtml('Tap to show shortlist screen');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpSaveSearchBtn'){
+                    G.get('HelpHeading').setHtml('Save button');
+                    G.get('HelpDetail').setHtml('Tap to show saved search screen');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpSearchIcon'){
+                    G.get('HelpHeading').setHtml('Search button');
+                    G.get('HelpDetail').setHtml('Tap to show your search resume screen');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpIconBtn'){
+                    G.get('HelpHeading').setHtml('Help button');
+                    G.get('HelpDetail').setHtml('It will show user guide <br> Tap again to close this help ');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'helpGlobeBtn'){
+                    G.get('HelpHeading').setHtml('Menu button');
+                    G.get('HelpDetail').setHtml('It will toggle more buttons');
+                    G.get('HelpID').setHtml('');
+                }
+                else if(Name == 'SearchField'){
+                    SearchResume.helpPositionUpdate('mysearchfield');
+                    G.get('HelpHeading').setHtml('Search bar');
+                    G.get('HelpDetail').setHtml('Type your required skills to search');
+                    G.get('HelpID').setHtml('');
+                }
+
+                if(Name == 'Profile'){
+                    SearchResume.helpPositionUpdate('profileBtn');
+                }
+                else if(Name == 'Skill'){
+                    SearchResume.helpPositionUpdate('SkillsBtn');
+                }
+                else if(Name == 'Industry'){
+                    SearchResume.helpPositionUpdate('IndustryBtn');
+                }
+                else if(Name == 'Keyword'){
+                    SearchResume.helpPositionUpdate('keywordBtn');
+                }
+                else if(Name == 'Certification'){
+                    SearchResume.helpPositionUpdate('certificationBtn');
+                }
+                else if(Name == 'Location'){
+                    SearchResume.helpPositionUpdate('locationBtn');
+                }
+
+                else if(Name == 'helpRequestBtn' || Name == 'helpShorlistBtn' || Name == 'helpSaveSearchBtn' || Name == 'helpIconBtn' || Name == 'helpGlobeBtn' || Name == 'helpSearchIcon'){
+                    SearchResume.helpPositionUpdate(Name);
+                }
+            }
+            return true;
+
+        },
+
+        helpPositionUpdate: function(ItemID) {
+            var help = G.get('HelpCnt').element;
+            var Arrow = Ext.get(Ext.query('.helpArrow')[0]);
+            help.removeCls('helpIconBtn');
+            help.removeCls('helpRequestBtn');
+            help.removeCls('helpShorlistBtn');
+            help.removeCls('helpSaveSearchBtn');
+            help.removeCls('helpGlobeBtn');
+            help.removeCls('helpSearchIcon');
+            if(ItemID=='helpIconBtn' || ItemID=='helpRequestBtn' || ItemID=='helpShorlistBtn' || ItemID=='helpSaveSearchBtn' || ItemID=='helpGlobeBtn' || ItemID=='helpSearchIcon' || ItemID=='globeBtn'){
+                help.addCls(ItemID);
+                help.removeCls('MarginAuto');
+                help.setTop(null);
+                Arrow.setLeft(null);
+            }
+            var btn = G.get(ItemID);
+            if(btn){
+                var btnX = btn.element.getX();
+                var btnY = btn.element.getY();
+
+                help.addCls('MarginAuto');
+                help.setTop(btnY + 70);
+                var helpX = help.getX();
+                var helpY = help.getY();
+                var btnW = 50/2;
+                var remPosition = btnX - helpX + btnW;
+                var pos = Math.max(remPosition, 7);
+                pos = Math.min(help.getWidth()+ helpX - 7, pos);
+                Arrow.setLeft(pos);
+                if(ItemID == 'mysearchfield'){
+                    Arrow.setLeft(null);
+                }
+            }
+        },
+
+        helpHide: function() {
+            var helpCnt = G.get('HelpCnt');
+            var HelpHidden = G.get('HelpDisable'); // contains html code for hiding HelpBox
+
+            helpCnt.hide();
+            // G.get('helpBtn').removeCls('activeBtn');
+            var helpIcon = ['helpIconBtn', 'helpRequestBtn', 'helpShorlistBtn', 'helpSaveSearchBtn', 'helpGlobeBtn', 'helpSearchIcon'];
+            for( var i=0; i<helpIcon.length; i++ ){
+                if( helpCnt.element.hasCls( helpIcon[i] ) ){
+                    HelpHidden.setHtml( HelpHidden.getHtml() + helpIcon[i] + ' ' );
+                    return;
+                }
+            }
+
+            helpIcon = ['Profile', 'Skill','Industry', 'Keyword', 'Certification', 'Location'];
+            var item = SearchResume.getActiveBtn();
+            HelpHidden.setHtml( HelpHidden.getHtml() + helpIcon[item] + ' ' );
+        },
+
         onSearchListItemTap: function(e,dataview,record) {
             var selectedElement =  Ext.get(e.target);
 
@@ -849,93 +993,6 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
 
             }
 
-        },
-
-        onSliderfieldDrag: function(sliderfield) {
-            var a=sliderfield.element.dom.querySelector('.xValue');
-            a.innerText = sliderfield.getValue()[0];
-        },
-
-        UpdateHelpDetail: function(Name) {
-            var disbleValue = G.get('HelpDisable').getHtml();
-
-            if(disbleValue.indexOf(' '+Name+' ')>=0 || disbleValue.indexOf(' all ')>=0){ //if name is Already exist, then hide HelpCnt
-                G.hide('HelpCnt');
-                return false;
-            }
-            else{
-                G.show('HelpCnt');
-                SearchResume.helpPositionUpdate(Name);
-
-                if(Name == 'Profile' || Name == 'Skill' || Name == 'Industry' || Name == 'Keyword' || Name == 'Certification' || Name == 'Location' ){
-                    G.get('HelpDetail').setHtml('Type your '+Name+' search here and add it to search item');
-                    G.get('HelpHeading').setHtml('Search for '+ Name);
-                    var item = SearchResume.getActiveBtn();
-                    G.get('HelpID').setHtml('');
-                }
-                else if(Name == 'helpRequestBtn'){
-                    G.get('HelpHeading').setHtml('Request button');
-                    G.get('HelpDetail').setHtml('Tap to show request screen');
-                    G.get('HelpID').setHtml('');
-                }
-                else if(Name == 'helpShorlistBtn'){
-                    G.get('HelpHeading').setHtml('Shortlist button');
-                    G.get('HelpDetail').setHtml('Tap to show shortlist screen');
-                    G.get('HelpID').setHtml('');
-                }
-                else if(Name == 'helpSaveSearchBtn'){
-                    G.get('HelpHeading').setHtml('Save button');
-                    G.get('HelpDetail').setHtml('Tap to show saved search screen');
-                    G.get('HelpID').setHtml('');
-                }
-                else if(Name == 'helpSearchIcon'){
-                    G.get('HelpHeading').setHtml('Search button');
-                    G.get('HelpDetail').setHtml('Tap to show your search resume screen');
-                    G.get('HelpID').setHtml('');
-                }
-                else if(Name == 'helpIconBtn'){
-                    G.get('HelpHeading').setHtml('Help button');
-                    G.get('HelpDetail').setHtml('It will show user guide <br> Tap again to close this help ');
-                    G.get('HelpID').setHtml('');
-                }
-
-            }
-            return true;
-
-        },
-
-        helpPositionUpdate: function(Name) {
-            var helpCnt = G.get('HelpCnt');
-            helpCnt.removeCls('helpIconBtn');
-            helpCnt.removeCls('helpRequestBtn');
-            helpCnt.removeCls('helpShorlistBtn');
-            helpCnt.removeCls('helpSaveSearchBtn');
-            helpCnt.removeCls('helpGlobeBtn');
-            helpCnt.removeCls('helpSearchIcon');
-
-
-            if(Name=='helpIconBtn' || Name=='helpRequestBtn' || Name=='helpShorlistBtn' || Name=='helpSaveSearchBtn' || Name=='helpGlobeBtn' || Name=='helpSearchIcon' ){
-                helpCnt.addCls(Name);
-            }
-        },
-
-        helpHide: function() {
-            var helpCnt = G.get('HelpCnt');
-            var HelpHidden = G.get('HelpDisable'); // contains html code for hiding HelpBox
-
-            helpCnt.hide();
-            // G.get('helpBtn').removeCls('activeBtn');
-            var helpIcon = ['helpIconBtn', 'helpRequestBtn', 'helpShorlistBtn', 'helpSaveSearchBtn', 'helpGlobeBtn', 'helpSearchIcon'];
-            for( var i=0; i<helpIcon.length; i++ ){
-                if( helpCnt.element.hasCls( helpIcon[i] ) ){
-                    HelpHidden.setHtml( HelpHidden.getHtml() + helpIcon[i] + ' ' );
-                    return;
-                }
-            }
-
-            helpIcon = ['Profile', 'Skill','Industry', 'Keyword', 'Certification', 'Location'];
-            var item = SearchResume.getActiveBtn();
-            HelpHidden.setHtml( HelpHidden.getHtml() + helpIcon[item] + ' ' );
         },
 
         resetStores: function() {

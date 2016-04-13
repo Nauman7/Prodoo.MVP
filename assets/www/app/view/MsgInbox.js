@@ -294,7 +294,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                         ],
                         itemId: 'MsgUserField',
                         clearIcon: false,
-                        placeHolder: 'Select reciever'
+                        placeHolder: 'Select receiver'
                     },
                     {
                         xtype: 'hiddenfield',
@@ -493,6 +493,10 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 fn: 'onMsgDetailListShow',
                 event: 'show',
                 delegate: '#MsgDetailList'
+            },
+            {
+                fn: 'onMsgViewCntPainted',
+                event: 'painted'
             }
         ]
     },
@@ -511,6 +515,15 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
         var list = G.get('MsgDetailView').element.query('.MsgView')[0];
         var viewHeight = Ext.get(list).getHeight();
         G.get('MsgDetailView').setHeight(Math.max(viewHeight, Ext.getBody().getHeight() - 37));
+    },
+
+    onMsgViewCntPainted: function(element, eOpts) {
+         element.on('tap',function(e){
+                    var selectedElement =Ext.get(e.target);
+                    if(!selectedElement.parent('.searchList') && !selectedElement.parent('.MsgField')){
+                        G.hide('MsgUserSearchList');
+                    }
+                });
     },
 
     AdjustListHeight: function(component) {

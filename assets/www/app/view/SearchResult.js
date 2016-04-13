@@ -148,9 +148,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         itemTpl: [
                             '<div class="listResult">',
                             '        <span class="listTitle">{ProfileValue}{SkillValue}{KeywordValue}{CertificationValue}{IndustryValue}{CountryName}</span>',
-                            '<!--     <span class="addIcon"><i> </i></span> -->',
                             '</div>'
                         ],
+                        pressedCls: null,
+                        selectedCls: null,
                         store: 'SearchProfile'
                     },
                     {
@@ -170,6 +171,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 cls: 'HelpCnt',
                 docked: 'top',
                 hidden: true,
+                html: '<span class="helpArrow"><span>',
                 itemId: 'HelpCnt',
                 items: [
                     {
@@ -184,8 +186,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                             },
                             {
                                 xtype: 'label',
-                                cls: 'labelCls',
-                                html: 'Search for Profile',
+                                html: 'Search bar',
                                 itemId: 'HelpHeading'
                             },
                             {
@@ -198,7 +199,8 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        html: 'Type your profile search here and add it to search item',
+                        cls: 'helpDetail',
+                        html: 'Type your required skills to search',
                         itemId: 'HelpDetail',
                         padding: 10
                     },
@@ -211,10 +213,13 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             },
             {
                 xtype: 'datepickerfield',
-                cls: 'DateCls',
+                cls: [
+                    'DateCls',
+                    'triggerGreen'
+                ],
                 itemId: 'SearchDatepicker',
                 label: 'Start Date',
-                labelCls: 'iYellow',
+                labelCls: 'iGreen',
                 labelWidth: 120,
                 dateFormat: 'm/d/y',
                 picker: {
@@ -242,7 +247,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 items: [
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'ProfileCnt',
                         margin: '0 0 10',
@@ -252,7 +260,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Profile '
                             },
@@ -307,7 +315,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'LocationCnt',
                         margin: '0 0 10',
@@ -317,7 +328,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Location'
                             },
@@ -371,7 +382,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'SkillCnt',
                         margin: '0 0 10',
@@ -381,7 +395,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Skills'
                             },
@@ -434,7 +448,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'IndustryCnt',
                         margin: '0 0 10',
@@ -444,7 +461,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Industry'
                             },
@@ -496,7 +513,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'KeywordCnt',
                         margin: '0 0 10',
@@ -506,7 +526,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Keyword'
                             },
@@ -540,7 +560,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     },
                     {
                         xtype: 'container',
-                        cls: 'LabelCnt',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
                         hidden: true,
                         itemId: 'CertificationCnt',
                         margin: '0 0 10',
@@ -550,7 +573,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'label',
                                 cls: [
                                     'heading',
-                                    'iYellow'
+                                    'iGreen'
                                 ],
                                 html: 'Certification'
                             },
@@ -840,10 +863,15 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
     },
 
     onMysearchfieldFocus: function(textfield, e, eOpts) {
-        //if(!textfield.getReadOnly()){
+
+
+        var HelpActive = SearchResume.UpdateHelpDetail('SearchField');
+
+        if(!HelpActive)
+        {
             G.show('SearchList');
             SearchResume.helpHide();
-        //}
+        }
     },
 
     onAddSearchBtnTap: function(button, e, eOpts) {
@@ -915,6 +943,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             button.addCls('activeBtn');
             G.show('HelpCnt');
             button.removeCls('helpFirstClick');
+            G.get('mysearchfield').setReadOnly(true);
         }
         else if(!IsVistor && !button.element.hasCls('helpFirstClick')){ // check if clicking on first time
             var HelpActive = SearchResume.UpdateHelpDetail('helpIconBtn');
@@ -925,20 +954,20 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             helpDisble.setHtml(' all ');// help disable for all icons
             G.hide('HelpCnt');
             button.removeCls('activeBtn');
-
+            G.get('mysearchfield').setReadOnly(false);
             var authStore = Ext.getStore('AuthStore');
             if(authStore.getAt(0)){
-            var isNotifcationRead= authStore.getAt(0).data.IsNotificationRead;
-            if(isNotifcationRead!==undefined && !isNotifcationRead){
-                SearchResume.MarkHelpNotificationRead();
-            }
+                var isNotifcationRead= authStore.getAt(0).data.IsNotificationRead;
+                if(isNotifcationRead!==undefined && !isNotifcationRead){
+                    SearchResume.MarkHelpNotificationRead();
+                }
             }
         }
 
         if(IsVistor){
-                var helpIcon=Ext.select('.helpIcon');
-                  helpIcon.addCls('bottom78');
-            }
+            var helpIcon=Ext.select('.helpIcon');
+            helpIcon.addCls('bottom78');
+        }
     },
 
     onRequestBtnTap: function(button, e, eOpts) {
@@ -966,7 +995,9 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
     },
 
     onGlobeBtnTap: function(button, e, eOpts) {
-        SearchResume.onGlobeBtnTap(this,button);
+        var HelpActive = SearchResume.UpdateHelpDetail('helpGlobeBtn');
+        if(!HelpActive)
+            SearchResume.onGlobeBtnTap(this,button);
     },
 
     onHomeBtnTap: function(button, e, eOpts) {

@@ -16,6 +16,10 @@
 			color:white;
 		}
 	}
+	.x-dataview-item{
+		color: white;
+		font-size: 16px;
+	}
 }
 .backIcon{
 	.x-button-label{
@@ -217,4 +221,34 @@
 
 .InnerHead{
 	background-color: lighten($blue4,10);
+}
+
+
+.splashText {
+	background: transparent;
+	line-height: 1.1;
+	padding: 0 10px;
+	margin: 0;
+	color: white;
+	text-align: center;
+
+}
+
+.splashCnt{
+	background: #fff;
+	@include box-shadow (0 0 5px 1px #2D1F55);
+	width: 95%;
+	padding:10px;
+	margin: 10px auto 50px;
+	    border-top: 4px solid #4C98D3;
+}
+.splashHeaderCnt{
+	position: relative;
+	.x-label {
+		color: #4C98D3;
+		font-size: 14px;
+	}
+}
+.splashDetail{
+    font-size: 12px;
 }

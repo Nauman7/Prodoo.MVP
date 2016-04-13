@@ -224,7 +224,37 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 placeHolder: 'mm/dd/yyyy',
                                 dateFormat: 'm/d/y',
                                 picker: {
-                                    zIndex: 30
+                                    itemId: 'requestStartDatePicker',
+                                    zIndex: 30,
+                                    doneButton: {
+                                        itemId: 'requestStartDateDone',
+                                        listeners: [
+                                            {
+                                                fn: function(component, eOpts) {
+                                                    component.on('tap',function( b, e, eOpts){
+                                                        var d = new Date();
+                                                        d.setHours(0,0,0,0);
+                                                        if(newrequestStartDate < d){
+                                                            Ext.Msg.alert("Info","Date cannot be earlier than Today");
+                                                            return false;
+                                                        }
+
+                                                    });
+                                                },
+                                                event: 'initialize'
+                                            }
+                                        ]
+                                    },
+                                    listeners: [
+                                        {
+                                            fn: function(component, eOpts) {
+                                                component.on('pick',function(oldDate, newDate, slot, eOpts){
+                                                    newrequestStartDate = newDate;
+                                                });
+                                            },
+                                            event: 'initialize'
+                                        }
+                                    ]
                                 },
                                 listeners: [
                                     {
@@ -356,8 +386,8 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 label: 'Location',
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
-                                name: 'Location',
-                                value: 'Denmark',
+                                name: 'LocationId',
+                                value: 13,
                                 placeHolder: 'Choose Location',
                                 autoSelect: false,
                                 defaultPhonePickerConfig: {
@@ -368,7 +398,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 },
                                 displayField: 'CountryName',
                                 store: 'CreateRequestLocation',
-                                valueField: 'CountryName',
+                                valueField: 'CountryId',
                                 listeners: [
                                     {
                                         fn: function(component, eOpts) {
@@ -391,8 +421,8 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 label: 'Language',
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
-                                name: 'Language',
-                                value: 'Danish',
+                                name: 'LanguageId',
+                                value: 2,
                                 placeHolder: 'Choose Language',
                                 autoSelect: false,
                                 defaultPhonePickerConfig: {
@@ -403,7 +433,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 },
                                 displayField: 'LanguageValue',
                                 store: 'SearchLanguage',
-                                valueField: 'LanguageValue',
+                                valueField: 'LanguageId',
                                 listeners: [
                                     {
                                         fn: function(component, eOpts) {

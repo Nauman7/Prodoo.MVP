@@ -37,12 +37,15 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                 items: [
                     {
                         xtype: 'image',
-                        height: 138,
-                        src: 'resources/images/Login.png'
+                        height: 54,
+                        margin: '40 auto 10',
+                        width: 250,
+                        src: 'resources/images/logo.png'
                     },
                     {
                         xtype: 'label',
                         cls: 'loginHeading',
+                        hidden: true,
                         html: 'Prodoo'
                     }
                 ]
@@ -60,7 +63,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         clearIcon: false,
                         labelAlign: 'top',
                         name: 'Email',
-                        value: '',
+                        value: 'nauman@prodoo.dk',
                         maxLength: 50,
                         placeHolder: 'Email'
                     },
@@ -71,7 +74,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         clearIcon: false,
                         labelAlign: 'top',
                         name: 'Password',
-                        value: '',
+                        value: 'password',
                         maxLength: 50,
                         placeHolder: 'Password'
                     }

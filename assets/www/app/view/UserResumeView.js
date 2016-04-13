@@ -14,174 +14,174 @@
  */
 
 Ext.define('ProDooMobileApp.view.UserResumeView', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.Container',
     alias: 'widget.UserResumeView',
 
     requires: [
+        'Ext.dataview.DataView',
         'Ext.XTemplate',
         'Ext.Button'
     ],
 
     config: {
-        store: 'SearchResultDetail',
-        cls: [
-            'darkBlue',
-            'resumeDetail'
-        ],
-        itemTpl: [
-            '<tpl if="IsAvailable == false">',
-            '<div class="detailTitle busyDetail">',
-            '    <span class="tickIcon"></span>',
-            '    <span class=\'marginForIcon\'>Not Available</span>',
-            '</div>',
-            '<tpl else>',
-            ' <div class="detailTitle">',
-            '    <span class="tickIcon"></span>',
-            '    Available Now',
-            '</div>',
-            '</tpl>',
-            '',
-            '',
-            '',
-            '<div class="LocationDiv"><span class="location">{Region}</span>',
-            '    <span class="onSite">on-site</span>',
-            '</div>',
-            '<div class="ViewCnt">',
-            '    <div class="tabHead">',
-            '        <span class="speakIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '      ',
-            '        <tpl for="Languages">',
-            '        <div class="listCnt">  ',
-            '            <span class="language">{LanguageValue}</span>',
-            '            <span class="level">Level <span class="levelNo orange2">{ExperienceLevel}</span></span>',
-            '        </div>',
-            '        </tpl>',
-            '        ',
-            '        ',
-            '       ',
-            '    </div>',
-            '</div>',
-            '<div class="ViewCnt">',
-            '    <div class="tabHead">',
-            '        <span class="userIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '        ',
-            '        <tpl for="Profiles">',
-            '        <div class="listCnt">',
-            '            <span class="language">{ProfileValue}</span>',
-            '        </div>',
-            '        </tpl>',
-            '        ',
-            '        ',
-            '        ',
-            '    </div>',
-            '</div>',
-            '',
-            '<div class="ViewCnt">',
-            '    <div class="tabHead">',
-            '        <span class="langIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '        <tpl for="Skills">',
-            '        <div class="listCnt center">',
-            '            <span class="language">{SkillValue}</span>',
-            '        </div>',
-            '            </tpl>',
-            '',
-            '    </div>',
-            '</div>',
-            '    ',
-            '<div class="ViewCnt">',
-            '    <div class="tabHead">',
-            '        <span class="KeywordIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '        <tpl for="Keywords">',
-            '        <div class="listCnt center">',
-            '            <span class="language">{KeywordValue}</span>',
-            '        </div>',
-            '            </tpl>',
-            '',
-            '    </div>',
-            '</div>',
-            '',
-            '<div class="ViewCnt">',
-            '    <div class="tabHead">',
-            '        <span class="certIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '        <tpl for="Certifications">',
-            '        <div class="listCnt">',
-            '            <span class="language">{CertificationValue}</span>',
-            '            <span class="yearExp">{CertificationDate:date("Y")}</span>',
-            '        </div>',
-            '            </tpl>',
-            '    </div>',
-            '</div>',
-            '',
-            '    ',
-            '   ',
-            '<div class="ViewCnt">',
-            '     ',
-            '    <div class="tabHead">',
-            '        <span class="caseIcon"> </span>',
-            '        <span class="ArrowUp"> </span>',
-            '    </div>',
-            '    <div class="Innerlist">',
-            '    <tpl for="ResumeExperience">',
-            '        <div class="tabHead InnerHead">',
-            '           <span class="BoardGame">{CompanyWorked}</span>',
-            '            <span class="ArrowUp"> </span>',
-            '        </div>',
-            '',
-            '',
-            '    <div class="innerListLevel2">',
-            '<!--             <div class="listCnt">',
-            '                <span class="language"></span>',
-            '                ',
-            '            </div> -->',
-            '            <div class="listCnt">',
-            '                <span class="language">{ProfileValue} ({IndustryValue})</span>',
-            '                <span class="yearExp">{StartDateYear} - {EndDateYear}</span>',
-            '              ',
-            '            </div>',
-            '            ',
-            '',
-            '            <div class="listCnt para">',
-            '                {Description}',
-            '            </div>',
-            '        </div>',
-            '        </tpl>',
-            '        ',
-            '    </div>',
-            '</div>',
-            ''
-        ],
-        listeners: [
-            {
-                fn: 'onListItemTap',
-                event: 'itemtap'
-            },
-            {
-                fn: 'onMybutton6Tap1',
-                event: 'tap',
-                delegate: '#ResumeHomeButton'
-            },
-            {
-                fn: 'onMybutton4Tap',
-                event: 'tap',
-                delegate: '#ResumeEditBtn'
-            }
-        ],
+        cls: 'darkBlue',
         items: [
+            {
+                xtype: 'dataview',
+                cls: 'resumeDetail',
+                height: '100%',
+                itemId: 'UserResume',
+                itemTpl: [
+                    '<tpl if="IsAvailable == false">',
+                    '<div class="detailTitle busyDetail">',
+                    '    <span class="tickIcon"></span>',
+                    '    <span class=\'marginForIcon\'>Not Available</span>',
+                    '</div>',
+                    '<tpl else>',
+                    ' <div class="detailTitle">',
+                    '    <span class="tickIcon"></span>',
+                    '<span class=\'marginForIcon\'>Available Now</span>',
+                    '</div>',
+                    '</tpl>',
+                    '',
+                    '',
+                    '',
+                    '<div class="LocationDiv"><span class="location">{Region}</span>',
+                    '    <span class="onSite">on-site</span>',
+                    '</div>',
+                    '<div class="ViewCnt">',
+                    '    <div class="tabHead">',
+                    '        <span class="speakIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '      ',
+                    '        <tpl for="Languages">',
+                    '        <div class="listCnt">  ',
+                    '            <span class="language">{LanguageValue}</span>',
+                    '            <span class="level">Level <span class="levelNo orange2">{ExperienceLevel}</span></span>',
+                    '        </div>',
+                    '        </tpl>',
+                    '        ',
+                    '        ',
+                    '       ',
+                    '    </div>',
+                    '</div>',
+                    '<div class="ViewCnt">',
+                    '    <div class="tabHead">',
+                    '        <span class="userIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '        ',
+                    '        <tpl for="Profiles">',
+                    '        <div class="listCnt">',
+                    '            <span class="language">{ProfileValue}</span>',
+                    '        </div>',
+                    '        </tpl>',
+                    '        ',
+                    '        ',
+                    '        ',
+                    '    </div>',
+                    '</div>',
+                    '',
+                    '<div class="ViewCnt">',
+                    '    <div class="tabHead">',
+                    '        <span class="langIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '        <tpl for="Skills">',
+                    '        <div class="listCnt center">',
+                    '            <span class="language">{SkillValue}</span>',
+                    '        </div>',
+                    '            </tpl>',
+                    '',
+                    '    </div>',
+                    '</div>',
+                    '    ',
+                    '<div class="ViewCnt">',
+                    '    <div class="tabHead">',
+                    '        <span class="KeywordIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '        <tpl for="Keywords">',
+                    '        <div class="listCnt center">',
+                    '            <span class="language">{KeywordValue}</span>',
+                    '        </div>',
+                    '            </tpl>',
+                    '',
+                    '    </div>',
+                    '</div>',
+                    '',
+                    '<div class="ViewCnt">',
+                    '    <div class="tabHead">',
+                    '        <span class="certIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '        <tpl for="Certifications">',
+                    '        <div class="listCnt">',
+                    '            <span class="language">{CertificationValue}</span>',
+                    '            <span class="yearExp">{CertificationDate:date("Y")}</span>',
+                    '        </div>',
+                    '            </tpl>',
+                    '    </div>',
+                    '</div>',
+                    '',
+                    '    ',
+                    '   ',
+                    '<div class="ViewCnt">',
+                    '     ',
+                    '    <div class="tabHead">',
+                    '        <span class="caseIcon"> </span>',
+                    '        <span class="ArrowUp"> </span>',
+                    '    </div>',
+                    '    <div class="Innerlist">',
+                    '    <tpl for="ResumeExperience">',
+                    '        <div class="tabHead InnerHead">',
+                    '           <span class="BoardGame">{CompanyWorked}</span>',
+                    '            <span class="ArrowUp"> </span>',
+                    '        </div>',
+                    '',
+                    '',
+                    '    <div class="innerListLevel2">',
+                    '<!--             <div class="listCnt">',
+                    '                <span class="language"></span>',
+                    '                ',
+                    '            </div> -->',
+                    '            <div class="listCnt">',
+                    '                <span class="language">{ProfileValue} ({IndustryValue})</span>',
+                    '                <span class="yearExp">{StartDateYear} - {EndDateYear}</span>',
+                    '              ',
+                    '            </div>',
+                    '            ',
+                    '',
+                    '            <div class="listCnt para">',
+                    '                {Description}',
+                    '            </div>',
+                    '        </div>',
+                    '        </tpl>',
+                    '        ',
+                    '    </div>',
+                    '</div>',
+                    ''
+                ],
+                store: 'SearchResultDetail'
+            },
+            {
+                xtype: 'container',
+                centered: true,
+                cls: [
+                    'labelCls',
+                    'center'
+                ],
+                docked: 'top',
+                hidden: true,
+                html: 'Welcome to the Resume view<br>  tab on edit icon to create new resume',
+                itemId: 'ResumeSplash'
+            },
             {
                 xtype: 'button',
                 bottom: 10,
@@ -206,10 +206,27 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                 right: 10,
                 text: ' '
             }
+        ],
+        listeners: [
+            {
+                fn: 'onMydataviewItemTap',
+                event: 'itemtap',
+                delegate: '#UserResume'
+            },
+            {
+                fn: 'onMybutton6Tap1',
+                event: 'tap',
+                delegate: '#ResumeHomeButton'
+            },
+            {
+                fn: 'onMybutton4Tap',
+                event: 'tap',
+                delegate: '#ResumeEditBtn'
+            }
         ]
     },
 
-    onListItemTap: function(dataview, index, target, record, e, eOpts) {
+    onMydataviewItemTap: function(dataview, index, target, record, e, eOpts) {
         var selectedItem = e.target;
         if(selectedItem.className.indexOf('ArrowUp')>=0){
             Ext.get(selectedItem).toggleCls('ArrowDown');
@@ -241,15 +258,17 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         // showing loader not visible while rendering the view
         //Ext.Viewport.setMasked(true);
         G.Push('ResumeView');
-
         var store = Ext.getStore('SearchResultDetail');
         var resume = store.getAt(0).data;
         if(resume.Profiles.length > 0 ){
             var profiles = resume.Profiles;
             profiles.forEach(function(item,index){
                 G.createKeywordView('Profile',item.ProfileValue,item.ProfileId,item.ExperienceLevel);
-                G.show('ProfileCnt');
             });
+            G.show('ProfileCnt');
+        }
+        else{
+            G.show('SplashCnt');
         }
 
         if(resume.Skills.length > 0 ){
@@ -298,7 +317,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
             var Languages = resume.Languages;
             Languages.forEach(function(item,index){
-                 UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
+                UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
 
             });
         }

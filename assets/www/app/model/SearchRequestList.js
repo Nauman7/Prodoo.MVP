@@ -43,10 +43,10 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
                 name: 'RequestTemplateId'
             },
             {
-                name: 'Location'
+                name: 'LocationId'
             },
             {
-                name: 'Language'
+                name: 'LanguageId'
             },
             {
                 name: 'Duration'
@@ -73,7 +73,7 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
                 name: 'UserId'
             },
             {
-                name: 'ShortlistId'
+                name: 'ShortlistIds'
             },
             {
                 name: 'Company'
@@ -98,6 +98,12 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
             },
             {
                 name: 'CountConfirmed'
+            },
+            {
+                name: 'Location'
+            },
+            {
+                name: 'Language'
             }
         ]
     }

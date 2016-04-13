@@ -335,6 +335,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
     onInboxTap: function(button, e, eOpts) {
         Messages.setActiveBtn(button);
+        G.get('MsgList').element.show();
         var store=Ext.getStore("MessageStore");
         store.clearFilter();
         store.load({
@@ -343,6 +344,8 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         G.get("MessageSearchField").reset();
         var Label=G.get('MsgInboxLbl').setHtml('Inbox');
         Label.replaceCls('reqSendIcon','reqInboxIcon');
+        Label.element.removeCls('collapseActive');
+
         if(Ext.getStore('AuthStore').getAt(0).data.IsFreelancer)
         {
             G.show('requestInboxList');
@@ -350,19 +353,22 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         }
         G.show('MsgInboxLbl');
         G.get('buttonsLabel').setHtml('Inbox');
+
     },
 
     onSendTap: function(button, e, eOpts) {
         Messages.setActiveBtn(button);
+        G.get('MsgList').element.show();
         var store=Ext.getStore("MessageStore");
         store.clearFilter();
         store.load({
             params:{isInbox: false}
         });
         G.get("MessageSearchField").reset();
-        var Label= G.get('MsgInboxLbl').setHtml('Sent');
+        var Label= G.get('MsgInboxLbl');
+        Label.setHtml('Sent');
         Label.replaceCls('reqInboxIcon','reqSendIcon');
-
+        Label.element.removeCls('collapseActive');
 
         G.hide('requestInboxList');
         G.hide('invitationLabel');
@@ -545,7 +551,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                 }
                 else
                 {
-                    Ext.Msg.alert('', 'Please add at least one reciever to proceed');
+                    Ext.Msg.alert('', 'Please add at least one receiver to proceed');
                     return;
                 }
             }

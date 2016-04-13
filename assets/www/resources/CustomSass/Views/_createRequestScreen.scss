@@ -64,7 +64,13 @@
 		border-radius: 5px; 
 	}
 }
-
+.triggerGreen{
+	.x-field-input{
+		&:before{
+			background-color: $_green;
+		}
+	}
+}
 .DateHeading{
 	height: 30px;
 	position: relative;

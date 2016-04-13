@@ -128,7 +128,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 emptyText: 'No record found',
                 itemTpl: [
                     '<div class="requestListCnt">',
-                    '    <span class="reqListNo">{RequestId}</span>',
+                    '   ',
                     '    <span class="reqListName">{RequestName} </span> ',
                     '    <span class="roundSpan">{CountNoAction}</span>',
                     '    <span class="roundSpan green">{CountConfirmed}</span>',
@@ -195,7 +195,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 emptyText: 'No record found',
                 itemTpl: [
                     '<div class="requestListCnt">',
-                    '    <span class="reqListNo">{RequestId}</span>',
+                    '   ',
                     '    <span class="reqListName">{RequestName}</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',

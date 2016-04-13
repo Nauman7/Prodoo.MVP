@@ -247,13 +247,15 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 var expStr = Ext.getStore('ResumeExperiencesStore');
                 var expData=Ext.getStore("SearchResultDetail").data.items[0].data.ResumeExperience;
                 expStr.setData(expData);
-
                 Searchfield.hide();
                 G.hide('searchBtn');
                 G.get('buttonsLabel').setHtml('Professional Experience');
                 G.show('CreateCompanyExperience');
                 G.hide('createCompanyCnt');
                 G.show('IndustryList');
+
+                UserResume.SplashView(lookupName,!expData.length>0);
+
             }
             else
             {
@@ -274,16 +276,16 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 Searchfield.setPlaceHolder(placeHolder);
                 Searchfield.setValue('');
                 G.get('buttonsLabel').setHtml(lookupName);
+                UserResume.SplashView(lookupName);
             }
 
             UserResume.enableDisableItems(lookupName);
             UserResume.scrollToHeading();
 
-
         },
 
         enableDisableItems: function(view) {
-            var enaItem;
+            var enaItem, splash;
             UserResume.disableAllItem();
             if(view=="Profile"){
                 enaItem = G.get('ProfileCnt');
@@ -307,6 +309,45 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 enaItem = G.get('SettingCnt');
             }
             enaItem.show();
+        },
+
+        SplashView: function(view, show) {
+            var enaItem, splash;
+            Splash = G.get('SplashCnt');
+            Heading = G.get('SplashHeading');
+            Detail = G.get('SplashDetail');
+
+            enaItem = G.get(view + 'Cnt');
+            if(view=="Profile"){
+                Heading.setHtml("Welcome to your resume Profile section!");
+                Detail.setHtml("The profile is the most important part of your resume. When a someone is looking for help they start with defining what profile it is they need. This can for instance be Project Manager, Programmer or Test Designer.<br> It's recommended that you pick 1-4 profiles on your resume. If you have more than 4 profiles, it might give the impression that you are a jack-of-all-trades, and master of none.<br> All Profiles correlate to eachother and gives score on correlations. If you like to know more on the scoring system, please login to the web app. <br><br>The ProDoo team");
+            }
+            else if(view=="Skill"){
+                Heading.setHtml("Welcome to your resume Skill section!");
+                Detail.setHtml("Skills are knowledge and experience in specific areas that you are specialized in. You simply pick the skills that you have aquired and you would like to be selected on.<br> In the web application you can enter experience level on the different skills, but in here in the mobile app there's no room for it, yet. Maybe we will run around with giant phones in the future, but right now we'll keep it this way.<br>The ProDoo team");
+            }
+            else if(view=="Industry"){
+                Heading.setHtml("Welcome to your resume Professionsl Experience section!");
+                Detail.setHtml("When a searcher has found some interesting resumes the next step is to select some of them on their experiences. Therefore it's reallyimportant to have covered your experiences for each of the profiles you have selected for your resume. Be as accurate as possible. This section will be mentioned during your interview.<br> The ProDoo team");
+            }
+            else if(view=="Keyword"){
+                Heading.setHtml("Welcome to your resume Keyword section!");
+                Detail.setHtml("Who are you? We need to face it, today the searchers and hiring managers don't have the time to actually read all cover letters. The most important keywords that describes you in your professional life is what they want to see. <br>This is not a cliche, try really hard to find the few keywords that defines you. 5-10 of them is a good number.<br>The ProDoo team");
+            }
+            else if(view=="Certification"){
+                Heading.setHtml("Welcome to your resume Certification section!");
+                Detail.setHtml("The faster we accept it the better it is. We are freelancers. We need stamps of different kinds to enter the market. Certifications is widely used as a search criteria among hiring managers. <br>If you don't have them, you might score just as high on skills.<br>So enter all of them here, and they will be mentioned during your interview, so bring copies.<br>The ProDoo team");
+            }
+            if(enaItem.items.items.length >= 3){
+                Splash.hide();
+            }
+            else{
+                Splash.show();
+            }
+            if(show){
+                Splash.show();
+            }
+
         },
 
         scrollToHeading: function() {
@@ -357,7 +398,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
             G.hide('AddSearchBtn');
             G.hide('ClearSearchIcon');
-
+            G.hide('SplashCnt');
             var item = UserResume.getActiveBtn();
             var searchField =  G.get('mysearchfield');
             var value = searchField.getValue();
@@ -471,7 +512,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
         onSettingBtnTap: function(button) {
             UserResume.hideActive(button);
-
+            G.hide('SplashCnt');
 
             var d=Ext.getStore('SearchResultDetail').getRange();
 
@@ -508,7 +549,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             });
         },
 
-        onResumeClick: function(view) {
+        onResumeClick: function() {
             // get current logged user
             var loggedUser = Ext.getStore('AuthStore').getAt(0);
             var resumeId = loggedUser.get('ResumeId');
@@ -522,18 +563,32 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     if (responseDecode.success) {
                         var resume = responseDecode.items;
                         if(resume!==null){
+                            G.hide('ResumeSplash');
+                            G.show('UserResume');
                             var store = Ext.getStore('SearchResultDetail');
                             var records = store.getRange();
-                            store.remove(records);
+                            //store.remove(records);
                             store.add(resume);
                             store.sync();
-                            if(view == 'goBack'){
-                                G.Pop();
-                            }
-                            else{
-                                G.Push('UserResumeView');
-                            }
+                            //if(view == 'goBack'){
+                            G.Pop();
+                            //}
+                            //else{
+                            G.Push('UserResumeView');
+                            //}
+                            if(
+                            resume.Certifications.length <=0 &&
+                            resume.Keywords.length <=0 &&
+                            resume.Languages.length <=0 &&
+                            resume.Profiles.length <=0 &&
+                            resume.ResumeExperience.length <=0 &&
+                            resume.Skills.length <=0
+                            ){
 
+                                G.Push('UserResumeView');
+                                G.show('ResumeSplash');
+                                G.hide('UserResume');
+                            }
                         }
                     }
                     else{
@@ -828,6 +883,31 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
             Container.add(Cnt);
 
+        },
+
+        updateSettings_Instant: function(params) {
+            var AuthObj = Ext.getStore('AuthStore').getAt(0);
+            params.UserId = AuthObj.get('UserId');
+            params.ResumeId = AuthObj.get('ResumeId');
+            Ext.Ajax.request({
+                url: ApiBaseUrl+'Resumes/SettingsUpdate',
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                params : Ext.JSON.encode(params),
+                success: function(conn, response, options, eOpts) {
+                    var result = Ext.JSON.decode(conn.responseText);
+                    if (result.success) {
+                        Ext.Msg.alert('Success',"Saved successfully.");
+                    } else {
+
+                        G.showGeneralFailure();
+                    }
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+                    G.showGeneralFailure();
+                }
+            });
         }
     },
 

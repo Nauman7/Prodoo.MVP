@@ -66,7 +66,7 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 itemId: 'requestList',
                 itemTpl: [
                     '<div class="requestCnt">',
-                    '    <span class="reqNo">{ShortlistId}</span>',
+                    '    ',
                     '    <span class="reqName">{ShortlistName}&nbsp ({Count})</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',

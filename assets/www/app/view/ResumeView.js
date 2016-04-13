@@ -165,6 +165,36 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
             },
             {
                 xtype: 'container',
+                cls: 'splashCnt',
+                hidden: true,
+                itemId: 'SplashCnt',
+                items: [
+                    {
+                        xtype: 'container',
+                        cls: 'splashHeaderCnt',
+                        items: [
+                            {
+                                xtype: 'label',
+                                html: 'Welcome to your resume profile section!',
+                                itemId: 'SplashHeading'
+                            }
+                        ]
+                    },
+                    {
+                        xtype: 'container',
+                        cls: 'splashDetail',
+                        html: 'The profile is the most important part of your resume. When a someone is looking for help they start with defining what profile it is they need. This can for instance be Project Manager, Programmer or Test Designer.<br> It\'s recommended that you pick 1-4 profiles on your resume. If you have more than 4 profiles, it might give the impression that you are a jack-of-all-trades, and master of none.<br> All Profiles correlate to eachother and gives score on correlations. If you like to know more on the scoring system, please login to the web app.<br><br>  The ProDoo team',
+                        itemId: 'SplashDetail'
+                    },
+                    {
+                        xtype: 'hiddenfield',
+                        html: ' all ',
+                        itemId: 'HelpDisable'
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
                 itemId: 'resultCnt',
                 margin: '50 0 100 ',
                 items: [
@@ -773,9 +803,10 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 placeHolder: 'mm/dd/yyyy',
                                                 dateFormat: 'm/d/y',
                                                 picker: {
+                                                    itemId: 'AvailabilityDatePicker',
                                                     zIndex: 100,
                                                     doneButton: {
-                                                        itemId: 'Done'
+                                                        itemId: 'AvailabilityDateDone'
                                                     }
                                                 },
                                                 listeners: [
@@ -787,7 +818,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                             component.getPicker().setYearFrom(d.getFullYear());
                                                             component.getPicker().setYearTo(d.getFullYear()+5);
                                                             component.setValue(d);
-
                                                         },
                                                         event: 'initialize'
                                                     }
@@ -1032,6 +1062,11 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#mydatepicker'
             },
             {
+                fn: 'onLocationSelectFieldChange',
+                event: 'change',
+                delegate: '#locationSelectField'
+            },
+            {
                 fn: 'onResumeSettingAddTap',
                 event: 'tap',
                 delegate: '#ResumeSettingAdd'
@@ -1217,10 +1252,27 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
     },
 
     onMydatepickerChange: function(datepickerfield, newDate, oldDate, eOpts) {
-        if(newDate<new Date())
-            UserResume.changeAvailibilityStatus(false);
-        else
+        var item = UserResume.getActiveBtn();
+        if(item===6)// if settings btn active
+            {
+                var requestSettingObj = new Object();
+                requestSettingObj.AvailabilityDate = newDate;
+                UserResume.updateSettings_Instant(requestSettingObj);
+            }
+        if(newDate<=new Date()) // avaialble for past date and today
             UserResume.changeAvailibilityStatus(true);
+        else
+            UserResume.changeAvailibilityStatus(false);
+    },
+
+    onLocationSelectFieldChange: function(selectfield, newValue, oldValue, eOpts) {
+        var item = UserResume.getActiveBtn();
+        if(item===6)// if settings btn active
+        {
+            var requestSettingObj = new Object();
+            requestSettingObj.Region = newValue;
+            UserResume.updateSettings_Instant(requestSettingObj);
+        }
     },
 
     onResumeSettingAddTap: function(button, e, eOpts) {
@@ -1232,12 +1284,21 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         var slider = G.get('SettingCnt').element.query('.sliderCls');
         var dd=G.get('SettingCnt').element.query('.languageDD');
         for( var i=0; i< slider.length; i++){
-        var resumeLanguage=new Object();
-             var sliderId = Ext.get(slider[i]).getId();
-             var ddId = Ext.get(dd[i]).getId();
-             resumeLanguage.ExperienceLevel = G.get(sliderId).getValue()[0];
-             resumeLanguage.LanguageId=G.get(ddId).getValue();
-            resumeLanguageModels.push(resumeLanguage);
+            var ddId = Ext.get(dd[i]).getId();
+            //Avoid duplicate enteries
+            var languageAlreadyExist=false;
+            resumeLanguageModels.forEach(function(lang){
+                if(G.get(ddId).getValue()== lang.LanguageId)
+                    languageAlreadyExist=true;
+            });
+            if(!languageAlreadyExist){
+                var resumeLanguage=new Object();
+                var sliderId = Ext.get(slider[i]).getId();
+
+                resumeLanguage.ExperienceLevel = G.get(sliderId).getValue()[0];
+                resumeLanguage.LanguageId=G.get(ddId).getValue();
+                resumeLanguageModels.push(resumeLanguage);
+            }
         }
 
 
@@ -1248,8 +1309,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         requestSettingObj.UserId = AuthObj.get('UserId');
         requestSettingObj.ResumeId = AuthObj.get('ResumeId');
         requestSettingObj.AvailabilityDate = new Date(G.get('mydatepicker').getValue());
-        //requestSettingObj.LanguageId =G.get('languageDropdown').getValue();
-        //requestSettingObj.ExperienceLevel = G.get('levelItemID').getValue()[0];
         requestSettingObj.ResumeLanguage=resumeLanguageModels;
         requestSettingObj.Region = G.get('locationSelectField').getValue();
         requestSettingObj.IsAvailable= !button.element.hasCls('busyBtn');
@@ -1267,7 +1326,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     onBackBtnTap: function(button, e, eOpts) {
         // G.showHomeView();
-        UserResume.onResumeClick('goBack');
+        UserResume.onResumeClick();
 
     },
 

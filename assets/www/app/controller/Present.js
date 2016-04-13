@@ -118,6 +118,30 @@ Ext.define('ProDooMobileApp.controller.Present', {
             },
             "list#PresentDetailTpl": {
                 itemtap: 'onPresentDetailTplItemTap'
+            },
+            "textfield#facebookLink": {
+                blur: 'onFacebookLinkBlur'
+            },
+            "textfield#twitterLink": {
+                blur: 'onTwitterLinkBlur'
+            },
+            "textfield#linkedinLink": {
+                blur: 'onLinkedinLinkBlur'
+            },
+            "textfield#googleplusLink": {
+                blur: 'onGoogleplusLinkBlur'
+            },
+            "textfield#pinterestLink": {
+                blur: 'onPinterestLinkBlur'
+            },
+            "textfield#driblleLink": {
+                blur: 'onDriblleLinkBlur'
+            },
+            "textfield#behanceLink": {
+                blur: 'onBehanceLinkBlur'
+            },
+            "textfield#instagramLink": {
+                blur: 'onInstagramLinkBlur'
             }
         }
     },
@@ -340,7 +364,6 @@ Ext.define('ProDooMobileApp.controller.Present', {
     onPresentSocialMediaConfirmTap: function(button, e, eOpts) {
         SocialMediaList.forEach(function(item,index){
             var socialMediaField=G.get(item.name+"Link");
-
             if (socialMediaField !== undefined)
             {
                 var socialMediaVal=socialMediaField.getValue();
@@ -561,6 +584,39 @@ Ext.define('ProDooMobileApp.controller.Present', {
                 }
             });
         }
+    },
+
+    onFacebookLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+
+    },
+
+    onTwitterLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onLinkedinLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onGoogleplusLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onPinterestLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onDriblleLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onBehanceLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
+    },
+
+    onInstagramLinkBlur: function(textfield, e, eOpts) {
+        G.ValidateUrl(textfield);
     }
 
 });
