@@ -593,6 +593,7 @@ Ext.define('ProDooMobileApp.controller.G', {
                                     if (result.success) {
                                         if(cnt.up('container').innerItems.length <= 3){
                                             cnt.up('container').hide();
+                                            G.show('SplashCnt');
                                         }
                                         button.up('container').destroy();
 
@@ -806,6 +807,20 @@ Ext.define('ProDooMobileApp.controller.G', {
             }
             else{
                 G.Pop();
+            }
+
+        },
+
+        ValidateUrl: function(urlField) {
+            var re = /(((^https?)|(^ftp)):\/\/([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&#;`~=%!]*)(\.\w{2,})?)*\/?)/i;
+            var url = urlField.getValue();
+            var isValidUrl = re.test(url);
+            if(url !== null && url !== "" && !isValidUrl)//G.ValidateUrl(url))
+            {
+                var linkName =urlField.up().innerItems[0].getHtml();
+                Ext.Msg.alert('',linkName + " url is invalid.");
+                urlField.setValue(null);
+                return null;
             }
 
         }
