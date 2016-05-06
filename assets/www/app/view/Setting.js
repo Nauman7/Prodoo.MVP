@@ -310,6 +310,7 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             '<!-- <div>A: {Answer}</div><br/> -->',
                             '    </div>'
                         ],
+                        loadingText: false,
                         store: 'FaqStore'
                     }
                 ]

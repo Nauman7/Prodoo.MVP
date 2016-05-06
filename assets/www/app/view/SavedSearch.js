@@ -85,7 +85,8 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
                         xtype: 'searchfield',
                         cls: 'searchRound',
                         itemId: 'mysearchfield',
-                        clearIcon: false
+                        clearIcon: false,
+                        placeHolder: 'Search Saved Searches'
                     }
                 ]
             },

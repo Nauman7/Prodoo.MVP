@@ -24,12 +24,15 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.cordova.*;
 
 import com.facebook.internal.Logger;
 
 import android.content.Intent;
+import code.prodoo.keyboard.KeyboardUtil;
+import code.prodoo.keyboard.KeyboardVisibilityListener;
 
 public class PhonegapFacebookTest extends CordovaActivity
 {
@@ -38,7 +41,7 @@ public class PhonegapFacebookTest extends CordovaActivity
 	public static boolean isMainView = false; 
 	private BroadcastReceiver mainViewReceiver = null;
 	private IntentFilter MainViewIntentFilter = null;
-	
+	KeyboardVisibilityListener mKeyboardVisibilityListener = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -50,6 +53,16 @@ public class PhonegapFacebookTest extends CordovaActivity
         super.setIntegerProperty("loadUrlTimeoutValue", 70000);
         //super.loadUrl("file:///android_asset/www/index.html");
         super.loadUrl(Config.getStartUrl());
+        
+        mKeyboardVisibilityListener = new KeyboardVisibilityListener() {
+			
+			@Override
+			public void onKeyboardVisibilityChanged(boolean keyboardVisible) {
+				Toast.makeText(ctx,""+keyboardVisible, Toast.LENGTH_SHORT).show();
+			}
+		};
+        KeyboardUtil.setKeyboardVisibilityListener(this, mKeyboardVisibilityListener);
+        
     }
     
     private void onBack(){

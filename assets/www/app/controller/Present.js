@@ -255,7 +255,17 @@ Ext.define('ProDooMobileApp.controller.Present', {
                 if (result.success) {
                     var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
                     Ext.getStore('UserDetail').load({
-                        params : { userId : loggedUserId }
+                        params : { userId : loggedUserId },
+                            callback : function() {
+                                if(Ext.getStore('UserDetail').data.items.length<=0){
+                                    G.show('splash');
+                                    G.hide('PresentDetailTpl');
+                                }
+                                else{
+                                    G.hide('splash');
+                                    G.show('PresentDetailTpl');
+                                }
+                            }
                     });
                     G.Pop();
                 } else {
@@ -574,7 +584,13 @@ Ext.define('ProDooMobileApp.controller.Present', {
                         var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
                         Ext.getStore('UserDetail').load({
                             params : { userId : loggedUserId
-                                     }
+                                     },
+                            callback : function() {
+                                if(Ext.getStore('UserDetail').data.items.length<=0){
+                                    G.show('splash');
+                                    G.hide('PresentDetailTpl');
+                                }
+                            }
                         });
                     }
                 },

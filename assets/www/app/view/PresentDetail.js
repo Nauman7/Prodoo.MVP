@@ -14,54 +14,88 @@
  */
 
 Ext.define('ProDooMobileApp.view.PresentDetail', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.Container',
     alias: 'widget.PresentDetail',
 
     requires: [
+        'Ext.dataview.List',
         'Ext.XTemplate',
+        'Ext.Img',
         'Ext.Button'
     ],
 
     config: {
-        cls: 'presentDetail',
-        hidden: false,
-        itemId: 'PresentDetailTpl',
-        pressedCls: '',
-        selectedCls: '',
-        store: 'UserDetail',
-        itemTpl: [
-            '<div class="presList">',
-            '    <div class="presView">',
-            '        <span class="presEdit"> </span>',
-            '        <span class="presDelete"> </span>',
-            '',
-            '',
-            '        <div class="presImg">',
-            '            <img src=\'{Logo}\'>',
-            '        </div>',
-            '        <div class="presName">{UserName}</div>',
-            '        <div class="presSkill">{Position}</div>',
-            '',
-            '        <div class="presContact">',
-            '            <span class="presPhone">{Phone}</span>',
-            '            <span class="presEmail">{Email}</span>',
-            '        </div>',
-            '        <div class="presDetail">',
-            '            <div class="InnerPresDetail">',
-            '                <div class="presSocialLinks">',
-            '                </div>',
-            '                <div class="PresDesc">',
-            '                    {Detail}',
-            '                </div>',
-            '',
-            '            </div>',
-            '        </div>',
-            '        <tpl if = "socialLinksEnabledPresent"> <span class="presArrowDown"> </span> </tpl>',
-            '    </div>',
-            '</div>',
-            ''
-        ],
+        cls: 'darkBlue',
         items: [
+            {
+                xtype: 'list',
+                cls: 'presentDetail',
+                height: '100%',
+                itemId: 'PresentDetailTpl',
+                itemTpl: [
+                    '<div class="presList">',
+                    '    <div class="presView">',
+                    '        <span class="presEdit"> </span>',
+                    '        <span class="presDelete"> </span>',
+                    '',
+                    '',
+                    '        <div class="presImg">',
+                    '            <img src=\'{Logo}\'>',
+                    '        </div>',
+                    '        <div class="presName">{UserName}</div>',
+                    '        <div class="presSkill">{Position}</div>',
+                    '',
+                    '        <div class="presContact">',
+                    '            <span class="presPhone">{Phone}</span>',
+                    '            <span class="presEmail">{Email}</span>',
+                    '        </div>',
+                    '        <div class="presDetail">',
+                    '            <div class="InnerPresDetail">',
+                    '                <div class="presSocialLinks">',
+                    '                </div>',
+                    '                <div class="PresDesc">',
+                    '                    {Detail}',
+                    '                </div>',
+                    '',
+                    '            </div>',
+                    '        </div>',
+                    '        <tpl if = "socialLinksEnabledPresent"> <span class="presArrowDown"> </span> </tpl>',
+                    '    </div>',
+                    '</div>',
+                    ''
+                ],
+                pressedCls: null,
+                selectedCls: null,
+                store: 'UserDetail'
+            },
+            {
+                xtype: 'container',
+                centered: true,
+                cls: [
+                    'labelCls',
+                    'center'
+                ],
+                docked: 'top',
+                hidden: true,
+                html: '<br><br>Add your presentation and tell them about you',
+                itemId: 'splash',
+                items: [
+                    {
+                        xtype: 'image',
+                        height: 128,
+                        src: 'resources/images/splash/present.png'
+                    }
+                ]
+            },
+            {
+                xtype: 'button',
+                bottom: 10,
+                cls: 'plusBtn',
+                docked: 'bottom',
+                itemId: 'PresentAddBtn',
+                right: 10,
+                text: ' '
+            },
             {
                 xtype: 'button',
                 bottom: 10,
@@ -72,15 +106,6 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                 docked: 'bottom',
                 itemId: 'PresentHomeButton',
                 left: 10,
-                text: ' '
-            },
-            {
-                xtype: 'button',
-                bottom: 10,
-                cls: 'plusBtn',
-                docked: 'bottom',
-                itemId: 'PresentAddBtn',
-                right: 10,
                 text: ' '
             }
         ]

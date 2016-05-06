@@ -20,6 +20,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
     requires: [
         'Ext.dataview.DataView',
         'Ext.XTemplate',
+        'Ext.Img',
         'Ext.Button'
     ],
 
@@ -84,7 +85,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     '        ',
                     '    </div>',
                     '</div>',
-                    '',
+                    '<tpl if="Skills.length &gt; 0">',
                     '<div class="ViewCnt">',
                     '    <div class="tabHead">',
                     '        <span class="langIcon"> </span>',
@@ -99,6 +100,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     '',
                     '    </div>',
                     '</div>',
+                    '    </tpl>',
                     '    ',
                     '<div class="ViewCnt">',
                     '    <div class="tabHead">',
@@ -179,8 +181,15 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                 ],
                 docked: 'top',
                 hidden: true,
-                html: 'Welcome to the Resume view<br>  tab on edit icon to create new resume',
-                itemId: 'ResumeSplash'
+                html: '<br>Welcome to the Resume view<br>  tab on edit icon to create new resume',
+                itemId: 'ResumeSplash',
+                items: [
+                    {
+                        xtype: 'image',
+                        height: 127,
+                        src: 'resources/images/splash/resume.png'
+                    }
+                ]
             },
             {
                 xtype: 'button',
@@ -270,7 +279,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         else{
             G.show('SplashCnt');
         }
-
+        debugger;
         if(resume.Skills.length > 0 ){
             var skills = resume.Skills;
             skills.forEach(function(item,index){

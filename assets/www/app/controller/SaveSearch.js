@@ -137,7 +137,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 Ext.Msg.confirm('Confirm', 'Do you want to save the current search parameters to be able to retrieve it later? If you press "No" you will be presented with the list of already saved searches.', function(btn){
                     if(btn === 'yes'){
                         Ext.defer( function() {
-                            Ext.Msg.prompt('Add search title', '',function(button,text){
+                            Ext.Msg.prompt('Name the search in a way so that you easily can identify it later', '',function(button,text){
                                 if(button==='ok')
                                 {
                                     searchObject.SearchName = text;
