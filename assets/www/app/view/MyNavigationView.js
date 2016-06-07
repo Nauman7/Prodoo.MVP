@@ -17,9 +17,7 @@ Ext.define('ProDooMobileApp.view.MyNavigationView', {
     extend: 'Ext.navigation.View',
 
     requires: [
-        'ProDooMobileApp.view.LoginForm',
-        'Ext.navigation.Bar',
-        'Ext.form.Panel'
+        'Ext.navigation.Bar'
     ],
 
     config: {
@@ -31,12 +29,7 @@ Ext.define('ProDooMobileApp.view.MyNavigationView', {
         navigationBar: {
             docked: 'top',
             hidden: true
-        },
-        items: [
-            {
-                xtype: 'LoginForm'
-            }
-        ]
+        }
     }
 
 });

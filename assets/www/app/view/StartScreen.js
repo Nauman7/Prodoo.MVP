@@ -128,6 +128,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Discover what you need',
+                                itemId: 'StartSearch',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -160,7 +161,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'write it down and become the chosen one',
-                                itemId: 'StartResumeContainer',
+                                itemId: 'StartResume',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -193,7 +194,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'see how much people intrested in your company',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartRequest',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -226,7 +227,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Keep your contact with them',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartMessage',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -259,7 +260,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Make them love your pro',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartPresent',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -292,7 +293,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Your company tell them your ability',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartCompany',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -325,7 +326,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Let us see how its going',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartStatistics',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -358,7 +359,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 centered: true,
                                 cls: 'imgTitle',
                                 html: 'Set it and love it',
-                                itemId: 'mycontainer10',
+                                itemId: 'StartSetting',
                                 padding: '0 20',
                                 items: [
                                     {
@@ -368,6 +369,39 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                         margin: 'auto',
                                         width: 220,
                                         src: 'resources/images/settingIcon.png'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        xtype: 'container',
+                        itemId: 'StartFeedbackContainer',
+                        items: [
+                            {
+                                xtype: 'container',
+                                cls: [
+                                    'topHeading',
+                                    'lightGreen'
+                                ],
+                                docked: 'top',
+                                html: 'Feedback'
+                            },
+                            {
+                                xtype: 'container',
+                                centered: true,
+                                cls: 'imgTitle',
+                                html: 'Feedback please',
+                                itemId: 'StartFeedback',
+                                padding: '0 20',
+                                items: [
+                                    {
+                                        xtype: 'image',
+                                        height: 117,
+                                        itemId: 'FeedbackContainerImg',
+                                        margin: 'auto',
+                                        width: 140,
+                                        src: 'resources/images/feedback.png'
                                     }
                                 ]
                             }
@@ -454,6 +488,11 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                 delegate: '#SettingsContainerImg'
             },
             {
+                fn: 'onFeedbackImgTap',
+                event: 'tap',
+                delegate: '#FeedbackContainerImg'
+            },
+            {
                 fn: 'onLeftArrowTap',
                 event: 'tap',
                 delegate: '#leftArrow'
@@ -500,6 +539,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     },
 
     onMyimgTap: function(image, e, eOpts) {
+
         ActiveScreen=1;
         G.Push('MsgInbox');
         var store=Ext.getStore("MessageStore");
@@ -532,7 +572,8 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             },
             callback : function() {
                 if(Ext.getStore('UserDetail').data.items.length<=0){
-                    G.show('splash');
+                    G.show('PresentSplash');
+                    G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
                     G.hide('PresentDetailTpl');
                 }
             }
@@ -572,11 +613,23 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
         G.Push('Setting');
     },
 
+    onFeedbackImgTap: function(image, e, eOpts) {
+
+        if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
+            ActiveScreen=5;
+        else
+            ActiveScreen=6;
+        G.Push('Feedback');
+
+          var store=Ext.getStore("FeedbackStore");
+           store.load();
+    },
+
     onLeftArrowTap: function(image, e, eOpts) {
         var carousel=Ext.ComponentQuery.query('carousel')[0];
-        var iterator=5;
+        var iterator=6;
         if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
-            iterator=4;
+            iterator=5;
 
         if(carousel.activeIndex === 0){//first item active
             for(var i=1; i<= iterator; i++){
@@ -590,9 +643,9 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
 
     onRightArrowTap: function(image, e, eOpts) {
         var carousel=Ext.ComponentQuery.query('carousel')[0];
-        var iterator=5;
+        var iterator=6;
         if(Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
-            iterator=4;
+            iterator=5;
         if(carousel.activeIndex == iterator){//last item active
             for(var i=1; i<= iterator; i++){
                 carousel.previous();
@@ -605,9 +658,9 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
 
     onCarouselActiveItemChange: function(container, value, oldValue, eOpts) {
         var carousel=Ext.ComponentQuery.query('carousel')[0];
-        var iterator=5;
+        var iterator=6;
         if(Ext.getStore('AuthStore').getAt(0) && Ext.getStore('AuthStore').getAt(0).get('IsFreelancer'))
-            iterator=4;
+            iterator=5;
         if((carousel.activeIndex===0)){
             this.down('#leftArrow').hide();
             this.down('#rightArrow').show();
@@ -625,6 +678,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     initialize: function() {
         this.callParent();
         this.addItems();
+        SystemLabel.BindStartScreenLabels();
     },
 
     addItems: function() {
@@ -650,7 +704,8 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 'StartMessageContainer',
                                 'StartPresentContainer',
                                 'StartStatisticsContainer',
-                                'StartSettingContainer'];
+                                'StartSettingContainer',
+                                'StartFeedbackContainer'];
                 G.get('StartFreelancerBtn').addCls('ActiveBtn');
             }
             else{
@@ -660,7 +715,8 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 'StartRequestContainer',
                                 'StartCompanyContainer',
                                 'StartStatisticsContainer',
-                                'StartSettingContainer'];
+                                'StartSettingContainer',
+                                'StartFeedbackContainer'];
                 G.get('StartCompanyBtn').addCls('ActiveBtn');
             }
 

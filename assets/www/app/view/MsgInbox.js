@@ -268,8 +268,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                             '    </div>',
                             '    <div class="msgDetailMsg"></div> ',
                             '</div>'
-                        ],
-                        store: 'MsgDetailList'
+                        ]
                     },
                     {
                         xtype: 'hiddenfield',
@@ -450,7 +449,8 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 xtype: 'button',
                 cls: [
                     'homeIcon',
-                    'btnCircle'
+                    'btnCircle',
+                    'bgYellow'
                 ],
                 docked: 'bottom',
                 itemId: 'HomeBtn',
@@ -462,7 +462,8 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     'btnCircle',
                     'backIcon',
                     'b10',
-                    'l10'
+                    'l10',
+                    'bgYellow'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -473,7 +474,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 xtype: 'button',
                 cls: 'sendBtn2',
                 docked: 'bottom',
-                hidden: true,
+                hidden: false,
                 itemId: 'SendBtn',
                 text: ' '
             }

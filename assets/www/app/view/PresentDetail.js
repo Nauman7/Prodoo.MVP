@@ -53,9 +53,7 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                     '            <div class="InnerPresDetail">',
                     '                <div class="presSocialLinks">',
                     '                </div>',
-                    '                <div class="PresDesc">',
-                    '                    {Detail}',
-                    '                </div>',
+                    '                <div class="PresDesc" style="white-space:pre">{Detail}</div>',
                     '',
                     '            </div>',
                     '        </div>',
@@ -78,7 +76,7 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                 docked: 'top',
                 hidden: true,
                 html: '<br><br>Add your presentation and tell them about you',
-                itemId: 'splash',
+                itemId: 'PresentSplash',
                 items: [
                     {
                         xtype: 'image',
@@ -90,7 +88,10 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
             {
                 xtype: 'button',
                 bottom: 10,
-                cls: 'plusBtn',
+                cls: [
+                    'plusBtn',
+                    'bgRed'
+                ],
                 docked: 'bottom',
                 itemId: 'PresentAddBtn',
                 right: 10,
@@ -101,7 +102,8 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                 bottom: 10,
                 cls: [
                     'btnCircle',
-                    'homeIcon'
+                    'homeIcon',
+                    'bgRed'
                 ],
                 docked: 'bottom',
                 itemId: 'PresentHomeButton',

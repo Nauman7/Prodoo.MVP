@@ -19,7 +19,6 @@ Ext.define('ProDooMobileApp.view.Register', {
 
     requires: [
         'Ext.Img',
-        'Ext.Label',
         'Ext.form.FieldSet',
         'Ext.field.Email',
         'Ext.field.Password',
@@ -33,17 +32,12 @@ Ext.define('ProDooMobileApp.view.Register', {
             {
                 xtype: 'container',
                 cls: 'loginProdoo',
-                margin: '10 0 0 0 ',
+                margin: '50 0 0 0 ',
                 items: [
                     {
                         xtype: 'image',
-                        height: 138,
-                        src: 'resources/images/Login.png'
-                    },
-                    {
-                        xtype: 'label',
-                        cls: 'loginHeading',
-                        html: 'Prodoo'
+                        height: 54,
+                        src: 'resources/images/logo.png'
                     }
                 ]
             },
@@ -96,7 +90,16 @@ Ext.define('ProDooMobileApp.view.Register', {
                             zIndex: 999
                         },
                         displayField: 'Type',
-                        store: 'UserType',
+                        options: [
+                            {
+                                Type: 'Company',
+                                Val: 'false'
+                            },
+                            {
+                                Type: 'Freelancer',
+                                Val: 'true'
+                            }
+                        ],
                         valueField: 'Val'
                     }
                 ]

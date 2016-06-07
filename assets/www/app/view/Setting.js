@@ -135,7 +135,7 @@ Ext.define('ProDooMobileApp.view.Setting', {
                     {
                         xtype: 'label',
                         cls: 'labelCls',
-                        html: 'About PROODOO'
+                        html: 'About ProDoo'
                     },
                     {
                         xtype: 'button',
@@ -319,7 +319,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                 xtype: 'button',
                 cls: [
                     'homeIcon',
-                    'btnCircle'
+                    'btnCircle',
+                    'bgLightPurple'
                 ],
                 docked: 'bottom',
                 itemId: 'SettingsHomeButton',

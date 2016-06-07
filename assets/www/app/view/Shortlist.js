@@ -26,9 +26,12 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
     ],
 
     config: {
-        cls: 'RequestScreen',
         itemId: 'ShortlistView',
         scrollable: true,
+        cls: [
+            'RequestScreen',
+            'scrollPadding'
+        ],
         items: [
             {
                 xtype: 'container',
@@ -66,7 +69,6 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 itemId: 'requestList',
                 itemTpl: [
                     '<div class="requestCnt">',
-                    '    ',
                     '    <span class="reqName">{ShortlistName}&nbsp ({Count})</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',
@@ -172,7 +174,6 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                             Ext.Msg.alert('Status', 'Please add some title!');
                             return;
                         }
-                        localStorage.SubmitDirectRequest=false;
                         Shortlist.onCreateShortlist(text);
                     }
                 }

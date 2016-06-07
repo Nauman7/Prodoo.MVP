@@ -25,8 +25,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
         'Ext.dataview.List',
         'Ext.XTemplate',
         'Ext.field.DatePicker',
-        'Ext.picker.Date',
-        'Ext.field.Slider'
+        'Ext.picker.Date'
     ],
 
     config: {
@@ -52,43 +51,60 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         xtype: 'button',
                         cls: [
                             'activeBtn',
-                            'tabIconSpan'
+                            'tabIconSpan',
+                            'profileTabIcon'
                         ],
-                        html: '<span class="tabIcon profileTabIcon"> </span>',
+                        html: ' ',
                         itemId: 'profileBtn',
                         margin: '0 5'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon editTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'editTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'SkillsBtn',
                         margin: '0 5'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon savedTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'savedTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'IndustryBtn',
                         margin: '0 5'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon skillTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'skillTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'keywordBtn',
                         margin: '0 5'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon certificationTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'certificationTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'certificationBtn',
                         margin: '0 5'
                     },
                     {
                         xtype: 'button',
-                        cls: 'locationIcon',
+                        cls: [
+                            'locationIcon',
+                            'tabIconSpan'
+                        ],
+                        html: ' ',
                         itemId: 'locationBtn',
                         margin: '0 5'
                     }
@@ -153,16 +169,6 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         pressedCls: null,
                         selectedCls: null,
                         store: 'SearchProfile'
-                    },
-                    {
-                        xtype: 'list',
-                        id: 'ProfilesDetailsView1',
-                        itemTpl: [
-                            'Profile: {Value} <br/>',
-                            'Experience: {Experience} <br/>',
-                            'Match: {Score}'
-                        ],
-                        store: 'ProfilesForResumeStore'
                     }
                 ]
             },
@@ -200,7 +206,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                     {
                         xtype: 'container',
                         cls: 'helpDetail',
-                        html: 'Type your required skills to search',
+                        html: '',
                         itemId: 'HelpDetail',
                         padding: 10
                     },
@@ -280,100 +286,12 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                         html: 'sample'
                                     },
                                     {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        itemId: 'mysliderfield3',
-                                        label: 'sample text for profile with large text',
-                                        labelAlign: 'top',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
-                                    },
-                                    {
                                         xtype: 'button',
                                         cls: [
                                             'closeIcon',
                                             'noBorder'
                                         ],
                                         itemId: 'ProfileListClose',
-                                        text: ' '
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'container',
-                        cls: [
-                            'LabelCnt',
-                            'greenLabel'
-                        ],
-                        hidden: true,
-                        itemId: 'LocationCnt',
-                        margin: '0 0 10',
-                        padding: '0 10',
-                        items: [
-                            {
-                                xtype: 'label',
-                                cls: [
-                                    'heading',
-                                    'iGreen'
-                                ],
-                                html: 'Location'
-                            },
-                            {
-                                xtype: 'container',
-                                hidden: true,
-                                margin: '0 0 5 0',
-                                layout: {
-                                    type: 'hbox',
-                                    align: 'center'
-                                },
-                                items: [
-                                    {
-                                        xtype: 'label',
-                                        cls: 'labelCls',
-                                        html: 'Sample Location',
-                                        width: 120
-                                    },
-                                    {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        itemId: 'mysliderfield3',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                    component.setLabelAlign('left');
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        xtype: 'button',
-                                        cls: [
-                                            'closeIcon',
-                                            'noBorder'
-                                        ],
-                                        itemId: 'mybutton16',
                                         text: ' '
                                     }
                                 ]
@@ -413,25 +331,6 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                         cls: 'labelCls',
                                         html: 'Sample Skills',
                                         width: 120
-                                    },
-                                    {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        itemId: 'mysliderfield3',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
                                     },
                                     {
                                         xtype: 'button',
@@ -479,24 +378,6 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                         cls: 'labelCls',
                                         html: 'Sample Industry',
                                         width: 120
-                                    },
-                                    {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
                                     },
                                     {
                                         xtype: 'button',
@@ -604,6 +485,53 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 ]
                             }
                         ]
+                    },
+                    {
+                        xtype: 'container',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
+                        hidden: true,
+                        itemId: 'LocationCnt',
+                        margin: '0 0 10',
+                        padding: '0 10',
+                        items: [
+                            {
+                                xtype: 'label',
+                                cls: [
+                                    'heading',
+                                    'iGreen'
+                                ],
+                                html: 'Location'
+                            },
+                            {
+                                xtype: 'container',
+                                hidden: true,
+                                margin: '0 0 5 0',
+                                layout: {
+                                    type: 'hbox',
+                                    align: 'center'
+                                },
+                                items: [
+                                    {
+                                        xtype: 'label',
+                                        cls: 'labelCls',
+                                        html: 'Sample Location',
+                                        width: 120
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        cls: [
+                                            'closeIcon',
+                                            'noBorder'
+                                        ],
+                                        itemId: 'mybutton16',
+                                        text: ' '
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -675,7 +603,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 xtype: 'button',
                 cls: [
                     'bigBtnCircle',
-                    'searchIconBig'
+                    'btnCircle'
                 ],
                 docked: 'bottom',
                 itemId: 'SearchBtn',
@@ -744,29 +672,9 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 delegate: '#HelpClose'
             },
             {
-                fn: 'onMysliderfield3Drag',
-                event: 'drag',
-                delegate: '#mysliderfield3'
-            },
-            {
                 fn: 'onCloseButtonTap',
                 event: 'tap',
                 delegate: '#ProfileListClose'
-            },
-            {
-                fn: 'onMysliderfield3Drag2',
-                event: 'drag',
-                delegate: '#mysliderfield3'
-            },
-            {
-                fn: 'onCloseButtonTap2',
-                event: 'tap',
-                delegate: '#mybutton16'
-            },
-            {
-                fn: 'onMysliderfield3Drag1',
-                event: 'drag',
-                delegate: '#mysliderfield3'
             },
             {
                 fn: 'onCloseButtonTap1',
@@ -785,6 +693,11 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             },
             {
                 fn: 'onCloseButtonTap111',
+                event: 'tap',
+                delegate: '#mybutton16'
+            },
+            {
+                fn: 'onCloseButtonTap2',
                 event: 'tap',
                 delegate: '#mybutton16'
             },
@@ -857,9 +770,6 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
 
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
         SearchResume.onPropertySearch(textfield);
-
-
-
     },
 
     onMysearchfieldFocus: function(textfield, e, eOpts) {
@@ -869,7 +779,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
 
         if(!HelpActive)
         {
-            G.show('SearchList');
+           // G.show('SearchList');
             SearchResume.helpHide();
         }
     },
@@ -896,32 +806,12 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
         SearchResume.helpHide();
     },
 
-    onMysliderfield3Drag: function(sliderfield, sl, thumb, e, eOpts) {
-        SearchResume.onSliderfieldDrag(sliderfield);
-    },
-
     onCloseButtonTap: function(button, e, eOpts) {
         button.up('container').hide();
     },
 
-    onMysliderfield3Drag2: function(sliderfield, sl, thumb, e, eOpts) {
-        SearchResume.onSliderfieldDrag(sliderfield);
-    },
-
-    onCloseButtonTap2: function(button, e, eOpts) {
-        button.up('container').hide();
-    },
-
-    onMysliderfield3Drag1: function(sliderfield, sl, thumb, e, eOpts) {
-        SearchResume.onSliderfieldDrag(sliderfield);
-    },
-
     onCloseButtonTap1: function(button, e, eOpts) {
         button.up('container').hide();
-    },
-
-    onMysliderfield3Drag11: function(sliderfield, sl, thumb, e, eOpts) {
-        SearchResume.onSliderfieldDrag(sliderfield);
     },
 
     onCloseButtonTap12: function(button, e, eOpts) {
@@ -936,12 +826,27 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
         button.up('container').hide();
     },
 
+    onCloseButtonTap2: function(button, e, eOpts) {
+        button.up('container').hide();
+    },
+
     onHelpBtnTap: function(button, e, eOpts) {
         if(!button.element.hasCls('activeBtn')){// login for first time
             var helpDisble = G.get('HelpDisable');
             helpDisble.setHtml(' ');
             button.addCls('activeBtn');
+
             G.show('HelpCnt');
+            var re = /@LookupName/gi;
+            var lookupMessage = Identifier.Title.Help_Search_Top_Lookup;
+            var profile='Profile';
+            lookupMessage = lookupMessage.replace(re, profile);
+            if(profile){
+            G.get('HelpHeading').setHtml('Search for '+ profile);
+            G.get('HelpDetail').setHtml(lookupMessage);
+            var item = SearchResume.getActiveBtn();
+            G.get('HelpID').setHtml('');
+            }
             button.removeCls('helpFirstClick');
             G.get('mysearchfield').setReadOnly(true);
         }

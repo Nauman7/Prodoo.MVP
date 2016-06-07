@@ -26,6 +26,8 @@ Ext.define('ProDooMobileApp.controller.Account', {
             IsVistor=false;
             var authStore = Ext.getStore('AuthStore');
             if(authStore.data.items.length > 0){ // loggedin record exists
+
+                //SystemLabel.LoadSystemLabel();  //Load all system label to local store
                 var authRec = authStore.getAt(0);
                 var userFullName = authRec.get('FirstName');
                 var authType = authRec.get('AuthType');
@@ -66,6 +68,8 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 }
 
             }
+            else
+            G.ShowView('LoginForm');
         },
 
         onVisitBtnClick: function() {
@@ -77,7 +81,6 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     var result = G.getResponseData(response);
                     if (result.success) {
                         SearchResume.resetStores();
-                        G.loadCommonLookups(result.items.LookupData);
                         IsVistor=true;
                         G.ShowView('SearchResult');
                     } else {
@@ -230,13 +233,6 @@ Ext.define('ProDooMobileApp.controller.Account', {
         this.Logout();
     },
 
-    InitializeFormStore: function() {
-        Ext.getStore('ProfilesStore').load();
-        Ext.getStore('SkillsStore').load();
-        Ext.getStore('ExperienceStore').load();
-        Ext.getStore('CertificateStore').load();
-    },
-
     Logout: function() {
         var authStore = Ext.getStore('AuthStore');
 
@@ -283,8 +279,6 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 success: function(response, options) {
                     var result = G.getResponseData(response);
                     if (result.success) {
-                        localStorage.globalKeywords=Ext.encode(result.items.LookupData.keywords);
-                        localStorage.globalCertifications=Ext.encode(result.items.LookupData.certificates);
 
                         var authStore = Ext.getStore('AuthStore');
                         var authModel = Ext.create('ProDooMobileApp.model.AuthModel');
@@ -299,7 +293,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                         authStore.add(authModel);
                         authStore.sync({
                             success: function () {
-                                G.loadCommonLookups(result.items.LookupData);
+
                                 G.ShowView('StartScreen');
                                 G.setLoggedUsername(result.items.FirstName);
 

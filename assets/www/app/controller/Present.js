@@ -232,7 +232,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
         SocialMediaList.forEach(function(item,index){
             if (item.isAdded)
             {
-                var record = Ext.create('ProDooMobileApp.model.UserDetailSocialMediaModel');
+                var record = new Object();
                 record.Id=0;
                 record.UserDetailId=0;
                 record.SocialMediaId=item.Id;
@@ -258,11 +258,12 @@ Ext.define('ProDooMobileApp.controller.Present', {
                         params : { userId : loggedUserId },
                             callback : function() {
                                 if(Ext.getStore('UserDetail').data.items.length<=0){
-                                    G.show('splash');
+                                    G.show('PresentSplash');
+                                    G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
                                     G.hide('PresentDetailTpl');
                                 }
                                 else{
-                                    G.hide('splash');
+                                    G.hide('PresentSplash');
                                     G.show('PresentDetailTpl');
                                 }
                             }
@@ -587,7 +588,8 @@ Ext.define('ProDooMobileApp.controller.Present', {
                                      },
                             callback : function() {
                                 if(Ext.getStore('UserDetail').data.items.length<=0){
-                                    G.show('splash');
+                                    G.show('PresentSplash');
+                                    G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
                                     G.hide('PresentDetailTpl');
                                 }
                             }

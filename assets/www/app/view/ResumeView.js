@@ -24,7 +24,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         'Ext.field.Search',
         'Ext.dataview.List',
         'Ext.XTemplate',
-        'Ext.field.Slider',
         'Ext.field.DatePicker',
         'Ext.picker.Date',
         'Ext.field.TextArea'
@@ -51,37 +50,50 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                         xtype: 'button',
                         cls: [
                             'tabIconSpan',
+                            'profileTabIcon',
                             'activeBtn'
                         ],
-                        html: '<span class="tabIcon profileTabIcon"> </span>',
+                        html: ' ',
                         itemId: 'profileBtn',
                         margin: '0 2'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon editTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'editTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'SkillsBtn',
                         margin: '0 2'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon savedTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'savedTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'IndustryBtn',
                         margin: '0 2'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon skillTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'skillTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'keywordBtn',
                         margin: '0 2'
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon certificationTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'certificationTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'certificationBtn',
                         margin: '0 2'
                     },
@@ -95,8 +107,11 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
-                        html: '<span class="tabIcon settingTabIcon"> </span>',
+                        cls: [
+                            'tabIconSpan',
+                            'settingTabIcon'
+                        ],
+                        html: ' ',
                         itemId: 'SettingBtn',
                         margin: '0 2'
                     }
@@ -183,7 +198,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     {
                         xtype: 'container',
                         cls: 'splashDetail',
-                        html: 'The profile is the most important part of your resume. When a someone is looking for help they start with defining what profile it is they need. This can for instance be Project Manager, Programmer or Test Designer.<br> It\'s recommended that you pick 1-4 profiles on your resume. If you have more than 4 profiles, it might give the impression that you are a jack-of-all-trades, and master of none.<br> All Profiles correlate to eachother and gives score on correlations. If you like to know more on the scoring system, please login to the web app.<br><br>  The ProDoo team',
+                        html: '',
                         itemId: 'SplashDetail'
                     },
                     {
@@ -231,25 +246,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         width: 120
                                     },
                                     {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        itemId: 'mysliderfield3',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
-                                    },
-                                    {
                                         xtype: 'button',
                                         cls: [
                                             'closeIcon',
@@ -295,25 +291,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         width: 120
                                     },
                                     {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        itemId: 'mysliderfield3',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
-                                    },
-                                    {
                                         xtype: 'button',
                                         cls: [
                                             'closeIcon',
@@ -356,24 +333,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         cls: 'labelCls',
                                         html: 'Sample Industry',
                                         width: 120
-                                    },
-                                    {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
                                     },
                                     {
                                         xtype: 'button',
@@ -462,7 +421,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             zIndex: 999
                                         },
                                         displayField: 'IndustryValue',
-                                        store: 'SearchIndustry',
+                                        store: 'IndustriesStore',
                                         valueField: 'IndustryId',
                                         listeners: [
                                             {
@@ -493,7 +452,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             zIndex: 999
                                         },
                                         displayField: 'ProfileValue',
-                                        store: 'SearchProfile',
+                                        store: 'ProfilesStore',
                                         valueField: 'ProfileId',
                                         listeners: [
                                             {
@@ -719,24 +678,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         width: 120
                                     },
                                     {
-                                        xtype: 'sliderfield',
-                                        flex: 1,
-                                        cls: 'sliderCls',
-                                        value: [
-                                            0
-                                        ],
-                                        maxValue: 10,
-                                        listeners: [
-                                            {
-                                                fn: function(component, eOpts) {
-                                                    var thumb = component.element.dom.querySelector('.x-thumb');
-                                                    thumb.insertAdjacentHTML( 'afterBegin', '<span class="xValue">0</span>' );
-                                                },
-                                                event: 'initialize'
-                                            }
-                                        ]
-                                    },
-                                    {
                                         xtype: 'button',
                                         cls: [
                                             'closeIcon',
@@ -897,17 +838,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 ],
                 docked: 'bottom',
                 hidden: true,
-                itemId: 'Confirm',
-                text: ' '
-            },
-            {
-                xtype: 'button',
-                cls: [
-                    'btnCircle',
-                    'confirmIcon'
-                ],
-                docked: 'bottom',
-                hidden: true,
                 itemId: 'CompanyExperienceComfirm',
                 text: ' '
             },
@@ -925,7 +855,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     'backIcon',
                     'btnCircle',
                     'b10',
-                    'l10'
+                    'l10',
+                    'bgBlue'
                 ],
                 docked: 'bottom',
                 itemId: 'EditResumeBackBtn',
@@ -937,7 +868,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     'backIcon',
                     'btnCircle',
                     'b10',
-                    'l10'
+                    'l10',
+                    'bgBlue'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -982,11 +914,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#SettingBtn'
             },
             {
-                fn: 'onMysearchfieldFocus',
-                event: 'focus',
-                delegate: '#mysearchfield'
-            },
-            {
                 fn: 'onMysearchfieldKeyup',
                 event: 'keyup',
                 delegate: '#mysearchfield'
@@ -1007,19 +934,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 delegate: '#SearchList'
             },
             {
-                fn: 'onMysliderfield3Drag',
-                event: 'drag',
-                delegate: '#mysliderfield3'
-            },
-            {
                 fn: 'onCloseButtonTap',
                 event: 'tap',
                 delegate: '#mybutton16'
-            },
-            {
-                fn: 'onMysliderfield3Drag1',
-                event: 'drag',
-                delegate: '#mysliderfield3'
             },
             {
                 fn: 'onCloseButtonTap1',
@@ -1070,11 +987,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                 fn: 'onResumeSettingAddTap',
                 event: 'tap',
                 delegate: '#ResumeSettingAdd'
-            },
-            {
-                fn: 'onConfirmBtnTap',
-                event: 'tap',
-                delegate: '#Confirm'
             },
             {
                 fn: 'onCompanyExperienceComfirmTap',
@@ -1133,12 +1045,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         UserResume.onSettingBtnTap(button);
     },
 
-    onMysearchfieldFocus: function(textfield, e, eOpts) {
-        if(!textfield.getReadOnly()){
-            G.show('SearchList');
-        }
-    },
-
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
         UserResume.resumePropertySearch(textfield);
     },
@@ -1155,27 +1061,12 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         UserResume.onSearchListItemTap(dataview,record,e);
     },
 
-    onMysliderfield3Drag: function(sliderfield, sl, thumb, e, eOpts) {
-        var a=sliderfield.element.dom.querySelector('.xValue');
-        a.innerText = sliderfield.getValue()[0];
-    },
-
     onCloseButtonTap: function(button, e, eOpts) {
         button.up('container').hide();
     },
 
-    onMysliderfield3Drag1: function(sliderfield, sl, thumb, e, eOpts) {
-        var a=sliderfield.element.dom.querySelector('.xValue');
-        a.innerText = sliderfield.getValue()[0];
-    },
-
     onCloseButtonTap1: function(button, e, eOpts) {
         button.up('container').hide();
-    },
-
-    onMysliderfield3Drag111: function(sliderfield, sl, thumb, e, eOpts) {
-        var a=sliderfield.element.dom.querySelector('.xValue');
-        a.innerText = sliderfield.getValue()[0];
     },
 
     onCloseButtonTap121: function(button, e, eOpts) {
@@ -1236,33 +1127,31 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         button.up('container').hide();
     },
 
-    onMysliderfield3Drag11: function(sliderfield, sl, thumb, e, eOpts) {
-        var a=sliderfield.element.dom.querySelector('.xValue');
-        a.innerText = sliderfield.getValue()[0];
-    },
-
     onCloseButtonTap12: function(button, e, eOpts) {
         button.up('container').hide();
     },
 
     oncheckBtnTap: function(button, e, eOpts) {
         var button=G.get('availabilityBtn');
-        UserResume.changeAvailibilityStatus(button.element.hasCls('busyBtn'));
-
+        UserResume.changeAvailibilityStatus(button.element.hasCls('busyBtn'), true);
     },
 
     onMydatepickerChange: function(datepickerfield, newDate, oldDate, eOpts) {
         var item = UserResume.getActiveBtn();
+
         if(item===6)// if settings btn active
-            {
-                var requestSettingObj = new Object();
-                requestSettingObj.AvailabilityDate = newDate;
-                UserResume.updateSettings_Instant(requestSettingObj);
-            }
-        if(newDate<=new Date()) // avaialble for past date and today
-            UserResume.changeAvailibilityStatus(true);
-        else
-            UserResume.changeAvailibilityStatus(false);
+        {
+            var isAvailable=newDate<=new Date();
+            var requestSettingObj = new Object();
+            requestSettingObj.AvailabilityDate = newDate;
+            requestSettingObj.IsAvailable=isAvailable;
+            UserResume.updateSettings_Instant(requestSettingObj);
+
+            if(isAvailable) // avaialble for past date and today
+                UserResume.changeAvailibilityStatus(true);
+            else
+                UserResume.changeAvailibilityStatus(false);
+        }
     },
 
     onLocationSelectFieldChange: function(selectfield, newValue, oldValue, eOpts) {
@@ -1277,43 +1166,6 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
 
     onResumeSettingAddTap: function(button, e, eOpts) {
         this.addNewLevel();
-    },
-
-    onConfirmBtnTap: function(button, e, eOpts) {
-        var resumeLanguageModels = new Array();
-        var slider = G.get('SettingCnt').element.query('.sliderCls');
-        var dd=G.get('SettingCnt').element.query('.languageDD');
-        for( var i=0; i< slider.length; i++){
-            var ddId = Ext.get(dd[i]).getId();
-            //Avoid duplicate enteries
-            var languageAlreadyExist=false;
-            resumeLanguageModels.forEach(function(lang){
-                if(G.get(ddId).getValue()== lang.LanguageId)
-                    languageAlreadyExist=true;
-            });
-            if(!languageAlreadyExist){
-                var resumeLanguage=new Object();
-                var sliderId = Ext.get(slider[i]).getId();
-
-                resumeLanguage.ExperienceLevel = G.get(sliderId).getValue()[0];
-                resumeLanguage.LanguageId=G.get(ddId).getValue();
-                resumeLanguageModels.push(resumeLanguage);
-            }
-        }
-
-
-
-        var button=G.get('availabilityBtn');
-        var AuthObj = Ext.getStore('AuthStore').getAt(0);
-        var requestSettingObj = new Object();
-        requestSettingObj.UserId = AuthObj.get('UserId');
-        requestSettingObj.ResumeId = AuthObj.get('ResumeId');
-        requestSettingObj.AvailabilityDate = new Date(G.get('mydatepicker').getValue());
-        requestSettingObj.ResumeLanguage=resumeLanguageModels;
-        requestSettingObj.Region = G.get('locationSelectField').getValue();
-        requestSettingObj.IsAvailable= !button.element.hasCls('busyBtn');
-        UserResume.UpdateSettings(requestSettingObj,true);
-
     },
 
     onCompanyExperienceComfirmTap: function(button, e, eOpts) {
@@ -1337,6 +1189,14 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         G.show('EditResumeBackBtn');
         G.hide('BackToExperience');
         G.show('CreateCompanyExperience');
+
+
+        var loggedUser = Ext.getStore('AuthStore').getAt(0);
+        var resumeId = loggedUser.get('ResumeId');
+
+        var expStr = Ext.getStore('ResumeExperiencesStore');
+        var expData=Ext.getStore("SearchResultDetail").data.items[0].data.ResumeExperience;
+        UserResume.SplashView('Industry',!expData.length>0);
     },
 
     onContainerPainted: function(element, eOpts) {

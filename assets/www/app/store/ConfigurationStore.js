@@ -43,9 +43,9 @@ Ext.define('ProDooMobileApp.store.ConfigurationStore', {
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {
         var url = ApiBaseUrl + 'Configuration/ConfigurationList';
-                        var storeApi = store.getProxy().getApi();
-                        if(storeApi.read === undefined)
-                            storeApi.read = url;
+        var storeApi = store.getProxy().getApi();
+        if(storeApi.read === undefined)
+            storeApi.read = url;
     }
 
 });

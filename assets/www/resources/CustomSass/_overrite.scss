@@ -124,7 +124,7 @@
 // }
 
 .x-webkit .x-field-select .x-component-outer:after{
-	display: none;
+    display: none;
 }
 
 .x-tab .x-button-icon.check2:before, .x-button .x-button-icon.check2:before {
@@ -157,12 +157,10 @@
     }
     .x-toolbar .x-body {
         min-height: 40px;
-        background: red;
         width: 100%;
         margin: 0;
         border-radius: 5px 5px 0 0;
-        background: #ed6363 !important; 
-        border-bottom: 2px solid #e0dcdc;
+        border-bottom: 1px solid #ccc;
     }
     .x-dock-horizontal{
         padding: 0 10px;
@@ -173,19 +171,50 @@
     .x-field-text {
         border: 2px solid #2D1F55 !important;
     }
+    .x-title{
+        font-size: 16px;
+        color: #000;
+        font-weight: normal;
+    }
 }
 
 .x-msgbox-inner {
     color: #000;
 }
+
 .x-toolbar .x-button.x-button-action, .x-toolbar-light .x-button {
-    background: #04caa7;
+    background: $_green;
     padding: 6px 5px;
     margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1px 2px 0px darken($_green, 10);
     &.x-button-pressing {
-        background: darken(#04caa7, 10);
+        background: darken($_green, 10);
     }
-
+}
+.x-toolbar .x-button.x-button-decline{
+ background: $_red;
+    padding: 6px 5px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 1px 2px 0px darken($_red, 20);
+    &.x-button-pressing {
+        background: darken($_red, 10);
+    }
+}
+.x-msgbox > .x-dock:before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    z-index: 1;
+    background: url('../images/topbar.png') repeat-y 0 0 ;
+    background-size: contain;
+    @include border-radius (5px 5px 0 0 );
 }
 .x-msgbox-buttons .x-button-normal span{
     opacity: 1;
@@ -205,18 +234,18 @@
 }
 .x-toolbar-dark .x-button, .x-toolbar-dark .x-button.x-button-pressing{
     background: white;
-        width: 40px;
+    width: 40px;
     height: 40px;
     border:none;
     @include border-radius(50%);
     .x-button-icon {
-    width: 1em;
-    height: 1.6em;
-}
+        width: 1em;
+        height: 1.6em;
+    }
 }
 .x-picker-bar {
     @include transparentbg($_green, 0.3);
     background-image: none;
-        border: none;
+    border: none;
     box-shadow: none;
 }

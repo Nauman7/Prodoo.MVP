@@ -96,7 +96,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             if(locationNames.items.length > 2){
                 locationNames.items.forEach(function(item, index){
                     if(index > 1){
-                        locations.push(item.innerElement.dom.innerText.trim());
+                        locations.push(item.getAt(2).getValue());
                     }
                 });
             }
@@ -124,7 +124,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
                 var searchStore = Ext.getStore('SavedSearchStore');
                 var loggedUserId =authRec.get('UserId');
-
+                searchStore.clearFilter();
                 searchStore.load({
                     params : { userId : loggedUserId
                     }
@@ -134,17 +134,24 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             }
             else if(!directSave)
             {
-                Ext.Msg.confirm('Confirm', 'Do you want to save the current search parameters to be able to retrieve it later? If you press "No" you will be presented with the list of already saved searches.', function(btn){
-                    if(btn === 'yes'){
-                        Ext.defer( function() {
-                            Ext.Msg.prompt('Name the search in a way so that you easily can identify it later', '',function(button,text){
-                                if(button==='ok')
-                                {
-                                    searchObject.SearchName = text;
-                                    SaveSearch.SaveSearchParameters(searchObject, directSave);
-                                }
 
+
+                Ext.Msg.confirm('Confirm', Identifier.Title.Notification_ResumeList_SaveBtn, function(btn){
+                    if(btn === 'yes'){
+
+                        Ext.defer( function() {
+                            Ext.Msg.prompt('Add Search Title', 'Name the search in a way so that you easily can identify it later', function(btn, text, cfg) {
+
+                                if(btn == 'ok' ){
+                                    if(Ext.isEmpty(text)) {
+                                        Ext.Msg.show(Ext.apply({}, cfg));
+                                    }else{
+                                        searchObject.SearchName = text;
+                                        SaveSearch.SaveSearchParameters(searchObject, directSave);
+                                    }
+                                }
                             });
+
                         }, 10 );
 
                     }
@@ -210,45 +217,45 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                             G.Pop();
                             G.Pop();
                             G.Push('SearchResult');
-                            if(result.items.Profiles.length > 0){
+                            if(result.items.Profiles && result.items.Profiles.length > 0){
                                 result.items.Profiles.forEach(function(item,index){
-                                    var profileLabel = Ext.getStore('SearchProfile').findRecord('ProfileId',item[0]).data.ProfileValue;
-                                    SearchResume.createKeywordView('Profile', profileLabel, item);
+
+                                    SearchResume.createKeywordView('Profile', item.ProfileValue, item.ProfileId);
                                 });
                                 G.show('ProfileCnt');
                             }
-                            if(result.items.Skills.length > 0){// if skill btn active
+                            if(result.items.Skills && result.items.Skills.length > 0){// if skill btn active
                                 result.items.Skills.forEach(function(item,index){
-                                    var skillLabel = Ext.getStore('SearchSkill').findRecord('SkillId',item[0]).data.SkillValue;
-                                    SearchResume.createKeywordView('Skill', skillLabel, item);
+
+                                    SearchResume.createKeywordView('Skill', item.SkillValue, item.SkillId);
                                 });
-                                //newCnt = SearchResume.createView('Skill', value, recordID.getValue());
+
                                 G.show('SkillCnt');
                             }
-                            if(result.items.Industeries.length > 0){// if Industry btn active
+                            if(result.items.Industeries && result.items.Industeries.length > 0){// if Industry btn active
                                 result.items.Industeries.forEach(function(item,index){
-                                    var industryLabel = Ext.getStore('SearchIndustry').findRecord('IndustryId',item[0]).data.IndustryValue;
-                                    SearchResume.createKeywordView('Industry', industryLabel, item);
+
+                                    SearchResume.createKeywordView('Industry', item.IndustryValue, item.IndustryId);
                                 }); G.show('IndustryCnt');
                             }
-                            if(result.items.KeywordIds.length > 0){// if Keyword btn active
-                                result.items.KeywordIds.forEach(function(item,index){
-                                    var keywordLabel = Ext.getStore('SearchKeyword').findRecord('KeywordId',item).data.KeywordValue;
-                                    newCnt = SearchResume.createKeywordView('Keyword', keywordLabel, item);
+                            if(result.items.Keywords && result.items.Keywords.length > 0){// if Keyword btn active
+                                result.items.Keywords.forEach(function(item,index){
+
+                                    newCnt = SearchResume.createKeywordView('Keyword', item.KeywordValue, item.KeywordId);
                                 });
                                 G.show('KeywordCnt');
                             }
-                            if(result.items.CertificationIds.length > 0){// if certification btn active
-                                result.items.CertificationIds.forEach(function(item,index){
-                                    var certificationLabel = Ext.getStore('SearchCertification').findRecord('CertificationId',item).data.CertificationValue;
-                                    newCnt = SearchResume.createKeywordView('Certification', certificationLabel, item);
+                            if(result.items.Certifications && result.items.Certifications.length > 0){// if certification btn active
+                                result.items.Certifications.forEach(function(item,index){
+
+                                    newCnt = SearchResume.createKeywordView('Certification', item.CertificationValue, item.CertificationId);
                                 });
                                 G.show('CertificationCnt');
                             }
-                            if(result.items.Countries.length > 0){
+                            if(result.items.Countries && result.items.Countries.length > 0){
                                 result.items.Countries.forEach(function(item,index){
-                                    //var certificationLabel = Ext.getStore('CreateRequestLocation').findRecord('CountryName',item).data.CountryName;
-                                    newCnt = SearchResume.createKeywordView('Location', item, item);
+
+                                    newCnt = SearchResume.createKeywordView('Location', item.CountryName, item.CountryId);
                                 });
                                 G.show('LocationCnt');
                             }

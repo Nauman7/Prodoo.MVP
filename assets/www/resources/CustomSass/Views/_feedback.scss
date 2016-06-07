@@ -1,0 +1,33 @@
+.bgLightGreen{
+	background: $_lightGreen !important;
+}
+.addBtn{
+	&.bgLightGreen{
+		right: 10px;
+		left: auto;
+		margin-left: 0;
+	}
+}
+.feedbackNo {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 45px;
+	padding-top: 15px;
+	text-align: center;
+	background: darken($darkBlue, 5);
+}
+
+.feedbackList{
+	.savName {
+		padding-left: 40px;
+	}
+}
+
+.FeedbackArea {
+	.x-input-el{
+		padding: 7px;
+		@include border-radius(7px); 
+	}
+}

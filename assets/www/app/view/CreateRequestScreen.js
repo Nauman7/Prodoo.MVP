@@ -76,18 +76,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                 cls: 'searchViewCnt',
                 items: [
                     {
-                        xtype: 'label',
-                        cls: [
-                            'labelCls',
-                            'center'
-                        ],
-                        docked: 'left',
-                        hidden: true,
-                        html: 'Title',
-                        padding: 10,
-                        width: '100%'
-                    },
-                    {
                         xtype: 'textfield',
                         cls: 'inputCls',
                         itemId: 'mytextfield1',
@@ -289,9 +277,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 label: 'Duration',
                                 labelWidth: 80,
                                 name: 'Duration',
-                                value: [
-                                    6
-                                ],
                                 maxValue: 12,
                                 minValue: 1,
                                 listeners: [
@@ -322,7 +307,20 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     zIndex: 999
                                 },
                                 displayField: 'DayType',
-                                store: 'CreateRequestDay',
+                                options: [
+                                    {
+                                        DayType: 'Days'
+                                    },
+                                    {
+                                        DayType: 'Weeks'
+                                    },
+                                    {
+                                        DayType: 'Months'
+                                    },
+                                    {
+                                        DayType: 'Years'
+                                    }
+                                ],
                                 valueField: 'DayType'
                             },
                             {
@@ -397,7 +395,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     zIndex: 999
                                 },
                                 displayField: 'CountryName',
-                                store: 'CreateRequestLocation',
+                                store: 'CountryStore',
                                 valueField: 'CountryId',
                                 listeners: [
                                     {
@@ -577,7 +575,20 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     zIndex: 999
                                 },
                                 displayField: 'Currency',
-                                store: 'CreateRequestFeeRange',
+                                options: [
+                                    {
+                                        Currency: 'USD'
+                                    },
+                                    {
+                                        Currency: 'GBP'
+                                    },
+                                    {
+                                        Currency: 'DKK'
+                                    },
+                                    {
+                                        Currency: 'EUR'
+                                    }
+                                ],
                                 valueField: 'Currency'
                             },
                             {

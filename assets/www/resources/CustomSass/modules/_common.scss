@@ -40,7 +40,7 @@
 	}
 
 	&.x-tabbar .x-tab.x-tab-active {
-		background: darken($green, 5);
+		background: darken($_green, 5);
 		@include transition(all 0.5s);
 	}
 }
@@ -51,8 +51,8 @@
 
 .clearfix:before,
 .clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+	content: " "; /* 1 */
+	display: table; /* 2 */
 }
 
 .clearfix:after {
@@ -104,7 +104,6 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	padding-bottom: 80px;
 	.x-list-item {
 		border-top: 1px solid black !important;
 		@include transition(background 0.3s);
@@ -131,4 +130,9 @@
 }
 .bottom78{
 	bottom: 78px !important;
+}
+.scrollPadding{
+	.x-scroll-scroller{
+		padding-bottom: 80px;
+	}
 }

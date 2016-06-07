@@ -31,28 +31,40 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 var store = Ext.getStore('SearchRequestList');
                 store.removeAll(); //Remove if there is something already in store
                 model = Ext.create('ProDooMobileApp.model.SearchRequestList');
-                isNew = values.RequestId ==='';
+                //isNew = values.RequestId ==='';
                 model.set(values);
 
-                if(isNew){
-                    var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                    model.set('RequestId', 0);
-                    model.set('UserId',loggedUserId);
-                }
+                // if(isNew){
+                var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+                if(values.RequestId ==='')
+                model.set('RequestId', 0);
+                model.set('UserId',loggedUserId);
+                // }
 
                 model.set('Duration', values.Duration[0]);
                 model.set('HourlyFee', values.HourlyFee[0]);
                 model.set('EndDate', Ext.Date.toString());
                 model.set('IsSent', false);
 
-                if(isNew)
+                // if(isNew)
                 store.add(model);
 
                 store.sync({
                     success: function () {
+                        if(localStorage.SubmitDirectRequest=="true")
+                        {
+                            G.Pop(); // Pop createrequest view
+                            G.Pop(); // Pop search resume view
+                            G.Pop(); // pop search reume view
+                            Requests.ShowRequestView(true,true, true);
+                        }
+                        else{
+                            G.Pop();
+                            Requests.ShowRequestView(false,false);
+                        }
 
-                        G.Pop();
-                        Requests.ShowRequestView(false,false);
+                        Ext.Msg.alert('','The request has been saved. You can now manage the request under \'Requests\' as a draft');
+
                     },
                     failure: function (batch) {
                         //var message = batch.operations[0].request.scope.reader.jsonData["message"];
@@ -95,17 +107,38 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                 store.add(model);
                 store.sync({
-                    success: function () {
+                    success: function (result) {
 
-                        G.Pop();
-                        G.Pop();
 
-                        if(localStorage.SubmitDirectRequest!="true") //Show request details
-                        Requests.ShowRequestView(false,false);
+                        if(JSON.parse(result.operations[0]._response.responseText).items==0)
+                        Ext.Msg.alert('', JSON.parse(result.operations[0]._response.responseText).message);
+                        else{
+
+
+
+                            if(localStorage.SubmitDirectRequest=="true")
+                            {
+                                G.Pop(); // Pop createrequest view
+                                G.Pop(); // Pop search resume view
+                                G.Pop(); // pop search reume view
+                            Requests.ShowRequestView(true,true, true);}
+                            else
+                            {
+                                G.Pop(); // Pop select shortlist view
+                                G.Pop(); // Pop create request view
+                                Requests.ShowRequestView(false,false);
+                            }
+                            Ext.Msg.alert('','Your request has been sent out to the selected resumes.');
+                        }
                     },
                     failure: function (batch) {
-                        //var message = batch.operations[0].request.scope.reader.jsonData["message"];
-                        //store.load();
+
+                        var message = batch.operations[0].request.scope.reader.jsonData["message"];
+                        Ext.Msg.alert('', message);
+
+                    },
+                    callback:function(x){
+
                     }
                 });
             }
@@ -140,6 +173,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 }
                 else{
                     var shortlistStore = Ext.getStore('ShortlistResumeStore');
+                    shortlistStore.clearFilter();
                     shortlistStore.load({
                         params : { userId : loggedUserId
                         }
@@ -325,14 +359,15 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     var form = G.get('CreateRequestScreen');
                     form.setValues(record.data);
                     var fields = form.getFields();
+
+                    // setting from field values
+                    fields.StartDate.setValue(new Date(record.data.StartDate));
                     fields.LanguageId.setValue(record.data.Language.LanguageId);
                     fields.LocationId.setValue(record.data.Location.CountryId);
 
                     SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
                     SearchResume.onSliderfieldDrag(G.get('durationItemID'));
 
-                    // setting start date
-                    fields.StartDate.setValue(new Date(record.data.StartDate));
 
                     if(isSentRequest){
                         G.get('DraftRequestBtn').hide();
@@ -352,8 +387,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         G.get('FixRequest').hide();
                         G.get('SavedREsumes').show();
                     }
-                    else
-                    G.get('DraftRequestBtn').hide();
+                    //else
+                    //    G.get('DraftRequestBtn').hide();
 
                 }
             }
@@ -427,7 +462,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         ShowRequestView: function(pushView, loadLookup, showHomeButton) {
-            var isFreelancer=Ext.getStore('AuthStore').getAt(0).data.IsFreelancer;
+            var isFreelancer=Ext.getStore('AuthStore').getAt(0).data.IsFreelancer;;
             Ext.Ajax.request({
                 url: ApiBaseUrl+'requests/GetRequests?isFreelancer='+isFreelancer+'&userId='+Ext.getStore('AuthStore').getAt(0).data.UserId,
                 method: 'Get',
@@ -438,18 +473,16 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success)
                     {
-                        if(pushView & showHomeButton) // navigation from home screen
+                        if(pushView) // navigation from home screen
                         G.Push('RequestScreen');
-                        else if(pushView & !showHomeButton)// navigation from search menu
-                        G.Push('RequestScreen');
+
                         if(showHomeButton)
                         {
                             G.hide('requrestBackButton');
                             G.show('requestHomeButton');
                         }
 
-                        if(isFreelancer)
-                        {
+                        if(isFreelancer){
 
                             var inboxStore = Ext.create('Ext.data.Store', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
@@ -462,11 +495,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                             G.show('invitationLabel');
                             var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
-
                         }
-                        else
-                        {
-
+                        else{
                             var draftStore = Ext.create('Ext.data.Store', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
                                 data: result.items.Draft
@@ -499,14 +529,14 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                             sentList.setStore(sentStore);
 
 
-
-
-
                             if(loadLookup){
                                 // Loading Company and Search Store for request detail screen
-                                var companyStore = Ext.getStore('CompanyDetail');
-                                companyStore.clearData();
-                                companyStore.load({
+
+                                Ext.getStore('CountryStore').load();
+
+                                Ext.getStore('SearchLanguage').load();
+
+                                Ext.getStore('CompanyDetail').load({
                                     params : { userId : Ext.getStore('AuthStore').getAt(0).get('UserId') }
                                 });
 
@@ -518,6 +548,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                                 });
                             }
                         }
+
 
                     }
                     else

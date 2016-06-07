@@ -3,7 +3,7 @@
 @import "mixins";
 
 @import "modules/fonts";
-@import "modules/Common";
+@import "modules/common";
 @import "modules/loader";
 
 @import "Views/userApp";
@@ -28,4 +28,5 @@
 @import "Views/setting";
 @import "Views/requestDetail";
 @import "Views/requestConfirm";
+@import "Views/feedback";
 @import "overrite";

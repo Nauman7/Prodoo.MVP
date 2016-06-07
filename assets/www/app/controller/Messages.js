@@ -214,19 +214,12 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         var items =  topBtns.items.items;
         items.forEach(function(item,index){
             if (item.element.dom.classList.contains('activeBtn'))
-                if(index === 0){
-                    isInbox=true;
-                    isSent=false;
-                }
-                else  if(index === 1){
-                    isInbox=false;
-                    isSent=true;
-                }
+            { isInbox= index === 0; return true;}
         });
 
         if (isInbox)
         { msgId=record.data.UserRequestMessageId; }
-        else if (isSent)
+        else
         { msgId=record.data.MessageId; }
 
         var Target = Ext.get(e.target);
@@ -236,7 +229,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
             if (isInbox)
             { rec= {MessageId:msgId,isDeleteInboxMessage:true}; }
-            else if (isSent)
+            else
             { rec= {MessageId:msgId,isDeleteSentMessage:true}; }
 
             Ext.Ajax.request({
@@ -285,10 +278,9 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                             G.show('backBtn');
 
                             G.show('ReplyBtn');
-                    G.get('buttonsLabel').setHtml('Message detail');
+                            G.get('buttonsLabel').setHtml('Message detail');
 
                             isInbox=true;
-                            isSent=false;
 
                             G.get('selectedMsg').data = record;
                             Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
@@ -310,11 +302,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             else
             {
                 Messages.hideAll();
-                //         G.hide('MsgCreateNew');
-        //         G.show('MsgDetailList');
-                //         G.hide('MsgInboxList');
-                //         G.hide('SendBtn');
-                //         G.hide('EditBtn');
                 G.show('backBtn');
                 if(isInbox)
                     G.show('ReplyBtn');
@@ -413,48 +400,52 @@ Ext.define('ProDooMobileApp.controller.Messages', {
     },
 
     onEditBtnTap: function(button, e, eOpts) {
-        var topBtns = G.get('topButtons');
-        var items =  topBtns.items.items;
-        items.forEach(function(item,index){
-            if (item.element.dom.classList.contains('activeBtn'))
-                if(index === 0){
-                    isInbox=true;
-                    isSent=false;
-                }
-                else  if(index === 1){
-                    isInbox=false;
-                    isSent=true;
-                }
-        });
-
-        Messages.hideAll();
-
-        G.show('MsgCreateNew');
-        G.show('backBtn');
-        G.show('SendBtn');
-        G.get('buttonsLabel').setHtml('New message');
-        VisibleScreen = 'CreateMessage';
-
+        // load reciever list
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
         var str=Ext.getStore("UserStore");
         str.load({
-            params : { userId : loggedUserId }
-            });
+            params : { userId : loggedUserId },
+            callback: function(data){
+                if(data.length==0)
+                    Ext.Msg.alert('Message','When someone send you request or accept your submitted request, then you will able to create and send message');
+                else
+                {
+                    // idenfity current list is inbox or sent
+                    var topBtns = G.get('topButtons');
+                    var items =  topBtns.items.items;
+                    items.forEach(function(item,index){
+                        if (item.element.dom.classList.contains('activeBtn'))
+                        { isInbox= index === 0; return; }
+                    });
 
+                    // hide current message list
+                    Messages.hideAll();
 
-        UsersList = new Array();
+                    // show create message controls
+                    G.show('MsgCreateNew');
+                    G.show('backBtn');
+                    G.show('SendBtn');
+                    G.get('buttonsLabel').setHtml('New message');
 
-        G.get("MsgUserField").reset();
-        G.get("MsgUserField").setReadOnly();
-        G.get("MsgSubjectField").reset();
-        G.get("MsgContentField").reset();
-        var toField =  G.get('MsgToField');
-        toField.items.each(function(item,index){
-        if(index!=0)
-            item.destroy();
+                    // reset form fields
+                    UsersList = new Array();
+                    G.get("MsgUserField").reset();
+                    G.get("MsgUserField").setReadOnly();
+                    G.get("MsgSubjectField").reset();
+                    G.get("MsgContentField").reset();
+                    var toField =  G.get('MsgToField');
+                    toField.items.each(function(item,index){
+                        if(index!=0)
+                            item.destroy();
+                    });
+                    isCreateNew=true;
+                }
+
+            }
         });
 
-        isCreateNew=true;
+
+
     },
 
     onReplyBtnTap: function(button, e, eOpts) {
@@ -485,20 +476,15 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         Messages.hideAll();
         if(G.get('MsgViewCnt') !== null)
             G.get('MsgViewCnt').addCls('MsgInboxCnt');
-        // G.hide('MsgCreateNew');
-        // G.hide('MsgDetailList');
+
         G.show('MsgList');
-        // G.hide('SendBtn');
         G.show('EditBtn');
-        // G.hide('backBtn');
         G.show('HomeBtn');
         G.show('searchCnt');
         G.show('topButtons');
         G.show('MsgInboxLbl');
-        // G.hide('ReplyBtn');
-        // G.hide('MsgDetailReply');
 
-        VisibleScreen = null;
+
 
         var topBtns = G.get('topButtons');
         var items =  topBtns.items.items;
@@ -536,18 +522,18 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         if (messageBody !== null && messageBody.trim() !== "")
         {
             var selectedRecord = G.get('selectedMsg').data;
-            var record= Ext.create("ProDooMobileApp.model.MsgModel");
-            record.data.MessageId=0;
-            record.data.UserIds=[];
+            var record= new Object();
+            record.MessageId=0;
+            record.UserIds=[];
 
             if (isCreateNew)
             {
                 if(UsersList.length!=0){
                 UsersList.forEach(function(item,index){
-                    record.data.UserIds[index]=item.UserId;
+                    record.UserIds[index]=item.UserId;
                 });
 
-                    record.data.Subject=subject;
+                    record.Subject=subject;
                 }
                 else
                 {
@@ -557,18 +543,18 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             }
             else
             {
-                record.data.Subject=selectedRecord.data.Subject;
-                record.data.UserIds.push(selectedRecord.data.User.UserId);
+                record.Subject=selectedRecord.data.Subject;
+                record.UserIds.push(selectedRecord.data.User.UserId);
             }
 
-            record.data.MessageBody=messageBody;
-            record.data.SenderId=Ext.getStore('AuthStore').data.items[0].data.UserId;
+            record.MessageBody=messageBody;
+            record.SenderId=Ext.getStore('AuthStore').data.items[0].data.UserId;
 
             Ext.Ajax.request({
                 url : ApiBaseUrl+'Message/Post',
                 method : 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                params : Ext.encode(record.data),
+                params : Ext.encode(record),
                 success : function (response) {
                     var responseDecode = Ext.decode(response.responseText);
                     if (responseDecode.success)
@@ -587,6 +573,12 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                         G.show('HomeBtn');
                         G.show('searchCnt');
                         G.show('topButtons');
+
+                        if(Ext.getStore('AuthStore').getAt(0).data.IsFreelancer )
+                        {
+                            G.show('requestInboxList');
+                            G.show('invitationLabel');
+                        }
                     }
                     else { G.showGeneralFailure(); }
 

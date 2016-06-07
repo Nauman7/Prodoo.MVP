@@ -46,7 +46,6 @@ Ext.define('ProDooMobileApp.store.MessageStore', {
         var userId = Ext.getStore('AuthStore').data.items[0].data.UserId;
         var url = ApiBaseUrl + 'Message/GetMessages/?userId='+userId+'&isInbox='+operation._params.isInbox;
         var storeApi = store.getProxy().getApi();
-        //if(storeApi.read === undefined)
         storeApi.read = url;
     }
 

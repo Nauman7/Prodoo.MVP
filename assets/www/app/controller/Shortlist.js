@@ -157,6 +157,8 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
         showShortListView: function(hideCreateIcon) {
             var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
             var shortlistStore = Ext.getStore('ShortlistResumeStore');
+
+            shortlistStore.clearFilter();
             shortlistStore.load({
                 params : { userId : loggedUserId
                 },
@@ -170,11 +172,7 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                 }//end callback
             });
 
-
-            //var hf= G.get('hfResumeId'); //restore resumeID into hidden field
-            //var tempId=hf? hf.getValue():-1;
             G.Push('Shortlist');
-            //G.get('hfResumeId').setValue(-1);
             if(hideCreateIcon)
             G.hide('AddBtn');
         },
@@ -202,10 +200,13 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
         },
 
         DirectShortListIconClick: function() {
+            var re = /@ResumeIdListLength/gi;
+            var message = Identifier.Title.Notification_ResumeList_ShortlistBtn;
+            message = message.replace(re, ResumeIdList.length);
             if(ResumeIdList && ResumeIdList.length>0){
                 Ext.Msg.show({
                     title: '',
-                    message: 'You have picked '+ResumeIdList.length+' resumes to add to a shortlist. Would you like to create a new shortlist, or add them to an existing shortlist?',
+                    message: message,
                     buttons: [
                     {
                         text: 'Cancel',

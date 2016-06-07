@@ -66,7 +66,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 cls: 'RequestLabel',
                 docked: 'top',
                 html: 'Sent',
-                itemId: 'buttonsLabel'
+                itemId: 'buttonsRequestLabel'
             },
             {
                 xtype: 'container',
@@ -236,7 +236,8 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                     'btnCircle',
                     'backIcon',
                     'l10',
-                    'b10'
+                    'b10',
+                    'bgLightBlue'
                 ],
                 docked: 'bottom',
                 itemId: 'requrestBackButton',
@@ -246,7 +247,8 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 xtype: 'button',
                 cls: [
                     'homeIcon',
-                    'btnCircle'
+                    'btnCircle',
+                    'bgLightBlue'
                 ],
                 docked: 'bottom',
                 hidden: true,
@@ -255,7 +257,10 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
             },
             {
                 xtype: 'button',
-                cls: 'addBtn',
+                cls: [
+                    'addBtn',
+                    'bgLightBlue'
+                ],
                 docked: 'bottom',
                 itemId: 'AddBtn',
                 text: ' '
@@ -314,7 +319,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         this.setActiveBtn(button);
         this.hideAll();
         G.show('requestSendList');
-        G.get('buttonsLabel').setHtml('Sent');
+        G.get('buttonsRequestLabel').setHtml('Sent');
         G.get('requestType').setValue('sent');
     },
 
@@ -322,7 +327,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         this.setActiveBtn(button);
         this.hideAll();
         G.show('requestDraftList');
-        G.get('buttonsLabel').setHtml('Draft');
+        G.get('buttonsRequestLabel').setHtml('Draft');
         G.get('requestType').setValue('draft');
     },
 

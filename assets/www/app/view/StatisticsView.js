@@ -548,7 +548,8 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                 xtype: 'button',
                 cls: [
                     'homeIcon',
-                    'btnCircle'
+                    'btnCircle',
+                    'bgPurple'
                 ],
                 docked: 'bottom',
                 itemId: 'StatisticsHomeButton',

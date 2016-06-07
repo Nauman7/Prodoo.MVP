@@ -78,7 +78,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             '        <tpl for="Profiles">',
             '        <div class="listCnt">',
             '            <span class="language">{ProfileValue}</span>',
-            '            <span class="level"><span class="levelNo YearNo orange2">{ExperienceLevel}</span> Years</span>',
+            '            <!--<span class="level"><span class="levelNo YearNo orange2">{ExperienceLevel}</span> Years</span>-->',
             '',
             '        </div>',
             '     </tpl>',

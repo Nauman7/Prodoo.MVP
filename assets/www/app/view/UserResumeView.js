@@ -196,7 +196,8 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                 bottom: 10,
                 cls: [
                     'btnCircle',
-                    'homeIcon'
+                    'homeIcon',
+                    'bgBlue'
                 ],
                 docked: 'bottom',
                 itemId: 'ResumeHomeButton',
@@ -264,6 +265,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
     },
 
     onMybutton4Tap: function(button, e, eOpts) {
+        Ext.getStore('CreateRequestLocation').load();
         // showing loader not visible while rendering the view
         //Ext.Viewport.setMasked(true);
         G.Push('ResumeView');
@@ -277,9 +279,10 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             G.show('ProfileCnt');
         }
         else{
+            Detail = G.get('SplashDetail');
+            Detail.setHtml(Identifier.Title.Help_Resume_Profile);
             G.show('SplashCnt');
         }
-        debugger;
         if(resume.Skills.length > 0 ){
             var skills = resume.Skills;
             skills.forEach(function(item,index){
@@ -334,20 +337,11 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         var locField=G.get("locationSelectField");
         if (locField !== undefined)
         {
-            var locFieldVal=locField.getValue();
-            if (locFieldVal === null || locFieldVal === "") {
+            if (!locField.getValue()) {
                 locField.setValue("Denmark");
             }
         }
 
-        var languageField=G.get("languageDropdown");
-        if (languageField !== undefined)
-        {
-            var languageFieldVal =languageField.getValue();
-            if (languageFieldVal === null || languageFieldVal === "") {
-                languageField.setValue(2); // 2 is for Denish
-            }
-        }
         //Ext.Viewport.setMasked(false);
     }
 

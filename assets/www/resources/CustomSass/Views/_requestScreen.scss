@@ -9,19 +9,19 @@
 	left: 50%;
 	margin-left: -30px;
 	bottom: 10px;
-	background: center center $green !important;
+	background: center center $_green !important;
 	width: 65px;
 	height: 65px;
 	border:none;
-	padding: 15px 16px;
+	padding: 18px 0 0 18px;
 	position: absolute;
 	@include border-radius(50%);
 	.x-button-label {
 
 		background: center center transparent !important;
 		background-image: url(../images/searchResult/plus1.png) !important;
-		width: 35px;
-		height: 35px;
+		width: 30px;
+		height: 30px;
 		border: none;
 		position: absolute;
 		background-size: contain!important;
@@ -200,4 +200,7 @@
 	border:none;
 	background-image: url(../images/requestScreen/request.png) !important;
 	background-size: contain!important;
+}
+.bgLightBlue{
+	background: $_lightBlue !important;
 }

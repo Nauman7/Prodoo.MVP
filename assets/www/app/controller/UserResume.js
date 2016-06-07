@@ -23,153 +23,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
     statics: {
         resumePropertySearch: function(textfield) {
-            var activeLookup = 'ProfileValue';
-            var store = Ext.getStore('SearchProfile');
-
-            // store to apply filter on
-            var topBtns = G.get('topButtons');
-            var items =  topBtns.items.items;
-            var query = textfield.getValue().toLowerCase();
-            items.forEach(function(item,index){
-                if (item.element.dom.classList.contains('activeBtn'))
-                if(index === 0){
-                    activeLookup = 'ProfileValue';
-                    store = Ext.getStore('SearchProfile');
-                }
-                else if(index === 1){
-                    activeLookup = 'SkillValue';
-                    store = Ext.getStore('SearchSkill');
-                }
-                else  if(index === 2){
-                    activeLookup = 'IndustryValue';
-                    store = Ext.getStore('SearchIndustry');
-                }
-                else  if(index === 3){
-                    activeLookup = 'KeywordValue';
-
-                }
-                else if(index === 4){
-                    activeLookup = 'CertificationValue';
-                    //store = Ext.getStore('SearchCertification');
-                }
-                else if(index === 5){
-                    activeLookup = 'LanguageValue';
-                    store = Ext.getStore('SearchLanguage');
-                }
-            });
-
-            if(activeLookup === 'KeywordValue'){
-                var url = ApiBaseUrl+'Allkeywords/KeywordsLookup';
-                if(query!=='')
-                url = url + '?filter='+query;
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'Get',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var result = Ext.JSON.decode(conn.responseText);
-                        if (result.success) {
-                            store = Ext.getStore('SearchKeyword');
-                            store.setData(result.items);
-                            store.sync();
-                        } else {
-                            G.showGeneralFailure();
-                        }
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                        //failure catch
-                        G.showGeneralFailure();
-                    }
-                });
-
-            }
-            else if(activeLookup === 'CertificationValue'){
-                var url = ApiBaseUrl+'AllCertifications/CertificationsLookup';
-                if(query!=='')
-                url = url + '?filter='+query;
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'Get',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var result = Ext.JSON.decode(conn.responseText);
-                        if (result.success) {
-                            store = Ext.getStore('SearchCertification');
-                            store.setData(result.items);
-                            store.sync();
-                        } else {
-                            G.showGeneralFailure();
-                        }
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                        //failure catch
-                        G.showGeneralFailure();
-                    }
-                });
-
-            }
-            else if(activeLookup === 'ProfileValue'){
-                var url = ApiBaseUrl+'AllProfiles/ProfileLookup';
-                if(query!=='')
-                url = url + '?filter='+query;
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'Get',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var result = Ext.JSON.decode(conn.responseText);
-                        if (result.success) {
-                            store = Ext.getStore('SearchProfile');
-                            store.setData(result.items);
-                            store.sync();
-                        } else {
-                            G.showGeneralFailure();
-                        }
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                        //failure catch
-                        G.showGeneralFailure();
-                    }
-                });
-
-            }
-            else if(activeLookup === 'SkillValue'){
-                var url = ApiBaseUrl+'AllSkills/SkillsLookup';
-                if(query!=='')
-                url = url + '?filter='+query;
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'Get',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var result = Ext.JSON.decode(conn.responseText);
-                        if (result.success) {
-                            store = Ext.getStore('SearchSkill');
-                            store.setData(result.items);
-                            store.sync();
-                        } else {
-                            G.showGeneralFailure();
-                        }
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                        //failure catch
-                        G.showGeneralFailure();
-                    }
-                });
-            }
-
-            else{
-
-                store.clearFilter();
-                store.filter([
-                {
-                    fn   : function(record) {
-                        return record.get(activeLookup).toLowerCase().indexOf(query)>-1;
-                    },
-                    scope: this
-                }
-                ]);
-            }
+            SearchResume.onPropertySearch(textfield);
         },
 
         onSearchListItemTap: function(dataview,record,e) {
@@ -269,10 +123,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 list.setStore(storeName);
                 list.hide();
 
-                if (lookupName == "Keyword")
-                { str.setData(JSON.parse(localStorage.globalKeywords)); }
-                else if (lookupName == "Certification")
-                { str.setData(JSON.parse(localStorage.globalCertifications)); }
+
                 Searchfield.setPlaceHolder(placeHolder);
                 Searchfield.setValue('');
                 G.get('buttonsLabel').setHtml(lookupName);
@@ -320,23 +171,23 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             enaItem = G.get(view + 'Cnt');
             if(view=="Profile"){
                 Heading.setHtml("Welcome to your resume Profile section!");
-                Detail.setHtml("The profile is the most important part of your resume. When a someone is looking for help they start with defining what profile it is they need. This can for instance be Project Manager, Programmer or Test Designer.<br> It's recommended that you pick 1-4 profiles on your resume. If you have more than 4 profiles, it might give the impression that you are a jack-of-all-trades, and master of none.<br> All Profiles correlate to eachother and gives score on correlations. If you like to know more on the scoring system, please login to the web app. <br><br>The ProDoo team");
+                Detail.setHtml(Identifier.Title.Help_Resume_Profile);
             }
             else if(view=="Skill"){
                 Heading.setHtml("Welcome to your resume Skill section!");
-                Detail.setHtml("Skills are knowledge and experience in specific areas that you are specialized in. You simply pick the skills that you have aquired and you would like to be selected on.<br> In the web application you can enter experience level on the different skills, but in here in the mobile app there's no room for it, yet. Maybe we will run around with giant phones in the future, but right now we'll keep it this way.<br>The ProDoo team");
+                Detail.setHtml(Identifier.Title.Help_Resume_Skills);
             }
             else if(view=="Industry"){
                 Heading.setHtml("Welcome to your resume Professionsl Experience section!");
-                Detail.setHtml("When a searcher has found some interesting resumes the next step is to select some of them on their experiences. Therefore it's reallyimportant to have covered your experiences for each of the profiles you have selected for your resume. Be as accurate as possible. This section will be mentioned during your interview.<br> The ProDoo team");
+                Detail.setHtml(Identifier.Title.Help_Resume_ProExperiance);
             }
             else if(view=="Keyword"){
                 Heading.setHtml("Welcome to your resume Keyword section!");
-                Detail.setHtml("Who are you? We need to face it, today the searchers and hiring managers don't have the time to actually read all cover letters. The most important keywords that describes you in your professional life is what they want to see. <br>This is not a cliche, try really hard to find the few keywords that defines you. 5-10 of them is a good number.<br>The ProDoo team");
+                Detail.setHtml(Identifier.Title.Help_Resume_Keyword);
             }
             else if(view=="Certification"){
                 Heading.setHtml("Welcome to your resume Certification section!");
-                Detail.setHtml("The faster we accept it the better it is. We are freelancers. We need stamps of different kinds to enter the market. Certifications is widely used as a search criteria among hiring managers. <br>If you don't have them, you might score just as high on skills.<br>So enter all of them here, and they will be mentioned during your interview, so bring copies.<br>The ProDoo team");
+                Detail.setHtml(Identifier.Title.Help_Resume_Certification);
             }
             if(enaItem.items.items.length >= 3){
                 Splash.hide();
@@ -526,27 +377,32 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             G.get('buttonsLabel').setHtml('Settings');
         },
 
-        UpdateSettings: function(params, loadResumeView) {
-            Ext.Ajax.request({
-                url: ApiBaseUrl+'Resumes/SettingsUpdate',
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                params : Ext.JSON.encode(params),
-                success: function(conn, response, options, eOpts) {
-                    var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success) {
-                        if(loadResumeView)
-                        UserResume.onResumeClick();
-                    } else {
+        SaveResumeLanguages: function() {
+            var resumeLanguageModels = new Array();
+            var slider = G.get('SettingCnt').element.query('.sliderCls');
+            var dd=G.get('SettingCnt').element.query('.languageDD');
+            for( var i=0; i< slider.length; i++){
+                var ddId = Ext.get(dd[i]).getId();
+                //Avoid duplicate enteries
+                var languageAlreadyExist=false;
+                resumeLanguageModels.forEach(function(lang){
+                    if(G.get(ddId).getValue()== lang.LanguageId)
+                    languageAlreadyExist=true;
+                });
+                if(!languageAlreadyExist){
+                    var resumeLanguage=new Object();
+                    var sliderId = Ext.get(slider[i]).getId();
 
-                        G.showGeneralFailure();
-                    }
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
+                    resumeLanguage.ExperienceLevel = G.get(sliderId).getValue()[0];
+                    resumeLanguage.LanguageId=G.get(ddId).getValue();
+                    resumeLanguageModels.push(resumeLanguage);
                 }
-            });
+            }
+
+            var requestSettingObj = new Object();
+            requestSettingObj.ResumeLanguage=resumeLanguageModels;
+
+            UserResume.updateSettings_Instant(requestSettingObj);
         },
 
         onResumeClick: function() {
@@ -587,6 +443,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
                                 G.Push('UserResumeView');
                                 G.show('ResumeSplash');
+                                G.get('ResumeSplash').setHtml(Identifier.Title.Splash_Resume);
                                 G.hide('UserResume');
                             }
                         }
@@ -601,7 +458,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             });
         },
 
-        changeAvailibilityStatus: function(available) {
+        changeAvailibilityStatus: function(available, saveDB) {
             var button=G.get('availabilityBtn');
             if(available){
 
@@ -617,6 +474,12 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 Cnt.addCls('BusyCnt');
                 Cnt.down('#availabilityLbl').setHtml('Not Available');
             }
+
+            if(saveDB){
+                var requestSettingObj = new Object();
+                requestSettingObj.IsAvailable = available;
+                UserResume.updateSettings_Instant(requestSettingObj);
+            }
         },
 
         ShowCreateResumeExperience: function(record, index) {
@@ -628,6 +491,13 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             G.hide('EditResumeBackBtn');
             G.show('BackToExperience');
             G.hide('CreateCompanyExperience');
+            G.hide('SplashCnt');
+            Ext.getStore('IndustriesStore').load({
+                params:{limit:10000}
+            });
+            Ext.getStore('ProfilesStore').load({
+                params:{limit:10000}
+            });
 
             if(record){
                 G.get('HFresumeExperienceId').setValue(record.data.ResumeExperienceId+'-'+index);
@@ -823,12 +693,14 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     {
                         fn: function(sliderfield, sl, thumb, e, eOpts){
                             SearchResume.onSliderfieldDrag(sliderfield);
+
                         },
                         event: 'drag'
                     },
                     {
                         fn: function(me, sl, thumb, newValue, oldValue, eOpts){
                             SearchResume.onSliderfieldDrag(me);
+                            UserResume.SaveResumeLanguages();
                         },
                         event: 'change'
                     }
@@ -858,6 +730,14 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     defaultTabletPickerConfig: {
                         zIndex: 999
                     },
+                    listeners: [
+                    {
+                        fn: function() {
+                            UserResume.SaveResumeLanguages();
+                        },
+                        event: 'change'
+                    }
+                    ],
                 },
                 {
                     xtype: 'button',
@@ -870,10 +750,13 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     {
                         fn: function(button, eOpts) {
                             button.up('container').destroy();
+                            UserResume.SaveResumeLanguages();
+
                         },
                         event: 'tap'
                     }
                     ]
+
                 }
                 ]
             });
@@ -897,7 +780,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 success: function(conn, response, options, eOpts) {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success) {
-                        Ext.Msg.alert('Success',"Saved successfully.");
+                        //   Ext.Msg.alert('Success',"Saved successfully.");
                     } else {
 
                         G.showGeneralFailure();

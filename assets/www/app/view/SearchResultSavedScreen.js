@@ -172,14 +172,14 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
         items: [
             {
                 xtype: 'label',
-                cls: 'detailTitle',
+                cls: 'SearchLabel',
                 docked: 'top',
                 hidden: true,
                 itemId: 'titleHeader',
-                padding: 10,
+                margin: 0,
                 style: 'color:white;',
                 tpl: [
-                    '<div>Title : {Total}</div>'
+                    'Title : {Total}'
                 ]
             },
             {
@@ -251,17 +251,6 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                 docked: 'bottom',
                 itemId: 'globeBtn',
                 right: 10,
-                text: ' '
-            },
-            {
-                xtype: 'button',
-                cls: [
-                    'bigBtnCircle',
-                    'searchIconBig',
-                    'rightBottomSearchResultButtons'
-                ],
-                docked: 'bottom',
-                hidden: true,
                 text: ' '
             },
             {
@@ -478,7 +467,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             HelpCnt.removeCls('HelpSRSkill');
             Ext.get(Ext.query('.SrNo')[0]).removeCls('rightSide');
             this.down('#HelpHeading').setHtml('Resume Summary');
-            this.down('#HelpDetail').setHtml('Brief summary about resume given here');
+            this.down('#HelpDetail').setHtml(Identifier.Title.Help_SearchResultSaved_ResumeSummary);
 
             this.startCount();
             HelpCnt.show();
@@ -491,12 +480,15 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
     },
 
     onRequestBtnTap: function(button, e, eOpts) {
+        var re = /@ResumeIdListLength/gi;
+        var message = Identifier.Title.Notification_ResumeList_RequestBtn;
+        message = message.replace(re, ResumeIdList.length);
         if(ResumeIdList && ResumeIdList.length>0){
 
 
             Ext.Msg.show({
                 title: '',
-                message: 'You have selected '+ResumeIdList.length+' resumes and clicked the request button to create a quick request. In the next screen you need to choose a title for the request to make it easy for you to find it later. When you save the quick request it will be saved with the current search parameters as your associated search and your selected resumes as you associated shortlist.',
+                message: message,
                 buttons: [{
                     text: 'Cancel',
                     ui: 'decline'
@@ -517,16 +509,15 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                             G.get('mydatepicker').setValue(searchedDate.getValue());
                         // End of Pd-170
 
-                        G.get('DraftRequestBtn').hide(); // dont need draft icon
                         var saveSearchDD= G.get('fieldSavedSearchedId');
                         saveSearchDD.disable();
                         saveSearchDD.setPlaceHolder("Current Search");
 
-                        localStorage.SubmitDirectRequest=true;
+                        Ext.getStore('CountryStore').load();
 
+                        Ext.getStore('SearchLanguage').load();
 
                         var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-
                         var companyStore = Ext.getStore('CompanyDetail');
                         companyStore.clearData();
                         companyStore.load({
@@ -534,6 +525,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                                      }
                         });
 
+                        localStorage.SubmitDirectRequest=true;
                     }
                     else if(buttonId== 'No')
                         Requests.ShowRequestView(true,true);
@@ -612,19 +604,19 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             HelpCnt.addCls('HelpSrNo');
             Ext.get(Ext.query('.SrNo')[0]).addCls('rightSide');
             this.down('#HelpHeading').setHtml('Score');
-            this.down('#HelpDetail').setHtml('Resumes are sorted by score');
+            this.down('#HelpDetail').setHtml(Identifier.Title.Help_SearchResultSaved_Score);
         }
         else if(HelpCnt.element.hasCls('HelpSrNo')){
             HelpCnt.removeCls('HelpSrNo');
             HelpCnt.addCls('HelpSRShortlistIcon');
             this.down('#HelpHeading').setHtml('Shortlist button');
-            this.down('#HelpDetail').setHtml('Tap to add resume in your shortlist');
+            this.down('#HelpDetail').setHtml(Identifier.Title.Help_SearchResultSaved_ShortlistBtn);
         }
         else if(HelpCnt.element.hasCls('HelpSRShortlistIcon')){
             HelpCnt.removeCls('HelpSRShortlistIcon');
             HelpCnt.addCls('HelpSRDownArrow');
             this.down('#HelpHeading').setHtml('Expand button');
-            this.down('#HelpDetail').setHtml('You can see the detail that are used to calculate the score by tap on the expand button here');
+            this.down('#HelpDetail').setHtml(Identifier.Title.Help_SearchResultSaved_ExpandBtn);
         }
         else if(HelpCnt.element.hasCls('HelpSRDownArrow')){
             HelpCnt.removeCls('HelpSRDownArrow');
@@ -634,7 +626,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             Ext.get(Ext.query('.listItems')[0]).addCls('slide-down');
 
             this.down('#HelpHeading').setHtml('Skill Detail');
-            this.down('#HelpDetail').setHtml('The detail contains the search parameters and the associated score ');
+            this.down('#HelpDetail').setHtml(Identifier.Title.Help_SearchResultSaved_SkillDetail);
         }
         else{
             this.down('#HelpCnt').hide();

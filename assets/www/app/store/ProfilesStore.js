@@ -17,13 +17,13 @@ Ext.define('ProDooMobileApp.store.ProfilesStore', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'ProDooMobileApp.model.PracticesModel',
+        'ProDooMobileApp.model.Profiles',
         'Ext.data.proxy.Ajax',
         'Ext.data.reader.Json'
     ],
 
     config: {
-        model: 'ProDooMobileApp.model.PracticesModel',
+        model: 'ProDooMobileApp.model.Profiles',
         storeId: 'ProfilesStore',
         proxy: {
             type: 'ajax',
@@ -31,7 +31,7 @@ Ext.define('ProDooMobileApp.store.ProfilesStore', {
             url: 'http://localhost/PRODOO/WebAPI/api/profiles/profileLookup',
             reader: {
                 type: 'json',
-                rootProperty: 'data'
+                rootProperty: 'items'
             }
         },
         listeners: [
@@ -43,7 +43,7 @@ Ext.define('ProDooMobileApp.store.ProfilesStore', {
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {
-        var url = ApiBaseUrl + 'AllProfiles/ProfileLookup';
+        var url = ApiBaseUrl + 'Profiles/ProfileLookup';
         var storeApi = store.getProxy().getApi();
         if(storeApi.read === undefined)
             storeApi.read = url;

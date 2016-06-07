@@ -1,30 +1,12 @@
 .ResumeView{
 	.tabIconSpan {
 		background-color: $blue4;	
-		.profileTabIcon{
-			background-image: url("../images/searchResult/userL.png");
-		}
-		.editTabIcon{
-			background-image: url("../images/searchResult/pencilboxL.png");
-		}
-
-		.skillTabIcon{
-			background-image: url("../images/searchResult/keyL.png");
-		}
-
-		.savedTabIcon{
-			background-image: url("../images/searchResult/caseL.png");
-		}
-
-		.certificationTabIcon{
-			background-image: url("../images/searchResult/capL.png");
-		}
-		
 		&.activeBtn{
 			background-color: white;
 		}
 	}
 }
+
 .confirmIcon{
 	bottom: 10px;
 	right: 10px;
@@ -51,12 +33,10 @@
 }
 
 .tabIconSpan{
-	.settingTabIcon{
-		background-image: url("../images/resumeView/settingL.png");
-	}
-	.languageTabIcon{
-		background-image: url("../images/resumeDetail/speakL.png");
-	}
+	
+	// .languageTabIcon{
+	// 	background-image: url("../images/resumeDetail/speakL.png");
+	// }
 }
 
 .LanguageCnt{
@@ -85,7 +65,7 @@
 	}
 }
 .AvailableCnt{
-	background:#04caa7;
+	background:$_green;
 	@extend .clearfix;
 	&.BusyCnt{
 		background: #ed6363;
@@ -312,4 +292,8 @@
 			background-image: url("../images/resumeView/up.png");
 		}
 	}
+}
+
+.bgBlue{
+	background: $blue4 !important;
 }

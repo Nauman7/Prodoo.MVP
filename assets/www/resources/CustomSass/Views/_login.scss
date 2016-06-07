@@ -104,7 +104,7 @@
 	}
 }
 .loginBtnCnt{
-	background-color: $green!important;
+	background-color: $_green !important;
 	position: relative;
 	// &:before{
 	// 	position: absolute;
@@ -117,7 +117,7 @@
 	// 	height: 0;
 	// 	border-style: solid;
 	// 	border-width: 0 11px 22px 11px;
-	// 	border-color: transparent transparent $green transparent;
+	// 	border-color: transparent transparent $_green transparent;
 	// 	z-index: 4;
 	// }
 	// &:after{
@@ -138,7 +138,7 @@
 	font-size: 36px;
 	border:none;
 	padding: 0;
-	background: #04caa7 !important;
+	background: $_green !important;
 	.x-button-label{
 		color: #3e335e;
 		font-weight: normal;
@@ -149,7 +149,7 @@
 	font-size: 15px;
 	border:none;
 	padding: 0;
-	background: #04caa7 !important;	
+	background: $_green !important;	
 	.x-button-label{
 		color: #3e335e;
 		font-weight: normal;
@@ -241,7 +241,7 @@
 	text-decoration: underline;
 }
 .SignUp{
-	color: $green;
+	color: $_green;
 	font-weight: bold;
 	text-decoration: none;
 }

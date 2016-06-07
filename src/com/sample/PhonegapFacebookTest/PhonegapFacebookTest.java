@@ -58,7 +58,7 @@ public class PhonegapFacebookTest extends CordovaActivity
 			
 			@Override
 			public void onKeyboardVisibilityChanged(boolean keyboardVisible) {
-				Toast.makeText(ctx,""+keyboardVisible, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(ctx,""+keyboardVisible, Toast.LENGTH_SHORT).show();
 			}
 		};
         KeyboardUtil.setKeyboardVisibilityListener(this, mKeyboardVisibilityListener);

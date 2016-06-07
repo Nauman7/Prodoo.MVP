@@ -41,9 +41,7 @@ Ext.define('ProDooMobileApp.view.CompanyDetail', {
             '        <div class="CompAddress">{CompanyAddress}</div>',
             '        <div class="compPhone">{Phone}</div>',
             '        <div class="compRegNo">{Vat}</div>',
-            '        <div class="compDetail">',
-            '            <div class="InnerCompDetail">{Detail}</div>',
-            '        </div>',
+            '        <div class="compDetail"><div class="InnerCompDetail" style=\'white-space:pre;\'>{Detail}</div></div>',
             '        <span class="compArrowDown"> </span>',
             '    </div>',
             '</div>',
@@ -55,7 +53,8 @@ Ext.define('ProDooMobileApp.view.CompanyDetail', {
                 bottom: 10,
                 cls: [
                     'btnCircle',
-                    'homeIcon'
+                    'homeIcon',
+                    'bgOrange'
                 ],
                 docked: 'bottom',
                 itemId: 'companyHomebtn',

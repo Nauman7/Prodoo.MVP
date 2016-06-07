@@ -1,7 +1,9 @@
 .tabIconSpan{
 	padding: 12px;
+	width: 50px;
+	height: 50px;
 	display: block;
-	background-color: #04caa7;
+	background-color: $_green;
 	border:none;
 	@include transition(0.3s all);
 	&.x-button-pressing{
@@ -9,65 +11,59 @@
 		background-color: white;
 	}
 	@include border-radius (50%);
-	.tabIcon{
+	.x-button-label{
 		width: 25px;
 		height: 25px;
-		display: block;
+		vertical-align: top;
+		display: inline-block;
 		background: none no-repeat center center transparent;
 		background-size: contain ;
 		margin: 0;
 	}
-	.profileTabIcon{
-		background-image: url("../images/searchResult/userL.png");
+	&.profileTabIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/userL.png");
+		}
 	}
-	.editTabIcon{
-		background-image: url("../images/searchResult/pencilboxL.png");
-	}
-
-	.skillTabIcon{
-		background-image: url("../images/searchResult/keyL.png");
-	}
-
-	.savedTabIcon{
-		background-image: url("../images/searchResult/caseL.png");
+	&.editTabIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/pencilboxL.png");
+		}
 	}
 
-	.certificationTabIcon{
-		background-image: url("../images/searchResult/capL.png");
+	&.skillTabIcon{
+		.x-button-label{
+
+			background-image: url("../images/searchResult/keyL.png");
+		}
 	}
-	
+
+	&.savedTabIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/caseL.png");
+		}
+	}
+
+	&.certificationTabIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/capL.png");
+		}
+	}
+	&.locationIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/location.png");
+		}
+	}
+	&.settingTabIcon{ // in resume view
+		.x-button-label{
+			background-image: url("../images/resumeView/settingL.png");
+		}
+	}
 }
-.locationIcon{
-	background: url("../images/searchResult/location.png") no-repeat !important;
-	width: 49px;
-	height: 49px;
-	background-size: cover!important;
 
-	display: inline-block;
-	border:none;
-	&.activeBtn{
-		background-image: url("../images/searchResult/locationHover.png") !important;
-	}
-}
 
 .tabIconSpan.activeBtn{
-	background-color: white;
-	.profileTabIcon{
-		background-image: url("../images/searchResult/userHoverL.png");
-	}
-	.editTabIcon{
-		background-image: url("../images/searchResult/pencilboxHoverL.png");
-	}
-	.skillTabIcon{
-		background-image: url("../images/searchResult/keyHoverL.png");
-	}
-	.savedTabIcon{
-		background-image: url("../images/searchResult/caseHoverL.png");
-	}
-	.certificationTabIcon{
-		background-image: url("../images/searchResult/capHoverL.png");
-	}
-	
+	background-color: white;	
 }
 
 .searchViewCnt{
@@ -93,11 +89,13 @@
 .btnCircle {
 	padding: 15px;
 	@include border-radius(50%);
-	background-color: #04caa7 !important;	
+	background-color: $_green !important;	
 	display: inline-block;
 	vertical-align: top;
 	position: absolute;	
 	border:none;
+	width: 60px;
+	height: 60px;
 	@include box-shadow(0px 0px 3px 1px #555);
 	@include transition(0.3s all);
 	z-index: 25;
@@ -110,21 +108,19 @@
 		background-size: contain;
 		width: 30px;
 		height: 30px;
+		display: inline-block;
+		vertical-align: top;
 	}
 }
 .helpIcon{
 	right: 10px;
 	// bottom: 270px;
 	bottom: 205px;
-	background: #04caa7 !important;
 	.x-button-label{
-		background-image: url(../images/searchResult/helpBtnL.png) !important;
+		background-image: url(../images/searchResult/helpBtnL.png);
 	}
 	&.activeBtn{
 		background: $red2 !important;
-		.x-button-label{
-			background-image: url(../images/searchResult/helpL.png) !important;
-		}
 	}
 	
 }
@@ -132,7 +128,7 @@
 	bottom: 10px;
 	left: 10px;
 	.x-button-label{
-		background-image: url(../images/searchResult/homeL.png);		
+		background-image: url(../images/searchResult/home.png);		
 	}
 }
 .searchIcon1{
@@ -162,9 +158,10 @@
 .searchIcon4{
 	right: 10px;
 	bottom: 205px;
-	background: url(../images/searchResult/requestIcons.png) -4px -4px !important;
+	padding-top: 13px;
 	.x-button-label{
-		// background-image: url(../images/searchResult/searchHandL.png);		
+		background: url(../images/searchResult/requestIcons.png);
+		height: 34px;
 	}
 }
 .searchIcon5{
@@ -173,49 +170,15 @@
 	}
 }
 .bigBtnCircle{	
-	background: center center transparent !important;
-	width: 66px;
-	height: 66px;
 	position: absolute;
-	margin-left: -33px;
+	margin-left: -30px;
 	left: 50%;
-	bottom: 8px;
-	border:none;
-	background-image: url(../images/searchResult/search.png) !important;
-	background-size: contain!important;
-	&:hover{
-		@include opacity(0.7);
+	bottom: 10px;
+	.x-button-label{
+		background-image: url(../images/searchResult/search.png);
 	}
+	
 }
-// .bigBtnCircle{
-// 	// @extend .btnCircle;
-// 	background-image: url(../images/searchResult/search.png);
-// 	// padding: 30px;
-// 	// @include border-radius(50%);
-// 	// background-color: #04caa7  !important;	
-// 	// display: inline-block;
-// 	// position: absolute;	
-// 	// border:none;
-// 	// @include box-shadow(0px 0px 3px 1px #555);
-// 	// @include transition(0.3s all);
-// 	// &.x-button-pressing{
-// 	// 	@include opacity(0.7); 
-// 	// }
-// 	// .x-button-label{
-// 	// 	background: none no-repeat center center transparent;
-// 	// 	background-size: contain;
-// 	// 	width: 70px;
-// 	// 	height: 70px;
-// 	// }
-// }
-// .searchIconBig{
-// 	left: 50%;
-// 	bottom: 10px;
-// 	margin-left: -15px;
-// 	.x-button-label{
-// 		background-image: url(../images/searchResult/searchBigL.png);		
-// 	}
-// }
 
 
 .listResult{
@@ -236,7 +199,7 @@
 }
 .addIcon{
 	padding: 7px;
-	background: $green;
+	background: $_green;
 	right: 12px;
 	top: 18px;
 	position: absolute;
@@ -255,7 +218,7 @@
 
 }
 .clearIcon{
-	background: $green;
+	background: $_green;
 	right: 45px;
 	top: 18px;
 	width: 30px;
@@ -285,7 +248,7 @@
 	}
 	.x-item-selected {
 		.listResult{
-			// background-color: darken($green,10);
+			// background-color: darken($_green,10);
 			
 		}
 		.listTitle{
@@ -625,10 +588,10 @@
 			width: 0;
 			content: '';
 			height: 0;
-		    right: -19px;
-		    border-top: 7px solid transparent;
-		    border-left: 16px solid #f54949;
-		    border-bottom: 7px solid transparent;
+			right: -19px;
+			border-top: 7px solid transparent;
+			border-left: 16px solid #f54949;
+			border-bottom: 7px solid transparent;
 		}
 		.helpArrow{
 			display: none;
@@ -639,31 +602,31 @@
 	&.helpIconBtn{
 		bottom: 275px;
 		&:after{			
-		    bottom: 15px;
+			bottom: 15px;
 		}
 	}
 	&.helpRequestBtn{
 		bottom: 210px;		
 		&:after{			
-		    bottom: 15px;
+			bottom: 15px;
 		}
 	}
 	&.helpShorlistBtn{
 		bottom: 145px;		
 		&:after{		
-		    bottom: 15px;
+			bottom: 15px;
 		}
 	}
 	&.helpSaveSearchBtn{
 		bottom: 80px;		
 		&:after{
-		    bottom: 15px;
+			bottom: 15px;
 		}
 	}
 	&.helpGlobeBtn{
 		bottom: 10px;		
 		&:after{
-		    bottom: 15px;
+			bottom: 15px;
 		}
 	}
 
@@ -696,7 +659,7 @@
 	float: left;
 	.x-label{
 		color: #f54949;
-		    font-size: 14px;
+		font-size: 14px;
 	}
 }
 .helpDetail{
@@ -717,7 +680,7 @@
 
 .SearchLabel{
 	color: #2D1F55;
-	background: #04CAA7;
+	background: $_green;
 	padding: 3px 0;
 	margin-top: 10px;
 	letter-spacing: 3px;
