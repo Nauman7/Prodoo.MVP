@@ -40,6 +40,7 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                 failure: function(response, options) {
                     var response = G.getResponseData(response);
                     Ext.Msg.alert('', response.message);
+                    Account.authCheck();
                 }
             });
         },

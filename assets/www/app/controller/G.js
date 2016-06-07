@@ -262,29 +262,16 @@ Ext.define('ProDooMobileApp.controller.G', {
                         if (response.authResponse) {
                             FB.api('/me?fields=picture,name,email', function (user) {
                                 // alert('response from facebook: ' + JSON.stringify(user));
-                                var authStore = Ext.getStore('AuthStore');
-                                var authModel = Ext.create('ProDooMobileApp.model.AuthModel');
-                                authModel.data.Email = user.email;
-                                authModel.data.FirstName = user.name;
-                                authModel.data.LastName = '';
-                                authModel.data.IsFreelancer = false;
-                                authModel.data.IsNotificationRead = false;
-                                authModel.data.AuthType = 2; // lookup value, 2 stands for facebook
-                                authStore.add(authModel);
-                                authStore.sync({
-                                    success: function () {
-                                        // preparing model for registration
-                                        var model = new Object();
-                                        model.Name = user.name;
-                                        model.Email = user.email;
-                                        model.IsLoginByMobile = true;
-                                        model.OAuthProviderId = 2; // lookupvalue for FB
-                                        G.registerThirdPartyUser(model);
-                                    },
-                                    failure: function (batch) {
 
-                                    }
-                                });
+                                // preparing model for registration
+                                var model = new Object();
+                                model.Name = user.name;
+                                model.Email = user.email;
+                                model.IsLoginByMobile = true;
+                                model.RegistrationTypeId=2;
+                                model.OAuthProviderId = user.id; // lookupvalue for FB
+                                G.registerThirdPartyUser(model);
+
                             });
 
                         }
@@ -314,20 +301,21 @@ Ext.define('ProDooMobileApp.controller.G', {
                 success: function(conn, response, options, eOpts) {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success) {
-                        localStorage.globalKeywords=Ext.encode(result.items.LookupData.keywords);
-                        localStorage.globalCertifications=Ext.encode(result.items.LookupData.certificates);
 
-
+                        //SystemLabel.LoadSystemLabel();//all system labels will load to localstore
                         var authStore = Ext.getStore('AuthStore');
-                        var rec = authStore.getAt(0);
-                        rec.set('ResumeId', result.items.ResumeId);
-                        rec.set('UserId', result.items.UserId);
-                        rec.set('IsFreelancer', result.items.IsFreelancer);
-                        rec.set('IsNotificationRead', result.items.IsNotificationRead);
-                        rec.set('FirstName',result.items.DisplayName);
-                        rec.dirty = true;
+                        var authModel = Ext.create('ProDooMobileApp.model.AuthModel');
+                        authModel.data.ResumeId = result.items.ResumeId;
+                        authModel.data.UserId = result.items.UserId;
+                        authModel.data.Email = model.email;
+                        authModel.data.FirstName = result.items.DisplayName;
+                        authModel.data.LastName = '';
+                        authModel.data.IsFreelancer = result.items.IsFreelancer;
+                        authModel.data.IsNotificationRead = result.items.IsNotificationRead;
+                        authModel.data.AuthType = model.RegistrationTypeId; // lookup value, 2 stands for facebook
+                        authStore.add(authModel);
                         authStore.sync();
-                        G.loadCommonLookups(result.items.LookupData);
+
                         G.ShowView('StartScreen');
                         G.setLoggedUsername(model.Name);
 
@@ -647,59 +635,6 @@ Ext.define('ProDooMobileApp.controller.G', {
 
         },
 
-        loadCommonLookups: function(LookupsData) {
-            // loading stores at startup
-            var store = Ext.getStore('SearchProfile');
-            store.removeAll(true);
-            LookupsData.profiles.forEach(function(item,index){
-                store.add(item);
-            });
-            store.sync();
-
-            var skillStore = Ext.getStore('SearchSkill');
-            skillStore.removeAll(true);
-            LookupsData.skills.forEach(function(item,index){
-                skillStore.add(item);
-            });
-            skillStore.sync();
-
-            /*var keywordStore = Ext.getStore('SearchKeyword');
-            keywordStore.removeAll(true);
-            LookupsData.keywords.forEach(function(item,index){
-            keywordStore.add(item);
-            });
-            keywordStore.sync();*/
-
-            /*var certificationStore = Ext.getStore('SearchCertification');
-            certificationStore.removeAll(true);
-            LookupsData.certificates.forEach(function(item,index){
-            certificationStore.add(item);
-            });
-            certificationStore.sync();*/
-
-            var industryStore = Ext.getStore('SearchIndustry');
-            industryStore.removeAll(true);
-            LookupsData.industeries.forEach(function(item,index){
-                industryStore.add(item);
-            });
-            industryStore.sync();
-
-            var languageStore = Ext.getStore('SearchLanguage');
-            languageStore.removeAll(true);
-            LookupsData.languages.forEach(function(item,index){
-                languageStore.add(item);
-            });
-            languageStore.sync();
-
-            var countryStore = Ext.getStore('CreateRequestLocation');
-            countryStore.removeAll(true);
-            LookupsData.countries.forEach(function(item,index){
-                countryStore.add(item);
-            });
-            countryStore.sync();
-
-        },
-
         convertUtctoLocalDate: function(date) {
             if(date!=null)
             {
@@ -812,7 +747,7 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         ValidateUrl: function(urlField) {
-            var re = /(((^https?)|(^ftp)):\/\/([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&#;`~=%!]*)(\.\w{2,})?)*\/?)/i;
+            var re = /^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/;
             var url = urlField.getValue();
             var isValidUrl = re.test(url);
             if(url !== null && url !== "" && !isValidUrl)//G.ValidateUrl(url))

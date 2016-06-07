@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 
-<!-- Auto Generated with Sencha Architect -->
-<!-- Modifications to this file will be overwritten. -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -10,7 +8,7 @@
     <title>Prodoo</title>
     
     <script>
-      var currentVersionNumber = '1.0.0.3';
+        var currentVersionNumber = '1.0.0.6';
         var Ext = Ext || {};
         Ext.theme = {
             name: "Windows"
@@ -23,6 +21,9 @@
 		.preLoader{
 			margin: 100px auto 0;
 			text-align:center;
+		}
+		.loaderImage{
+			max-width: 90%;
 		}
 		.preLoader div{
 			margin-bottom:20px;
@@ -43,9 +44,6 @@
             top: 48%;
             border-radius: 50%;
         }
-        .loaderImage{
-			max-width: 90%;
-		}
 	    .MarginBottom1 {
             margin-top:-200px;
 	    }
@@ -83,7 +81,6 @@
     <script src="libs/cordova.js"></script>
     <script src="libs/cdv-plugin-fb-connect.js"></script>
     <script src="libs/facebook-js-sdk.js"></script>
-    
    
     <script type="text/javascript" src="app.js"></script>
 </head>
@@ -94,7 +91,7 @@
 	<div><img class="loaderImage" src="resources/images/loader1.gif" alt="loader"></div>
 </div>
 <script>
-   
+
     if (window.location.href.toLowerCase().indexOf('prodoo') > -1) { // web app login
         window.fbAsyncInit = function () {
             if (window.location.hostname.indexOf('staging') > -1) {
@@ -108,7 +105,7 @@
             else if (window.location.hostname.indexOf('dev') > -1) {
                 FB.init({
                     appId: '930023363758501',
-                    cookie: true, 
+                    cookie: true,
                     xfbml: true,
                     version: 'v2.2'
                 });
@@ -116,16 +113,8 @@
             else if (window.location.hostname.indexOf('localhost') > -1) {
                 FB.init({
                     appId: '944681392241461',
-                    cookie: true, 
-                    xfbml: true,  
-                    version: 'v2.2'
-                });
-            }
-            else {
-                FB.init({
-                    appId: '1613499288923128',
-                    cookie: true, 
-                    xfbml: true, 
+                    cookie: true,
+                    xfbml: true,
                     version: 'v2.2'
                 });
             }
@@ -157,11 +146,7 @@
         }, false);
     }
 
-window.onload = function(){
-  Account.authCheck();
-}
-
-document.addEventListener("offline", function () { alert("No connection found, please check your internet") }, false);
+    document.addEventListener("offline", function () { alert("No connection found, please check your internet") }, false);
 
 </script></body>
 </html>

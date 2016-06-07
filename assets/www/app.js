@@ -25,38 +25,26 @@ Ext.application({
         'Ext.MessageBox'
     ],
     models: [
-        'PracticesModel',
-        'SkillsForResumeModel',
-        'ProfilesForResumeModel',
-        'CertificationsForResumeModel',
-        'KeywordsModel',
         'SearchProfile',
         'SearchResultSaved',
         'AuthModel',
-        'SearchResumeKeywordModel',
         'SearchRequestList',
-        'ShortlistRequestList',
         'SavedSearchModel',
         'UserModel',
-        'MsgModel',
-        'LookupDataModel',
         'Statistics',
         'StatisticsResume',
         'SocialMediaModel',
-        'UserDetailSocialMediaModel',
         'StatisticsModel',
         'ResumeExperiencesModel',
         'Faq',
         'ConfigurationModel',
-        'SettingTerm'
+        'SettingTerm',
+        'Feedback',
+        'Profiles',
+        'MessageModel'
     ],
     stores: [
         'ProfilesStore',
-        'SkillsStore',
-        'CertificateStore',
-        'ExperienceStore',
-        'ProfilesForResumeStore',
-        'SkillsForResumeStore',
         'SearchProfile',
         'SearchResultSaved',
         'SearchResultDetail',
@@ -67,33 +55,23 @@ Ext.application({
         'SearchIndustry',
         'SearchLanguage',
         'SearchRequestList',
-        'StartDate',
-        'ShortlistRequestList',
-        'CreateRequestDay',
         'CreateRequestLocation',
-        'CreateRequestFeeRange',
         'SavedSearchStore',
         'ShortlistResumeStore',
-        'MsgInboxList',
-        'MsgDetailList',
-        'SavedShortlistStore',
-        'resumeCertification',
         'CompanyDetail',
         'UserStore',
         'MessageStore',
         'StatisticsResume',
-        'GetLookupDataStore',
         'StatisticsRequest',
         'settingTerms',
-        'settingPrivacy',
-        'settingNotice',
         'UserDetail',
         'SocialMediaStore',
         'StatisticsGraph',
-        'UserType',
         'ResumeExperiencesStore',
         'FaqStore',
-        'ConfigurationStore'
+        'ConfigurationStore',
+        'FeedbackStore',
+        'CountryStore'
     ],
     views: [
         'LoginForm',
@@ -119,7 +97,8 @@ Ext.application({
         'Shortlist',
         'RequestDetail',
         'MyNavigationView',
-        'RequestConfirmed'
+        'RequestConfirmed',
+        'Feedback'
     ],
     controllers: [
         'Account',
@@ -132,7 +111,9 @@ Ext.application({
         'Shortlist',
         'SaveSearch',
         'Company',
-        'Present'
+        'Present',
+        'Feedback',
+        'SystemLabel'
     ],
     name: 'ProDooMobileApp',
 
@@ -157,30 +138,23 @@ Ext.application({
         else
             ApiBaseUrl= "http://mobile.staging.prodoo.dk/WebAPI/api/";
 
+
         // setting loading mask on viewport
         Ext.Viewport.setMasked({xtype:'loadmask',message:'loading...'});
         // disabling it by default
         Ext.Viewport.setMasked(false);
 
-        /*var authStore = Ext.getStore('AuthStore');
-        if(authStore.data.items.length > 0){ // cookie exists
-            var authRec = authStore.getAt(0);
-            debugger;
-            G.loadCommonLookups();
-            G.ShowView('StartScreen');
-        }*/
-
         Ext.Ajax.on('beforerequest', function (conn, response, options) {
 
-          //  if(navigator.onLine){
-        if(true){
-            if(Ext.Viewport.getMasked() == null || Ext.Viewport.getMasked().isHidden() == true)
-            {
-                Ext.Viewport.setMasked(true);
-            }
+            //  if(navigator.onLine){
+            if(true){
+                if(Ext.Viewport.getMasked() == null || Ext.Viewport.getMasked().isHidden() == true)
+                {
+                    Ext.Viewport.setMasked(true);
+                }
             }
             else {
-                 Ext.Msg.alert('Status', 'Internet connection not available');
+                Ext.Msg.alert('Status', 'Internet connection not available');
                 return false;
             }
         });
@@ -192,12 +166,13 @@ Ext.application({
             Ext.Viewport.setMasked(false);
 
             switch(response.status) {
-            case 0 :
-              Ext.Msg.alert('Status', 'Internet connection not available');
-              break;
-          }
+                case 0 :
+                    Ext.Msg.alert('Status', 'Internet connection not available');
+                    break;
+            }
         });
 
+            SystemLabel.LoadSystemLabel();  //Load all system label to local store
         Ext.create('ProDooMobileApp.view.MyNavigationView', {fullscreen: true});
     },
 
