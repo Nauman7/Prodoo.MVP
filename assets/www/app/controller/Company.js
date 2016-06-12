@@ -92,7 +92,9 @@ Ext.define('ProDooMobileApp.controller.Company', {
         }
         else if(selectedItem.className.indexOf('companyDelete')>=0)
         {
-            var url = ApiBaseUrl+'UserCompany/DeleteUserCompany';
+
+            G.DeleteItem('Comapny', function(){
+               var url = ApiBaseUrl+'UserCompany/DeleteUserCompany';
             record.id=record.data.UserDetailId;
             Ext.Ajax.request({
                 url: url,
@@ -114,6 +116,8 @@ Ext.define('ProDooMobileApp.controller.Company', {
                     G.showGeneralFailure();
                 }
             });
+            });
+
         }
     },
 

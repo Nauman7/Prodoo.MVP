@@ -103,7 +103,7 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                 modal: false,
                 itemTpl: [
                     '<div class="requestCnt feedbackList">',
-                    '    <span class="feedbackNo">{FeedbackId}</span>',
+                    '    ',
                     '    <span class="savName">{Title}</span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label closeBtn"> </span>',

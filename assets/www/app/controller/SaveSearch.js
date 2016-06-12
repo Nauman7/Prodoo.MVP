@@ -182,29 +182,35 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
             var savedSearchId = record.data.SavedSearchId;
             if(e.target.className.indexOf('x-button-label')>=0){
-                Ext.Ajax.request({
-                    url: ApiBaseUrl+'SavedSearches/RemoveSearch',
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    params : Ext.JSON.encode(record.data),
-                    success: function(conn, response, options, eOpts) {
 
-                        var r= JSON.parse(conn.responseText);
-                        if(r.success){
-                            var savedSearchStore=Ext.getStore("SavedSearchStore");
-                            var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+                G.DeleteItem('Search', function(){
+                    Ext.Ajax.request({
+                        url: ApiBaseUrl+'SavedSearches/RemoveSearch',
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        params : Ext.JSON.encode(record.data),
+                        success: function(conn, response, options, eOpts) {
 
-                            savedSearchStore.load({
-                                params : { userId : loggedUserId
-                                }
-                            });
+                            var r= JSON.parse(conn.responseText);
+                            if(r.success){
+                                var savedSearchStore=Ext.getStore("SavedSearchStore");
+                                var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+
+                                savedSearchStore.load({
+
+                                    params : { userId : loggedUserId
+                                    }
+                                });
+                                Ext.Viewport.setMasked(false);
+                            }
+                            else
+                            Ext.Msg.alert('', r.message,null);
+                        },
+                        failure: function(conn, response, options, eOpts) {
                         }
-                        else
-                        Ext.Msg.alert('', r.message,null);
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                    }
+                    });
                 });
+
             }
             else{
                 Ext.Ajax.request({

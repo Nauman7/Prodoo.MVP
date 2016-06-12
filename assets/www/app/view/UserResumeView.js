@@ -272,10 +272,13 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         var store = Ext.getStore('SearchResultDetail');
         var resume = store.getAt(0).data;
         if(resume.Profiles.length > 0 ){
-            var profiles = resume.Profiles;
-            profiles.forEach(function(item,index){
+
+            setTimeout( function(){
+                 resume.Profiles.forEach(function(item,index){
                 G.createKeywordView('Profile',item.ProfileValue,item.ProfileId,item.ExperienceLevel);
             });
+            }, 0 );
+
             G.show('ProfileCnt');
         }
         else{
@@ -284,24 +287,33 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
             G.show('SplashCnt');
         }
         if(resume.Skills.length > 0 ){
-            var skills = resume.Skills;
-            skills.forEach(function(item,index){
+
+            setTimeout( function(){
+                 resume.Skills.forEach(function(item,index){
                 G.createKeywordView('Skill',item.SkillValue,item.SkillId,item.ExperienceLevel);
             });
+            }, 0 );
+
         }
 
         if(resume.Keywords.length > 0 ){
-            var keywords = resume.Keywords;
-            keywords.forEach(function(item,index){
+
+            setTimeout( function(){
+                resume.Keywords.forEach(function(item,index){
                 G.createKeywordView('Keyword',item.KeywordValue, item.KeywordId);
             });
+            }, 0 );
+
         }
 
         if(resume.Certifications.length > 0 ){
-            var certifications = resume.Certifications;
-            certifications.forEach(function(item,index){
+
+            setTimeout( function(){
+                resume.Certifications.forEach(function(item,index){
                 G.createKeywordView('Certification',item.CertificationValue, item.CertificationId);
             });
+            }, 0 );
+
         }
 
         var settingContainer = G.get('SettingCnt');
@@ -326,12 +338,13 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
 
         if(resume.Languages.length > 0 ){
-
-            var Languages = resume.Languages;
-            Languages.forEach(function(item,index){
+            setTimeout( function(){
+                 resume.Languages.forEach(function(item,index){
                 UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
 
             });
+            }, 0 );
+
         }
 
         var locField=G.get("locationSelectField");

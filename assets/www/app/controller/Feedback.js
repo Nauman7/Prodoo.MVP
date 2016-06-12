@@ -64,24 +64,29 @@ Ext.define('ProDooMobileApp.controller.Feedback', {
     },
 
     onFeedbackListItemTap: function(dataview, index, target, record, e, eOpts) {
-          var selectedItem = e.target;
+        var selectedItem = e.target;
         if(selectedItem.className.indexOf('x-button-label closeBtn')>=0) {
-            var store = Ext.getStore('FeedbackStore');
-            store.remove(record);
-            //store.sync();
-            // store.sync is submitting all records again. So, using direct ajax call meanwhile
-            Ext.Ajax.request({
-                url: ApiBaseUrl+'Feedback/DeleteFeedback',
-                method: 'Delete',
-                params : Ext.JSON.encode(record.data),
-                headers: { 'Content-Type': 'application/json' },
-                success: function(conn, response, options, eOpts) {
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
-                }
+
+            G.DeleteItem('Feedback', function(){
+                var store = Ext.getStore('FeedbackStore');
+                store.remove(record);
+                //store.sync();
+                // store.sync is submitting all records again. So, using direct ajax call meanwhile
+                Ext.Ajax.request({
+                    url: ApiBaseUrl+'Feedback/DeleteFeedback',
+                    method: 'Delete',
+                    params : Ext.JSON.encode(record.data),
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
             });
+
+
         }
         else{
             G.hide('FeedbackList');

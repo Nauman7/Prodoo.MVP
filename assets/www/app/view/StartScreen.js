@@ -524,10 +524,12 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
     onSearchContainerImgTap: function(image, e, eOpts) {
         SearchResume.resetStores();
         G.Push('SearchResult');
+        G.get('HelpDetail').setHtml(Identifier.Title.Help_Search_SearchBar);
         ActiveScreen=0;
     },
 
     onMyimgTap2: function(image, e, eOpts) {
+
         SearchResume.resetStores();
         ActiveScreen=0;
         UserResume.onResumeClick();

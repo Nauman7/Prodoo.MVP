@@ -178,25 +178,28 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
         },
 
         DeleteRecord: function(data) {
-            Ext.Ajax.request({
-                url: ApiBaseUrl+'Shortlists/delete',
-                method: 'Delete',
-                params : Ext.JSON.encode(data),
-                headers: { 'Content-Type': 'application/json' },
-                success: function(conn, response, options, eOpts) {
-                    var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success) {
-                        Shortlist.showShortListView();
-                    } else {
+            G.DeleteItem('Shortlist', function(){
+                Ext.Ajax.request({
+                    url: ApiBaseUrl+'Shortlists/delete',
+                    method: 'Delete',
+                    params : Ext.JSON.encode(data),
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            Shortlist.showShortListView();
+                        } else {
+                            G.showGeneralFailure();
+                        }
+
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
                         G.showGeneralFailure();
                     }
-
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
-                }
+                });
             });
+
         },
 
         DirectShortListIconClick: function() {

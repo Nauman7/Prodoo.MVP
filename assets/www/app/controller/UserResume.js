@@ -178,7 +178,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 Detail.setHtml(Identifier.Title.Help_Resume_Skills);
             }
             else if(view=="Industry"){
-                Heading.setHtml("Welcome to your resume Professionsl Experience section!");
+                Heading.setHtml("Welcome to your resume Professional Experience section!");
                 Detail.setHtml(Identifier.Title.Help_Resume_ProExperiance);
             }
             else if(view=="Keyword"){
@@ -415,6 +415,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 method : 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 success : function (response) {
+                    Ext.getStore('SearchLanguage').load();
                     var responseDecode = Ext.decode(response.responseText);
                     if (responseDecode.success) {
                         var resume = responseDecode.items;
@@ -422,10 +423,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                             G.hide('ResumeSplash');
                             G.show('UserResume');
                             var store = Ext.getStore('SearchResultDetail');
-                            var records = store.getRange();
-                            //store.remove(records);
+                            store.removeAll();
                             store.add(resume);
-                            store.sync();
+                            // store.sync();
                             //if(view == 'goBack'){
                             G.Pop();
                             //}
@@ -441,7 +441,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                             resume.Skills.length <=0
                             ){
 
-                                G.Push('UserResumeView');
+
                                 G.show('ResumeSplash');
                                 G.get('ResumeSplash').setHtml(Identifier.Title.Splash_Resume);
                                 G.hide('UserResume');

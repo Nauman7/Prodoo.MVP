@@ -250,25 +250,28 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         DeleteRequest: function(requestId, listType) {
+
             var url = ApiBaseUrl+'Requests/DeleteRequest?requestId='+requestId+'&type='+listType;
+            G.DeleteItem('Request', function(){
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success)
+                        Requests.ShowRequestView(false,false);
+                        else
+                        Ext.Msg.alert('Not Deleted', result.message);
 
-            Ext.Ajax.request({
-                url: url,
-                method: 'Get',
-                headers: { 'Content-Type': 'application/json' },
-                success: function(conn, response, options, eOpts) {
-                    var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success)
-                    Requests.ShowRequestView(false,false);
-                    else
-                    Ext.Msg.alert('Not Deleted', result.message);
-
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
-                }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
+                    }
+                });
             });
+
         },
 
         TapRequestTitle: function(target, item, record) {

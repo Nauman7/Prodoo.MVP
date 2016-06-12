@@ -23,7 +23,7 @@ Ext.define('ProDooMobileApp.model.Profiles', {
     config: {
         fields: [
             {
-                name: 'PrifileId',
+                name: 'ProfileId',
                 type: 'int'
             },
             {

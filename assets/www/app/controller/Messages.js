@@ -225,14 +225,15 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         var Target = Ext.get(e.target);
         if (Target.parent('.closeIcon'))
         {
+
             var rec= null;
 
             if (isInbox)
             { rec= {MessageId:msgId,isDeleteInboxMessage:true}; }
             else
             { rec= {MessageId:msgId,isDeleteSentMessage:true}; }
-
-            Ext.Ajax.request({
+            G.DeleteItem('Message', function(){
+                 Ext.Ajax.request({
                 url : ApiBaseUrl+'Message/UpdateMessage/',
                 method : 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -252,6 +253,8 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                     G.showGeneralFailure();
                 }
             });
+            });
+
         }
         else if(Target.parent('.requestCnt')){
             if (!record.data.IsRead)
