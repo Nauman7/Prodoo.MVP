@@ -48,9 +48,9 @@
 	}
 }
 .orange{
-	background: $orange;
+	background: $_yellow;
 	&:before{
-		border-top-color: $orange;
+		border-top-color: $_orange;
 	}
 }
 .lightPurple{
@@ -81,15 +81,15 @@
 	}
 }
 .orange2{
-	background: $orange2;
+	background: $_orange;
 	&:before{
-		border-top-color: $orange2;
+		border-top-color: $_orange;
 	}
 }
 .green2{
-	background:#3CD4F6;
+	background:$_lightBlue;
 	&:before{
-		border-top-color: #3CD4F6;
+		border-top-color: $_lightBlue;
 	}
 }
 .imgTitle{

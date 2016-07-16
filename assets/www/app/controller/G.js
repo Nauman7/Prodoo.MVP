@@ -158,8 +158,8 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         mask: function() {
-            Ext.Viewport.setMasked({xtype:'loadmask',message:'Please wait...'});
-            Ext.Viewport.getMasked().element.dom.style.zIndex = 1000;
+            Ext.Viewport.setMasked({xtype:'loadmask',message:' '});
+            Ext.Viewport.getMasked().setZIndex(1000);
         },
 
         unmask: function() {
@@ -758,6 +758,14 @@ Ext.define('ProDooMobileApp.controller.G', {
                 return null;
             }
 
+        },
+
+        DeleteItem: function(itemType, callbackFunction) {
+            Ext.Msg.confirm('Confirm','You want to delete the current '+itemType+'?', function(btn){
+                if(btn === 'yes'){
+                    callbackFunction();
+                    return true;
+                }});
         }
     },
 

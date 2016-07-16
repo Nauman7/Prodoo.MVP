@@ -47,7 +47,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     '',
                     '',
                     '',
-                    '<div class="LocationDiv"><span class="location">{Region}</span>',
+                    '<div class="LocationDiv"><span class="location">{Country}</span>',
                     '    <span class="onSite">on-site</span>',
                     '</div>',
                     '<div class="ViewCnt">',
@@ -187,6 +187,8 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     {
                         xtype: 'image',
                         height: 127,
+                        margin: 'auto',
+                        width: 127,
                         src: 'resources/images/splash/resume.png'
                     }
                 ]
@@ -274,9 +276,9 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         if(resume.Profiles.length > 0 ){
 
             setTimeout( function(){
-                 resume.Profiles.forEach(function(item,index){
-                G.createKeywordView('Profile',item.ProfileValue,item.ProfileId,item.ExperienceLevel);
-            });
+                resume.Profiles.forEach(function(item,index){
+                    G.createKeywordView('Profile',item.ProfileValue,item.ProfileId,item.ExperienceLevel);
+                });
             }, 0 );
 
             G.show('ProfileCnt');
@@ -289,9 +291,9 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         if(resume.Skills.length > 0 ){
 
             setTimeout( function(){
-                 resume.Skills.forEach(function(item,index){
-                G.createKeywordView('Skill',item.SkillValue,item.SkillId,item.ExperienceLevel);
-            });
+                resume.Skills.forEach(function(item,index){
+                    G.createKeywordView('Skill',item.SkillValue,item.SkillId,item.ExperienceLevel);
+                });
             }, 0 );
 
         }
@@ -300,8 +302,8 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
             setTimeout( function(){
                 resume.Keywords.forEach(function(item,index){
-                G.createKeywordView('Keyword',item.KeywordValue, item.KeywordId);
-            });
+                    G.createKeywordView('Keyword',item.KeywordValue, item.KeywordId);
+                });
             }, 0 );
 
         }
@@ -310,17 +312,17 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
             setTimeout( function(){
                 resume.Certifications.forEach(function(item,index){
-                G.createKeywordView('Certification',item.CertificationValue, item.CertificationId);
-            });
+                    G.createKeywordView('Certification',item.CertificationValue, item.CertificationId);
+                });
             }, 0 );
 
         }
 
         var settingContainer = G.get('SettingCnt');
-        var region = settingContainer.down('selectfield[name=RegionId]');
+        var country = settingContainer.down('selectfield[name=CountryId]');
         var availblDate = settingContainer.down('selectfield[name=AvailabilityDate]');
         availblDate.setValue( new Date(resume.AvailabilityDate));
-        region.setValue(resume.Region);
+        country.setValue(resume.Country);
 
         var button = settingContainer.down('button');
         if(resume.IsAvailable){
@@ -339,10 +341,10 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
 
         if(resume.Languages.length > 0 ){
             setTimeout( function(){
-                 resume.Languages.forEach(function(item,index){
-                UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
+                resume.Languages.forEach(function(item,index){
+                    UserResume.CloneLangaugeControl(item.ExperienceLevel,item.LanguageId);
 
-            });
+                });
             }, 0 );
 
         }

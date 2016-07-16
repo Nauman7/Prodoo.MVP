@@ -161,6 +161,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         hidden: true,
                         itemId: 'SearchList',
                         margin: '0 40',
+                        maxHeight: 250,
                         itemTpl: [
                             '<div class="listResult">',
                             '        <span class="listTitle">{ProfileValue}{SkillValue}{KeywordValue}{CertificationValue}{IndustryValue}{CountryName}</span>',
@@ -168,7 +169,20 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         ],
                         pressedCls: null,
                         selectedCls: null,
-                        store: 'SearchProfile'
+                        store: 'SearchProfile',
+                        listeners: [
+                            {
+                                fn: function(component, eOpts) {
+                                    component.on('refresh',function(){
+                                        this.setHeight(null);
+                                        var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
+                                        if(ViewHeight > 10)
+                                        this.setHeight(ViewHeight);
+                                    });
+                                },
+                                event: 'initialize'
+                            }
+                        ]
                     }
                 ]
             },

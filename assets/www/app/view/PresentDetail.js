@@ -81,6 +81,8 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                     {
                         xtype: 'image',
                         height: 128,
+                        margin: 'auto',
+                        width: 190,
                         src: 'resources/images/splash/present.png'
                     }
                 ]

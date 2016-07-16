@@ -427,6 +427,7 @@ Ext.define('ProDooMobileApp.view.Setting', {
     },
 
     onArrowProdooTap: function(button, e, eOpts) {
+
         var Cnt = button.up('container');
         if(Cnt.element.hasCls('settingActiveCnt')){
             Cnt.element.next().hide();
@@ -440,6 +441,7 @@ Ext.define('ProDooMobileApp.view.Setting', {
             Cnt.element.next().show();
             Cnt.addCls('settingActiveCnt');
             var store = Ext.getStore('ConfigurationStore');
+
             store.load({
                 scope: this,
                 callback: function(records,operation,success){

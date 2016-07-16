@@ -137,19 +137,19 @@
 }
 .rOrange{
 	.SrNo{
-		background-color: $orange2;
+		background-color: $_orange;
 		
 	}
 	.resultTitle{
-		color: $orange2;
+		color: $_orange;
 	}
 	.downArrow{
 		&:after{
-			border-top-color: darken($orange2, 10);
+			border-top-color: darken($_orange, 10);
 		}
 		&.upArrow{
 			&:after{
-				border-bottom-color: darken($orange2, 10);
+				border-bottom-color: darken($_orange, 10);
 			}
 		}
 	}
@@ -202,7 +202,7 @@
 	color: $_green;
 }
 .iOrange{
-	color: $orange2;
+	color: $_orange;
 }
 .iYellow{
 	color: $_yellow;

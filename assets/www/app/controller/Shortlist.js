@@ -169,6 +169,14 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                         records.forEach(function(item,index){total +=item.data.Count;});
                         G.get('shortlistTotal').setData( { Total:total});
                     }//end if
+                    if(Ext.getStore('ShortlistResumeStore').data.items.length<=0){
+                        G.show('ShortlistSplash');
+                        G.hide('requestList');
+                    }
+                    else{
+                        G.hide('ShortlistSplash');
+                        G.show('requestList');
+                    }
                 }//end callback
             });
 

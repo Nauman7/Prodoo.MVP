@@ -64,6 +64,9 @@ Ext.define('ProDooMobileApp.model.SearchResultSaved', {
             },
             {
                 name: 'ResumeExperience'
+            },
+            {
+                name: 'Country'
             }
         ]
     }

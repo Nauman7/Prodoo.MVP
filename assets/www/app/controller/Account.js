@@ -271,7 +271,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
 
         if(loginModel.Email && G.ValidateEmail(loginModel.Email) && loginModel.Password){
             Ext.Ajax.request({
-                url: ApiBaseUrl+'Account/MobileLogin',
+                url: ApiBaseUrl+'Account/Login',
                 method: 'POST',
                 //headers: { 'Content-Type': 'application/json' },
                 params : {Email: loginModel.Email, Password: loginModel.Password, RememberMe: loginModel.RememberMe},

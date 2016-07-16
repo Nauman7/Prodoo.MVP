@@ -403,6 +403,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
     },
 
     onEditBtnTap: function(button, e, eOpts) {
+
         // load reciever list
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).data.UserId;
         var str=Ext.getStore("UserStore");
@@ -410,7 +411,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             params : { userId : loggedUserId },
             callback: function(data){
                 if(data.length==0)
-                    Ext.Msg.alert('Message','When someone send you request or accept your submitted request, then you will able to create and send message');
+                    Ext.Msg.alert('Message',Identifier.Title.Alert_Message_BtnEdit);
                 else
                 {
                     // idenfity current list is inbox or sent

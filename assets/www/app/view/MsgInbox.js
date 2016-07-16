@@ -58,9 +58,10 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     },
                     {
                         xtype: 'button',
-                        cls: 'sendRequestBtn',
+                        cls: 'msgSendBtn',
                         itemId: 'SendMsgBtn',
-                        margin: '0 5'
+                        margin: '0 5',
+                        text: ' '
                     }
                 ]
             },

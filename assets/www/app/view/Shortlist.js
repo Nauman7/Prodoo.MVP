@@ -18,11 +18,12 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
     alias: 'widget.Shortlist',
 
     requires: [
+        'Ext.Label',
         'Ext.Button',
         'Ext.field.Search',
-        'Ext.Label',
         'Ext.XTemplate',
-        'Ext.dataview.List'
+        'Ext.dataview.List',
+        'Ext.Img'
     ],
 
     config: {
@@ -33,6 +34,14 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
             'scrollPadding'
         ],
         items: [
+            {
+                xtype: 'label',
+                cls: 'SearchLabel',
+                docked: 'top',
+                html: 'Shortlist',
+                itemId: 'buttonsLabel',
+                margin: 0
+            },
             {
                 xtype: 'container',
                 cls: 'searchViewCnt',
@@ -79,6 +88,27 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 store: 'ShortlistResumeStore'
             },
             {
+                xtype: 'container',
+                centered: true,
+                cls: [
+                    'labelCls',
+                    'center'
+                ],
+                docked: 'top',
+                hidden: true,
+                html: '<br>Make a new shortlist <br> and add to your resume list',
+                itemId: 'ShortlistSplash',
+                items: [
+                    {
+                        xtype: 'image',
+                        height: 130,
+                        margin: 'auto',
+                        width: 95,
+                        src: 'resources/images/splash/shortlist.png'
+                    }
+                ]
+            },
+            {
                 xtype: 'button',
                 cls: 'requestBtn',
                 docked: 'bottom',
@@ -88,6 +118,7 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
             },
             {
                 xtype: 'button',
+                bottom: 10,
                 cls: [
                     'backIcon',
                     'btnCircle',
@@ -96,6 +127,7 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
                 ],
                 docked: 'bottom',
                 itemId: 'PresentEditBackBtn3',
+                left: 10,
                 text: ' '
             },
             {

@@ -83,8 +83,8 @@
 	background-color: #3ba2f6;
 }
 
-.statsYellow{
-	background-color: #f6aa3a;
+.statsLightBlue{
+	background-color: $_lightBlue;
 }
 
 
@@ -141,7 +141,7 @@
 	color: #fff;
 }
 .StatsRequestLbl{
-	color: #f6aa3a;
+	color: $_lightBlue;
 	width: 48%;
 	float: right;
 	text-align: left;

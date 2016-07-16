@@ -224,7 +224,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             if(counteries.items.length > 2){
                 counteries.items.forEach(function(item, index){
                     if(index > 1){
-                        countryNames.push(item.getAt(0).getHtml());
+                        countryNames.push(item.getAt(2).getValue());
                     }
                 });
             }

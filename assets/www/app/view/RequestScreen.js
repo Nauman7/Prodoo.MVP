@@ -50,7 +50,8 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                             'activeBtn'
                         ],
                         itemId: 'SendRequestBtn',
-                        margin: '0 5'
+                        margin: '0 5',
+                        text: ' '
                     },
                     {
                         xtype: 'button',

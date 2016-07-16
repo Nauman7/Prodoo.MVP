@@ -48,7 +48,7 @@ Ext.define('ProDooMobileApp.store.UserDetail', {
                 name: 'Detail'
             },
             {
-                name: 'socialLinks'
+                name: 'SocialLinks'
             },
             {
                 name: 'socialLinksEnabledPresent'

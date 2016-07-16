@@ -78,12 +78,24 @@ Ext.define('ProDooMobileApp.controller.Feedback', {
                     params : Ext.JSON.encode(record.data),
                     headers: { 'Content-Type': 'application/json' },
                     success: function(conn, response, options, eOpts) {
+                        var store=Ext.getStore("FeedbackStore");
+                        store.load({
+                            callback : function() {
+                                if(Ext.getStore('FeedbackStore').data.items.length<=0){
+                                    G.show('FeedbackSplash');
+                                    G.get('FeedbackSplash').setHtml(Identifier.Title.Splash_Feedback);
+                                    G.hide('FeedbackList');
+                                }
+                            }
+                        });
+
                     },
                     failure: function(conn, response, options, eOpts) {
                         //failure catch
                         G.showGeneralFailure();
                     }
                 });
+
             });
 
 

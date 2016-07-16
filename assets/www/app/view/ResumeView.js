@@ -169,12 +169,26 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                         hidden: true,
                         itemId: 'SearchList',
                         margin: '0 40',
+                        maxHeight: 250,
                         itemTpl: [
                             '<div class="listResult">',
                             '        <span class="listTitle">{SkillValue}{KeywordValue}{CertificationValue}{IndustryValue}{ProfileValue}</span>',
                             '</div>'
                         ],
-                        store: 'SearchProfile'
+                        store: 'SearchProfile',
+                        listeners: [
+                            {
+                                fn: function(component, eOpts) {
+                                    component.on('refresh',function(){
+                                        this.setHeight(null);
+                                        var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
+                                        if(ViewHeight > 10)
+                                        this.setHeight(ViewHeight);
+                                    });
+                                },
+                                event: 'initialize'
+                            }
+                        ]
                     }
                 ]
             },
@@ -780,7 +794,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 label: 'Location',
                                                 labelCls: 'labelCls',
                                                 labelWidth: 100,
-                                                name: 'RegionId',
+                                                name: 'CountryId',
                                                 placeHolder: 'Choose location',
                                                 autoSelect: false,
                                                 defaultPhonePickerConfig: {
@@ -791,7 +805,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                 },
                                                 displayField: 'CountryName',
                                                 store: 'CreateRequestLocation',
-                                                valueField: 'CountryName',
+                                                valueField: 'CountryId',
                                                 listeners: [
                                                     {
                                                         fn: function(component, eOpts) {
@@ -1159,7 +1173,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         if(item===6)// if settings btn active
         {
             var requestSettingObj = new Object();
-            requestSettingObj.Region = newValue;
+            requestSettingObj.CountryId = newValue;
             UserResume.updateSettings_Instant(requestSettingObj);
         }
     },

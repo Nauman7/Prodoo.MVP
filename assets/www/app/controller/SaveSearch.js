@@ -127,7 +127,14 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 searchStore.clearFilter();
                 searchStore.load({
                     params : { userId : loggedUserId
+                    },
+                    callback : function() {
+                        if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                            G.show('SavedSearchSplash');
+                            G.hide('SavedList');
+                        }
                     }
+
                 });
                 G.Push('SavedSearch');
                 return;
@@ -162,9 +169,17 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
                         searchStore.load({
                             params : { userId : loggedUserId
+                            },
+                            callback : function() {
+                                if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                                    G.show('SavedSearchSplash');
+                                    G.hide('SavedList');
+                                }
                             }
                         });
                         G.Push('SavedSearch');
+
+
                         return;
 
 
@@ -199,6 +214,12 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                                 savedSearchStore.load({
 
                                     params : { userId : loggedUserId
+                                    },
+                                    callback : function() {
+                                        if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                                            G.show('SavedSearchSplash');
+                                            G.hide('SavedList');
+                                        }
                                     }
                                 });
                                 Ext.Viewport.setMasked(false);
@@ -286,6 +307,12 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             var shortlistStore = Ext.getStore('ShortlistResumeStore');
             store.load({
                 params : { userId : loggedUserId
+                },
+                callback : function() {
+                    if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                        G.show('SavedSearchSplash');
+                        G.hide('SavedList');
+                    }
                 }
             });
             // if(G.get('SearchResultSavedScreenId')!==undefined)
@@ -311,6 +338,12 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
                                 searchStore.load({
                                     params : { userId : dataObject.UserId
+                                    },
+                                    callback : function() {
+                                        if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                                            G.show('SavedSearchSplash');
+                                            G.hide('SavedList');
+                                        }
                                     }
                                 });
                                 G.Push('SavedSearch');

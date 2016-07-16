@@ -314,12 +314,12 @@
 			}
 		}
 		.xValue{
-			background-color: darken($orange,20);
+			background-color: darken($_orange,20);
 		}
 	}
 	.xValue{
 		color: white;
-		background-color: $orange;
+		background-color: $_orange;
 		top: -15px;
 		position: relative;
 		padding: 5px 0;
@@ -448,14 +448,14 @@
 	@extend .clearfix;
 	.x-container{
 		float: left;
-		background-color: #F07749;
+		background-color: $_orange;
 		@include border-radius (18px);
 		padding: 0 10px;
 		margin: 10px 10px 10px 0;
 	}
 	.x-item-disabled{
 		&.x-container{
-			background-color: darken(#F07749,20);
+			background-color: darken($_orange,20);
 		}
 	}
 }

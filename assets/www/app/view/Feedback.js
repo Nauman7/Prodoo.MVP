@@ -22,6 +22,7 @@ Ext.define('ProDooMobileApp.view.Feedback', {
         'Ext.field.TextArea',
         'Ext.dataview.List',
         'Ext.XTemplate',
+        'Ext.Img',
         'Ext.Button'
     ],
 
@@ -51,11 +52,8 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                     },
                     {
                         xtype: 'formpanel',
-                        height: '200px',
+                        height: 300,
                         itemId: 'FeedbackSubmitForm',
-                        layout: 'vbox',
-                        modal: true,
-                        scrollable: false,
                         items: [
                             {
                                 xtype: 'textfield',
@@ -115,7 +113,29 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                 store: 'FeedbackStore'
             },
             {
+                xtype: 'container',
+                centered: true,
+                cls: [
+                    'labelCls',
+                    'center'
+                ],
+                docked: 'top',
+                hidden: true,
+                html: '<br>Write your feedback<br> and will do better',
+                itemId: 'FeedbackSplash',
+                items: [
+                    {
+                        xtype: 'image',
+                        height: 127,
+                        margin: 'auto',
+                        width: 152,
+                        src: 'resources/images/splash/feedback.png'
+                    }
+                ]
+            },
+            {
                 xtype: 'button',
+                bottom: 10,
                 cls: [
                     'homeIcon',
                     'btnCircle',
@@ -123,16 +143,19 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                 ],
                 docked: 'bottom',
                 itemId: 'FeedbackHomeButton',
+                left: 10,
                 text: ' '
             },
             {
                 xtype: 'button',
+                bottom: 10,
                 cls: [
                     'addBtn',
                     'bgLightGreen'
                 ],
                 docked: 'bottom',
                 itemId: 'FeedbackAdd',
+                right: 10,
                 text: ' '
             },
             {
@@ -200,6 +223,7 @@ Ext.define('ProDooMobileApp.view.Feedback', {
         var form  = G.get('FeedbackSubmitForm');
         form.reset();
         G.hide('FeedbackList');
+        G.hide('FeedbackSplash');
 
         //Manage Buttons
         G.show('FeedbackSubmitBtn');
@@ -223,6 +247,17 @@ Ext.define('ProDooMobileApp.view.Feedback', {
         G.hide('FeedbackBack');
         G.show('FeedbackHomeButton');
         G.show('FeedbackAdd');
+        var store=Ext.getStore("FeedbackStore");
+        store.load({
+            callback : function() {
+                if(Ext.getStore('FeedbackStore').data.items.length<=0){
+                    G.show('FeedbackSplash');
+                    G.get('FeedbackSplash').setHtml(Identifier.Title.Splash_Feedback);
+                    G.hide('FeedbackList');
+                }
+            }
+        });
+
     }
 
 });

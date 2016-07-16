@@ -90,7 +90,9 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                     case "Splash_Present":
                     Identifier.Title.Splash_Present= label.Message;
                     break;
-
+                    case "Splash_Feedback":
+                    Identifier.Title.Splash_Feedback= label.Message;
+                    break;
                     //For help Search
                     case "Help_Search_Top_Lookup":
                     Identifier.Title.Help_Search_Top_Lookup= label.Message;
@@ -171,6 +173,12 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                     case "Alert_ResumeList_SaveBtn":
                     Identifier.Title.Alert_ResumeList_SaveBtn= label.Message;
                     break;
+                    case "Alert_Company_TxtNameValidation":
+                    Identifier.Title.Alert_Company_TxtNameValidation=label.Message;
+                    break;
+                    case "Alert_Message_BtnEdit":
+                    Identifier.Title.Alert_Message_BtnEdit=label.Message;
+                    break;
 
 
                 }
@@ -217,6 +225,8 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                 //splash screen
                 Splash_Resume:"Splash_Resume",
                 Splash_Present:"Splash_Present",
+                Splash_Feedback:"Splash_Feedback",
+
 
                 //help-Search
                 Help_Search_Top_Lookup:"Help_Search_Top_Lookup",
@@ -248,7 +258,9 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
 
                 //Alter-search
                 Alert_Search_SearchFilter:"Alert_Search_SearchFilter",
-                Alert_ResumeList_SaveBtn:"Alert_ResumeList_SaveBtn"
+                Alert_ResumeList_SaveBtn:"Alert_ResumeList_SaveBtn",
+                Alert_Company_TxtNameValidation:"Alert_Company_TxtNameValidation",
+                Alert_Message_BtnEdit:"Alert_Message_BtnEdit"
 
             },
 

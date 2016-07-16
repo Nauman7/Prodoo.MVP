@@ -184,7 +184,7 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                                     {
                                         type: 'line',
                                         style: {
-                                            stroke: '#f6aa3a',
+                                            stroke: '#3cd4f6',
                                             lineWidth: 3
                                         },
                                         xField: 'Time',
@@ -439,7 +439,7 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                                 itemId: 'StatsGraphRequestChart',
                                 width: '100%',
                                 colors: [
-                                    '#f6aa3a',
+                                    '#3cd4f6',
                                     '#94ae0a',
                                     '#a61120',
                                     '#ff8809',
@@ -584,7 +584,7 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
         this.activeBtn(button);
         G.get('statsLbl').setHtml('RESUME STATISTICS');
         G.get('StatsListView').setStore('StatisticsResume');
-        G.get('TotalStatsCnt').removeCls('statsYellow');
+        G.get('TotalStatsCnt').removeCls('statsLightBlue');
         G.get('ResumeCount').show();
         G.get('RequestCount').hide();
         G.show('StatsListView');
@@ -596,7 +596,7 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
         this.activeBtn(button);
         G.get('statsLbl').setHtml('REQUEST STATISTICS');
         G.get('StatsListView').setStore('StatisticsRequest');
-        G.get('TotalStatsCnt').addCls('statsYellow');
+        G.get('TotalStatsCnt').addCls('statsLightBlue');
         G.get('RequestCount').show();
         G.get('ResumeCount').hide();
         G.show('TotalStatsCnt');

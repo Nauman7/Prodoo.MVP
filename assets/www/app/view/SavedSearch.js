@@ -14,53 +14,22 @@
  */
 
 Ext.define('ProDooMobileApp.view.SavedSearch', {
-    extend: 'Ext.dataview.List',
+    extend: 'Ext.Container',
     alias: 'widget.SavedSearch',
 
     requires: [
-        'Ext.XTemplate',
         'Ext.Label',
-        'Ext.Container',
+        'Ext.Img',
         'Ext.Button',
-        'Ext.field.Search'
+        'Ext.field.Search',
+        'Ext.dataview.List',
+        'Ext.XTemplate'
     ],
 
     config: {
-        store: 'SavedSearchStore',
         cls: [
             'darkBlue',
             'requestList'
-        ],
-        itemTpl: [
-            '<div class="requestCnt">',
-            '    <span class="savName">{SearchName}</span>',
-            '    <span class="ViewResume right">',
-            '    </span>',
-            '    <span class="closeIcon">',
-            '        <span class="x-button-label closeBtn"> </span>',
-            '    </span>',
-            '</div>'
-        ],
-        listeners: [
-            {
-                fn: 'onListItemTap',
-                event: 'itemtap'
-            },
-            {
-                fn: 'onMysearchfieldKeyup',
-                event: 'keyup',
-                delegate: '#mysearchfield'
-            },
-            {
-                fn: 'onMybutton6Tap1',
-                event: 'tap',
-                delegate: '#backBtn'
-            },
-            {
-                fn: 'onAddBtnTap1',
-                event: 'tap',
-                delegate: '#AddBtn1'
-            }
         ],
         items: [
             {
@@ -70,6 +39,27 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
                 html: 'Saved search list',
                 itemId: 'buttonsLabel',
                 margin: 0
+            },
+            {
+                xtype: 'container',
+                centered: true,
+                cls: [
+                    'labelCls',
+                    'center'
+                ],
+                docked: 'top',
+                hidden: true,
+                html: '<br>Make a new save search and <br> add to your resume list',
+                itemId: 'SavedSearchSplash',
+                items: [
+                    {
+                        xtype: 'image',
+                        height: 128,
+                        margin: 'auto',
+                        width: 158,
+                        src: 'resources/images/splash/savedSearch.png'
+                    }
+                ]
             },
             {
                 xtype: 'container',
@@ -89,6 +79,25 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
                         placeHolder: 'Search Saved Searches'
                     }
                 ]
+            },
+            {
+                xtype: 'list',
+                cls: [
+                    'darkBlue',
+                    'requestList'
+                ],
+                itemId: 'SavedList',
+                itemTpl: [
+                    '<div class="requestCnt">',
+                    '    <span class="savName">{SearchName}</span>',
+                    '    <span class="ViewResume right">',
+                    '    </span>',
+                    '    <span class="closeIcon">',
+                    '        <span class="x-button-label closeBtn"> </span>',
+                    '    </span>',
+                    '</div>'
+                ],
+                store: 'SavedSearchStore'
             },
             {
                 xtype: 'button',
@@ -133,11 +142,29 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
                 hidden: true,
                 text: ' '
             }
+        ],
+        listeners: [
+            {
+                fn: 'onMysearchfieldKeyup',
+                event: 'keyup',
+                delegate: '#mysearchfield'
+            },
+            {
+                fn: 'onListItemTap',
+                event: 'itemtap',
+                delegate: '#SavedList'
+            },
+            {
+                fn: 'onMybutton6Tap1',
+                event: 'tap',
+                delegate: '#backBtn'
+            },
+            {
+                fn: 'onAddBtnTap1',
+                event: 'tap',
+                delegate: '#AddBtn1'
+            }
         ]
-    },
-
-    onListItemTap: function(dataview, index, target, record, e, eOpts) {
-        SaveSearch.onSavedSearchResumeItemClick(dataview, index, target, record, e, eOpts);
     },
 
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
@@ -151,6 +178,10 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
                 scope: this
             }
         ]);
+    },
+
+    onListItemTap: function(dataview, index, target, record, e, eOpts) {
+        SaveSearch.onSavedSearchResumeItemClick(dataview, index, target, record, e, eOpts);
     },
 
     onMybutton6Tap1: function(button, e, eOpts) {

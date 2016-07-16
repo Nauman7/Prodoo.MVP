@@ -623,8 +623,17 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             ActiveScreen=6;
         G.Push('Feedback');
 
-          var store=Ext.getStore("FeedbackStore");
-           store.load();
+        var store=Ext.getStore("FeedbackStore");
+        store.load({
+            callback : function() {
+                if(Ext.getStore('FeedbackStore').data.items.length<=0){
+                    G.show('FeedbackSplash');
+                    G.get('FeedbackSplash').setHtml(Identifier.Title.Splash_Feedback);
+                    G.hide('FeedbackList');
+                }
+            }
+        });
+
     },
 
     onLeftArrowTap: function(image, e, eOpts) {

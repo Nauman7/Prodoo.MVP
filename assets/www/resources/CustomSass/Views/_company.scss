@@ -18,7 +18,7 @@
 
 .plusBtn{
 	margin-left: -30px;
-	background: center center #f17849 !important;
+	background: center center $_orange !important;
 	width: 60px;
 	height: 60px;
 	border: none;
@@ -66,7 +66,7 @@
 }
 .compName {
 	font-size: 20px;
-	color: #f17849;
+	color: $_orange;
 	font-weight: bold;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .compRegNo {
-	background: #f17849;
+	background: $_orange;
 	padding: 12px 0;
 	margin-top: 5px;
 }
@@ -112,7 +112,7 @@
 
 .compImg {
 	display: block;
-	border:3px solid #f17849;
+	border:3px solid $_orange;
 	width: 120px;
 	height: 120px;
 	overflow: hidden;

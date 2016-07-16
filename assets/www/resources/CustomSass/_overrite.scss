@@ -152,6 +152,9 @@
     padding: 0;
     border: none;
     background: #FFFFFF;
+     > .x-dock.x-sized{
+        margin: 0;
+     }
     .x-toolbar {
         padding: 0;
     }

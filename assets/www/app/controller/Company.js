@@ -160,7 +160,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
         if(obj.CompanyName.trim()==null || obj.CompanyName.trim()=="")
         {
             fields.CompanyName.addCls('isRequired');
-            Ext.Msg.alert('',"Unable to save, Name is required.");
+            Ext.Msg.alert('',Identifier.Title.Alert_Company_TxtNameValidation);
             return null;
         }
 

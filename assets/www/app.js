@@ -71,7 +71,8 @@ Ext.application({
         'FaqStore',
         'ConfigurationStore',
         'FeedbackStore',
-        'CountryStore'
+        'CountryStore',
+        'IndustriesStore'
     ],
     views: [
         'LoginForm',
@@ -140,7 +141,8 @@ Ext.application({
 
 
         // setting loading mask on viewport
-        Ext.Viewport.setMasked({xtype:'loadmask',message:'loading...'});
+        Ext.Viewport.setMasked({xtype:'loadmask',message:' '});
+        Ext.Viewport.getMasked().setZIndex(1000);
         // disabling it by default
         Ext.Viewport.setMasked(false);
 

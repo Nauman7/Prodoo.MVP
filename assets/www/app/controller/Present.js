@@ -196,7 +196,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
         var obj = form.getValues();
         obj.Logo = G.get('profileImg').getSrc();
 
-        if(obj.UserName.trim()==null || obj.UserName.trim()=="")
+        if(obj.UserName.trim()===null || obj.UserName.trim()==="")
         {
             fields.UserName.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save, Name is required.");
@@ -213,14 +213,14 @@ Ext.define('ProDooMobileApp.controller.Present', {
         }
         */
 
-        if(obj.Phone != null && obj.Phone != "" && !G.ValidateInteger(obj.Phone))
+        if(obj.Phone !== null && obj.Phone !== "" && !G.ValidateInteger(obj.Phone))
         {
             fields.Phone.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save,  Phone No is invalid.");
             return null;
         }
 
-        if(obj.Email != null && obj.Email != "" && !G.ValidateEmail(obj.Email))
+        if(obj.Email !== null && obj.Email !== "" && !G.ValidateEmail(obj.Email))
         {
             fields.Email.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save,  Email is invalid.");
@@ -242,8 +242,8 @@ Ext.define('ProDooMobileApp.controller.Present', {
             }
         });
         //record.data.CampaignDictionaries = dictionaries;
-        obj.socialLinks = socialMedias;
-        obj.socialLinks.forEach(function(item,index){ item.id=0; });
+        obj.SocialLinks = socialMedias;
+        obj.SocialLinks.forEach(function(item,index){ item.id=0; });
 
         Ext.Ajax.request({
             url: ApiBaseUrl+'UserDetail/AddUserDetail',
@@ -479,7 +479,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
             SocialMediaList.push(item.data);
         });
 
-        record.data.socialLinks.forEach(function(item,index){
+        record.data.SocialLinks.forEach(function(item,index){
             var indx=SocialMediaList.map(function(x) {return x.Id; }).indexOf(item.SocialMediaId);
             if (indx > -1)
             {
@@ -498,7 +498,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
 
             var socialMediasDivs="";
             SocialMediaList.forEach(function(item,index){
-                var socialMedia=G.get(item.name);
+                var socialMedia=G.get(item.Name);
                 if (item.isAdded && item.Enabled)
                 {
                     var elm="";
@@ -556,13 +556,13 @@ Ext.define('ProDooMobileApp.controller.Present', {
             G.get('profileImg').setSrc(record.data.Logo);
 
             SocialMediaList.forEach(function(item,index){
-                var socialMedia=G.get(item.name);
+                var socialMedia=G.get(item.Name);
                 if (item.isAdded)
                 {
                     socialMedia.show();
                     if (item.Enabled)
                     {
-                        var enableSocialMedia=G.get(item.name+"Available");
+                        var enableSocialMedia=G.get(item.Name+"Available");
                         enableSocialMedia.fireEvent('tap', enableSocialMedia);
                     }
                 }

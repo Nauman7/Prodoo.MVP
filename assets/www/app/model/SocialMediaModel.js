@@ -26,13 +26,13 @@ Ext.define('ProDooMobileApp.model.SocialMediaModel', {
                 name: 'Id'
             },
             {
-                name: 'name'
+                name: 'Name'
             },
             {
-                name: 'iconCls'
+                name: 'IconCls'
             },
             {
-                name: 'colorCls'
+                name: 'ColorCls'
             },
             {
                 name: 'isAdded'
