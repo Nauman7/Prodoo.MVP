@@ -154,6 +154,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
     },
 
     onCreateAccountBtnTap: function(button, e, eOpts) {
+
         if(button.getText() === 'Forgot Password'){
 
             var email = G.get('forgetPasswordEmail').getValue();
@@ -188,12 +189,6 @@ Ext.define('ProDooMobileApp.controller.Account', {
             var form = button.up('formpanel'),			// register form
                 values = form.getValues();				// Form values
 
-            // preparing model for registration
-            var model = values;
-            model.ConfirmPassword = values.Password;
-            model.ConfirmEmail = values.Email;
-            model.IsFreelancer=values.IsFreelancer;
-
             if(Ext.isEmpty(values.Name) || Ext.isEmpty(values.Password)
                || Ext.isEmpty(values.Email) || Ext.isEmpty(values.IsFreelancer))
             {
@@ -202,10 +197,23 @@ Ext.define('ProDooMobileApp.controller.Account', {
             }
 
             if(!G.ValidateEmail(values.Email))
-             {
+            {
                 Ext.Msg.alert('', 'Please enter valid email address');
                 return;
             }
+
+            // Minimum 6 char required as password
+            if (values.Password.length < 6) {
+                Ext.Msg.alert('', 'Password must be at least 6 characters.');
+                return;
+            }
+
+            // preparing model for registration
+            var model = values;
+            model.ConfirmPassword = values.Password;
+            model.ConfirmEmail = values.Email;
+            model.IsFreelancer=values.IsFreelancer;
+
 
             Ext.Ajax.request({
                 url: ApiBaseUrl+'Account/Register',
@@ -261,6 +269,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
     },
 
     LoginFunction: function() {
+
         IsVistor=false;
         var form = G.get('LoginFormItemId');			// Login form
         var values = form.getValues();				// Form values

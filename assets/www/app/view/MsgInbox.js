@@ -251,25 +251,10 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 itemId: 'MsgDetailList',
                 items: [
                     {
-                        xtype: 'list',
-                        scrollable: false,
+                        xtype: 'container',
                         cls: 'MsgDetailView',
-                        itemId: 'MsgDetailView',
-                        itemTpl: [
-                            '<div class="MsgView">',
-                            '    <div class="msgDetailTitle">',
-                            '        <span class="closeIcon">',
-                            '            <span class="x-button-label"></span>',
-                            '        </span>',
-                            '    </div>',
-                            '    <div class="msgNameCnt">',
-                            '        <span class="msgDetailDate">10:12:2014</span>',
-                            '        <span class="msgDetailUsername"></span>',
-                            '        <span class="msgDetailTime">10:12</span>',
-                            '    </div>',
-                            '    <div class="msgDetailMsg"></div> ',
-                            '</div>'
-                        ]
+                        html: '<div class="MsgView">     <div class="msgDetailTitle">         <span class="closeIcon">             <span class="x-button-label"></span>         </span>     </div>     <div class="msgNameCnt">         <span class="msgDetailDate">10:12:2014</span>         <span class="msgDetailUsername"></span>         <span class="msgDetailTime">10:12</span>     </div>     <div class="msgDetailMsg"></div>  </div>',
+                        itemId: 'MsgDetailView'
                     },
                     {
                         xtype: 'hiddenfield',

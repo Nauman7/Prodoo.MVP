@@ -747,17 +747,20 @@ Ext.define('ProDooMobileApp.controller.G', {
         },
 
         ValidateUrl: function(urlField) {
-            var re = /^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/;
+
+
+            //var re = /^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{3,6}$/;
+            var re = /(((^https?)|(^ftp)):\/\/([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*(([\w\-\.\?\\\/+@&#;`~=%!]*)(\.\w{2,})?)*\/?)/i;
             var url = urlField.getValue();
             var isValidUrl = re.test(url);
-            if(url !== null && url !== "" && !isValidUrl)//G.ValidateUrl(url))
+            if(url && isValidUrl===false)//G.ValidateUrl(url))
             {
                 var linkName =urlField.up().innerItems[0].getHtml();
                 Ext.Msg.alert('',linkName + " url is invalid.");
                 urlField.setValue(null);
                 return null;
-            }
 
+            }
         },
 
         DeleteItem: function(itemType, callbackFunction) {

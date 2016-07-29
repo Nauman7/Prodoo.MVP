@@ -182,7 +182,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
         SocialMediaList.forEach(function(item,index){
             if (item.isAdded)
             {
-                var socialMediaField=G.get(item.name+"Link");
+                var socialMediaField=G.get(item.Name+"Link");
                 socialMediaField.setValue(item.URL);
             }
         });
@@ -373,12 +373,13 @@ Ext.define('ProDooMobileApp.controller.Present', {
     },
 
     onPresentSocialMediaConfirmTap: function(button, e, eOpts) {
+
         SocialMediaList.forEach(function(item,index){
-            var socialMediaField=G.get(item.name+"Link");
+            var socialMediaField=G.get(item.Name+"Link");
             if (socialMediaField !== undefined)
             {
                 var socialMediaVal=socialMediaField.getValue();
-                var indx=SocialMediaList.map(function(x) {return x.name; }).indexOf(item.name);
+                var indx=SocialMediaList.map(function(x) {return x.Name; }).indexOf(item.Name);
                 var isAdded=false;
                 if (socialMediaVal !== "")
                 {
@@ -398,13 +399,13 @@ Ext.define('ProDooMobileApp.controller.Present', {
         UserDetail=form.setValues(UserDetail);
 
         SocialMediaList.forEach(function(item,index){
-            var socialMedia=G.get(item.name);
+            var socialMedia=G.get(item.Name);
             if (item.isAdded)
             {
                 socialMedia.show();
                 if (item.Enabled)
                 {
-                    var enableSocialMedia=G.get(item.name+"Available");
+                    var enableSocialMedia=G.get(item.Name+"Available");
                     enableSocialMedia.fireEvent('tap', enableSocialMedia);
                 }
             }
@@ -502,7 +503,7 @@ Ext.define('ProDooMobileApp.controller.Present', {
                 if (item.isAdded && item.Enabled)
                 {
                     var elm="";
-                    switch(item.name)
+                    switch(item.Name)
                     {
                         case "facebook":
                             elm="<span class='presFacebook'>facebook</span>";

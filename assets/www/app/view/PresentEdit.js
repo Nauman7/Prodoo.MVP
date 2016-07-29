@@ -403,7 +403,7 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
 
     CheckButtonFunctionality: function(button) {
         var nameOfSocialMedia= button._itemId.split("Available")[0];
-        var indx=SocialMediaList.map(function(x) {return x.name; }).indexOf(nameOfSocialMedia);
+        var indx=SocialMediaList.map(function(x) {return x.Name; }).indexOf(nameOfSocialMedia);
 
         if(button.element.hasCls('socialBtnActive'))
         {
