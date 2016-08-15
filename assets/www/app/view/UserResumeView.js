@@ -47,7 +47,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     '',
                     '',
                     '',
-                    '<div class="LocationDiv"><span class="location">{Country}</span>',
+                    '<div class="LocationDiv"><span class="location">{Region}</span>',
                     '    <span class="onSite">on-site</span>',
                     '</div>',
                     '<div class="ViewCnt">',
@@ -267,7 +267,6 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
     },
 
     onMybutton4Tap: function(button, e, eOpts) {
-        Ext.getStore('CreateRequestLocation').load();
         // showing loader not visible while rendering the view
         //Ext.Viewport.setMasked(true);
         G.Push('ResumeView');
@@ -319,10 +318,13 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
         }
 
         var settingContainer = G.get('SettingCnt');
+
         var country = settingContainer.down('selectfield[name=CountryId]');
+        country.setValue(resume.Region);
+
         var availblDate = settingContainer.down('selectfield[name=AvailabilityDate]');
         availblDate.setValue( new Date(resume.AvailabilityDate));
-        country.setValue(resume.Country);
+
 
         var button = settingContainer.down('button');
         if(resume.IsAvailable){

@@ -401,11 +401,16 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
             var requestSettingObj = new Object();
             requestSettingObj.ResumeLanguage=resumeLanguageModels;
-
             UserResume.updateSettings_Instant(requestSettingObj);
+
         },
 
         onResumeClick: function() {
+            // Get Languages
+            Ext.getStore('SearchLanguage').load();
+            // Get Locations
+            UserResume.LoadLocations();
+
             // get current logged user
             var loggedUser = Ext.getStore('AuthStore').getAt(0);
             var resumeId = loggedUser.get('ResumeId');
@@ -415,7 +420,6 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                 method : 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 success : function (response) {
-                    Ext.getStore('SearchLanguage').load();
                     var responseDecode = Ext.decode(response.responseText);
                     if (responseDecode.success) {
                         var resume = responseDecode.items;
@@ -749,8 +753,13 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     listeners: [
                     {
                         fn: function(button, eOpts) {
-                            button.up('container').destroy();
-                            UserResume.SaveResumeLanguages();
+                            var dd=G.get('SettingCnt').element.query('.languageDD');
+                            if(dd.length>2){
+                                button.up('container').destroy();
+                                UserResume.SaveResumeLanguages();
+                            }
+                            else
+                            Ext.Msg.alert('','At least one language requires');
 
                         },
                         event: 'tap'
@@ -791,6 +800,26 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     G.showGeneralFailure();
                 }
             });
+        },
+
+        LoadLocations: function() {
+            var store = Ext.getStore('CreateRequestLocation');
+            var url = ApiBaseUrl+'Country/GetFiltered';
+            Ext.Ajax.request({
+                url: url,
+                method: 'Get',
+                headers: { 'Content-Type': 'application/json' },
+                success: function(conn, response, options, eOpts) {
+                    var result = Ext.JSON.decode(conn.responseText);
+                    store.setData(result.items);
+                    store.sync();
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+                    G.showGeneralFailure();
+                }
+            });
+
         }
     },
 
