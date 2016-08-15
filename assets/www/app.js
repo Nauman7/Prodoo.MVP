@@ -99,7 +99,8 @@ Ext.application({
         'RequestDetail',
         'MyNavigationView',
         'RequestConfirmed',
-        'Feedback'
+        'Feedback',
+        'PasswordChangeView'
     ],
     controllers: [
         'Account',

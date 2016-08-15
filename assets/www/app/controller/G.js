@@ -308,7 +308,7 @@ Ext.define('ProDooMobileApp.controller.G', {
                         authModel.data.ResumeId = result.items.ResumeId;
                         authModel.data.UserId = result.items.UserId;
                         authModel.data.Email = model.email;
-                        authModel.data.FirstName = result.items.DisplayName;
+                        authModel.data.FirstName = result.items.FirstName;
                         authModel.data.LastName = '';
                         authModel.data.IsFreelancer = result.items.IsFreelancer;
                         authModel.data.IsNotificationRead = result.items.IsNotificationRead;
@@ -317,7 +317,7 @@ Ext.define('ProDooMobileApp.controller.G', {
                         authStore.sync();
 
                         G.ShowView('StartScreen');
-                        G.setLoggedUsername(model.Name);
+                        G.setLoggedUsername(result.items.FirstName);
 
                     } else {
                         Ext.Msg.alert('', result.message);
