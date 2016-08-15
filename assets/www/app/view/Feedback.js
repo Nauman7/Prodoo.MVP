@@ -220,6 +220,7 @@ Ext.define('ProDooMobileApp.view.Feedback', {
     onFeedbackAddTap: function(button, e, eOpts) {
         // Manage views
         G.show('FeedbackSubmit');
+        G.get('buttonsLabel').setHtml('Submit Feedback');
         var form  = G.get('FeedbackSubmitForm');
         form.reset();
         G.hide('FeedbackList');

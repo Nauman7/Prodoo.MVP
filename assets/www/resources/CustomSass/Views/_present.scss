@@ -18,27 +18,6 @@
 .input[type=file] {
 	display:none;
 }
-// .plusBtn{
-// 	margin-left: -30px;
-// 	background: center center $_orange !important;
-// 	width: 60px;
-// 	height: 60px;
-// 	border: none;
-// 	padding: 13px 13px;
-// 	position: absolute;
-// 	@include border-radius(50%);
-// 	@include box-shadow (0px 0px 3px 1px #555555);
-// 	.x-button-label {
-
-// 		background: center center transparent !important;
-// 		background-image: url(../images/company/add.png) !important;
-// 		width: 35px;
-// 		height: 35px;
-// 		border: none;
-// 		position: absolute;
-// 		background-size: contain!important;
-// 	} 
-// }
 
 
 .presList {
@@ -59,7 +38,7 @@
 }
 .presDelete{
 	@include border-radius(50%);
-	background: url(../images/present/Delete.png) center center no-repeat #fff;
+	background: url(../images/present/delete.png) center center no-repeat #fff;
 	width: 40px;
 	height: 40px;
 	right: 5px;

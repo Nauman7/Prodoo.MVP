@@ -45,6 +45,9 @@ Ext.define('ProDooMobileApp.model.AuthModel', {
             },
             {
                 name: 'IsFreelancer'
+            },
+            {
+                name: 'IsPasswordChanged'
             }
         ]
     }

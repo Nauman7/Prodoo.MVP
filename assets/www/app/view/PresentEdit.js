@@ -133,7 +133,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'presEditAdd',
-                                        itemId: 'SocialMediaAddBtn'
+                                        itemId: 'SocialMediaAddBtn',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -157,7 +158,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'facebookAvailable'
+                                        itemId: 'facebookAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -181,7 +183,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'twitterAvailable'
+                                        itemId: 'twitterAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -205,7 +208,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'linkedinAvailable'
+                                        itemId: 'linkedinAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -229,7 +233,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'googleplusAvailable'
+                                        itemId: 'googleplusAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -253,7 +258,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'pinterestAvailable'
+                                        itemId: 'pinterestAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -277,7 +283,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'driblleAvailable'
+                                        itemId: 'driblleAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -301,7 +308,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'behanceAvailable'
+                                        itemId: 'behanceAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             },
@@ -325,7 +333,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                                     {
                                         xtype: 'button',
                                         cls: 'socialCheck',
-                                        itemId: 'instagramAvailable'
+                                        itemId: 'instagramAvailable',
+                                        pressedCls: null
                                     }
                                 ]
                             }
@@ -361,7 +370,8 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
                     'backIcon',
                     'btnCircle',
                     'l10',
-                    'b10'
+                    'b10',
+                    'bgRed'
                 ],
                 docked: 'bottom',
                 itemId: 'PresentEditBackBtn',
@@ -370,9 +380,9 @@ Ext.define('ProDooMobileApp.view.PresentEdit', {
             {
                 xtype: 'button',
                 cls: [
-                    'redConfirm',
-                    'b10',
-                    'r10'
+                    'confirmIcon',
+                    'btnCircle',
+                    'bgRed'
                 ],
                 docked: 'bottom',
                 itemId: 'PresentEditConfirm',

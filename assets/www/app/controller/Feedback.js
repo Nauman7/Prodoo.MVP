@@ -111,6 +111,7 @@ Ext.define('ProDooMobileApp.controller.Feedback', {
             var fields=form.getFields();
             fields.Title.setReadOnly(true);
             fields.Content.setReadOnly(true);
+            G.get('buttonsLabel').setHtml('Feedback');
 
         }
     }

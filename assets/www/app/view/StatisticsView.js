@@ -62,13 +62,15 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                         xtype: 'button',
                         cls: 'requestStatsBtn',
                         itemId: 'requestStatsBtn',
-                        margin: '0 5'
+                        margin: '0 5',
+                        text: ' '
                     },
                     {
                         xtype: 'button',
                         cls: 'graphStatsBtn',
                         itemId: 'graphStatsBtn',
-                        margin: '0 5'
+                        margin: '0 5',
+                        text: ' '
                     }
                 ]
             },
@@ -341,7 +343,8 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                                             'left'
                                         ],
                                         hidden: true,
-                                        margin: '0 10 0 0'
+                                        margin: '0 10 0 0',
+                                        pressedCls: null
                                     },
                                     {
                                         xtype: 'label',
@@ -360,7 +363,6 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                             {
                                 xtype: 'container',
                                 cls: 'StatsDateCnt',
-                                hidden: false,
                                 itemId: 'StatsGraphResumeDate',
                                 padding: 7,
                                 items: [
@@ -371,7 +373,8 @@ Ext.define('ProDooMobileApp.view.StatisticsView', {
                                             'left'
                                         ],
                                         hidden: true,
-                                        margin: '0 10 0 0'
+                                        margin: '0 10 0 0',
+                                        pressedCls: null
                                     },
                                     {
                                         xtype: 'label',

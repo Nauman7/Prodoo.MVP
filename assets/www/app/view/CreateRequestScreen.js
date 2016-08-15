@@ -106,17 +106,25 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
             },
             {
                 xtype: 'button',
-                cls: 'fixRequest',
+                cls: [
+                    'confirmIcon',
+                    'btnCircle',
+                    'bgYellow'
+                ],
                 docked: 'bottom',
                 itemId: 'FixRequest',
                 text: ' '
             },
             {
                 xtype: 'button',
-                cls: 'fixRequest',
+                cls: [
+                    'confirmIcon',
+                    'btnCircle',
+                    'bgYellow'
+                ],
                 docked: 'bottom',
                 hidden: true,
-                itemId: 'SavedREsumes',
+                itemId: 'SavedResumes',
                 text: ' '
             },
             {
@@ -155,6 +163,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                             'closeIcon',
                             'requestCloseIcon'
                         ],
+                        pressedCls: null,
                         text: ' '
                     }
                 ]
@@ -216,6 +225,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     zIndex: 30,
                                     doneButton: {
                                         itemId: 'requestStartDateDone',
+                                        pressedCls: null,
                                         listeners: [
                                             {
                                                 fn: function(component, eOpts) {
@@ -232,6 +242,9 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                                 event: 'initialize'
                                             }
                                         ]
+                                    },
+                                    cancelButton: {
+                                        pressedCls: null
                                     },
                                     listeners: [
                                         {
@@ -322,17 +335,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     }
                                 ],
                                 valueField: 'DayType'
-                            },
-                            {
-                                xtype: 'button',
-                                cls: [
-                                    'closeIcon',
-                                    'noBorder'
-                                ],
-                                hidden: true,
-                                itemId: 'DurationCloseBtn',
-                                margin: 0,
-                                text: ' '
                             }
                         ]
                     }
@@ -590,17 +592,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                     }
                                 ],
                                 valueField: 'Currency'
-                            },
-                            {
-                                xtype: 'button',
-                                cls: [
-                                    'closeIcon',
-                                    'noBorder'
-                                ],
-                                hidden: true,
-                                itemId: 'DurationCloseBtn',
-                                margin: 0,
-                                text: ' '
                             }
                         ]
                     }
@@ -624,7 +615,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
             {
                 fn: 'ShowSavedResume',
                 event: 'tap',
-                delegate: '#SavedREsumes'
+                delegate: '#SavedResumes'
             },
             {
                 fn: 'onBackBtnTap',
@@ -647,11 +638,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                 delegate: '#durationItemID'
             },
             {
-                fn: 'onDurationCloseBtnTap',
-                event: 'tap',
-                delegate: '#DurationCloseBtn'
-            },
-            {
                 fn: 'onfeeRangeItemIDDrag',
                 event: 'drag',
                 delegate: '#feeRangeItemID'
@@ -660,11 +646,6 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                 fn: 'onfeeRangeItemIDChange',
                 event: 'change',
                 delegate: '#feeRangeItemID'
-            },
-            {
-                fn: 'onDurationCloseBtnTap1',
-                event: 'tap',
-                delegate: '#DurationCloseBtn'
             }
         ]
     },
@@ -674,7 +655,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
     },
 
     ShowSavedResume: function(button, e, eOpts) {
-        var form = button.up()
+        var form = button.up();
         var values = form.getValues();
         Requests.ShowSavedResumeRequest(values.RequestId);
     },
@@ -702,20 +683,12 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
         SearchResume.onSliderfieldDrag(me);
     },
 
-    onDurationCloseBtnTap: function(button, e, eOpts) {
-        button.up('container').hide();
-    },
-
     onfeeRangeItemIDDrag: function(sliderfield, sl, thumb, e, eOpts) {
         SearchResume.onSliderfieldDrag(sliderfield);
     },
 
     onfeeRangeItemIDChange: function(me, sl, thumb, newValue, oldValue, eOpts) {
         SearchResume.onSliderfieldDrag(me);
-    },
-
-    onDurationCloseBtnTap1: function(button, e, eOpts) {
-        button.up('container').hide();
     }
 
 });

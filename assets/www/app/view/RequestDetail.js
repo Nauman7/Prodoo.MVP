@@ -120,7 +120,8 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                             {
                                 xtype: 'button',
                                 cls: 'reqYesBtn',
-                                itemId: 'acceptRequestBtn'
+                                itemId: 'acceptRequestBtn',
+                                pressedCls: null
                             },
                             {
                                 xtype: 'label',
@@ -134,7 +135,8 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                             {
                                 xtype: 'button',
                                 cls: 'reqNoBtn',
-                                itemId: 'declineRequestBtn'
+                                itemId: 'declineRequestBtn',
+                                pressedCls: null
                             }
                         ]
                     },

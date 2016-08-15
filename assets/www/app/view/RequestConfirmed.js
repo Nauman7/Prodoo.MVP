@@ -119,7 +119,8 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
             },
             {
                 xtype: 'button',
-                cls: 'reqArrowDown'
+                cls: 'reqArrowDown',
+                pressedCls: null
             },
             {
                 xtype: 'hiddenfield',

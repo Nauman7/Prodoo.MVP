@@ -175,6 +175,7 @@ Ext.define('ProDooMobileApp.view.Register', {
                 cls: 'loginBtn',
                 docked: 'bottom',
                 itemId: 'createAccountBtn',
+                pressedCls: null,
                 text: 'Create Account'
             }
         ]

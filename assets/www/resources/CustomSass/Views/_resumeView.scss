@@ -2,7 +2,7 @@
 	.tabIconSpan {
 		background-color: $blue4;	
 		&.activeBtn{
-			background-color: white;
+			background-color: darken(saturate($blue4, 50), 20);
 		}
 	}
 }
@@ -16,28 +16,15 @@
 	}
 }
 
-.CreateNewIcon{
-	position: absolute;	
-	border:none;
-	@include transition(0.3s all);
-	z-index: 25;
-	width: 60px;
-	height: 60px;
+.CreateNewIcon.x-button{
 	bottom: 10px;
 	right: 10px;
-	background:url(../images/resumeView/add.png) center center no-repeat !important;
-	background-size: contain !important;
-	&.x-button-pressing{
-		@include opacity(0.7); 
-	}
+	left: auto;
+	margin:0;
+	background-color: $blue4 !important;
 }
 
-.tabIconSpan{
-	
-	// .languageTabIcon{
-	// 	background-image: url("../images/resumeDetail/speakL.png");
-	// }
-}
+
 
 .LanguageCnt{
 	@extend .clearfix;
@@ -60,6 +47,7 @@
 	width: 65px;
 	height: 38px;
 	border:none;
+	@include transition(none !important);
 	&.busyBtn{
 		background-position: -70px 0px !important;
 	}
@@ -134,43 +122,7 @@
 	padding: 5px;
 	@extend .clearfix; 
 }
-.wProfileIcon{
-	background-image: url(../images/resumeView/user.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 23px;
-	display: inline-block;
-	width: 20px;
-	vertical-align: top;
-}
-.wSkillIcon{
-	background-image: url(../images/resumeView/skill.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 23px;
-	display: inline-block;
-	width: 20px;
-	vertical-align: top;
-}
-.wKeywordIcon{
-	background-image: url(../images/resumeView/key.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 14px;
-	display: inline-block;
-	width: 24px;
-	vertical-align: top;
-	margin: 6px 0 0;
-}
-.wGraphIcon{
-	background-image: url(../images/resumeView/graph.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	height: 23px;
-	display: inline-block;
-	width: 20px;
-	vertical-align: top;
-}
+
 .sliderCnt{
 	padding: 10px;
 	border-bottom: #000 1px solid;

@@ -283,7 +283,8 @@ Ext.define('ProDooMobileApp.view.PresentSocialMedia', {
                     'backIcon',
                     'btnCircle',
                     'l10',
-                    'b10'
+                    'b10',
+                    'bgRed'
                 ],
                 docked: 'bottom',
                 itemId: 'PresentSocialMediaBackBtn',
@@ -291,13 +292,15 @@ Ext.define('ProDooMobileApp.view.PresentSocialMedia', {
             },
             {
                 xtype: 'button',
+                bottom: 10,
                 cls: [
-                    'redConfirm',
-                    'b10',
-                    'r10'
+                    'confirmIcon',
+                    'btnCircle',
+                    'bgRed'
                 ],
                 docked: 'bottom',
                 itemId: 'PresentSocialMediaConfirm',
+                right: 10,
                 text: ' '
             }
         ]

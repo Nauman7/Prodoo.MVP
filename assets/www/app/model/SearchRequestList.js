@@ -104,6 +104,9 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
             },
             {
                 name: 'Language'
+            },
+            {
+                name: 'CompanyName'
             }
         ]
     }

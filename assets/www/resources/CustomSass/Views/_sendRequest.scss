@@ -1,12 +1,14 @@
 
+
 .sendRequest{
+	@extend .btnCircle;
 	right:10px;
 	bottom: 10px;
-	background: center center transparent !important;
-	width: 65px;
-	height: 65px;
-	position: absolute;
-	border:none;
-	background-image: url(../images/requestScreen/sendBtn.png) !important;
-	background-size: contain !important;
+	padding: 11px 0 0 14px;
+	background-color: $_yellow !important;
+	.x-button-label{
+		background-image: url(../images/requestScreen/sendBtn.png) !important;
+		width: 34px;
+		height: 41px;
+	}
 }

@@ -197,40 +197,32 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
             var savedSearchId = record.data.SavedSearchId;
             if(e.target.className.indexOf('x-button-label')>=0){
-
-                G.DeleteItem('Search', function(){
-                    Ext.Ajax.request({
-                        url: ApiBaseUrl+'SavedSearches/RemoveSearch',
-                        method: 'DELETE',
-                        headers: { 'Content-Type': 'application/json' },
-                        params : Ext.JSON.encode(record.data),
-                        success: function(conn, response, options, eOpts) {
-
-                            var r= JSON.parse(conn.responseText);
-                            if(r.success){
-                                var savedSearchStore=Ext.getStore("SavedSearchStore");
-                                var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-
-                                savedSearchStore.load({
-
-                                    params : { userId : loggedUserId
-                                    },
-                                    callback : function() {
-                                        if(Ext.getStore('SavedSearchStore').data.items.length<=0){
-                                            G.show('SavedSearchSplash');
-                                            G.hide('SavedList');
-                                        }
-                                    }
-                                });
-                                Ext.Viewport.setMasked(false);
+                // SaveSearch.removeSearch(record);
+                Ext.Ajax.request({
+                    url: ApiBaseUrl+'Requests/GetRequestBySaveSearchId?searchId='+savedSearchId,
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var obj=JSON.parse(conn.responseText);
+                        if(obj.total>0){
+                            var requestlist='';
+                            for (i = 0; i < obj.total; i++) {
+                                if(i==obj.total-1)
+                                requestlist+=obj.items[i].RequestName;
+                                else
+                                requestlist+=obj.items[i].RequestName+',';
                             }
-                            else
-                            Ext.Msg.alert('', r.message,null);
-                        },
-                        failure: function(conn, response, options, eOpts) {
+                            Ext.Msg.alert('','This saved search is used in other requests.'+requestlist+'The Saved Search can only be deleted when no other requests are associated with it.');
+                        }else{
+                            //call search delete functionality
+                            SaveSearch.removeSearch(record);
                         }
-                    });
+
+                    }
                 });
+
+
+
 
             }
             else{
@@ -363,6 +355,43 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 failure: function(conn, response, options, eOpts) {
                     //failure catch
                 }
+            });
+        },
+
+        removeSearch: function(record) {
+
+            G.DeleteItem('Search', function(){
+                Ext.Ajax.request({
+                    url: ApiBaseUrl+'SavedSearches/RemoveSearch',
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    params : Ext.JSON.encode(record.data),
+                    success: function(conn, response, options, eOpts) {
+
+                        var r= JSON.parse(conn.responseText);
+                        if(r.success){
+                            var savedSearchStore=Ext.getStore("SavedSearchStore");
+                            var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+
+                            savedSearchStore.load({
+
+                                params : { userId : loggedUserId
+                                },
+                                callback : function() {
+                                    if(Ext.getStore('SavedSearchStore').data.items.length<=0){
+                                        G.show('SavedSearchSplash');
+                                        G.hide('SavedList');
+                                    }
+                                }
+                            });
+                            Ext.Viewport.setMasked(false);
+                        }
+                        else
+                        Ext.Msg.alert('', r.message,null);
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                    }
+                });
             });
         }
     },

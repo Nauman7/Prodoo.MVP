@@ -30,8 +30,11 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
     ],
 
     config: {
-        cls: 'tabPanel ResumeView',
         scrollable: true,
+        cls: [
+            'tabPanel',
+            'ResumeView'
+        ],
         items: [
             {
                 xtype: 'container',
@@ -266,6 +269,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'noBorder'
                                         ],
                                         itemId: 'mybutton16',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -311,6 +315,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'noBorder'
                                         ],
                                         itemId: 'mybutton16',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -355,6 +360,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'noBorder'
                                         ],
                                         itemId: 'mybutton16',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -428,6 +434,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         labelCls: 'labelCls',
                                         labelWidth: 110,
                                         name: 'IndustryId',
+                                        placeHolder: 'Select Industry',
+                                        autoSelect: false,
                                         defaultPhonePickerConfig: {
                                             zIndex: 999
                                         },
@@ -458,7 +466,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                         labelCls: 'labelCls',
                                         labelWidth: 110,
                                         name: 'ProfileId',
-                                        placeHolder: 'ProfileId',
+                                        placeHolder: 'Select Profile',
+                                        autoSelect: false,
                                         defaultPhonePickerConfig: {
                                             zIndex: 999
                                         },
@@ -610,6 +619,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'noBorder'
                                         ],
                                         itemId: 'mybutton16',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -654,6 +664,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'noBorder'
                                         ],
                                         itemId: 'mybutton16',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -733,6 +744,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                             'right'
                                         ],
                                         itemId: 'availabilityBtn',
+                                        pressedCls: null,
                                         text: ' '
                                     }
                                 ]
@@ -834,7 +846,8 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                                                     'PlusMiniBtn',
                                                     'right'
                                                 ],
-                                                itemId: 'ResumeSettingAdd'
+                                                itemId: 'ResumeSettingAdd',
+                                                pressedCls: null
                                             }
                                         ]
                                     }
@@ -857,9 +870,14 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
             },
             {
                 xtype: 'button',
-                cls: 'CreateNewIcon',
+                cls: [
+                    'addBtn',
+                    'bgBlue',
+                    'r10',
+                    'b10'
+                ],
                 docked: 'bottom',
-                hidden: true,
+                hidden: false,
                 itemId: 'CreateCompanyExperience',
                 text: ' '
             },
@@ -1187,6 +1205,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
     },
 
     onCreateCompanyExperienceTap: function(button, e, eOpts) {
+
         UserResume.ShowCreateResumeExperience(null);
     },
 

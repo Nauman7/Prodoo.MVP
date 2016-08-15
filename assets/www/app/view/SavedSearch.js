@@ -125,21 +125,13 @@ Ext.define('ProDooMobileApp.view.SavedSearch', {
             },
             {
                 xtype: 'button',
-                cls: 'addBtn',
-                docked: 'bottom',
-                hidden: true,
-                itemId: 'AddBtn1',
-                text: ' '
-            },
-            {
-                xtype: 'button',
-                bottom: 10,
                 cls: [
-                    'btnCircle',
-                    'searchIcon2'
+                    'addBtn',
+                    'btnCenter'
                 ],
                 docked: 'bottom',
                 hidden: true,
+                itemId: 'AddBtn1',
                 text: ' '
             }
         ],

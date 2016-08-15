@@ -138,7 +138,8 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
                     'backIcon',
                     'btnCircle',
                     'b10',
-                    'l10'
+                    'l10',
+                    'bgOrange'
                 ],
                 docked: 'bottom',
                 itemId: 'CompanyEditBackBtn',
@@ -147,9 +148,9 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
             {
                 xtype: 'button',
                 cls: [
-                    'redConfirm',
-                    'b10',
-                    'r10'
+                    'confirmIcon',
+                    'btnCircle',
+                    'bgOrange'
                 ],
                 docked: 'bottom',
                 itemId: 'CompanyEditConfirm',

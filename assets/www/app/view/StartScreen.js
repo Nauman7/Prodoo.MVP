@@ -81,6 +81,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 ],
                                 itemId: 'StartCompanyBtn',
                                 width: '50%',
+                                pressedCls: null,
                                 text: 'Company'
                             },
                             {
@@ -91,6 +92,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 ],
                                 itemId: 'StartFreelancerBtn',
                                 width: '50%',
+                                pressedCls: null,
                                 text: 'Freelancer'
                             }
                         ]
@@ -100,7 +102,8 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                         cls: 'logoutBtn',
                         hidden: true,
                         html: 'LOGOUT',
-                        itemId: 'Logout'
+                        itemId: 'Logout',
+                        pressedCls: null
                     }
                 ]
             },

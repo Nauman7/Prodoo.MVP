@@ -57,7 +57,8 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                     '',
                     '            </div>',
                     '        </div>',
-                    '        <tpl if = "socialLinksEnabledPresent"> <span class="presArrowDown"> </span> </tpl>',
+                    '        ',
+                    '        <tpl if="SocialLinksEnabledPresent == true" > <span class="presArrowDown"> </span> </tpl>',
                     '    </div>',
                     '</div>',
                     ''
@@ -91,7 +92,7 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                 xtype: 'button',
                 bottom: 10,
                 cls: [
-                    'plusBtn',
+                    'addBtn',
                     'bgRed'
                 ],
                 docked: 'bottom',

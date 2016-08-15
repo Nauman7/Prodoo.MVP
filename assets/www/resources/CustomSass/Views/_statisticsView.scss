@@ -2,35 +2,46 @@
 	background: #3e335e;
 }
 
-
-
-.resumeStatsBtn, .requestStatsBtn, .graphStatsBtn{
-	width:46px;
-	height:46px;
-	background: center center no-repeat transparent !important;
-	border: none;
+.resumeStatsBtn {
+	@extend .tabIconSpan;
+	padding: 0px 0 0 16px;
+	background-color: $_purple;
+	.x-button-label{
+		background-image: url(../images/statisticsView/resume.png) !important;
+		width: 18px;
+		height: 22px;
+	}
+	&.activeBtn {
+		background-color: adjust-hue(darken(saturate($_purple, 50), 10), 15);
+	}
 }
-.resumeStatsBtn{	
-	background-image: url(../images/statisticsView/resume.png) !important;	
-	&.activeBtn{
-		background-image: url(../images/statisticsView/resumeActive.png) !important;
-	}	
+.requestStatsBtn{
+	@extend .tabIconSpan;
+	padding: 0px 0 0 16px;
+	background-color: $_purple;
+	.x-button-label{
+		background-image: url(../images/statisticsView/request.png) !important;	
+		width: 17px;
+		height: 20px;
+	}
+	&.activeBtn {
+		background-color: adjust-hue(darken(saturate($_purple, 50), 10), 15);
+	}
+}
+.graphStatsBtn{
+	@extend .tabIconSpan;
+	padding: 2px 0 0 13px;
+	background-color: $_purple;
+	.x-button-label{
+		background-image: url(../images/statisticsView/graph.png) !important;	
+		width: 22px;
+		height: 20px;
+	}
+	&.activeBtn {
+		background-color: adjust-hue(darken(saturate($_purple, 50), 10), 15);
+	}
 }
 
-.requestStatsBtn{	
-	background-image: url(../images/statisticsView/request.png) !important;	
-	&.activeBtn{
-		background-image: url(../images/statisticsView/requestActive.png) !important;
-	}	
-}
-
-
-.graphStatsBtn{	
-	background-image: url(../images/statisticsView/graph.png) !important;	
-	&.activeBtn{
-		background-image: url(../images/statisticsView/graphActive.png) !important;
-	}	
-}
 
 .PrevStatsBtn{
 	border:none;
@@ -39,13 +50,7 @@
 	background: url(../images/statisticsView/prev.png) no-repeat center !important;	
 	
 }
-.NextStatsBtn{
-	border:none;
-	width: 17px;
-	height: 21px;
-	background: url(../images/statisticsView/next.png) no-repeat center !important;	
-	
-}
+
 
 .statsHeadCnt{
 	background: #261f3b;
@@ -98,24 +103,7 @@
 }
 .StatsGraphInnerCnt{
 	position: relative;
-	// &:after {
-	// 	content: '';
-	// 	background: url("../images/statisticsView/down.png") no-repeat center center;
-	// 	width: 27px;
-	// 	height: 28px;
-	// 	position: absolute;
-	// 	bottom: -14px;
-	// 	left: 50%;
-	// 	margin-left: -14px;
-	// 	@include border-radius (50%);
-	// 	border: 2px solid #261f3b;
-	// 	z-index: 5;
-	// }
-	// &.activeImg{
-	// 	&:after{
-	// 		background: url("../images/statisticsView/up.png") no-repeat center center;
-	// 	}
-	// }
+	
 }
 .StatsRequestImg{
 	background:url('../images/statisticsView/request1.png') no-repeat center center #8f82f5 ;

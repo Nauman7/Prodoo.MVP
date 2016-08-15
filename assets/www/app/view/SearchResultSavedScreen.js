@@ -18,8 +18,8 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
     alias: 'widget.SearchResultSavedScreen',
 
     requires: [
-        'Ext.Label',
         'Ext.XTemplate',
+        'Ext.Label',
         'Ext.plugin.ListPaging',
         'Ext.Container',
         'Ext.Button',

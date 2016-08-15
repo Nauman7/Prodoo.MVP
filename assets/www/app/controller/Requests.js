@@ -78,69 +78,77 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
         sendRequest: function() {
             if(localStorage.SubmitDirectRequest=="true" || G.get('requestList').getSelection()[0]){
-                var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                var store = Ext.getStore('SearchRequestList');
-                store.removeAll(); //Remove if there is something already in store
+                Ext.Msg.confirm('Confirm', 'Do you want to send request invitation?', function(btn){
+                    if(btn === 'yes'){
+                        var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+                        var store = Ext.getStore('SearchRequestList');
+                        store.removeAll(); //Remove if there is something already in store
 
-                if(localStorage.SubmitDirectRequest=="true")
-                {
+                        if(localStorage.SubmitDirectRequest=="true")
+                        {
 
-                    var record  = G.get('resumeDirectRequestData').getData();
-                    var shortlistIds= new Array();
-                    shortlistIds.push(G.get('hfShortlistId').getValue());
-                    record.set('SavedSearchedId',G.get('hfSavedSearchId').getValue());
-                    record.set('ShortlistIds', shortlistIds);
-                }
-                else
-                {
-                    var record  = G.get('resumeRequestData').getData();
-                    var shortlistIds= new Array();
-                    shortlistIds.push(G.get('requestList').getSelection()[0].data.ShortlistId);
-                    record.set('ShortlistIds',shortlistIds);
-                }
-
-                record.set('IsSent', true);
-
-                var model = Ext.create('ProDooMobileApp.model.SearchRequestList');
-                model.set(record.data);
-
-
-                store.add(model);
-                store.sync({
-                    success: function (result) {
-
-
-                        if(JSON.parse(result.operations[0]._response.responseText).items==0)
-                        Ext.Msg.alert('', JSON.parse(result.operations[0]._response.responseText).message);
-                        else{
-
-
-
-                            if(localStorage.SubmitDirectRequest=="true")
-                            {
-                                G.Pop(); // Pop createrequest view
-                                G.Pop(); // Pop search resume view
-                                G.Pop(); // pop search reume view
-                            Requests.ShowRequestView(true,true, true);}
-                            else
-                            {
-                                G.Pop(); // Pop select shortlist view
-                                G.Pop(); // Pop create request view
-                                Requests.ShowRequestView(false,false);
-                            }
-                            Ext.Msg.alert('','Your request has been sent out to the selected resumes.');
+                            var record  = G.get('resumeDirectRequestData').getData();
+                            var shortlistIds= new Array();
+                            shortlistIds.push(G.get('hfShortlistId').getValue());
+                            record.set('SavedSearchedId',G.get('hfSavedSearchId').getValue());
+                            record.set('ShortlistIds', shortlistIds);
                         }
-                    },
-                    failure: function (batch) {
+                        else
+                        {
+                            var record  = G.get('resumeRequestData').getData();
+                            var shortlistIds= new Array();
+                            shortlistIds.push(G.get('requestList').getSelection()[0].data.ShortlistId);
+                            record.set('ShortlistIds',shortlistIds);
+                        }
 
-                        var message = batch.operations[0].request.scope.reader.jsonData["message"];
-                        Ext.Msg.alert('', message);
+                        record.set('IsSent', true);
 
-                    },
-                    callback:function(x){
+                        var model = Ext.create('ProDooMobileApp.model.SearchRequestList');
+                        model.set(record.data);
 
+
+                        store.add(model);
+                        store.sync({
+                            success: function (result) {
+
+
+                                if(JSON.parse(result.operations[0]._response.responseText).items==0)
+                                Ext.Msg.alert('', JSON.parse(result.operations[0]._response.responseText).message);
+                                else{
+
+
+
+                                    if(localStorage.SubmitDirectRequest=="true")
+                                    {
+                                        G.Pop(); // Pop createrequest view
+                                        G.Pop(); // Pop search resume view
+                                        G.Pop(); // pop search reume view
+                                    Requests.ShowRequestView(true,true, true);}
+                                    else
+                                    {
+                                        G.Pop(); // Pop select shortlist view
+                                        G.Pop(); // Pop create request view
+                                        Requests.ShowRequestView(false,false);
+                                    }
+                                    Ext.Msg.alert('','Your request has been sent out to the selected resumes.');
+                                }
+                            },
+                            failure: function (batch) {
+
+                                var message = batch.operations[0].request.scope.reader.jsonData["message"];
+                                Ext.Msg.alert('', message);
+
+                            },
+                            callback:function(x){
+
+                            }
+                        });
+                    }else{
+                        return;
                     }
                 });
+
+
             }
             else
             Ext.Msg.alert('', 'Please select shortlist to proceed.');
@@ -252,149 +260,201 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         DeleteRequest: function(requestId, listType) {
 
             var url = ApiBaseUrl+'Requests/DeleteRequest?requestId='+requestId+'&type='+listType;
-            G.DeleteItem('Request', function(){
-                Ext.Ajax.request({
-                    url: url,
-                    method: 'Get',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var result = Ext.JSON.decode(conn.responseText);
-                        if (result.success)
-                        Requests.ShowRequestView(false,false);
-                        else
-                        Ext.Msg.alert('Not Deleted', result.message);
 
-                    },
-                    failure: function(conn, response, options, eOpts) {
-                        //failure catch
-                        G.showGeneralFailure();
-                    }
-                });
+            Ext.Ajax.request({
+                url: url,
+                method: 'Get',
+                headers: { 'Content-Type': 'application/json' },
+                success: function(conn, response, options, eOpts) {
+                    var result = Ext.JSON.decode(conn.responseText);
+                    if (result.success)
+                    Requests.ShowRequestView(false,false);
+                    else
+                    Ext.Msg.alert('Not Deleted', result.message);
+
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+                    G.showGeneralFailure();
+                }
             });
+
 
         },
 
         TapRequestTitle: function(target, item, record) {
+
+            var savedSearchId=record.data.SavedSearchedId;
             if(target.parent('.closeIcon')){
-                if(item===0){ // Delete Recieved resume request
-                    Requests.DeleteRequestResume(record.data.RequestId, record.data.RequestName, false);
-                } else // Delete draft,sent request
-                {
-                    Requests.DeleteRequest(record.data.RequestId, item);
-                }
+
+                Ext.Msg.confirm('Confirm','You want to delete the current request?', function(btn){
+                    if(btn === 'yes'){
+                        Ext.Msg.confirm('Confirm','Do you want to remove the associated saved search and shortlist as well?', function(btn){
+                            if(btn === 'yes'){
+                                // ajax call to SS and SL
+                                if(item===0){ // Delete Recieved resume request
+                                    Requests.DeleteRequestResume(record.data.RequestId, record.data.RequestName, false);
+                                } else // Delete draft,sent request
+                                {
+                                    if(savedSearchId){
+                                        Ext.Ajax.request({
+                                            url: ApiBaseUrl+'Requests/GetRequestBySaveSearchId?searchId='+savedSearchId,
+                                            method: 'GET',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            success: function(conn, response, options, eOpts) {
+                                                var obj=JSON.parse(conn.responseText);
+                                                var no=1;
+                                                if(obj.total>1){
+                                                    var requestlist='';
+                                                    for (i = 0; i < obj.total; i++) {
+                                                        requestlist+=no+'.'+ obj.items[i].RequestName+'</br>';
+                                                        no++;
+                                                    }
+                                                    Ext.Msg.alert('','The request have saved search which is associated with other requests.</br>'+requestlist+'</br>The Saved Search can only be deleted when no other requests are associated with it.');
+                                                    return;
+                                                }else{
+                                                    //Delete Reqeust and savedSearch
+                                                    Requests.DeleteRequest(record.data.RequestId, item);
+                                                    var savedSearch = {
+                                                        SavedSearchId:record.data.SavedSearchedId,
+                                                        SearchName:"Name",
+                                                        UserId:record.data.UserId
+                                                    };
+                                                    Requests.deleteSavedSearch(savedSearch);
+                                                }
+
+                                            }
+                                        });
+                                    }else{
+                                        //call search delete functionality
+                                        Requests.DeleteRequest(record.data.RequestId, item);
+                                    }
 
 
-            }
-            else if(target.parent('.x-list-item')){
-
-                if(item===0){// Inbox active
-                    // G.ShowView('RequestDetail');
-                    G.Push('RequestDetail');
-                    var startDate= new Date(record.data.StartDate);
-
-                    G.get("SpanDateDuration").setHtml(startDate.toDateString()+", Duration "+record.data.Duration+" "+record.data.DurationType);
-                    G.get("SpanRequestName").setHtml(record.data.RequestName);
-                    G.get("HFRequestId").setHtml(record.data.RequestId);
-                    G.get("SpanHourlyFee").setHtml(record.data.HourlyFee  +" "+record.data.FeeCurrencyType);
-                    if(record.data.Company && record.data.Company.CompanyName)
-                    {
-                        G.get("SpanCompanyName").setHtml(record.data.Company.CompanyName);
-                        var companyStore = Ext.getStore('CompanyDetail');
-                        companyStore.clearData();
-                        companyStore.add({
-                            CompanyName: record.data.Company.CompanyName,
-                            CompanyAddress: record.data.Company.CompanyAddress,
-                            Phone: record.data.Company.Phone,
-                            Detail:record.data.Company.Detail,
-                            Logo:record.data.Company.Logo,
-                            Vat:record.data.Company.Vat,
-                            UserCompanyId:record.data.Company.UserCompanyId,
-                        });
-                    }
-                    else
-                    G.get("SpanCompanyName").hide();
 
 
-                    if(record.data.Description)
-                    G.get("SpanDescription").setHtml(record.data.Description);
-                    else
-                    G.get("SpanDescription").hide();
+                                }
 
-                    G.get("SpanLanguageLocation").setHtml(record.data.Language.LanguageValue+" "+record.data.Location.CountryName);
-
-
-                    if(record.data.IsConfirmed){
-
-                        G.get("acceptRequestBtn").hide();
-                        G.get("declineRequestBtn").hide();
-                        G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
-                    }
-
-                    if(!record.data.IsRead) //Mark message as read
-                    {
-                        var rec= {RequestId: record.data.RequestId, ResumeId: Ext.getStore('AuthStore').getAt(0).get('ResumeId')};
-
-                        Ext.Ajax.request({
-                            url : ApiBaseUrl+'RequestsResumes/MarkNotificationRead/',
-                            method : 'PUT',
-                            headers: { 'Content-Type': 'application/json' },
-                            params : Ext.encode(rec),
-                            success : function (response) {
-                                Requests.ShowRequestView();
+                            }else{
+                                //remove only request.
+                                Requests.DeleteRequest(record.data.RequestId, item);
                             }
                         });
 
-                    }
-                }
-                else{ // Other active
+                    }});
 
-                    var isSentRequest = false;
-
-
-                    if(item==2) // Sent active
-                    isSentRequest = true;
-
-
-                    G.Push('CreateRequestScreen');
-                    var topHeadingLabel =G.get('requestTopHeading');
-                    topHeadingLabel.setHtml('Request Details');
-
-                    var form = G.get('CreateRequestScreen');
-                    form.setValues(record.data);
-                    var fields = form.getFields();
-
-                    // setting from field values
-                    fields.StartDate.setValue(new Date(record.data.StartDate));
-                    fields.LanguageId.setValue(record.data.Language.LanguageId);
-                    fields.LocationId.setValue(record.data.Location.CountryId);
-
-                    SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
-                    SearchResume.onSliderfieldDrag(G.get('durationItemID'));
-
-
-                    if(isSentRequest){
-                        G.get('DraftRequestBtn').hide();
-                        fields.Duration.disable();
-                        fields.StartDate.disable();
-                        fields.RequestName.disable();
-                        fields.Description.disable();
-                        fields.LocationId.disable();
-                        fields.LanguageId.disable();
-                        fields.HourlyFee.disable();
-                        fields.Duration.disable();
-                        fields.UserCompanyId.disable();
-                        fields.FeeCurrencyType.disable();
-                        fields.DurationType.disable();
-                        fields.SavedSearchedId.disable();
-                        G.get('cloneBtn').show();
-                        G.get('FixRequest').hide();
-                        G.get('SavedREsumes').show();
-                    }
-                    //else
-                    //    G.get('DraftRequestBtn').hide();
 
                 }
-            }
+                else if(target.parent('.x-list-item')){
+
+                    if(item===0){// Inbox active
+                        // G.ShowView('RequestDetail');
+                        G.Push('RequestDetail');
+                        var startDate= new Date(record.data.StartDate);
+
+                        G.get("SpanDateDuration").setHtml(startDate.toDateString()+", Duration "+record.data.Duration+" "+record.data.DurationType);
+                        G.get("SpanRequestName").setHtml(record.data.RequestName);
+                        G.get("HFRequestId").setHtml(record.data.RequestId);
+                        G.get("SpanHourlyFee").setHtml(record.data.HourlyFee  +" "+record.data.FeeCurrencyType);
+                        if(record.data.Company && record.data.Company.CompanyName)
+                        {
+                            G.get("SpanCompanyName").setHtml(record.data.Company.CompanyName);
+                            var companyStore = Ext.getStore('CompanyDetail');
+                            companyStore.clearData();
+                            companyStore.add({
+                                CompanyName: record.data.Company.CompanyName,
+                                CompanyAddress: record.data.Company.CompanyAddress,
+                                Phone: record.data.Company.Phone,
+                                Detail:record.data.Company.Detail,
+                                Logo:record.data.Company.Logo,
+                                Vat:record.data.Company.Vat,
+                                UserCompanyId:record.data.Company.UserCompanyId,
+                            });
+                        }
+                        else
+                        G.get("SpanCompanyName").hide();
+
+
+                        if(record.data.Description)
+                        G.get("SpanDescription").setHtml(record.data.Description);
+                        else
+                        G.get("SpanDescription").hide();
+
+                        G.get("SpanLanguageLocation").setHtml(record.data.Language.LanguageValue+" "+record.data.Location.CountryName);
+
+
+                        if(record.data.IsConfirmed){
+
+                            G.get("acceptRequestBtn").hide();
+                            G.get("declineRequestBtn").hide();
+                            G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
+                        }
+
+                        if(!record.data.IsRead) //Mark message as read
+                        {
+                            var rec= {RequestId: record.data.RequestId, ResumeId: Ext.getStore('AuthStore').getAt(0).get('ResumeId')};
+
+                            Ext.Ajax.request({
+                                url : ApiBaseUrl+'RequestsResumes/MarkNotificationRead/',
+                                method : 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                params : Ext.encode(rec),
+                                success : function (response) {
+                                    Requests.ShowRequestView();
+                                }
+                            });
+
+                        }
+                    }
+                    else{ // Other active
+
+                        var isSentRequest = false;
+
+
+                        if(item==2) // Sent active
+                        isSentRequest = true;
+
+
+                        G.Push('CreateRequestScreen');
+                        var topHeadingLabel =G.get('requestTopHeading');
+                        topHeadingLabel.setHtml('Request Details');
+
+                        var form = G.get('CreateRequestScreen');
+                        form.setValues(record.data);
+                        var fields = form.getFields();
+
+                        // setting from field values
+                        fields.StartDate.setValue(new Date(record.data.StartDate));
+                        fields.LanguageId.setValue(record.data.Language.LanguageId);
+                        fields.LocationId.setValue(record.data.Location.CountryId);
+
+                        SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
+                        SearchResume.onSliderfieldDrag(G.get('durationItemID'));
+
+
+                        if(isSentRequest){
+                            G.get('DraftRequestBtn').hide();
+                            fields.Duration.disable();
+                            fields.StartDate.disable();
+                            fields.RequestName.disable();
+                            fields.Description.disable();
+                            fields.LocationId.disable();
+                            fields.LanguageId.disable();
+                            fields.HourlyFee.disable();
+                            fields.Duration.disable();
+                            fields.UserCompanyId.disable();
+                            fields.FeeCurrencyType.disable();
+                            fields.DurationType.disable();
+                            fields.SavedSearchedId.disable();
+                            G.get('cloneBtn').show();
+                            G.get('FixRequest').hide();
+                            G.get('SavedResumes').show();
+                        }
+                        //else
+                        //    G.get('DraftRequestBtn').hide();
+
+                    }
+                }
         },
 
         ShowConfirmRequestView: function() {
@@ -462,6 +522,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     G.showGeneralFailure();
                 }
             });
+
+
+
         },
 
         ShowRequestView: function(pushView, loadLookup, showHomeButton) {
@@ -617,6 +680,23 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                 }
             });requestId
 
+        },
+
+        deleteSavedSearch: function(model) {
+            Ext.Ajax.request({
+                url: ApiBaseUrl+'SavedSearches/RemoveSearch',
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                params : Ext.JSON.encode(model),
+                success: function(conn, response, options, eOpts) {
+
+                    // Ext.Msg.alert('', 'SavedSearch Deleted');
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+                    Ext.Msg.alert('','Failure.');
+                }
+            });
         }
     },
 

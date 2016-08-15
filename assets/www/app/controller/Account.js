@@ -92,6 +92,49 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     Ext.Msg.alert('', response.message);
                 }
             });
+        },
+
+        resetPassword: function() {
+
+            var form = G.get('passwordChangeView');
+            var values = form.getValues();
+            var newPassword=values.NewPassword;
+            var confirmPassword=values.ConfirmPassword;
+            if(Ext.isEmpty(newPassword) || Ext.isEmpty(confirmPassword))
+            {
+                Ext.Msg.alert('', 'Please fill all form fields.');
+                return;
+            }
+            if(newPassword!== confirmPassword)
+            {
+                Ext.Msg.alert('', 'Password does not match');
+                return;
+            }
+            if (confirmPassword.length < 6) {
+                Ext.Msg.alert('', 'Password must be at least 6 characters.');
+                return;
+            }
+            var authStore = Ext.getStore('AuthStore');
+            var logUserEmail=authStore.data.items[0].data.Email;
+            var logUserName=authStore.data.items[0].data.FirstName;
+
+            Ext.Ajax.request({
+                url: ApiBaseUrl+'Account/PasswordResetter',
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                params : {email: logUserEmail, password: confirmPassword},
+                scope: this,
+                success: function(response, options) {
+                    Ext.Msg.alert('','Your password has been successfully updated.');
+                    G.ShowView('StartScreen');
+                    G.setLoggedUsername(logUserName);
+
+                },
+                failure: function(conn, response, options, eOpts) {
+                    //failure catch
+                    Ext.Msg.alert('',JSON.parse(conn.responseText).Message);
+                }
+            });
         }
     },
 
@@ -299,12 +342,17 @@ Ext.define('ProDooMobileApp.controller.Account', {
                         authModel.data.IsFreelancer= result.items.IsFreelancer;
                         authModel.data.IsNotificationRead = result.items.IsNotificationRead;
                         authModel.data.AuthType = 0; // without external login
+                        authModel.data.IsPasswordChanged=result.items.IsPasswordChanged;
                         authStore.add(authModel);
                         authStore.sync({
                             success: function () {
+                                if(result.items.IsPasswordChanged){
+                                    G.ShowView('PasswordChangeView');
+                                }else{
+                                    G.ShowView('StartScreen');
+                                    G.setLoggedUsername(result.items.FirstName);
+                                }
 
-                                G.ShowView('StartScreen');
-                                G.setLoggedUsername(result.items.FirstName);
 
                             },
                             failure: function (batch) {

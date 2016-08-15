@@ -77,7 +77,10 @@ Ext.define('ProDooMobileApp.view.CompanyDetail', {
             {
                 xtype: 'button',
                 bottom: 10,
-                cls: 'plusBtn',
+                cls: [
+                    'addBtn',
+                    'bgOrange'
+                ],
                 docked: 'bottom',
                 itemId: 'CompanyAddNewBtn',
                 right: 10,

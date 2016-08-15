@@ -23,8 +23,29 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
     statics: {
         onShortlistResumeItemClick: function(className, data) {
 
+
+
             if(className === 'x-button-label'){ // Delete Shortlist and associated resumes
-                Shortlist.DeleteRecord(data);
+                //Shortlist.DeleteRecord(data);
+                var shorlistId=data.ShortlistId;
+                Ext.Ajax.request({
+                    url: ApiBaseUrl+'Shortlists/GetAllResumesByShortlistId?shortlistId='+shorlistId,
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
+                        var obj=JSON.parse(conn.responseText);
+                        if(obj.total>0){
+                            Ext.Msg.alert('','This shortlist is used in other resume.The shortlist can only be deleted when no other resume are associated with it.');
+                        }else{
+                            //call search delete functionality
+                            Shortlist.DeleteRecord(data);
+                        }
+
+                    }
+                });
+
+
+
             }
 
             else

@@ -415,7 +415,6 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     'r10'
                 ],
                 docked: 'bottom',
-                hidden: false,
                 itemId: 'EditBtn',
                 text: ' '
             },
@@ -460,7 +459,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 xtype: 'button',
                 cls: 'sendBtn2',
                 docked: 'bottom',
-                hidden: false,
+                hidden: true,
                 itemId: 'SendBtn',
                 text: ' '
             }

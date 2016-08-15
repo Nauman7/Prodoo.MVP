@@ -128,6 +128,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         xtype: 'button',
                         cls: 'visitorBtn',
                         itemId: 'visitorBtn',
+                        pressedCls: null,
                         text: 'Enter as a visitor'
                     },
                     {
@@ -139,6 +140,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                                 flex: 1,
                                 cls: 'facebookBtn',
                                 itemId: 'facebookLoginBtn',
+                                pressedCls: null,
                                 text: 'Login with facebook'
                             },
                             {
@@ -147,6 +149,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                                 cls: 'linkedinBtn',
                                 hidden: true,
                                 itemId: 'linkedinloginBtn',
+                                pressedCls: null,
                                 text: 'Login with linkedin'
                             }
                         ]
@@ -155,6 +158,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                         xtype: 'button',
                         cls: 'loginBtn',
                         itemId: 'loginButton',
+                        pressedCls: null,
                         text: 'Login'
                     }
                 ]

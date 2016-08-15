@@ -123,20 +123,30 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
             {
                 xtype: 'list',
                 scrollable: false,
-                cls: 'requestListView',
+                cls: [
+                    'requestListView',
+                    'sendReqList'
+                ],
                 hidden: false,
                 itemId: 'requestSendList',
                 emptyText: 'No record found',
                 itemTpl: [
                     '<div class="requestListCnt">',
-                    '   ',
-                    '    <span class="reqListName">{RequestName} </span> ',
-                    '    <span class="roundSpan">{CountNoAction}</span>',
-                    '    <span class="roundSpan green">{CountConfirmed}</span>',
-                    '    <span class="roundSpan red">{CountDeleted}</span>',
-                    '    <span class="closeIcon">',
-                    '        <span class="x-button-label"> </span>',
-                    '    </span>',
+                    '    <div class="reqData">',
+                    '        <span class="reqListName">{RequestName} <br></span>',
+                    '        <span class="reqListName">{CompanyName} </span>',
+                    '        <span class="moreInfo">. . .</span>',
+                    '        <span class="closeIcon">',
+                    '            <span class="x-button-label"> </span>',
+                    '        </span>',
+                    '    </div>',
+                    '    <div class="reqInfo">',
+                    '        <span class="reqNoAction">No action <span>{CountNoAction}</span> </span>',
+                    '        <span class="reqAccepted">Accepted <span>{CountConfirmed}</span></span>',
+                    '        <span class="reqDecline">Decline <span>{CountDeleted}</span></span>',
+                    '    </div>',
+                    '',
+                    '',
                     '</div>'
                 ],
                 loadingText: false,
@@ -197,7 +207,8 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 itemTpl: [
                     '<div class="requestListCnt">',
                     '   ',
-                    '    <span class="reqListName">{RequestName}</span>',
+                    '    <span class="reqListName">{RequestName}<br></span>',
+                    '    <span class="reqListName">{CompanyName} </span>',
                     '    <span class="closeIcon">',
                     '        <span class="x-button-label"> </span>',
                     '    </span>',
@@ -260,7 +271,8 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 xtype: 'button',
                 cls: [
                     'addBtn',
-                    'bgLightBlue'
+                    'bgLightBlue',
+                    'btnCenter'
                 ],
                 docked: 'bottom',
                 itemId: 'AddBtn',
@@ -284,7 +296,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
                 delegate: '#mysearchfield'
             },
             {
-                fn: 'onrequestListTap111',
+                fn: 'onSendListTap',
                 event: 'itemtap',
                 delegate: '#requestSendList'
             },
@@ -353,10 +365,16 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         ]);
     },
 
-    onrequestListTap111: function(dataview, index, target, record, e, eOpts) {
-        var target =  Ext.get(e.target);
+    onSendListTap: function(dataview, index, target, record, e, eOpts) {
+        var selectedElement =  Ext.get(e.target);
+        if(selectedElement.hasCls('moreInfo')){
+            target.toggleCls('infoVisible');
+            this.fixHeight(dataview);
+        }
+        else{
+            Requests.TapRequestTitle(selectedElement, 2, record);
 
-        Requests.TapRequestTitle(target, 2, record);
+        }
 
     },
 
@@ -414,11 +432,16 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
 
     AdjustListHeight: function(component) {
         component.on('refresh',function(){
-            this.setHeight(null);
-            var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
-            if(ViewHeight > 10)
-                this.setHeight(ViewHeight);
+            G.get('RequestScreen').fixHeight(this);
         });
+    },
+
+    fixHeight: function(component) {
+        component.setHeight(null);
+        var ViewHeight = Ext.get(component.element.query('.x-scroll-scroller')[0]).getHeight();
+        if(ViewHeight > 10)
+            component.setHeight(ViewHeight);
+
     }
 
 });

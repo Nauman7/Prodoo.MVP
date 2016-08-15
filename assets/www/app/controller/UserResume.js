@@ -88,6 +88,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
         },
 
         onTopBtnTap: function(button,lookupName) {
+
             G.hide('Confirm');
             var Searchfield = G.get('mysearchfield');
             UserResume.hideActive(button);
@@ -488,6 +489,16 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
         ShowCreateResumeExperience: function(record, index) {
             G.show('createCompanyCnt');
+            //reset  form
+            G.get("CreateExpCompanyName").setValue('');
+            G.get("CreateExpProfile").reset();
+            G.get('CreateExpIndustry').reset();
+            G.get("CreateExpStartDate").setValue(new Date());
+            G.get("CreateExpEndDate").setValue(new Date());
+            G.get("CreateExpDescription").setValue('');
+
+
+
             G.hide('IndustryList');
             G.get('CompanyExperienceComfirm').hide();
             G.show('CompanyExperienceComfirm');

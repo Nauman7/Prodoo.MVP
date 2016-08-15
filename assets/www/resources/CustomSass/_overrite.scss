@@ -186,25 +186,27 @@
 }
 
 .x-toolbar .x-button.x-button-action, .x-toolbar-light .x-button {
-    background: $_green;
+    background: $_green !important;
     padding: 6px 5px;
     margin-bottom: 10px;
     border: none;
     border-radius: 4px;
     box-shadow: 1px 2px 0px darken($_green, 10);
     &.x-button-pressing {
-        background: darken($_green, 10);
+        @include opacity(1);
+        background: darken($_green, 10) !important;
     }
 }
 .x-toolbar .x-button.x-button-decline{
- background: $_red;
+ background: $_red !important;
     padding: 6px 5px;
     margin-bottom: 10px;
     border: none;
     border-radius: 4px;
     box-shadow: 1px 2px 0px darken($_red, 20);
     &.x-button-pressing {
-        background: darken($_red, 10);
+        @include opacity(1);
+        background: darken($_red, 10) !important;
     }
 }
 .x-msgbox > .x-dock:before{
@@ -251,4 +253,13 @@
     background-image: none;
     border: none;
     box-shadow: none;
+}
+
+.x-button-normal{
+    @include transition(0.3s background, 0.3s opacity);
+    &.x-button-pressing{
+        background-color: white !important;
+        @include opacity(0.7); 
+        background-image: none;
+    }
 }

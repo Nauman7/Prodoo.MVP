@@ -34,18 +34,18 @@
 	height: 32px;
 	background: url('../images/setting/2D.png') no-repeat !important;
 }
+.settingActiveCnt{
+	.settingDownArrow{
+		background: url('../images/setting/3B.png') no-repeat !important;
+	}
+}
 .settingInnerCnt{
 	position: relative;
 	.x-inner{
 		@extend .clearfix;
 	}
 }
-.settingActiveCnt{
-	.settingDownArrow{
-		background: url('../images/setting/3B.png') no-repeat !important;
-	}
-	
-}
+
 .SettingRightBtn{
 	background: url('../images/setting/6C.png') no-repeat !important;
 	border:none;
@@ -55,6 +55,7 @@
 	margin-top: -16px;
 	width: 32px;
 	height: 32px;
+	
 }
 
 .SettingMainHeading{

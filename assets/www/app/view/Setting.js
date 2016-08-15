@@ -45,7 +45,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                     {
                         xtype: 'button',
                         cls: 'settingDownArrow',
-                        itemId: 'ArrowNotification'
+                        itemId: 'ArrowNotification',
+                        pressedCls: null
                     }
                 ]
             },
@@ -72,7 +73,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'socialCheck',
-                                itemId: 'SettingToneNotofication'
+                                itemId: 'SettingToneNotofication',
+                                pressedCls: null
                             }
                         ]
                     },
@@ -95,7 +97,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'socialCheck',
-                                itemId: 'SettingMessageNotification'
+                                itemId: 'SettingMessageNotification',
+                                pressedCls: null
                             }
                         ]
                     },
@@ -118,7 +121,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'socialCheck',
-                                itemId: 'SettingRequestNotification'
+                                itemId: 'SettingRequestNotification',
+                                pressedCls: null
                             }
                         ]
                     }
@@ -140,7 +144,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                     {
                         xtype: 'button',
                         cls: 'settingDownArrow',
-                        itemId: 'ArrowProdoo'
+                        itemId: 'ArrowProdoo',
+                        pressedCls: null
                     }
                 ]
             },
@@ -221,7 +226,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'SettingRightBtn',
-                                itemId: 'SettingsProdooTermsBtn'
+                                itemId: 'SettingsProdooTermsBtn',
+                                pressedCls: null
                             }
                         ]
                     },
@@ -244,7 +250,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'SettingRightBtn',
-                                itemId: 'SettingsProdooPrivacyBtn'
+                                itemId: 'SettingsProdooPrivacyBtn',
+                                pressedCls: null
                             }
                         ]
                     },
@@ -267,7 +274,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                             {
                                 xtype: 'button',
                                 cls: 'SettingRightBtn',
-                                itemId: 'SettingsProdooLegalBtn'
+                                itemId: 'SettingsProdooLegalBtn',
+                                pressedCls: null
                             }
                         ]
                     }
@@ -289,7 +297,8 @@ Ext.define('ProDooMobileApp.view.Setting', {
                     {
                         xtype: 'button',
                         cls: 'settingDownArrow',
-                        itemId: 'ArrowHelp'
+                        itemId: 'ArrowHelp',
+                        pressedCls: null
                     }
                 ]
             },

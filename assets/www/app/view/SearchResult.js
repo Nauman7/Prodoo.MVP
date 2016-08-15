@@ -144,14 +144,16 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         cls: 'addIcon',
                         hidden: true,
                         html: ' ',
-                        itemId: 'AddSearchBtn'
+                        itemId: 'AddSearchBtn',
+                        pressedCls: null
                     },
                     {
                         xtype: 'button',
                         cls: 'clearIcon',
                         hidden: true,
                         html: ' ',
-                        itemId: 'ClearSearchIcon'
+                        itemId: 'ClearSearchIcon',
+                        pressedCls: null
                     },
                     {
                         xtype: 'list',
@@ -213,7 +215,8 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 xtype: 'button',
                                 cls: 'helpClose',
                                 hidden: true,
-                                itemId: 'HelpClose'
+                                itemId: 'HelpClose',
+                                pressedCls: null
                             }
                         ]
                     },

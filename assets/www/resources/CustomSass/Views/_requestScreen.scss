@@ -6,18 +6,17 @@
 	bottom:10px;
 }
 .addBtn{
-	left: 50%;
-	margin-left: -30px;
-	bottom: 10px;
-	background: center center $_green !important;
-	width: 65px;
-	height: 65px;
+	
+	background: center center $_green;
+	width: 60px;
+	height: 60px;
 	border:none;
-	padding: 18px 0 0 18px;
+	padding: 15px 0 0 15px;
 	position: absolute;
+	@include box-shadow(0px 0px 3px 1px #555);
 	@include border-radius(50%);
+	
 	.x-button-label {
-
 		background: center center transparent !important;
 		background-image: url(../images/searchResult/plus1.png) !important;
 		width: 30px;
@@ -28,7 +27,11 @@
 	} 
 	
 }
-
+.btnCenter{
+	left: 50%;
+	margin-left: -30px;
+	bottom: 10px;
+}
 .requestListView{
 	// position: absolute;
 	// width: 100%;
@@ -142,44 +145,33 @@
 		height: 30px;
 		top: 11px;
 		left: 15px;
-		background: center center no-repeat transparent !important;
+		background: center center no-repeat transparent;
 		border: none;
-		background-size: contain!important;
+		background-size: contain;
 	}
 }
 .reqInboxIcon{
 	&:before{
-		background-image: url(../images/requestScreen/recieve.png) !important;
+		background-image: url(../images/requestScreen/recieve.png);
 	}
 }
 .reqDraftIcon{
 	&:before{
-		background-image: url(../images/requestScreen/draft.png) !important;
+		background-image: url(../images/requestScreen/draft.png);
 	}
 }
 .reqSendIcon{
 	&:before{
-		background-image: url(../images/requestScreen/send.png) !important;
+		background-image: url(../images/requestScreen/send.png);
 	}
 }
 
-.recieveBtn{
-	width:46px;
-	height:46px;
-	background: center center no-repeat transparent !important;
-	border: none;
-}
-// .draftBtn{	
-// 	background-image: url(../images/requestScreen/draft.png) !important;	
-// 	&.activeBtn{
-// 		background-image: url(../images/requestScreen/draftActive.png) !important;
-// 	}	
-// }
-.draftBtn, .sendRequestBtn, .msgSendBtn, .recieveBtn {
+
+.draftBtn {
 	width:46px;
 	height:46px;
 	@include border-radius(50%);
-	background: $_lightBlue !important;	
+	background: $_lightBlue;	
 	display: inline-block;
 	vertical-align: top;
 	border:none;
@@ -187,10 +179,7 @@
 	height: 46px;
 	@include transition(0.3s all);
 	&.activeBtn{
-		background: white !important;
-	}
-	&.x-button-pressing{
-		@include opacity(0.7); 
+		background-color: darken(saturate($_lightBlue, 50), 20);
 	}
 	.x-button-label{
 		background:center no-repeat;
@@ -202,6 +191,7 @@
 }
 
 .sendRequestBtn{
+	@extend .draftBtn;
 	.x-button-label{
 		width: 26px;
 		height: 31px;
@@ -209,36 +199,113 @@
 	}
 }
 .msgSendBtn{
-	background: $_yellow !important;	
-
+	@extend .draftBtn;
+	background: $_yellow;
+	&.activeBtn{
+		background: darken(saturate($_yellow, 50), 17);
+	}	
 }	
 .recieveBtn{	
-	background: $_yellow !important;	
+	@extend .draftBtn;
+	background: $_yellow;
 	.x-button-label{
 		width: 25px;
 		height: 22px;
 		background-image: url(../images/requestScreen/recieve1.png);
 	}
+	&.activeBtn{
+		background: darken(saturate($_yellow, 50), 17);
+	}
 }
-
-// .sendRequestBtn{	
-// 	background-image: url(../images/requestScreen/send.png) !important;	
-// 	&.activeBtn{
-// 		background-image: url(../images/requestScreen/sendActive.png) !important;
-// 	}	
-// }
-
 .requestBtn{
 	right:10px;
 	bottom: 10px;
-	background: center center transparent !important;
+	background: center center transparent;
 	width: 65px;
 	height: 65px;
 	position: absolute;
 	border:none;
-	background-image: url(../images/requestScreen/request.png) !important;
-	background-size: contain!important;
+	background-image: url(../images/requestScreen/request.png);
+	background-size: contain;
 }
+
 .bgLightBlue{
 	background: $_lightBlue !important;
+}
+
+.moreInfo {
+	float: right;
+	letter-spacing: -1px;
+	font-size: 35px;
+	font-weight: bold;
+	line-height: 0px;
+	color: black;
+	height: 22px;
+	@include transition(0.3s all);
+
+}
+.reqInfo{
+	@extend .clearfix;
+	display: none;
+	>span{
+		display: block;		
+		padding: 13px 0 13px 60px;
+		position: relative;
+		border-bottom: 1px solid black;
+		background: darken($blue5,5);
+		&:before{
+			content:'';
+			position: absolute;
+			left: 13px;
+			top: 7px;
+			width: 30px;
+			height: 30px;
+			@include border-radius(50%);
+		}
+		> span{
+			display: inline-block;
+			margin-left: 20px;
+			font-weight: bold;
+		}
+	}
+
+}
+.infoVisible{
+	.reqInfo{
+		display: block;
+	}
+	.moreInfo{
+		color: $_lightBlue;
+		@include rotateY(180deg);
+	}
+}
+.reqNoAction{
+	&:before{
+		background: url('../images/requestScreen/noaction.png') no-repeat center center $_lightBlue;
+	}
+}
+.reqAccepted{	
+	&:before{		
+		background: url('../images/requestScreen/accept.png') no-repeat center center $_green;
+	}
+}
+.reqDecline{	
+	&:before{		
+		background: url('../images/requestScreen/decline.png') no-repeat center center $_red;
+	}
+}
+.sendReqList{
+	&.x-list .x-list-item.x-list-item-tpl .x-innerhtml{
+		padding: 0;
+	}
+	.x-list-item{
+		border-bottom: none !important;
+	}
+
+}
+.reqData{
+	@extend .clearfix;
+	padding: 12px 55px 12px 15px; 
+	position: relative;
+	border-bottom: 1px solid black;
 }

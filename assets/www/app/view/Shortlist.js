@@ -132,7 +132,10 @@ Ext.define('ProDooMobileApp.view.Shortlist', {
             },
             {
                 xtype: 'button',
-                cls: 'addBtn',
+                cls: [
+                    'addBtn',
+                    'btnCenter'
+                ],
                 docked: 'bottom',
                 itemId: 'AddBtn',
                 text: ' '
