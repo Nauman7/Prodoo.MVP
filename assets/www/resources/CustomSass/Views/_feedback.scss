@@ -16,8 +16,16 @@
 
 
 .FeedbackArea {
+	
 	.x-input-el{
 		padding: 7px;
 		@include border-radius(7px); 
 	}
+}
+.feedbackForm {
+    position: absolute;
+    top: 30px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
 }

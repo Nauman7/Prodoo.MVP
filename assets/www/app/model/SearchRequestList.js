@@ -107,6 +107,9 @@ Ext.define('ProDooMobileApp.model.SearchRequestList', {
             },
             {
                 name: 'CompanyName'
+            },
+            {
+                name: 'RequestResumeId'
             }
         ]
     }

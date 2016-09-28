@@ -99,6 +99,83 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     'reqHead',
                     'reqInboxIcon'
                 ],
+                html: 'Messages',
+                itemId: 'MsgInboxLbl',
+                listeners: [
+                    {
+                        fn: function(component, eOpts) {
+                            component.element.on('tap',function(){
+                                if(this.hasCls('collapseActive')){
+                                    this.next().show();
+                                }
+                                else{
+                                    this.next().hide();
+                                }
+                                this.toggleCls('collapseActive');
+                            });
+                        },
+                        event: 'initialize'
+                    }
+                ]
+            },
+            {
+                xtype: 'list',
+                scrollable: false,
+                cls: 'requestListView',
+                hidden: false,
+                itemId: 'MsgList',
+                margin: '0 0 70 0',
+                emptyText: 'No messages found',
+                itemTpl: Ext.create('Ext.XTemplate', 
+                    '<div class="requestCnt">',
+                    '    <div class="msgDate">',
+                    '          {[this.returnDate(values.DateCreated)]}',
+                    '    </div>',
+                    '',
+                    '    <div class="msgTime">{[this.returnTime(values.DateCreated)]}</div>',
+                    '    <tpl if="IsRead == false">',
+                    '        <div class="msgList unRead">',
+                    '            <tpl else> ',
+                    '                <div class="msgList">',
+                    '                    </tpl>',
+                    '                <span class="msgTitle">',
+                    '                    {Subject}',
+                    '                </span>',
+                    '                <span class="msgDesc">{MessageBody}</span>',
+                    '                </div>',
+                    '            <span class="closeIcon">',
+                    '                <span class="x-button-label"> </span>',
+                    '            </span>',
+                    '        </div>',
+                    {
+                        returnDate: function(date) {
+                            return G.GetSpecificTimePeriod(date);
+                        },
+                        returnTime: function(date) {
+                            return G.GetSpecificTime(date);
+                        }
+                    }
+                ),
+                loadingText: false,
+                pressedCls: '',
+                selectedCls: '',
+                store: 'MessageStore',
+                listeners: [
+                    {
+                        fn: function(component, eOpts) {
+                            G.get('MsgViewCnt').AdjustListHeight(component);
+                        },
+                        single: true,
+                        event: 'initialize'
+                    }
+                ]
+            },
+            {
+                xtype: 'label',
+                cls: [
+                    'reqHead',
+                    'reqInboxIcon'
+                ],
                 hidden: true,
                 html: 'Invitations',
                 itemId: 'invitationLabel',
@@ -174,8 +251,9 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     'reqHead',
                     'reqInboxIcon'
                 ],
-                html: 'Messages',
-                itemId: 'MsgInboxLbl',
+                hidden: true,
+                html: 'Declined Invitations',
+                itemId: 'declineRequest',
                 listeners: [
                     {
                         fn: function(component, eOpts) {
@@ -197,48 +275,45 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 xtype: 'list',
                 scrollable: false,
                 cls: 'requestListView',
-                hidden: false,
-                itemId: 'MsgList',
-                margin: '0 0 70 0',
-                emptyText: 'No messages found',
-                itemTpl: Ext.create('Ext.XTemplate', 
+                hidden: true,
+                itemId: 'declineRequestList',
+                emptyText: 'No record found',
+                itemTpl: [
                     '<div class="requestCnt">',
                     '    <div class="msgDate">',
-                    '          {[this.returnDate(values.DateCreated)]}',
+                    '         {[G.GetSpecificTimePeriod(values.CreateDate)]}',
                     '    </div>',
-                    '',
-                    '    <div class="msgTime">{[this.returnTime(values.DateCreated)]}</div>',
-                    '    <tpl if="IsRead == false">',
+                    '    <div class="msgTime"> {[G.GetSpecificTime(values.CreateDate)]}</div>',
+                    '    <tpl if="IsConfirmed == true">',
+                    '        <div class="msgList confirmed">',
+                    '    <tpl elseif="IsRead == false">',
                     '        <div class="msgList unRead">',
-                    '            <tpl else> ',
-                    '                <div class="msgList">',
-                    '                    </tpl>',
+                    '    <tpl else>',
+                    '        <div class="msgList">',
+                    '    </tpl>',
+                    '        ',
                     '                <span class="msgTitle">',
-                    '                    {Subject}',
+                    '                    {RequestName}',
                     '                </span>',
-                    '                <span class="msgDesc">{MessageBody}</span>',
-                    '                </div>',
-                    '            <span class="closeIcon">',
-                    '                <span class="x-button-label"> </span>',
+                    '        <span class="msgDesc">{Company.CompanyName}</span>',
+                    '               ',
+                    '      </div>         ',
+                    '            <span class="tickIconFloatRight">',
+                    '                Restore',
                     '            </span>',
-                    '        </div>',
-                    {
-                        returnDate: function(date) {
-                            return G.GetSpecificTimePeriod(date);
-                        },
-                        returnTime: function(date) {
-                            return G.GetSpecificTime(date);
-                        }
-                    }
-                ),
+                    '  </div>',
+                    '',
+                    '',
+                    ''
+                ],
                 loadingText: false,
                 pressedCls: '',
                 selectedCls: '',
-                store: 'MessageStore',
                 listeners: [
                     {
                         fn: function(component, eOpts) {
                             G.get('MsgViewCnt').AdjustListHeight(component);
+
                         },
                         single: true,
                         event: 'initialize'
@@ -476,6 +551,11 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                 delegate: '#requestInboxList'
             },
             {
+                fn: 'onrequestListTap11',
+                event: 'itemtap',
+                delegate: '#declineRequestList'
+            },
+            {
                 fn: 'onMsgDetailListShow',
                 event: 'show',
                 delegate: '#MsgDetailList'
@@ -495,6 +575,15 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
         var target =  Ext.get(e.target);
 
         Requests.TapRequestTitle(target, 0, record);
+    },
+
+    onrequestListTap11: function(dataview, index, target, record, e, eOpts) {
+
+        var target =  Ext.get(e.target);
+        if(target.dom.className==='tickIconFloatRight')
+            Requests.RestoreRequest(target,0,record);
+
+        //Requests.TapRequestTitle(target, 0, record);
     },
 
     onMsgDetailListShow: function(component, eOpts) {

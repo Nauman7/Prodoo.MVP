@@ -366,16 +366,17 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
     },
 
     onSendListTap: function(dataview, index, target, record, e, eOpts) {
+
         var selectedElement =  Ext.get(e.target);
         if(selectedElement.hasCls('moreInfo')){
             target.toggleCls('infoVisible');
             this.fixHeight(dataview);
-        }
-        else{
-            Requests.TapRequestTitle(selectedElement, 2, record);
+        }else if(selectedElement.dom.className==='reqData'){
+        Requests.TapRequestTitle(selectedElement, 2, record);
 
+        }else{
+            Requests.ShowSavedResumeRequest(record.data.RequestId,selectedElement.dom.className);
         }
-
     },
 
     onrequestListTap11: function(dataview, index, target, record, e, eOpts) {
@@ -400,7 +401,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
     onAddBtnTap: function(button, e, eOpts) {
         localStorage.SubmitDirectRequest=false;
         G.Push('CreateRequestScreen');
-        var searchedDate=G.get('SearchDatepicker')
+        var searchedDate=G.get('SearchDatepicker');
         if(searchedDate)
             G.get('mydatepicker').setValue(searchedDate.getValue());
         else

@@ -290,3 +290,17 @@
 .bgYellow{
 	background: $_yellow !important;
 }
+
+.tickIconFloatRight {
+  padding: 0px 8px 0px;
+  margin: 5px;
+  margin-top: -5px;
+  height: 30px;
+  float: right;
+  vertical-align: middle;
+  background-color: white;
+  color:black;
+  /*-moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;*/
+}

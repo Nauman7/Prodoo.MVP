@@ -30,6 +30,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             var keywords = G.get('KeywordCnt').items;
             var certifications = G.get('CertificationCnt').items;
             var locationNames = G.get('LocationCnt').items;
+            var languageNames = G.get('LanguageCnt').items;
 
             var hasDirty = false;
             var authStore = Ext.getStore('AuthStore');
@@ -41,6 +42,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             var keywordIds =  new Array();
             var certificationIds = new Array();
             var locations = new Array();
+            var languages = new Array();
 
             // processing profiles
             if(profiles.items.length > 2){
@@ -101,6 +103,13 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                 });
             }
 
+            if(languageNames.items.length > 2){
+                languageNames.items.forEach(function(item, index){
+                    if(index > 1){
+                        languages.push(item.getAt(2).getValue());
+                    }
+                });
+            }
 
 
             var searchObject = new Object();
@@ -111,6 +120,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             searchObject.IndusteryIds = industeryIds;
             searchObject.UserId = authRec.get('UserId');
             searchObject.Countries = locations;
+            searchObject.Languages = languages;
 
             // if no search cretria set
             if(profilesObjs.length < 1
@@ -119,6 +129,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             && certificationIds.length < 1
             && industeryIds.length < 1
             && locations.length <1
+            && languages.length <1
             )
             {
 
@@ -206,13 +217,16 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                         var obj=JSON.parse(conn.responseText);
                         if(obj.total>0){
                             var requestlist='';
+                            var ssNo=1;
                             for (i = 0; i < obj.total; i++) {
                                 if(i==obj.total-1)
-                                requestlist+=obj.items[i].RequestName;
+                                requestlist+=ssNo+'. ' +obj.items[i].RequestName;
                                 else
-                                requestlist+=obj.items[i].RequestName+',';
+                                requestlist+=ssNo+'. ' +obj.items[i].RequestName+'<br>';
+                                ssNo++;
+
                             }
-                            Ext.Msg.alert('','This saved search is used in other requests.'+requestlist+'The Saved Search can only be deleted when no other requests are associated with it.');
+                            Ext.Msg.alert('','This saved search is used in other request(s).'+'<br>'+requestlist+'<br>'+'The Saved Search can only be deleted when no other request(s) are associated with it.');
                         }else{
                             //call search delete functionality
                             SaveSearch.removeSearch(record);
@@ -277,6 +291,13 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                                     newCnt = SearchResume.createKeywordView('Location', item.CountryName, item.CountryId);
                                 });
                                 G.show('LocationCnt');
+                            }
+                            if(result.items.Languages && result.items.Languages.length > 0){
+                                result.items.Languages.forEach(function(item,index){
+
+                                    newCnt = SearchResume.createKeywordView('Language', item.LanguageValue, item.LanguageId);
+                                });
+                                G.show('LanguageCnt');
                             }
                             // enabling profile by default
                             SearchResume.enableDisableItems('Profile');

@@ -52,7 +52,7 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                     },
                     {
                         xtype: 'formpanel',
-                        height: 300,
+                        cls: 'feedbackForm',
                         itemId: 'FeedbackSubmitForm',
                         items: [
                             {
@@ -71,11 +71,28 @@ Ext.define('ProDooMobileApp.view.Feedback', {
                             {
                                 xtype: 'textareafield',
                                 cls: 'FeedbackArea',
-                                height: 200,
+                                height: 300,
                                 itemId: 'FeedbackDetail',
+                                minHeight: 300,
                                 clearIcon: false,
                                 name: 'Content',
-                                placeHolder: 'Detail'
+                                placeHolder: 'Detail',
+                                listeners: [
+                                    {
+                                        fn: function(component, eOpts) {
+
+
+                                            component.on('keyup', function (textarea) {
+                                                G.get('FeedbackView').adjustHeight(textarea);
+                                            });
+
+                                            component.on('change', function (textarea, newValue) {
+                                                G.get('FeedbackView').adjustHeight(textarea);
+                                            });
+                                        },
+                                        event: 'initialize'
+                                    }
+                                ]
                             },
                             {
                                 xtype: 'textfield',
@@ -259,6 +276,14 @@ Ext.define('ProDooMobileApp.view.Feedback', {
             }
         });
 
+    },
+
+    adjustHeight: function(textarea) {
+        var textAreaEl = textarea.getComponent().input;
+            if (textAreaEl) {
+                textAreaEl.dom.style.height = 'auto';
+                textAreaEl.dom.style.height = textAreaEl.dom.scrollHeight + "px";
+            }
     }
 
 });

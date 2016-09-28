@@ -93,6 +93,9 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                     case "Splash_Feedback":
                     Identifier.Title.Splash_Feedback= label.Message;
                     break;
+                    case "Splash_Company":
+                    Identifier.Title.Splash_Company= label.Message;
+                    break;
                     //For help Search
                     case "Help_Search_Top_Lookup":
                     Identifier.Title.Help_Search_Top_Lookup= label.Message;
@@ -226,6 +229,7 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                 Splash_Resume:"Splash_Resume",
                 Splash_Present:"Splash_Present",
                 Splash_Feedback:"Splash_Feedback",
+                Splash_Company:"Splash_Company",
 
 
                 //help-Search

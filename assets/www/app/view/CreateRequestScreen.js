@@ -655,9 +655,10 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
     },
 
     ShowSavedResume: function(button, e, eOpts) {
+
         var form = button.up();
         var values = form.getValues();
-        Requests.ShowSavedResumeRequest(values.RequestId);
+        Requests.ShowSavedResumeRequest(values.RequestId,'');
     },
 
     onBackBtnTap: function(button, e, eOpts) {

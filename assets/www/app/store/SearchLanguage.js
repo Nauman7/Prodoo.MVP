@@ -17,13 +17,20 @@ Ext.define('ProDooMobileApp.store.SearchLanguage', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'Ext.data.Field',
         'Ext.data.proxy.Ajax',
-        'Ext.data.reader.Json'
+        'Ext.data.reader.Json',
+        'Ext.data.Field'
     ],
 
     config: {
         storeId: 'SearchLanguage',
+        proxy: {
+            type: 'ajax',
+            reader: {
+                type: 'json',
+                rootProperty: 'items'
+            }
+        },
         fields: [
             {
                 name: 'LanguageId'
@@ -32,23 +39,16 @@ Ext.define('ProDooMobileApp.store.SearchLanguage', {
                 name: 'LanguageValue'
             }
         ],
-        proxy: {
-            type: 'ajax',
-            reader: {
-                type: 'json',
-                rootProperty: 'items'
-            }
-        },
         listeners: [
             {
-                fn: 'onJsonstoreBeforeLoad',
+                fn: 'onJsonpstoreBeforeLoad',
                 event: 'beforeload'
             }
         ]
     },
 
-    onJsonstoreBeforeLoad: function(store, operation, eOpts) {
-         var url = ApiBaseUrl + 'Language/get';
+    onJsonpstoreBeforeLoad: function(store, operation, eOpts) {
+        var url = ApiBaseUrl + 'Language/get';
                         var storeApi = store.getProxy().getApi();
                         if(storeApi.read === undefined)
                             storeApi.read = url;

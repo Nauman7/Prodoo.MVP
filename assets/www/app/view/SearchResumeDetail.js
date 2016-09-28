@@ -32,7 +32,14 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             '<div class="detailTitle">',
             '    <span class="tickIcon"></span>',
             '    <span class=\'marginForIcon\'>Available Now</span>',
+            '    ',
+            '    <tpl if="IsConfirmed">',
+            '    <span class="tickIconFloatRight">View Presentations</span>',
+            '        </tpl>',
+            '    ',
             '</div>',
+            '',
+            '',
             '',
             '<tpl if="IsConfirmed">',
             '',
@@ -41,7 +48,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             '    <span class="onSite">{Contact.Email}</span>',
             '</div>',
             '    ',
-            '<div class="LocationDiv"><span class="location">{Region}</span>',
+            '<div class="LocationDiv"><span class="location">{Region.CountryName}</span>',
             '    <span class="onSite">{Contact.Phone}</span>',
             '</div>',
             ' ',
@@ -49,7 +56,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
             '<tpl else>',
             '',
             '<div class="LocationDiv">',
-            '    <span class="location">{Region}</span>',
+            '    <span class="location">{Region.CountryName}</span>',
             '     <span class="onSite">On Site</span>',
             '</div>',
             '</tpl>',
@@ -196,6 +203,7 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
     },
 
     onListItemTap: function(dataview, index, target, record, e, eOpts) {
+
         var selectedItem = e.target;
         if(selectedItem.className.indexOf('ArrowUp')>=0){
             Ext.get(selectedItem).toggleCls('ArrowDown');
@@ -211,6 +219,48 @@ Ext.define('ProDooMobileApp.view.SearchResumeDetail', {
                 }
                 detail.style.maxHeight = '0px';
             }
+        }
+
+        if(selectedItem.className=='tickIconFloatRight'){
+
+            SocialMediaList=new Array();
+        Ext.getStore("SocialMediaStore").load(function(){
+            this.data.items.forEach(function(item,index){
+                SocialMediaList.push(item.data);
+            });
+        });
+
+        ActiveScreen=2;
+
+
+        //var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+        Ext.getStore('UserDetailFreelancResumes').load({
+
+            params : {
+                resumeId : record.data.ResumeId
+            },
+            callback : function() {
+                if(Ext.getStore('UserDetailFreelancResumes').data.items.length<=0){
+                    G.show('PresentSplash');
+                    G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
+                    G.hide('PresentDetailTpl');
+                }
+            }
+        });
+
+
+            G.Push('PresentDetail');
+            var tplid=G.get('PresentDetailTpl');
+            tplid.setStore('UserDetailFreelancResumes');
+            tplid.on('refresh',function(){
+                tplid.element.select('.presDelete, .presEdit').hide();
+            });
+            G.get('PresentAddBtn').hide();
+            G.get('PresentHomeButton').hide();
+            G.get('PresentBackBtn').show();
+
+
+
         }
 
         // if(selectedItem.className.indexOf('SrNo')>=0){

@@ -44,7 +44,9 @@
 		@include transition(all 0.5s);
 	}
 }
-
+body.x-android{
+	margin: 1px 0 0 0;
+}
 .x-msgbox .x-toolbar.x-docked-top, .x-msgbox .x-toolbar{
 	overflow: visible;
 }

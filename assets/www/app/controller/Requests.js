@@ -285,6 +285,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         TapRequestTitle: function(target, item, record) {
 
             var savedSearchId=record.data.SavedSearchedId;
+
             if(target.parent('.closeIcon')){
 
                 Ext.Msg.confirm('Confirm','You want to delete the current request?', function(btn){
@@ -310,19 +311,42 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                                                         requestlist+=no+'.'+ obj.items[i].RequestName+'</br>';
                                                         no++;
                                                     }
-                                                    Ext.Msg.alert('','The request have saved search which is associated with other requests.</br>'+requestlist+'</br>The Saved Search can only be deleted when no other requests are associated with it.');
+                                                    Ext.Msg.alert('','The request have saved search which is associated with other request(s).</br>'+requestlist+'The Saved Search can only be deleted when no other request(s) are associated with it.');
                                                     return;
                                                 }else{
                                                     //Delete Reqeust and savedSearch
-                                                    Requests.DeleteRequest(record.data.RequestId, item);
-                                                    var savedSearch = {
-                                                        SavedSearchId:record.data.SavedSearchedId,
-                                                        SearchName:"Name",
-                                                        UserId:record.data.UserId
-                                                    };
-                                                    Requests.deleteSavedSearch(savedSearch);
-                                                }
+                                                    Ext.Ajax.request({
+                                                        url: ApiBaseUrl+'requests/get?requestId='+record.data.RequestId,
+                                                        method: 'GET',
+                                                        headers: { 'Content-Type': 'application/json' },
+                                                        success: function(conn, response, options, eOpts) {
+                                                            var obj=JSON.parse(conn.responseText);
+                                                            for(var i=0;i<obj.items.ShortLists.length;i++){
+                                                                var slId=obj.items.ShortLists[i].ShortlistId;
+                                                                var result=Requests.selectShortlist(slId);
 
+                                                                var shortList = {
+                                                                    ShortlistId:slId,
+                                                                    ShortlistName:"Name"
+                                                                };
+
+                                                                if(result){
+                                                                    Ext.Ajax.request({
+                                                                        url: ApiBaseUrl+'Shortlists/delete',
+                                                                        method: 'Delete',
+                                                                        params : Ext.JSON.encode(shortList),
+                                                                        headers: { 'Content-Type': 'application/json' },
+                                                                        success: function(conn, response, options, eOpts) {},
+                                                                        failure: function(conn, response, options, eOpts) {G.showGeneralFailure();}
+                                                                    });
+
+                                                                }
+
+                                                                Requests.DeleteRequest(record.data.RequestId, item);
+                                                            }
+                                                        }
+                                                    });
+                                                }
                                             }
                                         });
                                     }else{
@@ -490,6 +514,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         ConfirmRequestedInvitation: function() {
+
             var requestId= G.get("HFRequestId").getHtml();
             var userDetailId= G.get("HfUserDetailId").getValue();
             var resumeId = Ext.getStore('AuthStore').getAt(0).get('ResumeId');
@@ -528,7 +553,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         ShowRequestView: function(pushView, loadLookup, showHomeButton) {
-            var isFreelancer=Ext.getStore('AuthStore').getAt(0).data.IsFreelancer;;
+
+            var isFreelancer=Ext.getStore('AuthStore').getAt(0).data.IsFreelancer;
             Ext.Ajax.request({
                 url: ApiBaseUrl+'requests/GetRequests?isFreelancer='+isFreelancer+'&userId='+Ext.getStore('AuthStore').getAt(0).data.UserId,
                 method: 'Get',
@@ -549,7 +575,6 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         }
 
                         if(isFreelancer){
-
                             var inboxStore = Ext.create('Ext.data.Store', {
                                 model:'ProDooMobileApp.model.SearchRequestList',
                                 data: result.items.Inbox
@@ -561,6 +586,18 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                             G.show('invitationLabel');
                             var numberOfItems= result.items.Inbox.length>0? result.items.Inbox.length:1;
+
+
+                            var declineRequestStore=Ext.create('Ext.data.Store',{
+                                model:'ProDooMobileApp.model.SearchRequestList',
+                                data:result.items.DeclineRequests
+                            });
+
+                            G.show('declineRequestList');
+                            G.get('declineRequestList').setStore(declineRequestStore);
+                            G.show('declineRequest');
+
+
                         }
                         else{
                             var draftStore = Ext.create('Ext.data.Store', {
@@ -627,7 +664,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
             });
         },
 
-        ShowSavedResumeRequest: function(requestId) {
+        ShowSavedResumeRequest: function(requestId, type) {
             Ext.Ajax.request({
                 url: ApiBaseUrl+'RequestsResumes/GetRequestedResumes?requestId='+requestId,
                 method: 'Get',
@@ -640,6 +677,27 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                             var ResultSavedStore  = Ext.getStore('SearchResultSaved');
                             ResultSavedStore.removeAll();
                             //ResultSavedStore.sync();
+
+                            ResultSavedStore.clearFilter(true);
+                            if(type==='reqAccepted')
+                            ResultSavedStore.filter('IsConfirmed', 'True');
+                            if(type==='reqDecline')
+                            ResultSavedStore.filter('IsDeleted', 'True');
+                            if(type==='reqNoAction'){
+                                var noActionFilter = [
+                                new Ext.util.Filter({
+                                    property: 'IsConfirmed', value: 'false'
+                                }),
+                                new Ext.util.Filter({
+                                    property: "IsDeleted", value: 'false'
+                                })
+                                ];
+                                ResultSavedStore.filter(noActionFilter);
+                            }
+                            //ResultSavedStore.filter('IsRead', 'False');
+
+
+
 
                             result.items.forEach(function(item,index){
                                 var model = new ProDooMobileApp.model.SearchResultSaved();
@@ -678,25 +736,55 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     //failure catch
 
                 }
-            });requestId
-
+            });
         },
 
-        deleteSavedSearch: function(model) {
+        selectShortlist: function(shortlistId) {
             Ext.Ajax.request({
-                url: ApiBaseUrl+'SavedSearches/RemoveSearch',
-                method: 'DELETE',
+                url: ApiBaseUrl+'requests/GetRequestByShortListId?shortlistId='+shortlistId,
+                method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
-                params : Ext.JSON.encode(model),
                 success: function(conn, response, options, eOpts) {
+                    var obj=JSON.parse(conn.responseText);
+                    if(obj.total>1){
+                        var requestlist='';
+                        var slNo=1;
+                        for (i = 0; i < obj.total; i++) {
+                            if(i==obj.total-1)
+                            requestlist+=slNo+'. ' +obj.items[i].RequestName;
+                            else
+                            requestlist+=slNo+'. ' +obj.items[i].RequestName+'<br>';
+                            slNo++;
 
-                    // Ext.Msg.alert('', 'SavedSearch Deleted');
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    Ext.Msg.alert('','Failure.');
+                        }
+                        Ext.Msg.alert('','The request have shortlist which is associated with other request(s).</br>'+requestlist+'</br>The shortlist can only be deleted when no other request(s) are associated with it.');
+                        return false;
+                    }else{
+                        return true;
+                    }
+
                 }
             });
+        },
+
+        RestoreRequest: function(target, item, record) {
+            var requestResumeId=record.data.RequestResumeId;
+
+            Ext.Msg.confirm('Confirm','You want to restore the request?', function(btn){
+                if(btn === 'yes'){
+                    Ext.Ajax.request({
+                        url: ApiBaseUrl+'requests/RestoreRequest?requestResumeId='+requestResumeId,
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        success: function(conn, response, options, eOpts) {
+                            Requests.ShowRequestView(false,false,false);
+
+                        }
+                    });
+
+                }});
+
+
         }
     },
 

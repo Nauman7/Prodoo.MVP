@@ -102,7 +102,10 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     },
                     {
                         xtype: 'button',
-                        cls: 'tabIconSpan',
+                        cls: [
+                            'tabIconSpan',
+                            'languageTabIcon'
+                        ],
                         hidden: true,
                         html: '<span class="tabIcon languageTabIcon"> </span>',
                         itemId: 'languageBtn',
@@ -877,7 +880,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                     'b10'
                 ],
                 docked: 'bottom',
-                hidden: false,
+                hidden: true,
                 itemId: 'CreateCompanyExperience',
                 text: ' '
             },

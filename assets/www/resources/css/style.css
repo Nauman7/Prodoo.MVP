@@ -69,6 +69,10 @@
   transition: all 0.5s;
 }
 
+body.x-android {
+  margin: 1px 0 0 0;
+}
+
 .x-msgbox .x-toolbar.x-docked-top, .x-msgbox .x-toolbar {
   overflow: visible;
 }
@@ -739,6 +743,9 @@
 }
 .tabIconSpan.locationIcon .x-button-label, .locationIcon.resumeStatsBtn .x-button-label, .locationIcon.requestStatsBtn .x-button-label, .locationIcon.graphStatsBtn .x-button-label {
   background-image: url("../images/searchResult/location.png");
+}
+.tabIconSpan.languageIcon .x-button-label, .languageIcon.resumeStatsBtn .x-button-label, .languageIcon.requestStatsBtn .x-button-label, .languageIcon.graphStatsBtn .x-button-label {
+  background-image: url("../images/searchResult/language.png");
 }
 .tabIconSpan.settingTabIcon .x-button-label, .settingTabIcon.resumeStatsBtn .x-button-label, .settingTabIcon.requestStatsBtn .x-button-label, .settingTabIcon.graphStatsBtn .x-button-label {
   background-image: url("../images/resumeView/settingL.png");
@@ -2663,6 +2670,10 @@
   padding: 5px;
 }
 
+.SavedList {
+  padding: 10px;
+}
+
 .editIcon {
   background-color: #f6aa3a !important;
 }
@@ -2926,6 +2937,20 @@
 
 .bgYellow {
   background: #f6aa3a !important;
+}
+
+.tickIconFloatRight {
+  padding: 0px 8px 0px;
+  margin: 5px;
+  margin-top: -5px;
+  height: 30px;
+  float: right;
+  vertical-align: middle;
+  background-color: white;
+  color: black;
+  /*-moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;*/
 }
 
 .companyDetail {
@@ -3954,6 +3979,14 @@
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
   border-radius: 7px;
+}
+
+.feedbackForm {
+  position: absolute;
+  top: 30px;
+  bottom: 80px;
+  left: 0;
+  right: 0;
 }
 
 .x-webkit .x-field-select .x-component-outer:after {

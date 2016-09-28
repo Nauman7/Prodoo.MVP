@@ -47,7 +47,7 @@ Ext.define('ProDooMobileApp.view.UserResumeView', {
                     '',
                     '',
                     '',
-                    '<div class="LocationDiv"><span class="location">{Region}</span>',
+                    '<div class="LocationDiv"><span class="location">{Region.CountryName}</span>',
                     '    <span class="onSite">on-site</span>',
                     '</div>',
                     '<div class="ViewCnt">',

@@ -55,8 +55,10 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
             '        </tpl>',
             '        ',
             '        ',
-            '        <div class="resultLocation <tpl if=\'IsConfirmed\'>greenLocation </tpl> <tpl if=\'IsDeleted\'>redLocation </tpl>">{Region}</div>',
+            '        <div class="resultLocation <tpl if=\'IsConfirmed\'>greenLocation</tpl> <tpl if=\'IsDeleted\'>redLocation </tpl>">{Region.CountryName}</div>',
             '        <div class="resultSkill <tpl if=\'IsConfirmed\'>greenSkill </tpl> <tpl if=\'IsDeleted\'>redSkill </tpl>">{[this.prepareHeading(values.Skills,"skills")]}</div>',
+            '       ',
+            '        ',
             '        ',
             '        ',
             '                </div>',
@@ -504,7 +506,7 @@ Ext.define('ProDooMobileApp.view.SearchResultSavedScreen', {
                         G.Push('CreateRequestScreen');
 
                         //PD-170- set search available date as default date
-                        var searchedDate=G.get('SearchDatepicker')
+                        var searchedDate=G.get('SearchDatepicker');
                         if(searchedDate)
                             G.get('mydatepicker').setValue(searchedDate.getValue());
                         // End of Pd-170

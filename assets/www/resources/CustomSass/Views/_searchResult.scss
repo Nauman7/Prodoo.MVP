@@ -50,6 +50,11 @@
 			background-image: url("../images/searchResult/location.png");
 		}
 	}
+	&.languageIcon{
+		.x-button-label{
+			background-image: url("../images/searchResult/language.png");
+		}
+	}
 	&.settingTabIcon{ // in resume view
 		.x-button-label{
 			background-image: url("../images/resumeView/settingL.png");

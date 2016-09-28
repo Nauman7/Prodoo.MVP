@@ -94,28 +94,35 @@ Ext.define('ProDooMobileApp.controller.Company', {
         {
 
             G.DeleteItem('Comapny', function(){
-               var url = ApiBaseUrl+'UserCompany/DeleteUserCompany';
-            record.id=record.data.UserDetailId;
-            Ext.Ajax.request({
-                url: url,
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                params : Ext.JSON.encode(record.data),
-                success: function(conn, response, options, eOpts) {
-                    var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success) {
-                        var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                        Ext.getStore('CompanyDetail').load({
-                            params : { userId : loggedUserId }
-                        });
+                var url = ApiBaseUrl+'UserCompany/DeleteUserCompany';
+                record.id=record.data.UserDetailId;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    params : Ext.JSON.encode(record.data),
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+                            Ext.getStore('CompanyDetail').load({
+                                params : { userId : loggedUserId },
+                                callback : function() {
+                                    if(Ext.getStore('CompanyDetail').data.items.length<=0){
+                                        G.show('CompanySplash');
+                                        G.get('CompanySplash').setHtml(Identifier.Title.Splash_Company);
+                                        G.hide('CompanyDetailTpl');
+                                    }
+                                }
+                            });
+                        }
+                        else {  Ext.Msg.alert('', result.message); }
+                    },
+                    failure: function(conn, response, options, eOpts) {
+                        //failure catch
+                        G.showGeneralFailure();
                     }
-                    else {  Ext.Msg.alert('', result.message); }
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
-                }
-            });
+                });
             });
 
         }
@@ -150,6 +157,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
     },
 
     onCompanyEditConfirmTap: function(button, e, eOpts) {
+
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
         var form = button.up();
         var fields=form.getFields();
@@ -198,7 +206,18 @@ Ext.define('ProDooMobileApp.controller.Company', {
                 if (result.success) {
                     var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
                     Ext.getStore('CompanyDetail').load({
-                        params : { userId : loggedUserId }
+                        params : { userId : loggedUserId },
+                        callback : function() {
+                            if(Ext.getStore('CompanyDetail').data.items.length<=0){
+                                G.show('CompanySplash');
+                                G.get('CompanySplash').setHtml(Identifier.Title.Splash_Company);
+                                G.hide('CompanyDetailTpl');
+                            }
+                            else{
+                                G.hide('CompanySplash');
+                                G.show('CompanyDetailTpl');
+                            }
+                        }
                     });
                     G.Pop();
                 } else {

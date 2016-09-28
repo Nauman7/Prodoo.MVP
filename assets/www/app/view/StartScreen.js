@@ -591,13 +591,21 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
 
     onCompanyContainerImgTap: function(image, e, eOpts) {
 
-            ActiveScreen=3;
+        ActiveScreen=3;
         var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
         var companyStore = Ext.getStore('CompanyDetail');
         companyStore.clearData();
         companyStore.load({
-            params : { userId : loggedUserId
-                     }
+            params : {
+                userId : loggedUserId
+            },
+            callback : function() {
+                if(Ext.getStore('CompanyDetail').data.items.length<=0){
+                    G.show('CompanySplash');
+                    G.get('CompanySplash').setHtml(Identifier.Title.Splash_Company);
+                    G.hide('CompanyDetailTpl');
+                }
+            }
         });
         G.Push('CompanyDetail');
     },

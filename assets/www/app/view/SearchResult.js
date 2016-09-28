@@ -107,6 +107,16 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         html: ' ',
                         itemId: 'locationBtn',
                         margin: '0 5'
+                    },
+                    {
+                        xtype: 'button',
+                        cls: [
+                            'languageIcon',
+                            'tabIconSpan'
+                        ],
+                        html: ' ',
+                        itemId: 'languageBtn',
+                        margin: '0 5'
                     }
                 ]
             },
@@ -166,7 +176,7 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                         maxHeight: 250,
                         itemTpl: [
                             '<div class="listResult">',
-                            '        <span class="listTitle">{ProfileValue}{SkillValue}{KeywordValue}{CertificationValue}{IndustryValue}{CountryName}</span>',
+                            '        <span class="listTitle">{ProfileValue}{SkillValue}{KeywordValue}{CertificationValue}{IndustryValue}{CountryName}{LanguageValue}</span>',
                             '</div>'
                         ],
                         pressedCls: null,
@@ -549,6 +559,53 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                                 ]
                             }
                         ]
+                    },
+                    {
+                        xtype: 'container',
+                        cls: [
+                            'LabelCnt',
+                            'greenLabel'
+                        ],
+                        hidden: true,
+                        itemId: 'LanguageCnt',
+                        margin: '0 0 10',
+                        padding: '0 10',
+                        items: [
+                            {
+                                xtype: 'label',
+                                cls: [
+                                    'heading',
+                                    'iGreen'
+                                ],
+                                html: 'Language'
+                            },
+                            {
+                                xtype: 'container',
+                                hidden: true,
+                                margin: '0 0 5 0',
+                                layout: {
+                                    type: 'hbox',
+                                    align: 'center'
+                                },
+                                items: [
+                                    {
+                                        xtype: 'label',
+                                        cls: 'labelCls',
+                                        html: 'Sample Language',
+                                        width: 120
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        cls: [
+                                            'closeIcon',
+                                            'noBorder'
+                                        ],
+                                        itemId: 'mybutton16',
+                                        text: ' '
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -659,6 +716,11 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
                 delegate: '#locationBtn'
             },
             {
+                fn: 'onlanguageTap',
+                event: 'tap',
+                delegate: '#languageBtn'
+            },
+            {
                 fn: 'onMysearchfieldKeyup',
                 event: 'keyup',
                 delegate: '#mysearchfield'
@@ -715,6 +777,11 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
             },
             {
                 fn: 'onCloseButtonTap2',
+                event: 'tap',
+                delegate: '#mybutton16'
+            },
+            {
+                fn: 'onCloseButtonTap21',
                 event: 'tap',
                 delegate: '#mybutton16'
             },
@@ -785,6 +852,10 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
         SearchResume.onTopBtnTap(button,'Location');
     },
 
+    onlanguageTap: function(button, e, eOpts) {
+        SearchResume.onTopBtnTap(button,'Language');
+    },
+
     onMysearchfieldKeyup: function(textfield, e, eOpts) {
         SearchResume.onPropertySearch(textfield);
     },
@@ -847,25 +918,19 @@ Ext.define('ProDooMobileApp.view.SearchResult', {
         button.up('container').hide();
     },
 
+    onCloseButtonTap21: function(button, e, eOpts) {
+        button.up('container').hide();
+    },
+
     onHelpBtnTap: function(button, e, eOpts) {
         if(!button.element.hasCls('activeBtn')){// login for first time
             var helpDisble = G.get('HelpDisable');
             helpDisble.setHtml(' ');
             button.addCls('activeBtn');
 
-            G.show('HelpCnt');
-            var re = /@LookupName/gi;
-            var lookupMessage = Identifier.Title.Help_Search_Top_Lookup;
-            var profile='Profile';
-            lookupMessage = lookupMessage.replace(re, profile);
-            if(profile){
-            G.get('HelpHeading').setHtml('Search for '+ profile);
-            G.get('HelpDetail').setHtml(lookupMessage);
-            var item = SearchResume.getActiveBtn();
-            G.get('HelpID').setHtml('');
-            }
             button.removeCls('helpFirstClick');
             G.get('mysearchfield').setReadOnly(true);
+            SearchResume.UpdateHelpDetail('Profile');
         }
         else if(!IsVistor && !button.element.hasCls('helpFirstClick')){ // check if clicking on first time
             var HelpActive = SearchResume.UpdateHelpDetail('helpIconBtn');

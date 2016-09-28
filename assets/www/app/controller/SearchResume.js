@@ -34,6 +34,8 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 var lookupStore = '';
                 if(lookupName=='Location')
                 lookupStore = 'CreateRequestLocation';
+                else if(lookupName=='Language')
+                lookupStore = 'CreateRequestLanguage';
                 else
                 lookupStore = 'Search'+lookupName;
 
@@ -116,6 +118,9 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             else if(view=="Location"){
                 enaItem = G.get('LocationCnt').innerItems;
             }
+            else if(view=="Language"){
+                enaItem = G.get('LanguageCnt').innerItems;
+            }
 
             for(var i=1; i< enaItem.length; i++){
                 enaItem[i].enable();
@@ -166,13 +171,15 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             var keywords = G.get('KeywordCnt').items;
             var certifications = G.get('CertificationCnt').items;
             var counteries = G.get('LocationCnt').items;
+            var languages = G.get('LanguageCnt').items;
 
-            var profilesObjs = new Array();
-            var skillsObjs = new Array();
-            var industeryIds = new Array();
-            var keywordIds =  new Array();
-            var certificationIds = new Array();
-            var countryNames = new Array();
+            var profilesObjs = [];
+            var skillsObjs = [];
+            var industeryIds = [];
+            var keywordIds =  [];
+            var certificationIds = [];
+            var countryNames = [];
+            var languageIds = [];
 
             // processing profiles
             if(profiles.items.length > 2){
@@ -229,9 +236,17 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 });
             }
 
+            // processing languages
+            if(languages.items.length > 2){
+                languages.items.forEach(function(item, index){
+                    if(index > 1){
+                        languageIds.push(item.getAt(2).getValue());
+                    }
+                });
+            }
 
-            if(profilesObjs.length==0 && skillsObjs.length==0 && keywordIds.length==0 &&
-            certificationIds.length==0 && industeryIds.length==0 && countryNames.length==0 )
+            if(profilesObjs.length===0 && skillsObjs.length===0 && keywordIds.length===0 &&
+            certificationIds.length===0 && industeryIds.length===0 && countryNames.length===0 && languageIds.length===0)
             {
                 Ext.Msg.alert('Status',Identifier.Title.Alert_Search_SearchFilter,null);
 
@@ -244,8 +259,9 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 searchObject.CertificationIds = certificationIds;
                 searchObject.IndusteryIds = industeryIds;
                 searchObject.Countries=countryNames;
+                searchObject.Languages=languageIds;
                 searchObject.Type='Only20';
-                searchObject.AvailabilityDate=G.get('SearchDatepicker').getValue();
+                searchObject.AvailabilityDate=G.get('SearchDatepicker').getFormattedValue();
                 var searchObj = JSON.stringify(searchObject);
                 var store = Ext.getStore('SearchResultSaved');
                 store.getProxy().setExtraParam("model", searchObj);
@@ -310,7 +326,12 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 else  if(index === 5){
 
                     store = Ext.getStore('CreateRequestLocation');
-                    url = ApiBaseUrl+'Country/GetFiltered';
+                    url = ApiBaseUrl+'Country/LocationsLookup';
+                }
+                else  if(index === 6){
+
+                    store = Ext.getStore('CreateRequestLanguage');
+                    url = ApiBaseUrl+'Language/LanguagesLookup';
                 }
             });
 
@@ -322,6 +343,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 method: 'Get',
                 headers: { 'Content-Type': 'application/json' },
                 success: function(conn, response, options, eOpts) {
+
                     var result = Ext.JSON.decode(conn.responseText);
                     if (result.success && result.items.length>0)
                     G.show('SearchList');
@@ -336,8 +358,6 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                     G.showGeneralFailure();
                 }
             });
-
-
         },
 
         onAddSearchBtnTap: function() {
@@ -485,6 +505,9 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
             }
             else if(view=='Location'){
                 Container=G.get('LocationCnt');
+            }
+            else if(view=='Language'){
+                Container=G.get('LanguageCnt');
             }
             Container.add(Cnt);
 
@@ -827,7 +850,11 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                     existingRecords = G.get('LocationCnt').items.items;
                     recordID=record.data.CountryId;
                 }
-
+                else if(item===6)
+                {
+                    existingRecords = G.get('LanguageCnt').items.items;
+                    recordID=record.data.LanguageId;
+                }
 
                 existingRecords.forEach(function(item,index){
                     if(index>1){
@@ -872,6 +899,10 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                     else if(item == 5){// if certification btn active
                         newCnt = this.createKeywordView('Location', record.data.CountryName,record.data.CountryId);
                         G.show('LocationCnt');
+                    }
+                    else if(item == 6){// if certification btn active
+                        newCnt = this.createKeywordView('Language', record.data.LanguageValue,record.data.LanguageId);
+                        G.show('LanguageCnt');
                     }
                 }
                 searchField.setValue('');

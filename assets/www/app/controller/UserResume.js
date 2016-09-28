@@ -526,6 +526,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
         },
 
         SaveCompanyExperience: function(rec) {
+
             var resumeId = Ext.getStore('AuthStore').getAt(0).get('ResumeId');
 
             var companyNameField=G.get("CreateExpCompanyName");
@@ -563,6 +564,13 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
             {
                 profileField.addCls('isRequired');
                 Ext.Msg.alert('',"Profile is required to proceed.");
+                return null;
+            }
+
+            if(industry == null)
+            {
+                profileField.addCls('isRequired');
+                Ext.Msg.alert('',"Industry is required to proceed.");
                 return null;
             }
 

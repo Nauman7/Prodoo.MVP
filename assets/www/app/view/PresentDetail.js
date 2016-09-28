@@ -112,8 +112,34 @@ Ext.define('ProDooMobileApp.view.PresentDetail', {
                 itemId: 'PresentHomeButton',
                 left: 10,
                 text: ' '
+            },
+            {
+                xtype: 'button',
+                bottom: 10,
+                cls: [
+                    'btnCircle',
+                    'backIcon',
+                    'bgRed'
+                ],
+                docked: 'bottom',
+                hidden: true,
+                itemId: 'PresentBackBtn',
+                left: 10,
+                text: ' '
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onPresentBackBtnTap',
+                event: 'tap',
+                delegate: '#PresentBackBtn'
             }
         ]
+    },
+
+    onPresentBackBtnTap: function(button, e, eOpts) {
+
+        G.Pop();
     }
 
 });

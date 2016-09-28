@@ -35,7 +35,7 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                     success: function(conn, response, options, eOpts) {
                         var obj=JSON.parse(conn.responseText);
                         if(obj.total>0){
-                            Ext.Msg.alert('','This shortlist is used in other resume.The shortlist can only be deleted when no other resume are associated with it.');
+                            Ext.Msg.alert('','This shortlist is used in some request(s). The shortlist can only be deleted when no other request(s) are associated with it.');
                         }else{
                             //call search delete functionality
                             Shortlist.DeleteRecord(data);
