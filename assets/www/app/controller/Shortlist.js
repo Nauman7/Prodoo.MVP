@@ -23,24 +23,25 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
     statics: {
         onShortlistResumeItemClick: function(className, data) {
 
-            if(className === 'x-button-label'){ // Delete Shortlist and associated resumes
-                //Shortlist.DeleteRecord(data);
-                var shorlistId=data.ShortlistId;
-                Ext.Ajax.request({
-                    url: ApiBaseUrl+'Shortlists/GetAllRequestByShortlistId?shortlistId='+shorlistId,
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                    success: function(conn, response, options, eOpts) {
-                        var obj=JSON.parse(conn.responseText);
-                        if(obj.total>0){
-                            Ext.Msg.alert('','This shortlist is used in some request(s). The shortlist can only be deleted when no other request(s) are associated with it.');
-                        }else{
-                            //call search delete functionality
-                            Shortlist.DeleteRecord(data);
-                        }
+            if(className === 'x-button-label'){
+                Ext.Msg.confirm('Confirm','Do you really want to delete '+data.ShortlistName+'?', function(btn){
+                    if(btn === 'yes'){
+                        var shorlistId=data.ShortlistId;
+                        Ext.Ajax.request({
+                            url: ApiBaseUrl+'Shortlists/GetAllRequestByShortlistId?shortlistId='+shorlistId,
+                            method: 'GET',
+                            headers: { 'Content-Type': 'application/json' },
+                            success: function(conn, response, options, eOpts) {
+                                var obj=JSON.parse(conn.responseText);
+                                Ext.Msg.alert('Info',obj.message,function(){
+                                    Shortlist.showShortListView();
+                                });
 
+                            }
+                        });
                     }
                 });
+
 
 
 

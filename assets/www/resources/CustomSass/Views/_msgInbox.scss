@@ -173,7 +173,7 @@
     right: 10px;
     bottom: 10px;
     padding-top: 11px;
-    background-color: $_yellow !important;
+    background-color: $_yellow;
     .x-button-label {
         background-image: url(../images/requestScreen/sendBtn2.png) !important;
         height: 37px;
@@ -190,16 +190,16 @@
         border-top: 1px solid black !important;
         @include transition(background 0.3s);
         // &:hover{
-        // 	background: lighten($blue5,10);
+        //  background: lighten($blue5,10);
         // }
     }
     &.x-list {
         // .x-list-item.x-item-selected.x-list-item-tpl,
         // .x-list-item.x-item-pressed.x-list-item-tpl{
-        // 	background: lighten($blue5,15);
-        // 	.x-innerhtml{
-        // 		background: lighten($blue5,15);
-        // 	}
+        //  background: lighten($blue5,15);
+        //  .x-innerhtml{
+        //      background: lighten($blue5,15);
+        //  }
         // }
     }
     // background-color: #fff;
@@ -207,7 +207,7 @@
         padding: 0;
     }
     // .x-list-item-last{
-    // 	border-bottom: none !important;
+    //  border-bottom: none !important;
     // }
 }
 
@@ -303,4 +303,12 @@
     vertical-align: middle;
     background-color: #fff;
     color: #000;
+}
+
+.msgUserInfo {
+    padding-left: 10px !important;
+}
+
+.msgMoreInfo {
+    margin-top: 9px;
 }

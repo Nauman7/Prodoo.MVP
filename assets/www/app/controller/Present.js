@@ -576,33 +576,33 @@ Ext.define('ProDooMobileApp.controller.Present', {
             var url = ApiBaseUrl+'UserDetail/DeleteUserDetail';
             G.DeleteItem('Present', function(){
 
-                 Ext.Ajax.request({
-                        url: url,
-                        method: 'DELETE',
-                        headers: { 'Content-Type': 'application/json' },
-                        params : Ext.JSON.encode(record.data),
-                        success: function(conn, response, options, eOpts) {
-                            var result = Ext.JSON.decode(conn.responseText);
-                            if (result.success) {
-                                var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-                                Ext.getStore('UserDetail').load({
-                                    params : { userId : loggedUserId
-                                             },
-                                    callback : function() {
-                                        if(Ext.getStore('UserDetail').data.items.length<=0){
-                                            G.show('PresentSplash');
-                                            G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
-                                            G.hide('PresentDetailTpl');
-                                        }
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    params : Ext.JSON.encode(record.data),
+                    success: function(conn, response, options, eOpts) {
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success) {
+                            var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
+                            Ext.getStore('UserDetail').load({
+                                params : { userId : loggedUserId
+                                         },
+                                callback : function() {
+                                    if(Ext.getStore('UserDetail').data.items.length<=0){
+                                        G.show('PresentSplash');
+                                        G.get('PresentSplash').setHtml(Identifier.Title.Splash_Present);
+                                        G.hide('PresentDetailTpl');
                                     }
-                                });
-                            }
-                        },
-                       failure: function(response, request) {
-                            //failure catch
-                           G.showGeneralFailure('', response);
+                                }
+                            });
                         }
-                    });
+                    },
+                    failure: function(response, request) {
+                        //failure catch
+                        G.showGeneralFailure('', response);
+                    }
+                });
             });
         }
     },

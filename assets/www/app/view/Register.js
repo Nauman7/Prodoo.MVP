@@ -92,11 +92,11 @@ Ext.define('ProDooMobileApp.view.Register', {
                         displayField: 'Type',
                         options: [
                             {
-                                Type: 'Company',
+                                Type: 'Searcher',
                                 Val: 'false'
                             },
                             {
-                                Type: 'Freelancer',
+                                Type: 'iPro',
                                 Val: 'true'
                             }
                         ],
