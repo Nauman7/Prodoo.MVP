@@ -285,79 +285,80 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
         },
 
         onPropertySearch: function(textfield) {
-
-            var activeLookup = 'ProfileValue';
-            var store = Ext.getStore('SearchProfile');
-            var url='';
-
-            // store to apply filter on
-            var topBtns = G.get('topButtons');
-            var items =  topBtns.items.items;
             var query = textfield.getValue().toLowerCase();
+            if(query.length>2 || query.length===0){
+                var activeLookup = 'ProfileValue';
+                var store = Ext.getStore('SearchProfile');
+                var url='';
 
-            items.forEach(function(item,index){
-                if (item.element.dom.classList.contains('activeBtn'))
-                if(index === 0){
+                // store to apply filter on
+                var topBtns = G.get('topButtons');
+                var items =  topBtns.items.items;
 
-                    store = Ext.getStore('SearchProfile');
-                    url = ApiBaseUrl+'Profiles/ProfileLookup';
-                }
-                else if(index === 1){
+                items.forEach(function(item,index){
+                    if (item.element.dom.classList.contains('activeBtn'))
+                    if(index === 0){
 
-                    store = Ext.getStore('SearchSkill');
-                    url = ApiBaseUrl+'Skills/SkillsLookup';
-                }
-                else  if(index === 2){
+                        store = Ext.getStore('SearchProfile');
+                        url = ApiBaseUrl+'Profiles/ProfileLookup';
+                    }
+                    else if(index === 1){
 
-                    store = Ext.getStore('SearchIndustry');
-                    url = ApiBaseUrl+'Industries/IndustriesLookup';
-                }
-                else  if(index === 3){
+                        store = Ext.getStore('SearchSkill');
+                        url = ApiBaseUrl+'Skills/SkillsLookup';
+                    }
+                    else  if(index === 2){
 
-                    store = Ext.getStore('SearchKeyword');
-                    url = ApiBaseUrl+'keywords/KeywordsLookup';
-                }
-                else  if(index === 4){
+                        store = Ext.getStore('SearchIndustry');
+                        url = ApiBaseUrl+'Industries/IndustriesLookup';
+                    }
+                    else  if(index === 3){
 
-                    store = Ext.getStore('SearchCertification');
-                    url = ApiBaseUrl+'Certifications/CertificationsLookup';
+                        store = Ext.getStore('SearchKeyword');
+                        url = ApiBaseUrl+'keywords/KeywordsLookup';
+                    }
+                    else  if(index === 4){
 
-                }
-                else  if(index === 5){
+                        store = Ext.getStore('SearchCertification');
+                        url = ApiBaseUrl+'Certifications/CertificationsLookup';
 
-                    store = Ext.getStore('CreateRequestLocation');
-                    url = ApiBaseUrl+'Country/LocationsLookup';
-                }
-                else  if(index === 6){
+                    }
+                    else  if(index === 5){
 
-                    store = Ext.getStore('CreateRequestLanguage');
-                    url = ApiBaseUrl+'Language/LanguagesLookup';
-                }
-            });
+                        store = Ext.getStore('CreateRequestLocation');
+                        url = ApiBaseUrl+'Country/LocationsLookup';
+                    }
+                    else  if(index === 6){
+
+                        store = Ext.getStore('CreateRequestLanguage');
+                        url = ApiBaseUrl+'Language/LanguagesLookup';
+                    }
+                });
 
 
-            if(query!=='')
-            url = url + '?filter='+query;
-            Ext.Ajax.request({
-                url: url,
-                method: 'Get',
-                headers: { 'Content-Type': 'application/json' },
-                success: function(conn, response, options, eOpts) {
+                if(query!=='')
+                url = url + '?filter='+query;
+                Ext.Ajax.request({
+                    url: url,
+                    method: 'Get',
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function(conn, response, options, eOpts) {
 
-                    var result = Ext.JSON.decode(conn.responseText);
-                    if (result.success && result.items.length>0)
-                    G.show('SearchList');
-                    else
-                    G.hide('SearchList');
+                        var result = Ext.JSON.decode(conn.responseText);
+                        if (result.success && result.items.length>0)
+                        G.show('SearchList');
+                        else
+                        G.hide('SearchList');
 
-                    store.setData(result.items);
-                    store.sync();
-                },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-                    G.showGeneralFailure();
-                }
-            });
+                        store.setData(result.items);
+                        store.sync();
+                    },
+                    failure: function(response, request) {
+                        //failure catch
+                        G.showGeneralFailure('', response);
+                    }
+                });
+            }
         },
 
         onAddSearchBtnTap: function() {
@@ -810,6 +811,7 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
         },
 
         onSearchListItemTap: function(e,dataview,record) {
+
             var selectedElement =  Ext.get(e.target);
 
             if(selectedElement.hasCls('listResult') || selectedElement.parent().hasCls('listResult')){
@@ -946,11 +948,11 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                         authStore.sync();
                     }
                     else
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -979,11 +981,11 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                             G.ShowView('StartScreen');
                         }
                         else
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     },
-                    failure: function(conn, response, options, eOpts) {
+                    failure: function(response, request) {
                         //failure catch
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 });
             }
@@ -992,6 +994,28 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 G.destroy('StartScreen');
                 G.ShowView('StartScreen');
             }
+        },
+
+        LatestUserCompanyAddress: function() {
+
+            var url = ApiBaseUrl+'usercompany/GetLatestUserCompanyCountry';
+            Ext.Ajax.request({
+                url: url,
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                success: function(conn, response, options, eOpts) {
+                    var result = Ext.JSON.decode(conn.responseText);
+                    if (result.success) {
+                        SearchResume.createKeywordView('Location', result.items.CountryName,result.items.CountryId);
+                        G.show('LocationCnt');
+
+                    }
+                },
+                failure: function(response, request) {
+                    //failure catch
+                    G.showGeneralFailure('', response);
+                }
+            });
         }
     },
 

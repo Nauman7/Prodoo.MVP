@@ -103,7 +103,7 @@ Ext.define('ProDooMobileApp.controller.G', {
             {
                 if(!Ext.isEmpty(response.responseText))
                 {
-                    Ext.Msg.alert("Error", Ext.decode(response.responseText).Message);
+                    //Ext.Msg.alert("Error", Ext.decode(response.responseText).Message);
                     return;
                 }
             }
@@ -323,9 +323,8 @@ Ext.define('ProDooMobileApp.controller.G', {
                         Ext.Msg.alert('', result.message);
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
-                    var response = G.getResponseData(response);
-                    Ext.Msg.alert('', response.message);
+                failure: function(response, request) {
+                    G.showGeneralFailure('', response)
                 }
             });
         },
@@ -415,12 +414,12 @@ Ext.define('ProDooMobileApp.controller.G', {
 
 
                                     } else {
-                                        G.showGeneralFailure();
+                                        G.showGeneralFailure('', response);
                                     }
                                 },
-                                failure: function(conn, response, options, eOpts) {
+                                failure: function(response, request) {
                                     //failure catch
-                                    G.showGeneralFailure();
+                                    G.showGeneralFailure('', response);
                                 }
                             });
                         },
@@ -478,12 +477,12 @@ Ext.define('ProDooMobileApp.controller.G', {
                                         button.up('container').destroy();
 
                                     } else {
-                                        G.showGeneralFailure();
+                                        G.showGeneralFailure('', response);
                                     }
                                 },
-                                failure: function(conn, response, options, eOpts) {
+                                failure: function(response, request) {
                                     //failure catch
-                                    G.showGeneralFailure();
+                                    G.showGeneralFailure('', response);
                                 }
                             });
 
@@ -586,12 +585,12 @@ Ext.define('ProDooMobileApp.controller.G', {
                                         button.up('container').destroy();
 
                                     } else {
-                                        G.showGeneralFailure();
+                                        G.showGeneralFailure('', response);
                                     }
                                 },
-                                failure: function(conn, response, options, eOpts) {
+                                failure: function(response, request) {
                                     //failure catch
-                                    G.showGeneralFailure();
+                                    G.showGeneralFailure('', response);
                                 }
                             });
 
@@ -630,9 +629,18 @@ Ext.define('ProDooMobileApp.controller.G', {
             Container.add(Cnt);
         },
 
-        showGeneralFailure: function() {
-            Ext.Msg.alert('', 'Please contact tech support, sorry for inconvenience');
+        showGeneralFailure: function(message, response) {
+            if (!message || message=='')
+            message = 'Please contact tech support, sorry for inconvenience';
 
+            if (response) {
+                message = JSON.parse(response.responseText).Message;
+                if (response.status == 401)
+                message = 'Please login agin, your session has been expired.';
+
+            }
+
+            Ext.Msg.alert('', message);
         },
 
         convertUtctoLocalDate: function(date) {

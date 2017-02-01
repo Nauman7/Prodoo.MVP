@@ -2829,7 +2829,8 @@ body.x-android {
   padding: 10px;
   height: 100%;
 }
-.TextMsg > .x-component-outer, .TextMsg .x-field-input {
+.TextMsg > .x-component-outer,
+.TextMsg .x-field-input {
   height: 100%;
 }
 
@@ -2916,7 +2917,8 @@ body.x-android {
   padding: 10px 5px;
 }
 
-.MsgCreateCnt, .MsgReplyCnt {
+.MsgCreateCnt,
+.MsgReplyCnt {
   height: 100%;
   position: absolute;
   width: 100%;
@@ -2939,18 +2941,13 @@ body.x-android {
   background: #f6aa3a !important;
 }
 
-.tickIconFloatRight {
-  padding: 0px 8px 0px;
-  margin: 5px;
-  margin-top: -5px;
-  height: 30px;
-  float: right;
+.reqInfo > .tickIconFloatRight {
+  padding: 10px;
+  margin: 0px 0 0 90px;
+  float: left;
   vertical-align: middle;
-  background-color: white;
-  color: black;
-  /*-moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;*/
+  background-color: #fff;
+  color: #000;
 }
 
 .companyDetail {

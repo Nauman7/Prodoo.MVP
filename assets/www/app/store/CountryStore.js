@@ -48,10 +48,10 @@ Ext.define('ProDooMobileApp.store.CountryStore', {
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {
-                var url = ApiBaseUrl + 'Country/get';
-                var storeApi = store.getProxy().getApi();
-                if(storeApi.read === undefined)
-                    storeApi.read = url;
+        var url = ApiBaseUrl + 'Country/get';
+        var storeApi = store.getProxy().getApi();
+        if(storeApi.read === undefined)
+            storeApi.read = url;
     }
 
 });

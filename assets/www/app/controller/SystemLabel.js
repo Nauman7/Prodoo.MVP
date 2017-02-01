@@ -183,6 +183,10 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                     Identifier.Title.Alert_Message_BtnEdit=label.Message;
                     break;
 
+                    case "Request_Invitation_Confirmation":
+                    Identifier.Title.Request_Invitation_Confirmation=label.Message;
+                    break;
+
 
                 }
 
@@ -259,6 +263,7 @@ Ext.define('ProDooMobileApp.controller.SystemLabel', {
                 Notification_ResumeList_ShortlistBtn:"Notification_ResumeList_ShortlistBtn",
                 Notification_ResumeList_RequestBtn:"Notification_ResumeList_RequestBtn",
                 Notification_ResumeList_SaveBtn:"Notification_ResumeList_SaveBtn",
+                Request_Invitation_Confirmation:"Request_Invitation_Confirmation",
 
                 //Alter-search
                 Alert_Search_SearchFilter:"Alert_Search_SearchFilter",

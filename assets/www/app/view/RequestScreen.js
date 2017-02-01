@@ -371,7 +371,7 @@ Ext.define('ProDooMobileApp.view.RequestScreen', {
         if(selectedElement.hasCls('moreInfo')){
             target.toggleCls('infoVisible');
             this.fixHeight(dataview);
-        }else if(selectedElement.dom.className==='reqData'){
+        }else if(selectedElement.dom.className==='reqData' ||selectedElement.dom.className==='x-button-label'){
         Requests.TapRequestTitle(selectedElement, 2, record);
 
         }else{

@@ -346,12 +346,12 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
 
                         }
                         else{
-                            G.showGeneralFailure();
+                            G.showGeneralFailure('', response);
                         }
 
                     },
                     failure : function (e) {
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 });
             }
@@ -454,11 +454,11 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         }
                     }
                     else{
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 },
                 failure : function (e) {
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -664,7 +664,7 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         G.show('CreateCompanyExperience');
 
                     } else {
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
 
                     companyNameField.setValue('');
@@ -673,9 +673,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     EndDateField.setValue(new Date());
                     DescriptionField.setValue('');
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -811,12 +811,12 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                         //   Ext.Msg.alert('Success',"Saved successfully.");
                     } else {
 
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -833,9 +833,9 @@ Ext.define('ProDooMobileApp.controller.UserResume', {
                     store.setData(result.items);
                     store.sync();
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
 

@@ -21,6 +21,7 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
         'Ext.Container',
         'Ext.Img',
         'Ext.field.File',
+        'Ext.field.Select',
         'Ext.field.Number',
         'Ext.field.TextArea',
         'Ext.field.Hidden',
@@ -85,6 +86,26 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
                         labelCls: 'labelCls',
                         name: 'CompanyAddress',
                         maxLength: 50
+                    },
+                    {
+                        xtype: 'selectfield',
+                        itemId: 'cmbCompanyCountry',
+                        label: 'Country',
+                        labelCls: 'labelCls',
+                        value: 'Select Country',
+                        placeHolder: 'Choose Country',
+                        autoSelect: false,
+                        displayField: 'CountryName',
+                        store: 'CountryStore',
+                        valueField: 'CountryId',
+                        listeners: [
+                            {
+                                fn: function(component, eOpts) {
+                                    component.setLabelAlign('left');
+                                },
+                                event: 'initialize'
+                            }
+                        ]
                     },
                     {
                         xtype: 'numberfield',

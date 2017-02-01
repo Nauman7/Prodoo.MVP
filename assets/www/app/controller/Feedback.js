@@ -90,9 +90,9 @@ Ext.define('ProDooMobileApp.controller.Feedback', {
                         });
 
                     },
-                    failure: function(conn, response, options, eOpts) {
+                   failure: function(response, request) {
                         //failure catch
-                        G.showGeneralFailure();
+                       G.showGeneralFailure('', response);
                     }
                 });
 

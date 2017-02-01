@@ -1,306 +1,306 @@
-
-
-
-.editIcon{
-	@extend .btnCircle;
-	background-color: $_yellow !important;
-	.x-button-label{
-		background-image: url(../images/requestScreen/Edit.png);
-	}
-}
-.replyIcon{	
-	@extend .btnCircle;
-	background-color: $_yellow !important;
-	    padding: 16px 0 0 12px;
-	.x-button-label{
-		background-image: url(../images/requestScreen/reply.png);
-		width: 38px;
-	}
-}
-.r10{
-	right:10px;
+.editIcon {
+    @extend .btnCircle;
+    background-color: $_yellow !important;
+    .x-button-label {
+        background-image: url(../images/requestScreen/Edit.png);
+    }
 }
 
-.b10{
-	bottom: 10px;
+.replyIcon {
+    @extend .btnCircle;
+    background-color: $_yellow !important;
+    padding: 16px 0 0 12px;
+    .x-button-label {
+        background-image: url(../images/requestScreen/reply.png);
+        width: 38px;
+    }
 }
-.b70{
-	bottom: 70px;
+
+.r10 {
+    right: 10px;
 }
-.b75{
-	bottom: 75px;
+
+.b10 {
+    bottom: 10px;
 }
-.MsgView{
-	color: white;
+
+.b70 {
+    bottom: 70px;
 }
-.l10{
-	left:10px;
+
+.b75 {
+    bottom: 75px;
+}
+
+.MsgView {
+    color: white;
+}
+
+.l10 {
+    left: 10px;
 }
 
 .MsgField {
-	background: #2d1f55;
-	.x-form-field{
-		padding-left: 6px;
-
-	}
-	
+    background: #2d1f55;
+    .x-form-field {
+        padding-left: 6px;
+    }
 }
 
-.MsgPanel{
-	background: $blue5;
-	
+.MsgPanel {
+    background: $blue5;
 }
-.MsgInboxCnt{
-	.x-scroll-scroller{
-		// padding-bottom: 70px;
-		padding-top: 7px;
-	}
+
+.MsgInboxCnt {
+    .x-scroll-scroller {
+        // padding-bottom: 70px;
+        padding-top: 7px;
+    }
 }
+
 .msgDate {
-	background-color: black;
-	position: absolute;
-	top: -8px;
-	padding: 3px 20px;
-	font-size: 10px;
-	color: #7A7193;
-	@include border-radius(50px);
-	z-index: 1;
+    background-color: black;
+    position: absolute;
+    top: -8px;
+    padding: 3px 20px;
+    font-size: 10px;
+    color: #7A7193;
+    @include border-radius(50px);
+    z-index: 1;
 }
+
 .msgTime {
-	color: white;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 90px;
-	padding: 20px 0;
-	bottom: 0;
-	text-align: center;
-	background-color: #3e335e;
-	vertical-align: middle;
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90px;
+    padding: 20px 0;
+    bottom: 0;
+    text-align: center;
+    background-color: #3e335e;
+    vertical-align: middle;
 }
+
 .msgList {
-	padding: 3px 60px 0 95px;
-	float: left;
+    padding: 3px 60px 0 95px;
+    float: left;
 }
 
 .msgTitle {
-	display: block;
+    display: block;
 }
 
 .msgDesc {
-	display: block;
-	color: #888888;
+    display: block;
+    color: #888888;
 }
 
 .unRead {
-	&:before {
-		content: '';
-		width: 13px;
-		height: 13px;
-		position: absolute;
-		background-color: #f6aa3a;
-		left: 84px;
-		top: 48%;
-		border-radius: 50%;
-	}
-	.msgDesc {
-		color: #f6aa3a;
-	}
+    &:before {
+        content: '';
+        width: 13px;
+        height: 13px;
+        position: absolute;
+        background-color: #f6aa3a;
+        left: 84px;
+        top: 48%;
+        border-radius: 50%;
+    }
+    .msgDesc {
+        color: #f6aa3a;
+    }
 }
 
 .SubjectField {
-	padding: 0;
-	background:#fff;
-	border-bottom: 1px solid #3e335e;
-	@extend .clearfix;
+    padding: 0;
+    background: #fff;
+    border-bottom: 1px solid #3e335e;
+    @extend .clearfix;
 }
-.SubjectFieldTo{
-	border-bottom: 1px solid #3e335e;
-	@extend .clearfix;
-	background-color: #fff;
+
+.SubjectFieldTo {
+    border-bottom: 1px solid #3e335e;
+    @extend .clearfix;
+    background-color: #fff;
 }
+
 .MessageToCls {
-	margin: 2px 10px 0 0;
-	line-height: 1;
-	padding: 10px 40px 10px 10px;
-	float: left;
-	background: #f6aa3a;
-	color: #fff;
-	@include border-radius(20px);
-	position: relative;
-	.closeIcon {
-		position: absolute;
-
-		top: 50%;
-		right: 5px;
-		margin-top: -15px;
-	}
+    margin: 2px 10px 0 0;
+    line-height: 1;
+    padding: 10px 40px 10px 10px;
+    float: left;
+    background: #f6aa3a;
+    color: #fff;
+    @include border-radius(20px);
+    position: relative;
+    .closeIcon {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        margin-top: -15px;
+    }
 }
 
 .SubjectField .x-input-el {
-	padding: 10px;
+    padding: 10px;
 }
+
 .SubjectField .x-input-el {
-	padding: 10px;
+    padding: 10px;
 }
 
 .TextMsg {
-	padding: 0;
-	background-color: white;
-	// position: absolute;
-	// top: 148px;
-	// left: 0;
-	// right: 0;
-	// bottom: 0;
-	.x-input-el {
-		padding: 10px;
-		height: 100%;
-	}
-	> .x-component-outer, .x-field-input{
-		height: 100%;
-	}
+    padding: 0;
+    background-color: white;
+    // position: absolute;
+    // top: 148px;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+    .x-input-el {
+        padding: 10px;
+        height: 100%;
+    }
+    > .x-component-outer,
+    .x-field-input {
+        height: 100%;
+    }
 }
 
-
-
-.sendBtn2{
-	@extend .btnCircle;
-	right:10px;
-	bottom: 10px;
-	padding-top: 11px;
-	background-color: $_yellow !important;
-	.x-button-label{
-		background-image: url(../images/requestScreen/sendBtn2.png) !important;
-		height: 37px;
-	}
+.sendBtn2 {
+    @extend .btnCircle;
+    right: 10px;
+    bottom: 10px;
+    padding-top: 11px;
+    background-color: $_yellow !important;
+    .x-button-label {
+        background-image: url(../images/requestScreen/sendBtn2.png) !important;
+        height: 37px;
+    }
 }
-
-
 
 .MsgDetailView {
-	// position: absolute;
-	// width: 100%;
-	// height: 100%;
-	// padding-bottom: 80px;
-	background: white;
-	.x-list-item {
-		border-top: 1px solid black !important;
-		@include transition(background 0.3s);
-		// &:hover{
-		// 	background: lighten($blue5,10);
-		// }
-	}	
-	
-	&.x-list {
-		// .x-list-item.x-item-selected.x-list-item-tpl,
-		// .x-list-item.x-item-pressed.x-list-item-tpl{
-		// 	background: lighten($blue5,15);
-		// 	.x-innerhtml{
-		// 		background: lighten($blue5,15);
-		// 	}
-		// }
-	}
-	// background-color: #fff;
-	.x-list-item.x-list-item-tpl  .x-innerhtml{
-		padding: 0 ;
-	}
-	// .x-list-item-last{
-	// 	border-bottom: none !important;
-	// }
+    // position: absolute;
+    // width: 100%;
+    // height: 100%;
+    // padding-bottom: 80px;
+    background: white;
+    .x-list-item {
+        border-top: 1px solid black !important;
+        @include transition(background 0.3s);
+        // &:hover{
+        // 	background: lighten($blue5,10);
+        // }
+    }
+    &.x-list {
+        // .x-list-item.x-item-selected.x-list-item-tpl,
+        // .x-list-item.x-item-pressed.x-list-item-tpl{
+        // 	background: lighten($blue5,15);
+        // 	.x-innerhtml{
+        // 		background: lighten($blue5,15);
+        // 	}
+        // }
+    }
+    // background-color: #fff;
+    .x-list-item.x-list-item-tpl .x-innerhtml {
+        padding: 0;
+    }
+    // .x-list-item-last{
+    // 	border-bottom: none !important;
+    // }
 }
 
 .msgDetailTitle {
-	text-align: center;
-	background-color: #3e335e;
-	display: inline-block;
-	width: 100%;
-	padding: 12px 40px 13px 40px;
-	position: relative;
-	line-height: 1;
-	.x-label{
-		color: white;
-		font-size: inherit;
-		
-	}
+    text-align: center;
+    background-color: #3e335e;
+    display: inline-block;
+    width: 100%;
+    padding: 12px 40px 13px 40px;
+    position: relative;
+    line-height: 1;
+    .x-label {
+        color: white;
+        font-size: inherit;
+    }
 }
 
 .msgDetailTitle .closeIcon {
-	position: absolute;
-	right: 5px;
-	margin: 0;
-	top: 6px;
+    position: absolute;
+    right: 5px;
+    margin: 0;
+    top: 6px;
 }
 
 .msgNameCnt {
-	background-color: #eceaf2;
-	color: #3e335e;
-	padding: 0 10px;
-	line-height: 1.6;
-	position: relative;
+    background-color: #eceaf2;
+    color: #3e335e;
+    padding: 0 10px;
+    line-height: 1.6;
+    position: relative;
 }
 
 .msgDetailDate {
-	position: absolute;
-	top: -10px;
-	width: 90px;
-	margin-left: -45px;
-	left: 50%;
-	font-size: 10px;
-	background-color: #000;
-	padding: 3px 20px;
-	line-height: 1;
-	text-align: center;
-	color: #ECEAF2;
-	border-radius: 50px;
+    position: absolute;
+    top: -10px;
+    width: 90px;
+    margin-left: -45px;
+    left: 50%;
+    font-size: 10px;
+    background-color: #000;
+    padding: 3px 20px;
+    line-height: 1;
+    text-align: center;
+    color: #ECEAF2;
+    border-radius: 50px;
 }
 
 .msgDetailUsername {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .msgDetailTime {
-	float: right;
+    float: right;
 }
 
 .msgDetailMsg {
-	background-color: white;
-	color: #3e335e;
-	padding: 10px 5px;
+    background-color: white;
+    color: #3e335e;
+    padding: 10px 5px;
 }
 
-.MsgCreateCnt , .MsgReplyCnt{
-	height: 100%;
-	position: absolute;
-	width: 100%;
-	left: 0;
-	top: 0;
-	// background-color: white;
-}
-.MsgReplyCnt{
-	.TextMsg {
-		height: 100%;
-		margin-top: 1px;
-	}
-}
-.MsgReplyView{
-	padding: 10px;
-	background-color: #fff;
-	color: #3e335e;
-}
-.bgYellow{
-	background: $_yellow !important;
+.MsgCreateCnt,
+.MsgReplyCnt {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    // background-color: white;
 }
 
-.tickIconFloatRight {
-  padding: 0px 8px 0px;
-  margin: 5px;
-  margin-top: -5px;
-  height: 30px;
-  float: right;
-  vertical-align: middle;
-  background-color: white;
-  color:black;
-  /*-moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;*/
+.MsgReplyCnt {
+    .TextMsg {
+        height: 100%;
+        margin-top: 1px;
+    }
+}
+
+.MsgReplyView {
+    padding: 10px;
+    background-color: #fff;
+    color: #3e335e;
+}
+
+.bgYellow {
+    background: $_yellow !important;
+}
+
+.reqInfo > .tickIconFloatRight {
+    padding: 10px;
+    margin: 0px 0 0 90px;
+    float: left;
+    vertical-align: middle;
+    background-color: #fff;
+    color: #000;
 }

@@ -270,12 +270,12 @@ Ext.define('ProDooMobileApp.controller.Present', {
                     });
                     G.Pop();
                 } else {
-                    G.showGeneralFailure();
+                   G.showGeneralFailure('', response);
                 }
             },
-            failure: function(conn, response, options, eOpts) {
+           failure: function(response, request) {
                 //failure catch
-                G.showGeneralFailure();
+               G.showGeneralFailure('', response);
             }
         });
     },
@@ -598,9 +598,9 @@ Ext.define('ProDooMobileApp.controller.Present', {
                                 });
                             }
                         },
-                        failure: function(conn, response, options, eOpts) {
+                       failure: function(response, request) {
                             //failure catch
-                            G.showGeneralFailure();
+                           G.showGeneralFailure('', response);
                         }
                     });
             });

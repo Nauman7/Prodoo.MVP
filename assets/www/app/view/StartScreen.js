@@ -529,6 +529,8 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
         G.Push('SearchResult');
         G.get('HelpDetail').setHtml(Identifier.Title.Help_Search_SearchBar);
         ActiveScreen=0;
+        //Set Location as default
+        SearchResume.LatestUserCompanyAddress();
     },
 
     onMyimgTap2: function(image, e, eOpts) {
@@ -608,6 +610,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
             }
         });
         G.Push('CompanyDetail');
+        Ext.getStore('CountryStore').load();
     },
 
     onMyimgTap1: function(image, e, eOpts) {

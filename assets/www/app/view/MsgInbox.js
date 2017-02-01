@@ -141,6 +141,9 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     '                <span class="msgTitle">',
                     '                    {Subject}',
                     '                </span>',
+                    '                <span class="msgTitle">',
+                    '                    {UserName}',
+                    '                </span>',
                     '                <span class="msgDesc">{MessageBody}</span>',
                     '                </div>',
                     '            <span class="closeIcon">',
@@ -274,34 +277,43 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
             {
                 xtype: 'list',
                 scrollable: false,
-                cls: 'requestListView',
+                cls: [
+                    'requestListView',
+                    'sendReqList '
+                ],
                 hidden: true,
                 itemId: 'declineRequestList',
                 emptyText: 'No record found',
                 itemTpl: [
                     '<div class="requestCnt">',
-                    '    <div class="msgDate">',
-                    '         {[G.GetSpecificTimePeriod(values.CreateDate)]}',
-                    '    </div>',
-                    '    <div class="msgTime"> {[G.GetSpecificTime(values.CreateDate)]}</div>',
-                    '    <tpl if="IsConfirmed == true">',
-                    '        <div class="msgList confirmed">',
-                    '    <tpl elseif="IsRead == false">',
-                    '        <div class="msgList unRead">',
-                    '    <tpl else>',
-                    '        <div class="msgList">',
-                    '    </tpl>',
-                    '        ',
-                    '                <span class="msgTitle">',
-                    '                    {RequestName}',
-                    '                </span>',
-                    '        <span class="msgDesc">{Company.CompanyName}</span>',
-                    '               ',
-                    '      </div>         ',
-                    '            <span class="tickIconFloatRight">',
-                    '                Restore',
+                    '    <div class="reqData">',
+                    '        <div class="msgDate">',
+                    '            {[G.GetSpecificTimePeriod(values.CreateDate)]}',
+                    '        </div>',
+                    '        <div class="msgTime"> {[G.GetSpecificTime(values.CreateDate)]}</div>',
+                    '        <tpl if="IsConfirmed == true">',
+                    '            <div class="msgList confirmed">',
+                    '        <tpl elseif="IsRead == false">',
+                    '            <div class="msgList unRead">',
+                    '        <tpl else>',
+                    '            <div class="msgList">',
+                    '        </tpl>',
+                    '',
+                    '            <span class="msgTitle">',
+                    '                {RequestName}',
                     '            </span>',
-                    '  </div>',
+                    '            <span class="msgDesc">{Company.CompanyName}</span>',
+                    '',
+                    '        </div>  ',
+                    '        <span class="moreInfo">. . .</span>',
+                    '    </div>',
+                    '    <div class="reqInfo">    ',
+                    '        <span class="tickIconFloatRight">',
+                    '            Restore',
+                    '        </span>',
+                    '    </div>',
+                    '',
+                    '</div>',
                     '',
                     '',
                     ''
@@ -579,10 +591,14 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
 
     onrequestListTap11: function(dataview, index, target, record, e, eOpts) {
 
-        var target =  Ext.get(e.target);
-        if(target.dom.className==='tickIconFloatRight')
+        var selectedElement =  Ext.get(e.target);
+        if(selectedElement.hasCls('moreInfo')){
+            target.toggleCls('infoVisible');
+            this.fixHeight(dataview);
+        }
+        else if(selectedElement.dom.className==='tickIconFloatRight'){
             Requests.RestoreRequest(target,0,record);
-
+        }
         //Requests.TapRequestTitle(target, 0, record);
     },
 
@@ -604,12 +620,17 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
     AdjustListHeight: function(component) {
         component.on('refresh',function(){
             if(!G.get('MsgViewCnt').isHidden()){
-                this.setHeight(null);
-                var ViewHeight = Ext.get(this.element.query('.x-scroll-scroller')[0]).getHeight();
-                if(ViewHeight > 10)
-                    this.setHeight(ViewHeight);
+                G.get('MsgViewCnt').fixHeight(this);
             }
         });
+    },
+
+    fixHeight: function(component) {
+        component.setHeight(null);
+        var ViewHeight = Ext.get(component.element.query('.x-scroll-scroller')[0]).getHeight();
+        if(ViewHeight > 10)
+            component.setHeight(ViewHeight);
+
     }
 
 });

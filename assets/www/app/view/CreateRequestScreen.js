@@ -387,7 +387,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
                                 name: 'LocationId',
-                                value: 13,
+                                value: 'select location',
                                 placeHolder: 'Choose Location',
                                 autoSelect: false,
                                 defaultPhonePickerConfig: {
@@ -422,7 +422,7 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
                                 name: 'LanguageId',
-                                value: 2,
+                                value: 'Choose Language',
                                 placeHolder: 'Choose Language',
                                 autoSelect: false,
                                 defaultPhonePickerConfig: {
@@ -457,7 +457,9 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
                                 name: 'UserCompanyId',
+                                value: 'Choose Company',
                                 placeHolder: 'Choose Company',
+                                autoSelect: false,
                                 defaultPhonePickerConfig: {
                                     zIndex: 999
                                 },
@@ -490,8 +492,9 @@ Ext.define('ProDooMobileApp.view.CreateRequestScreen', {
                                 labelCls: 'labelCls',
                                 labelWidth: 110,
                                 name: 'SavedSearchedId',
-                                value: 1,
+                                value: 'Choose SaveSearch',
                                 placeHolder: 'Choose Saved Search',
+                                autoSelect: false,
                                 defaultPhonePickerConfig: {
                                     zIndex: 999
                                 },

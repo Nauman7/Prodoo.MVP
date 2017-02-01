@@ -88,11 +88,11 @@ Ext.define('ProDooMobileApp.controller.Statistics', {
                         }
                     }
                     else{
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 },
                 failure : function (e) {
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
             G.Push('StatisticsView');

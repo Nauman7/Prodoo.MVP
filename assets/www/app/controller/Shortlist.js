@@ -23,13 +23,11 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
     statics: {
         onShortlistResumeItemClick: function(className, data) {
 
-
-
             if(className === 'x-button-label'){ // Delete Shortlist and associated resumes
                 //Shortlist.DeleteRecord(data);
                 var shorlistId=data.ShortlistId;
                 Ext.Ajax.request({
-                    url: ApiBaseUrl+'Shortlists/GetAllResumesByShortlistId?shortlistId='+shorlistId,
+                    url: ApiBaseUrl+'Shortlists/GetAllRequestByShortlistId?shortlistId='+shorlistId,
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     success: function(conn, response, options, eOpts) {
@@ -105,8 +103,9 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
 
 
                         },
-                        failure: function(conn, response, options, eOpts) {
+                        failure: function(response, request) {
                             //failure catch
+                            G.showGeneralFailure('', response)
 
                         }
                     });
@@ -127,11 +126,11 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                 success: function(conn, response, options, eOpts) {
                     var result = Ext.JSON.decode(conn.responseText);
                     if (!result.success)
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -165,12 +164,12 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                         Shortlist.showShortListView(hideCreateIcon);
                     }
                     else
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
 
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -218,13 +217,13 @@ Ext.define('ProDooMobileApp.controller.Shortlist', {
                         if (result.success) {
                             Shortlist.showShortListView();
                         } else {
-                            G.showGeneralFailure();
+                            G.showGeneralFailure('', response);
                         }
 
                     },
-                    failure: function(conn, response, options, eOpts) {
+                    failure: function(response, request) {
                         //failure catch
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 });
             });

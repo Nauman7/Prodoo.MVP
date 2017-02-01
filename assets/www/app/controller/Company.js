@@ -66,7 +66,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
     },
 
     onCompanyDetailTplItemTap: function(dataview, index, target, record, e, eOpts) {
-
+        var me=this;
         var selectedItem = e.target;
         if(selectedItem.className.indexOf('compArrowDown')>=0){
             Ext.get(selectedItem).toggleCls('compArrowUp');
@@ -88,7 +88,10 @@ Ext.define('ProDooMobileApp.controller.Company', {
             G.Push('CompanyEdit');
             var form = G.get('CompanyAddForm');
             form.setValues(record.data);
+            var cmbCountry=G.get('cmbCompanyCountry');
+            cmbCountry.setValue(record.data.CountryId);
             G.get('companyImg').setSrc(record.data.Logo);
+
         }
         else if(selectedItem.className.indexOf('companyDelete')>=0)
         {
@@ -118,9 +121,9 @@ Ext.define('ProDooMobileApp.controller.Company', {
                         }
                         else {  Ext.Msg.alert('', result.message); }
                     },
-                    failure: function(conn, response, options, eOpts) {
+                   failure: function(response, request) {
                         //failure catch
-                        G.showGeneralFailure();
+                       G.showGeneralFailure('', response);
                     }
                 });
             });
@@ -171,16 +174,12 @@ Ext.define('ProDooMobileApp.controller.Company', {
             Ext.Msg.alert('',Identifier.Title.Alert_Company_TxtNameValidation);
             return null;
         }
-
-        /*
-        Pd-216
-        if(obj.CompanyName != null && obj.CompanyName != "" &&  !G.ValidateAlphabet(obj.CompanyName))
+        if(obj.CompanyAddress != null && obj.CompanyAddress != "" && !G.ValidateAlphanumeric(obj.CompanyAddress))
         {
-            fields.CompanyName.addCls('isRequired');
-            Ext.Msg.alert('',"Unable to save,  Name is invalid.");
+            fields.CompanyAddress.addCls('isRequired');
+            Ext.Msg.alert('',"Unable to save,  Address is invalid.");
             return null;
         }
-        */
         if(obj.CompanyAddress != null && obj.CompanyAddress != "" && !G.ValidateAlphanumeric(obj.CompanyAddress))
         {
             fields.CompanyAddress.addCls('isRequired');
@@ -188,14 +187,20 @@ Ext.define('ProDooMobileApp.controller.Company', {
             return null;
         }
 
+
         if(obj.Phone != null && obj.Phone != "" && !G.ValidateInteger(obj.Phone))
         {
             fields.Phone.addCls('isRequired');
             Ext.Msg.alert('',"Unable to save,  Phone No is invalid.");
             return null;
         }
-
-
+        var countryId=G.get('cmbCompanyCountry');
+        if(countryId._value === null)
+        {
+            Ext.Msg.alert('',"Choose any country to proceed.");
+            return ;
+        }
+        obj.CountryId=countryId._value.data.CountryId;
         Ext.Ajax.request({
             url: ApiBaseUrl+'UserCompany/AddUserCompany',
             method: 'POST',
@@ -221,12 +226,12 @@ Ext.define('ProDooMobileApp.controller.Company', {
                     });
                     G.Pop();
                 } else {
-                    G.showGeneralFailure();
+                   G.showGeneralFailure('', response);
                 }
             },
-            failure: function(conn, response, options, eOpts) {
+           failure: function(response, request) {
                 //failure catch
-                G.showGeneralFailure();
+               G.showGeneralFailure('', response);
             }
         });
 

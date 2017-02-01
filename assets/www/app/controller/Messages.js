@@ -246,11 +246,11 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                         store.remove(record);
                         Ext.Msg.alert('', 'Message deleted successfully!');
                     }
-                    else { G.showGeneralFailure(); }
+                    else {G.showGeneralFailure('', response); }
 
                 },
                 failure : function (e) {
-                    G.showGeneralFailure();
+                   G.showGeneralFailure('', response);
                 }
             });
             });
@@ -293,11 +293,11 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                             Ext.query(".msgDetailTime")[0].innerText=G.GetSpecificTime(record.data.DateCreated);
                             G.show('MsgDetailList');
                         }
-                        else { G.showGeneralFailure(); }
+                        else {G.showGeneralFailure('', response); }
 
                     },
                     failure : function (e) {
-                        G.showGeneralFailure();
+                       G.showGeneralFailure('', response);
                     }
                 });
 
@@ -584,11 +584,11 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                             G.show('invitationLabel');
                         }
                     }
-                    else { G.showGeneralFailure(); }
+                    else {G.showGeneralFailure('', response); }
 
                 },
                 failure : function (e) {
-                    G.showGeneralFailure();
+                   G.showGeneralFailure('', response);
                 }
             });
         }

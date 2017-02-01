@@ -33,6 +33,9 @@ Ext.define('ProDooMobileApp.store.CompanyDetail', {
                 name: 'CompanyAddress'
             },
             {
+                name: 'CountryId'
+            },
+            {
                 name: 'Vat'
             },
             {

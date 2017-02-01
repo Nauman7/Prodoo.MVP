@@ -78,7 +78,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
         sendRequest: function() {
             if(localStorage.SubmitDirectRequest=="true" || G.get('requestList').getSelection()[0]){
-                Ext.Msg.confirm('Confirm', 'Do you want to send request invitation?', function(btn){
+                Ext.Msg.confirm('Confirm', Identifier.Title.Request_Invitation_Confirmation, function(btn){
                     if(btn === 'yes'){
                         var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
                         var store = Ext.getStore('SearchRequestList');
@@ -155,14 +155,42 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         passModelToSavedSearchList: function() {
+
             var form  = G.get('CreateRequestScreen');
             var values = form.getValues();
 
+
+
+
             if(values.RequestName){
+                if(Ext.isEmpty(values.StartDate)){
+                    Ext.Msg.alert('', 'Please enter start date to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.DurationType)){
+                    Ext.Msg.alert('', 'Please select duration type to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.FeeCurrencyType)){
+                    Ext.Msg.alert('', 'Please select currency type to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.LocationId)){
+                    Ext.Msg.alert('', 'Please select location to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.LanguageId)){
+                    Ext.Msg.alert('', 'Please select language to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.UserCompanyId)){
+                    Ext.Msg.alert('', 'Please select user compnay to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.SavedSearchedId)){
+                    Ext.Msg.alert('', 'Please select any saved searched to proceed.');
+                    return;
+                }else if(Ext.isEmpty(values.Description)){
+                    Ext.Msg.alert('', 'Please write some decription to proceed.');
+                    return;
+                }
+
                 //var model = null;
                 var loggedUserId = Ext.getStore('AuthStore').getAt(0).get('UserId');
-
-
                 var model = Ext.create('ProDooMobileApp.model.SearchRequestList');
                 model.set(values);
                 model.set('Duration', values.Duration[0]);
@@ -227,6 +255,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
         },
 
         DeleteRequestResume: function(requestId, requestName, innerView) {
+
             var requestObject = new Object();
 
             requestObject.RequestId = requestId;
@@ -250,9 +279,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         Requests.ShowRequestView(false,false);
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -273,9 +302,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                     Ext.Msg.alert('Not Deleted', result.message);
 
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
 
@@ -288,197 +317,216 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
             if(target.parent('.closeIcon')){
 
-                Ext.Msg.confirm('Confirm','You want to delete the current request?', function(btn){
-                    if(btn === 'yes'){
-                        Ext.Msg.confirm('Confirm','Do you want to remove the associated saved search and shortlist as well?', function(btn){
+                if(Ext.getStore('AuthStore').getAt(0).data.IsFreelancer){
+
+                    Ext.Msg.confirm('Confirm','Do you want to delete the invitation?', function(btn){
+                        if(btn === 'yes'){
+                            Requests.DeleteRequestResume(record.data.RequestId, record.data.RequestName, false);
+                        }});
+
+
+                    }else{
+
+                        Ext.Msg.confirm('Confirm','You want to delete the current request?', function(btn){
                             if(btn === 'yes'){
-                                // ajax call to SS and SL
-                                if(item===0){ // Delete Recieved resume request
-                                    Requests.DeleteRequestResume(record.data.RequestId, record.data.RequestName, false);
-                                } else // Delete draft,sent request
-                                {
-                                    if(savedSearchId){
-                                        Ext.Ajax.request({
-                                            url: ApiBaseUrl+'Requests/GetRequestBySaveSearchId?searchId='+savedSearchId,
-                                            method: 'GET',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            success: function(conn, response, options, eOpts) {
-                                                var obj=JSON.parse(conn.responseText);
-                                                var no=1;
-                                                if(obj.total>1){
-                                                    var requestlist='';
-                                                    for (i = 0; i < obj.total; i++) {
-                                                        requestlist+=no+'.'+ obj.items[i].RequestName+'</br>';
-                                                        no++;
-                                                    }
-                                                    Ext.Msg.alert('','The request have saved search which is associated with other request(s).</br>'+requestlist+'The Saved Search can only be deleted when no other request(s) are associated with it.');
-                                                    return;
-                                                }else{
-                                                    //Delete Reqeust and savedSearch
-                                                    Ext.Ajax.request({
-                                                        url: ApiBaseUrl+'requests/get?requestId='+record.data.RequestId,
-                                                        method: 'GET',
-                                                        headers: { 'Content-Type': 'application/json' },
-                                                        success: function(conn, response, options, eOpts) {
-                                                            var obj=JSON.parse(conn.responseText);
-                                                            for(var i=0;i<obj.items.ShortLists.length;i++){
-                                                                var slId=obj.items.ShortLists[i].ShortlistId;
-                                                                var result=Requests.selectShortlist(slId);
-
-                                                                var shortList = {
-                                                                    ShortlistId:slId,
-                                                                    ShortlistName:"Name"
-                                                                };
-
-                                                                if(result){
-                                                                    Ext.Ajax.request({
-                                                                        url: ApiBaseUrl+'Shortlists/delete',
-                                                                        method: 'Delete',
-                                                                        params : Ext.JSON.encode(shortList),
-                                                                        headers: { 'Content-Type': 'application/json' },
-                                                                        success: function(conn, response, options, eOpts) {},
-                                                                        failure: function(conn, response, options, eOpts) {G.showGeneralFailure();}
-                                                                    });
-
-                                                                }
-
-                                                                Requests.DeleteRequest(record.data.RequestId, item);
+                                Ext.Msg.confirm('Confirm','Do you want to remove the associated saved search and shortlist as well?', function(btn){
+                                    if(btn === 'yes'){
+                                        // ajax call to SS and SL
+                                        if(item===0){ // Delete Recieved resume request
+                                            Requests.DeleteRequestResume(record.data.RequestId, record.data.RequestName, false);
+                                        } else // Delete draft,sent request
+                                        {
+                                            if(savedSearchId){
+                                                Ext.Ajax.request({
+                                                    url: ApiBaseUrl+'Requests/GetRequestBySaveSearchId?searchId='+savedSearchId,
+                                                    method: 'GET',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    success: function(conn, response, options, eOpts) {
+                                                        var obj=JSON.parse(conn.responseText);
+                                                        var no=1;
+                                                        if(obj.total>1){
+                                                            var requestlist='';
+                                                            for (i = 0; i < obj.total; i++) {
+                                                                requestlist+=no+'.'+ obj.items[i].RequestName+'</br>';
+                                                                no++;
                                                             }
+                                                            Ext.Msg.alert('','The request have saved search which is associated with other request(s).</br>'+requestlist+'The Saved Search can only be deleted when no other request(s) are associated with it.');
+                                                            return;
+                                                        }else{
+                                                            //Delete Reqeust and savedSearch
+                                                            Ext.Ajax.request({
+                                                                url: ApiBaseUrl+'requests/get?requestId='+record.data.RequestId,
+                                                                method: 'GET',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                success: function(conn, response, options, eOpts) {
+                                                                    var obj=JSON.parse(conn.responseText);
+                                                                    for(var i=0;i<obj.items.ShortLists.length;i++){
+                                                                        var slId=obj.items.ShortLists[i].ShortlistId;
+                                                                        var result=Requests.selectShortlist(slId);
+
+                                                                        var shortList = {
+                                                                            ShortlistId:slId,
+                                                                            ShortlistName:"Name"
+                                                                        };
+
+                                                                        if(result){
+                                                                            Ext.Ajax.request({
+                                                                                url: ApiBaseUrl+'Shortlists/delete',
+                                                                                method: 'Delete',
+                                                                                params : Ext.JSON.encode(shortList),
+                                                                                headers: { 'Content-Type': 'application/json' },
+                                                                                success: function(conn, response, options, eOpts) {},
+                                                                                failure: function(response, request) {G.showGeneralFailure();}
+                                                                            });
+
+                                                                        }
+
+                                                                        Requests.DeleteRequest(record.data.RequestId, item);
+                                                                    }
+                                                                }
+                                                            });
                                                         }
-                                                    });
-                                                }
+                                                    }
+                                                });
+                                            }else{
+                                                //call search delete functionality
+                                                Requests.DeleteRequest(record.data.RequestId, item);
                                             }
-                                        });
+
+
+
+
+                                        }
+
                                     }else{
-                                        //call search delete functionality
+                                        //remove only request.
                                         Requests.DeleteRequest(record.data.RequestId, item);
                                     }
+                                });
+
+                            }});
+
+
+                        }
 
 
 
 
-                                }
 
-                            }else{
-                                //remove only request.
-                                Requests.DeleteRequest(record.data.RequestId, item);
+
+                    }
+                    else if(target.parent('.x-list-item')){
+
+                        if(item===0){// Inbox active
+                            // G.ShowView('RequestDetail');
+                            G.Push('RequestDetail');
+                            var startDate= new Date(record.data.StartDate);
+
+                            G.get("SpanDateDuration").setHtml(startDate.toDateString()+", Duration "+record.data.Duration+" "+record.data.DurationType);
+                            G.get("SpanRequestName").setHtml(record.data.RequestName);
+                            G.get("HFRequestId").setHtml(record.data.RequestId);
+                            G.get("SpanHourlyFee").setHtml(record.data.HourlyFee  +" "+record.data.FeeCurrencyType);
+                            if(record.data.Company && record.data.Company.CompanyName)
+                            {
+                                G.get("SpanCompanyName").setHtml(record.data.Company.CompanyName);
+                                var companyStore = Ext.getStore('CompanyDetail');
+                                companyStore.clearData();
+                                companyStore.add({
+                                    CompanyName: record.data.Company.CompanyName,
+                                    CompanyAddress: record.data.Company.CompanyAddress,
+                                    Phone: record.data.Company.Phone,
+                                    Detail:record.data.Company.Detail,
+                                    Logo:record.data.Company.Logo,
+                                    Vat:record.data.Company.Vat,
+                                    UserCompanyId:record.data.Company.UserCompanyId,
+                                });
                             }
-                        });
+                            else
+                            G.get("SpanCompanyName").hide();
 
-                    }});
+
+                            if(record.data.Description)
+                            G.get("SpanDescription").setHtml(record.data.Description);
+                            else
+                            G.get("SpanDescription").hide();
+
+                            G.get("SpanLanguageLocation").setHtml(record.data.Language.LanguageValue+" "+record.data.Location.CountryName);
 
 
-                }
-                else if(target.parent('.x-list-item')){
+                            if(record.data.IsConfirmed){
 
-                    if(item===0){// Inbox active
-                        // G.ShowView('RequestDetail');
-                        G.Push('RequestDetail');
-                        var startDate= new Date(record.data.StartDate);
+                                G.get("acceptRequestBtn").hide();
+                                G.get("declineRequestBtn").hide();
+                                G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
+                            }
 
-                        G.get("SpanDateDuration").setHtml(startDate.toDateString()+", Duration "+record.data.Duration+" "+record.data.DurationType);
-                        G.get("SpanRequestName").setHtml(record.data.RequestName);
-                        G.get("HFRequestId").setHtml(record.data.RequestId);
-                        G.get("SpanHourlyFee").setHtml(record.data.HourlyFee  +" "+record.data.FeeCurrencyType);
-                        if(record.data.Company && record.data.Company.CompanyName)
-                        {
-                            G.get("SpanCompanyName").setHtml(record.data.Company.CompanyName);
-                            var companyStore = Ext.getStore('CompanyDetail');
-                            companyStore.clearData();
-                            companyStore.add({
-                                CompanyName: record.data.Company.CompanyName,
-                                CompanyAddress: record.data.Company.CompanyAddress,
-                                Phone: record.data.Company.Phone,
-                                Detail:record.data.Company.Detail,
-                                Logo:record.data.Company.Logo,
-                                Vat:record.data.Company.Vat,
-                                UserCompanyId:record.data.Company.UserCompanyId,
-                            });
+                            if(!record.data.IsRead) //Mark message as read
+                            {
+                                var rec= {RequestId: record.data.RequestId, ResumeId: Ext.getStore('AuthStore').getAt(0).get('ResumeId')};
+
+                                Ext.Ajax.request({
+                                    url : ApiBaseUrl+'RequestsResumes/MarkNotificationRead/',
+                                    method : 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    params : Ext.encode(rec),
+                                    success : function (response) {
+                                        Requests.ShowRequestView();
+                                    }
+                                });
+
+                            }
                         }
-                        else
-                        G.get("SpanCompanyName").hide();
+                        else{ // Other active
+
+                            var isSentRequest = false;
 
 
-                        if(record.data.Description)
-                        G.get("SpanDescription").setHtml(record.data.Description);
-                        else
-                        G.get("SpanDescription").hide();
-
-                        G.get("SpanLanguageLocation").setHtml(record.data.Language.LanguageValue+" "+record.data.Location.CountryName);
+                            if(item==2) // Sent active
+                            isSentRequest = true;
 
 
-                        if(record.data.IsConfirmed){
+                            G.Push('CreateRequestScreen');
+                            var topHeadingLabel =G.get('requestTopHeading');
+                            topHeadingLabel.setHtml('Request Details');
 
-                            G.get("acceptRequestBtn").hide();
-                            G.get("declineRequestBtn").hide();
-                            G.get("labelInterestedOrNot").setHtml('Invitation already accepted.');
-                        }
+                            var form = G.get('CreateRequestScreen');
+                            form.setValues(record.data);
+                            var fields = form.getFields();
 
-                        if(!record.data.IsRead) //Mark message as read
-                        {
-                            var rec= {RequestId: record.data.RequestId, ResumeId: Ext.getStore('AuthStore').getAt(0).get('ResumeId')};
+                            // setting from field values
+                            fields.StartDate.setValue(new Date(record.data.StartDate));
+                            if(record.data.Language!==undefined)
+                            fields.LanguageId.setValue(record.data.Language.LanguageId);
+                            if(record.data.Location!==undefined)
+                            fields.LocationId.setValue(record.data.Location.CountryId);
 
-                            Ext.Ajax.request({
-                                url : ApiBaseUrl+'RequestsResumes/MarkNotificationRead/',
-                                method : 'PUT',
-                                headers: { 'Content-Type': 'application/json' },
-                                params : Ext.encode(rec),
-                                success : function (response) {
-                                    Requests.ShowRequestView();
-                                }
-                            });
+                            SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
+                            SearchResume.onSliderfieldDrag(G.get('durationItemID'));
+
+
+                            if(isSentRequest){
+                                G.get('DraftRequestBtn').hide();
+                                fields.Duration.disable();
+                                fields.StartDate.disable();
+                                fields.RequestName.disable();
+                                fields.Description.disable();
+                                fields.LocationId.disable();
+                                fields.LanguageId.disable();
+                                fields.HourlyFee.disable();
+                                fields.Duration.disable();
+                                fields.UserCompanyId.disable();
+                                fields.FeeCurrencyType.disable();
+                                fields.DurationType.disable();
+                                fields.SavedSearchedId.disable();
+                                G.get('cloneBtn').show();
+                                G.get('FixRequest').hide();
+                                G.get('SavedResumes').show();
+                            }
+                            //else
+                            //    G.get('DraftRequestBtn').hide();
 
                         }
                     }
-                    else{ // Other active
-
-                        var isSentRequest = false;
-
-
-                        if(item==2) // Sent active
-                        isSentRequest = true;
-
-
-                        G.Push('CreateRequestScreen');
-                        var topHeadingLabel =G.get('requestTopHeading');
-                        topHeadingLabel.setHtml('Request Details');
-
-                        var form = G.get('CreateRequestScreen');
-                        form.setValues(record.data);
-                        var fields = form.getFields();
-
-                        // setting from field values
-                        fields.StartDate.setValue(new Date(record.data.StartDate));
-                        fields.LanguageId.setValue(record.data.Language.LanguageId);
-                        fields.LocationId.setValue(record.data.Location.CountryId);
-
-                        SearchResume.onSliderfieldDrag(G.get('feeRangeItemID'));
-                        SearchResume.onSliderfieldDrag(G.get('durationItemID'));
-
-
-                        if(isSentRequest){
-                            G.get('DraftRequestBtn').hide();
-                            fields.Duration.disable();
-                            fields.StartDate.disable();
-                            fields.RequestName.disable();
-                            fields.Description.disable();
-                            fields.LocationId.disable();
-                            fields.LanguageId.disable();
-                            fields.HourlyFee.disable();
-                            fields.Duration.disable();
-                            fields.UserCompanyId.disable();
-                            fields.FeeCurrencyType.disable();
-                            fields.DurationType.disable();
-                            fields.SavedSearchedId.disable();
-                            G.get('cloneBtn').show();
-                            G.get('FixRequest').hide();
-                            G.get('SavedResumes').show();
-                        }
-                        //else
-                        //    G.get('DraftRequestBtn').hide();
-
-                    }
-                }
         },
 
         ShowConfirmRequestView: function() {
@@ -506,9 +554,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         }
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
-                    if (response.timedout)
-                    Ext.Msg.alert('', 'Maximum request time exceeded');
+                failure: function(response, request) {
+                    G.showGeneralFailure('', response)
                 }
             });
         },
@@ -542,9 +589,9 @@ Ext.define('ProDooMobileApp.controller.Requests', {
                         //Requests.requestTopButtonsClick('ToMe');
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
 
@@ -655,11 +702,11 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                     }
                     else
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -732,9 +779,8 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
 
                 },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
-
+                failure: function(response, request) {
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -781,10 +827,7 @@ Ext.define('ProDooMobileApp.controller.Requests', {
 
                         }
                     });
-
                 }});
-
-
         }
     },
 

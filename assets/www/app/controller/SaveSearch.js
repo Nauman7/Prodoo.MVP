@@ -47,20 +47,16 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             // processing profiles
             if(profiles.items.length > 2){
                 profiles.items.forEach(function(item, index){
-                    if(index > 1){
-
-                        profilesObjs.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { profilesObjs.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
             // processing skills
             if(skills.items.length > 2){
                 skills.items.forEach(function(item, index){
-                    if(index > 1){
-
-                        skillsObjs.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { skillsObjs.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
@@ -68,68 +64,61 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
             if(industeries.items.length > 2){
                 industeries.items.forEach(function(item, index){
 
-                    if(index > 1){
-
-                        industeryIds.push(item.getAt(2).getValue());
-
-                    }
+                    if(index > 1)
+                    { industeryIds.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
             // processing keywords
             if(keywords.items.length > 2){
                 keywords.items.forEach(function(item, index){
-                    if(index > 1){
-                        keywordIds.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { keywordIds.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
             // processing certifications
             if(certifications.items.length > 2){
                 certifications.items.forEach(function(item, index){
-                    if(index > 1){
-                        certificationIds.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { certificationIds.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
             // processing locations
             if(locationNames.items.length > 2){
                 locationNames.items.forEach(function(item, index){
-                    if(index > 1){
-                        locations.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { locations.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
             if(languageNames.items.length > 2){
                 languageNames.items.forEach(function(item, index){
-                    if(index > 1){
-                        languages.push(item.getAt(2).getValue());
-                    }
+                    if(index > 1)
+                    { languages.push({'Id' : item.getAt(2).getValue(), 'ExpLevel' : 0}); }
                 });
             }
 
 
             var searchObject = new Object();
-            searchObject.ProfileIds = profilesObjs;
-            searchObject.SkillIds = skillsObjs;
-            searchObject.KeywordIds = keywordIds;
-            searchObject.CertificationIds = certificationIds;
-            searchObject.IndusteryIds = industeryIds;
+            searchObject.Profiles = profilesObjs;
+            searchObject.Skills = skillsObjs;
+            searchObject.Keywords = keywordIds;
+            searchObject.Certifications = certificationIds;
+            searchObject.Industries = industeryIds;
             searchObject.UserId = authRec.get('UserId');
             searchObject.Countries = locations;
             searchObject.Languages = languages;
 
             // if no search cretria set
             if(profilesObjs.length < 1
-            &&  skillsObjs.length < 1
-            &&    keywordIds.length < 1
+            && skillsObjs.length < 1
+            && keywordIds.length < 1
             && certificationIds.length < 1
             && industeryIds.length < 1
-            && locations.length <1
-            && languages.length <1
+            && locations.length < 1
+            && languages.length < 1
             )
             {
 
@@ -207,7 +196,8 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
         onSavedSearchResumeItemClick: function(dataview, index, target, record, e, eOpts) {
 
             var savedSearchId = record.data.SavedSearchId;
-            if(e.target.className.indexOf('x-button-label')>=0){
+            if(e.target.className.indexOf('x-button-label')>=0)
+            {
                 // SaveSearch.removeSearch(record);
                 Ext.Ajax.request({
                     url: ApiBaseUrl+'Requests/GetRequestBySaveSearchId?searchId='+savedSearchId,
@@ -234,12 +224,9 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
 
                     }
                 });
-
-
-
-
             }
-            else{
+            else
+            {
                 Ext.Ajax.request({
                     url: ApiBaseUrl+'SavedSearches/RetrieveResumeSearch?SavedSearchId='+savedSearchId,
                     method: 'GET',
@@ -302,12 +289,12 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                             // enabling profile by default
                             SearchResume.enableDisableItems('Profile');
                         } else {
-                            G.showGeneralFailure();
+                            G.showGeneralFailure('', response);
                         }
                     },
-                    failure: function(conn, response, options, eOpts) {
+                    failure: function(response, request) {
                         //failure catch
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 });
             }
@@ -362,7 +349,7 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                                 G.Push('SavedSearch');
                             }
                             else
-                            G.showGeneralFailure();
+                            G.showGeneralFailure('', response);
                         }// end of indirectSave
                         else
                         {
@@ -371,10 +358,10 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                         }
                     }
                     else
-                    G.showGeneralFailure();
+                    G.showGeneralFailure('', response);
                 },
-                failure: function(conn, response, options, eOpts) {
-                    //failure catch
+                failure: function(response, request) {
+                    G.showGeneralFailure('', response);
                 }
             });
         },
@@ -410,7 +397,8 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                         else
                         Ext.Msg.alert('', r.message,null);
                     },
-                    failure: function(conn, response, options, eOpts) {
+                    failure: function(response, request) {
+                        G.showGeneralFailure('', response)
                     }
                 });
             });

@@ -1142,9 +1142,9 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
                         str.remove(rec);
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
+               failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure();
+                   G.showGeneralFailure('', response);
                 }
             });
         }
@@ -1194,7 +1194,7 @@ Ext.define('ProDooMobileApp.view.ResumeView', {
         if(item===6)// if settings btn active
         {
             var requestSettingObj = new Object();
-            requestSettingObj.CountryId = newValue;
+            requestSettingObj.RegionId = newValue;
             UserResume.updateSettings_Instant(requestSettingObj);
         }
     },

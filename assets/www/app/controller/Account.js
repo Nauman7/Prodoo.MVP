@@ -25,7 +25,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
         authCheck: function() {
             IsVistor=false;
             var authStore = Ext.getStore('AuthStore');
-            if(authStore.data.items.length > 0){ // loggedin record exists
+            if(Account.AuthCookieExist() && authStore.data.items.length > 0){ // loggedin record exists
 
                 //SystemLabel.LoadSystemLabel();  //Load all system label to local store
                 var authRec = authStore.getAt(0);
@@ -84,12 +84,11 @@ Ext.define('ProDooMobileApp.controller.Account', {
                         IsVistor=true;
                         G.ShowView('SearchResult');
                     } else {
-                        G.showGeneralFailure();
+                        G.showGeneralFailure('', response);
                     }
                 },
                 failure: function(response, options) {
-                    var response = G.getResponseData(response);
-                    Ext.Msg.alert('', response.message);
+                    G.showGeneralFailure('', response)
                 }
             });
         },
@@ -130,11 +129,16 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     G.setLoggedUsername(logUserName);
 
                 },
-                failure: function(conn, response, options, eOpts) {
+                failure: function(response, request) {
                     //failure catch
-                    Ext.Msg.alert('',JSON.parse(conn.responseText).Message);
+                    G.showGeneralFailure('', response)
                 }
             });
+        },
+
+        AuthCookieExist: function() {
+            var a= '.ASPXAUTH';
+            return document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
         }
     },
 
@@ -221,9 +225,9 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     }
                     G.get('forgetPasswordEmail').setValue('');
                 },
-                failure: function(conn, response, options, eOpts) {
+               failure: function(response, request) {
                     //failure catch
-                    Ext.Msg.alert('',JSON.parse(conn.responseText).Message);
+                   G.showGeneralFailure('', response)
                 }
             });
         }
@@ -272,9 +276,9 @@ Ext.define('ProDooMobileApp.controller.Account', {
                         Ext.Msg.alert('', result.message);
                     }
                 },
-                failure: function(conn, response, options, eOpts) {
+               failure: function(response, request) {
 
-                    Ext.Msg.alert('',JSON.parse(conn.responseText).Message);
+                   G.showGeneralFailure('', response)
                 }
             });
         }
@@ -296,15 +300,26 @@ Ext.define('ProDooMobileApp.controller.Account', {
         authStore.removeAll();
         authStore.sync({
             success: function () {
+                // Erase cookie
+                 document.cookie = '.ASPXAUTH'+'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
                 if(FB.getAccessToken() !== null ){
                     FB.logout();
                 }
+                var cnt = this;
+
+                Ext.Ajax.request({
+                    url: ApiBaseUrl + 'Account/Logoff',
+                    success: function () {
+                        G.ShowView('LoginForm');
+                    },
+                    failure: function (response) {
+                    }
+                });
                 //if(!Ext.isEmpty(IN.User) && IN.User.isAuthorized())
                 //   IN.User.logout();
-                G.ShowView('LoginForm');
             },
             failure: function (batch) {
-                Ext.Msg.alert('', 'Please contact technical support');
             }
         });
         // to log out when user enter as visitor
@@ -365,9 +380,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     }
                 },
                 failure: function(response, options) {
-
-                    var response = G.getResponseData(response);
-                    Ext.Msg.alert('', response.message);
+                   G.showGeneralFailure('', response)
                 }
             });
         }
