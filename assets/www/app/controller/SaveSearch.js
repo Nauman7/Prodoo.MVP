@@ -395,10 +395,10 @@ Ext.define('ProDooMobileApp.controller.SaveSearch', {
                             Ext.Viewport.setMasked(false);
                         }
                         else
-                        Ext.Msg.alert('Info', r.message,null);
+                        Ext.Msg.alert('', r.message,null);
                     },
                     failure: function(response, request) {
-                        G.showGeneralFailure('', response);
+                        G.showGeneralFailure('', response)
                     }
                 });
             });

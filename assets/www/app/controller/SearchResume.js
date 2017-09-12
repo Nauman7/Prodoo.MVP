@@ -261,7 +261,6 @@ Ext.define('ProDooMobileApp.controller.SearchResume', {
                 searchObject.Countries=countryNames;
                 searchObject.Languages=languageIds;
                 searchObject.Type='Only20';
-                searchObject.SearchByMobile= true;
                 searchObject.AvailabilityDate=G.get('SearchDatepicker').getFormattedValue();
                 var searchObj = JSON.stringify(searchObject);
                 var store = Ext.getStore('SearchResultSaved');

@@ -33,12 +33,6 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                 xtype: 'formpanel',
                 items: [
                     {
-                        xtype: 'label',
-                        cls: 'RequestLabel',
-                        html: 'Invitation Detail',
-                        margin: 0
-                    },
-                    {
                         xtype: 'container',
                         cls: [
                             'bbBlack',
@@ -163,8 +157,7 @@ Ext.define('ProDooMobileApp.view.RequestDetail', {
                             'backIcon',
                             'btnCircle',
                             'b10',
-                            'l10',
-                            'bgLightBlue'
+                            'l10'
                         ],
                         docked: 'bottom',
                         itemId: 'BackBtn',

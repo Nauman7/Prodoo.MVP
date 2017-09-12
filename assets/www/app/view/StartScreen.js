@@ -82,7 +82,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 itemId: 'StartCompanyBtn',
                                 width: '50%',
                                 pressedCls: null,
-                                text: 'Searcher'
+                                text: 'Company'
                             },
                             {
                                 xtype: 'button',
@@ -93,7 +93,7 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
                                 itemId: 'StartFreelancerBtn',
                                 width: '50%',
                                 pressedCls: null,
-                                text: 'iPro'
+                                text: 'Freelancer'
                             }
                         ]
                     },
@@ -611,7 +611,6 @@ Ext.define('ProDooMobileApp.view.StartScreen', {
         });
         G.Push('CompanyDetail');
         Ext.getStore('CountryStore').load();
-        Ext.getStore("IndustriesStore").load();
     },
 
     onMyimgTap1: function(image, e, eOpts) {

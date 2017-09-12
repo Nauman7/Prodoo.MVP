@@ -89,44 +89,12 @@ Ext.define('ProDooMobileApp.view.CompanyEdit', {
                     },
                     {
                         xtype: 'selectfield',
-                        itemId: 'cmbCompanyIndustry',
-                        label: 'Industry',
-                        labelCls: 'labelCls',
-                        value: 'Select Industry',
-                        placeHolder: 'Choose Industry',
-                        autoSelect: false,
-                        defaultPhonePickerConfig: {
-                            zIndex: 999
-                        },
-                        defaultTabletPickerConfig: {
-                            zIndex: 999
-                        },
-                        displayField: 'IndustryValue',
-                        store: 'IndustriesStore',
-                        valueField: 'IndustryId',
-                        listeners: [
-                            {
-                                fn: function(component, eOpts) {
-                                    component.setLabelAlign('left');
-                                },
-                                event: 'initialize'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'selectfield',
                         itemId: 'cmbCompanyCountry',
                         label: 'Country',
                         labelCls: 'labelCls',
                         value: 'Select Country',
                         placeHolder: 'Choose Country',
                         autoSelect: false,
-                        defaultPhonePickerConfig: {
-                            zIndex: 999
-                        },
-                        defaultTabletPickerConfig: {
-                            zIndex: 999
-                        },
                         displayField: 'CountryName',
                         store: 'CountryStore',
                         valueField: 'CountryId',

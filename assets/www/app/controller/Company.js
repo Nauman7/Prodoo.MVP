@@ -200,16 +200,7 @@ Ext.define('ProDooMobileApp.controller.Company', {
             Ext.Msg.alert('',"Choose any country to proceed.");
             return ;
         }
-        var industryId=G.get('cmbCompanyIndustry');
-        if(industryId._value === null)
-        {
-            Ext.Msg.alert('',"Choose any industry to proceed.");
-            return ;
-        }
-
         obj.CountryId=countryId._value.data.CountryId;
-        obj.IndustryId=industryId._value.data.IndustryId;
-
         Ext.Ajax.request({
             url: ApiBaseUrl+'UserCompany/AddUserCompany',
             method: 'POST',

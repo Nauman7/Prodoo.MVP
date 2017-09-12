@@ -138,9 +138,7 @@ Ext.application({
         else if(window.location.href.indexOf('dev')>0)
             ApiBaseUrl= "http://mobile.dev.prodoo.dk/webapi/api/";
         else if(window.location.href.indexOf('staging')>0)
-            ApiBaseUrl = "http://mobile.staging.prodoo.dk/WebAPI/api/";
-        else if (window.location.href.indexOf('mobile.prodoo') > 0)
-            ApiBaseUrl = "http://mobile.prodoo.dk/WebAPI/api/";
+            ApiBaseUrl= "http://mobile.staging.prodoo.dk/WebAPI/api/";
         else
             ApiBaseUrl= "http://mobile.prodoo.dk/WebAPI/api/";
 

@@ -26,7 +26,6 @@ Ext.define('ProDooMobileApp.view.PresentSocialMedia', {
 
     config: {
         cls: 'PresSocial',
-        padding: '0 0 80 0',
         scrollable: true,
         items: [
             {
@@ -293,6 +292,7 @@ Ext.define('ProDooMobileApp.view.PresentSocialMedia', {
             },
             {
                 xtype: 'button',
+                bottom: 10,
                 cls: [
                     'confirmIcon',
                     'btnCircle',
@@ -300,6 +300,7 @@ Ext.define('ProDooMobileApp.view.PresentSocialMedia', {
                 ],
                 docked: 'bottom',
                 itemId: 'PresentSocialMediaConfirm',
+                right: 10,
                 text: ' '
             }
         ]

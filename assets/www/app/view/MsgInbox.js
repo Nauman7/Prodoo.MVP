@@ -29,7 +29,6 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
 
     config: {
         itemId: 'MsgViewCnt',
-        padding: '0 0 90 0',
         scrollable: true,
         cls: [
             'MsgPanel',
@@ -122,57 +121,41 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
             {
                 xtype: 'list',
                 scrollable: false,
-                cls: [
-                    'requestListView',
-                    'sendReqList'
-                ],
+                cls: 'requestListView',
                 hidden: false,
                 itemId: 'MsgList',
+                margin: '0 0 70 0',
                 emptyText: 'No messages found',
                 itemTpl: Ext.create('Ext.XTemplate', 
                     '<div class="requestCnt">',
-                    '    <div class="reqData">',
-                    '        <div class="msgDate">',
-                    '            {[this.returnDate(values.DateCreated)]}',
-                    '        </div>',
+                    '    <div class="msgDate">',
+                    '          {[this.returnDate(values.DateCreated)]}',
+                    '    </div>',
                     '',
-                    '        <div class="msgTime">{[this.returnTime(values.DateCreated)]}</div>',
-                    '        <tpl if="IsRead == false">',
+                    '    <div class="msgTime">{[this.returnTime(values.DateCreated)]}</div>',
+                    '    <tpl if="IsRead == false">',
                     '        <div class="msgList unRead">',
-                    '                <tpl else> ',
-                    '        <div class="msgList">',
-                    '            </tpl>',
-                    '            <span class="msgTitle">',
-                    '                {Subject}',
+                    '            <tpl else> ',
+                    '                <div class="msgList">',
+                    '                    </tpl>',
+                    '                <span class="msgTitle">',
+                    '                    {Subject}',
+                    '                </span>',
+                    '                <span class="msgTitle">',
+                    '                    {UserName}',
+                    '                </span>',
+                    '                <span class="msgDesc">{MessageBody}</span>',
+                    '                </div>',
+                    '            <span class="closeIcon">',
+                    '                <span class="x-button-label"> </span>',
                     '            </span>',
-                    '',
-                    '            <span class="msgDesc">{[this.MessageBody(values.MessageBody)]}</span>',
                     '        </div>',
-                    '        <span class="closeIcon">',
-                    '            <span class="x-button-label"> </span>',
-                    '        </span>',
-                    '        <span class="moreInfo msgMoreInfo">. . .</span>',
-                    '    </div>',
-                    '    <div class="reqInfo">    ',
-                    '        <span class="msgUserInfo">',
-                    '            {UserName}',
-                    '        </span>',
-                    '    </div>',
-                    '</div>',
                     {
                         returnDate: function(date) {
-
                             return G.GetSpecificTimePeriod(date);
                         },
                         returnTime: function(date) {
                             return G.GetSpecificTime(date);
-                        },
-                        MessageBody: function(MessageBody) {
-
-                            var messagebody = MessageBody;
-                            var lastIndex = messagebody.indexOf("request");
-                            return messagebody.substring(0,lastIndex+7);
-
                         }
                     }
                 ),
@@ -322,7 +305,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
                     '            <span class="msgDesc">{Company.CompanyName}</span>',
                     '',
                     '        </div>  ',
-                    '        <span class="moreInfo msgMoreInfo">. . .</span>',
+                    '        <span class="moreInfo">. . .</span>',
                     '    </div>',
                     '    <div class="reqInfo">    ',
                     '        <span class="tickIconFloatRight">',
@@ -561,10 +544,7 @@ Ext.define('ProDooMobileApp.view.MsgInbox', {
             },
             {
                 xtype: 'button',
-                cls: [
-                    'sendBtn2',
-                    'bgYellow'
-                ],
+                cls: 'sendBtn2',
                 docked: 'bottom',
                 hidden: true,
                 itemId: 'SendBtn',

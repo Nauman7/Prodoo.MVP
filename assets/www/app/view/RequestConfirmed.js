@@ -18,9 +18,9 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
     alias: 'widget.RequestConfirmed',
 
     requires: [
-        'Ext.Label',
         'Ext.Container',
         'Ext.Img',
+        'Ext.Label',
         'Ext.Button',
         'Ext.field.Hidden',
         'Ext.field.TextArea'
@@ -31,12 +31,6 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
         padding: '0 0 75 0',
         scrollable: true,
         items: [
-            {
-                xtype: 'label',
-                cls: 'RequestLabel',
-                html: 'Presentation',
-                margin: 0
-            },
             {
                 xtype: 'container',
                 cls: 'PresCompanyName',
@@ -120,19 +114,12 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
                                 itemId: 'presEmail'
                             }
                         ]
-                    },
-                    {
-                        xtype: 'container',
-                        cls: 'RequestSocial',
-                        html: '<div class="presSocialLinks"><span class="presFacebook">facebook</span><span class="presTwitter">twitter</span><span class="presLinkedin">linked in</span><span class="presGooglePlus">google +</span><span class="presPinterestPlus">pinterest</span><span class="presDribllePlus">Driblle</span><span class="presBehancePlus">Behance</span><span class="presInstagramPlus">Instagram</span></div>',
-                        itemId: 'socialLinkCnt'
                     }
                 ]
             },
             {
                 xtype: 'button',
                 cls: 'reqArrowDown',
-                itemId: 'mybutton5',
                 pressedCls: null
             },
             {
@@ -151,8 +138,7 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
                     'backIcon',
                     'btnCircle',
                     'l10',
-                    'b10',
-                    'bgLightBlue'
+                    'b10'
                 ],
                 docked: 'bottom',
                 itemId: 'requestConfirmBackBtn',
@@ -160,10 +146,7 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
             },
             {
                 xtype: 'button',
-                cls: [
-                    'sendBtn2',
-                    'bgLightBlue'
-                ],
+                cls: 'sendBtn2',
                 docked: 'bottom',
                 hidden: false,
                 itemId: 'requestConfirmSendBtn',
@@ -171,11 +154,6 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
             }
         ],
         listeners: [
-            {
-                fn: 'onDownArrowTap',
-                event: 'tap',
-                delegate: '#mybutton5'
-            },
             {
                 fn: 'onrequestConfirmBackBtnTap',
                 event: 'tap',
@@ -187,11 +165,6 @@ Ext.define('ProDooMobileApp.view.RequestConfirmed', {
                 delegate: '#requestConfirmSendBtn'
             }
         ]
-    },
-
-    onDownArrowTap: function(button, e, eOpts) {
-        G.get('socialLinkCnt').toggleCls('RequestSocialExpand');
-        button.toggleCls('presArrowUp');
     },
 
     onrequestConfirmBackBtnTap: function(button, e, eOpts) {

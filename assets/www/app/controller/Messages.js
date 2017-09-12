@@ -101,8 +101,6 @@ Ext.define('ProDooMobileApp.controller.Messages', {
             Cnt.down('#topButtons').hide();
             Cnt.down('#ReplyBtn').hide();
             Cnt.down('#MsgDetailReply').hide();
-            Cnt.down('#declineRequestList').hide();
-            Cnt.down('#declineRequest').hide();
         },
 
         searchMessages: function(textfield) {
@@ -211,10 +209,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
     },
 
     onMsgListItemTap: function(dataview, index, target, record, e, eOpts) {
-
         var msgId=null;
-        var messageBody = record.data.MessageBody;
-        var convertedMessageBody = messageBody.replace(/<br>/g,'\n');
         var topBtns = G.get('topButtons');
         var items =  topBtns.items.items;
         items.forEach(function(item,index){
@@ -228,11 +223,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
         { msgId=record.data.MessageId; }
 
         var Target = Ext.get(e.target);
-        if(Target.hasCls('moreInfo')){
-            target.toggleCls('infoVisible');
-            G.get('MsgViewCnt').fixHeight(dataview);
-        }
-        else if (Target.parent('.closeIcon'))
+        if (Target.parent('.closeIcon'))
         {
 
             var rec= null;
@@ -296,7 +287,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
 
                             G.get('selectedMsg').data = record;
                             Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
-                            Ext.query(".msgDetailMsg")[0].innerText=convertedMessageBody;
+                            Ext.query(".msgDetailMsg")[0].innerText=record.data.MessageBody;
                             Ext.query(".msgDetailUsername")[0].innerText=record.data.UserName;
                             Ext.query(".msgDetailDate")[0].innerText=G.GetSpecificTimePeriod(record.data.DateCreated);
                             Ext.query(".msgDetailTime")[0].innerText=G.GetSpecificTime(record.data.DateCreated);
@@ -323,7 +314,7 @@ Ext.define('ProDooMobileApp.controller.Messages', {
                 G.get('buttonsLabel').setHtml('Message detail');
                 G.get('selectedMsg').data = record;
                 Ext.query(".msgDetailTitle")[0].innerText=record.data.Subject;
-                Ext.query(".msgDetailMsg")[0].innerText=convertedMessageBody;
+                Ext.query(".msgDetailMsg")[0].innerText=record.data.MessageBody;
                 Ext.query(".msgDetailUsername")[0].innerText=record.data.UserName;
                 Ext.query(".msgDetailDate")[0].innerText=G.GetSpecificTimePeriod(record.data.DateCreated);
                 Ext.query(".msgDetailTime")[0].innerText=G.GetSpecificTime(record.data.DateCreated);

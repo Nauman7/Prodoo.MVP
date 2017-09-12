@@ -74,9 +74,9 @@ Ext.define('ProDooMobileApp.controller.Account', {
 
         onVisitBtnClick: function() {
             Ext.Ajax.request({
-                url: ApiBaseUrl+'Account/Login',
-                method: 'POST',
-                params : {Email: "visitor@prodoo.eu", Password: "ProdooVisitor", RememberMe: false},
+                url: ApiBaseUrl+'Account/lookupdata',
+                method: 'GET',
+                scope: this,
                 success: function(response, options) {
                     var result = G.getResponseData(response);
                     if (result.success) {
@@ -88,7 +88,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     }
                 },
                 failure: function(response, options) {
-                    G.showGeneralFailure('', response);
+                    G.showGeneralFailure('', response)
                 }
             });
         },
@@ -131,7 +131,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                 },
                 failure: function(response, request) {
                     //failure catch
-                    G.showGeneralFailure('', response);
+                    G.showGeneralFailure('', response)
                 }
             });
         },
@@ -380,7 +380,7 @@ Ext.define('ProDooMobileApp.controller.Account', {
                     }
                 },
                 failure: function(response, options) {
-                   G.showGeneralFailure('', response);
+                   G.showGeneralFailure('', response)
                 }
             });
         }

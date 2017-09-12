@@ -31,16 +31,16 @@
 		width: 33px;
 		height: 33px;
 	}
-	// &:after{
-	// 	background:  url(../images/present/plus.png) no-repeat;
-	// 	content:'';
-	// 	position: absolute;
-	// 	right: 10px;
-	// 	top:50%;
-	// 	margin-top: -16px;
-	// 	width: 32px;
-	// 	height: 32px;
-	// }
+	&:after{
+		background:  url(../images/present/plus.png) no-repeat;
+		content:'';
+		position: absolute;
+		right: 10px;
+		top:50%;
+		margin-top: -16px;
+		width: 32px;
+		height: 32px;
+	}
 }
 .RequestConfirmed{
 	background: #3e335e;
@@ -75,13 +75,4 @@
 	&.presArrowUp{
 		background: url(../images/present/upArrow.png) no-repeat !important;
 	}
-}
-
-.RequestSocial{
-	max-height:0;
-	overflow:hidden;
-	@include transition(0.3s all);
-}
-.RequestSocialExpand{
-	max-height: 20em;
 }

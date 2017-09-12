@@ -54,7 +54,7 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
                 xtype: 'fieldset',
                 cls: 'loginForm',
                 itemId: 'LoginFieldSetItemId',
-                padding: '80 20 0 20',
+                padding: '20 20 0 20',
                 items: [
                     {
                         xtype: 'emailfield',
@@ -81,7 +81,6 @@ Ext.define('ProDooMobileApp.view.LoginForm', {
             {
                 xtype: 'container',
                 cls: 'SignUpCnt',
-                hidden: false,
                 html: '<span class="forgot">Forgot password</span><br>Don\'t have an account?<br><span class=\'SignUp\'>Sign up</span> for free',
                 itemId: 'SignUp',
                 margin: '0 0 10 0',
